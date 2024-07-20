@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Sahel Politica</title>
+        <link href="css/blog-page.css" rel="stylesheet">
+        <link href="css/footer.css" rel="stylesheet">
+        <link href="css/header.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+        <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+
+    </head>
+    <body>
+        <header>
+            <div class="header-background"></div>
+            <div class="menu">
+                <p class="menu-logo">
+                    <img src="images/logo.png" />
+                </p>
+                <div class="menu-link">
+                    <a href="index.html">About us</a>
+                    <a href="services.html">Services</a>
+                    <a href="our-team.html">Our team</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact us</a>
+                </div>
+                
+            </div>
+        </header>
+        <main>
+            <section class="hero"></section>
+            <section class="page-title">
+                <h1>Blog</h1>
+            </section>
+            <section class="blog-filter">
+                <div class="input-group rounded">
+                    <input type="search" id="search-input" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    <button class="btn btn-outline-primary" type="button" id="search-addon">Search</button>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Filter by Date
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="#" data-filter="This week">This week</a></li>
+                        <li><a class="dropdown-item" href="#" data-filter="This month">This month</a></li>
+                        <li><a class="dropdown-item" href="#" data-filter="This six months">This six months</a></li>
+                        <li><a class="dropdown-item" href="#" data-filter="This year">This year</a></li>
+                        <li><a class="dropdown-item" href="#" data-filter="All">All the dates</a></li>
+                    </ul>
+                    <button type="button" class="btn btn-outline-danger d-none" id="clear-filter">
+                        <span>&times;</span>
+                    </button>
+                </div>
+            </section>
+            <section class="blog">
+                <!-- Loading spinner -->
+                <div id="loading-spinner"></div>
+                <!-- No results message -->
+                <div id="no-results-message">No articles found</div>
+                <div class="blog-boxs" id="blog-boxs">
+                    <!-- Articles will be dynamically inserted here -->
+                </div>
+                <div class="blog-button-page">
+                   <div class="blog-button">
+                        <a href="blog.html"><button type="button" class="btn btn-outline-dark">< Previous</button></a>
+                    </div>
+                    <div class="blog-button">
+                        <a href="blog.html"><button type="button" class="btn btn-outline-dark">1</button></a>
+                    </div>
+                    <div class="blog-button">
+                        <a href="blog.html"><button type="button" class="btn btn-outline-dark">Next ></button></a>
+                    </div> 
+                </div>
+                
+            </section>
+            <footer>
+                <div class="footer-contact">
+                    <div class="footer-title-newsletter">
+                        <h5>Stay up to date with all our news by subscribing to our newsletter.</h5>
+                    </div>
+                    <div class="footer-mail-form">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                            <input type="email" class="form-control newsletter-form" id="exampleFormControlInput1" placeholder="name@example.com">
+                            <a href="blog.html"><button type="button" class="btn btn-outline-light">Register</button></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-info">
+                    <img class="logo-footer" src="images/logo.png">
+                    <div class="footer-list-info">
+                        <div class="footer-contact-adress">
+                            <img class="icon-info-footer" src="images/map.png">
+                            <h4>SAPAS Gmbh, Chamerstrasse 172, 6300 Zug</h4>
+                        </div>
+                        <div class="footer-contact-mail">
+                            <img class="icon-info-footer" src="images/mail-black.png">
+                            <h4>info@sahelpolitica.ch</h4>
+                        </div>
+                        <div class="footer-contact-number">
+                            <img class="icon-info-footer" src="images/phone-black.png">
+                            <h4>+41 778 12 40 73</h4>
+                        </div>
+                    </div>
+                    <div class="footer-follow-us">
+                        <h3>Follow us:</h3>
+                        <a href=""><img src="images/facebook.png"></a>
+                        <a target="_blank" href="https://www.linkedin.com/company/sahelpolitica/"><img src="images/linkedin.png"></a>
+                        <a target="_blank" href="https://x.com/SahelPolitica"><img src="images/twitter-x.png"></a>
+                    </div>
+                </div>
+            </footer>
+        </main>
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-analytics.js";
+            import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+            
+            const firebaseConfig = {
+                apiKey: "API_KEY",
+                authDomain: "sahelpolitica.firebaseapp.com",
+                projectId: "sahelpolitica",
+                storageBucket: "sahelpolitica.appspot.com",
+                messagingSenderId: "11417703739",
+                appId: "1:11417703739:web:882052b747e7b761bdd31e",
+                measurementId: "G-WFFDBTWRKV"
+            };
+            
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+            const db = getFirestore(app);
+            
+            async function fetchArticles(searchTerm = '', filter = '') {
+                const articlesContainer = document.getElementById('blog-boxs');
+                const loadingSpinner = document.getElementById('loading-spinner');
+                const noResultsMessage = document.getElementById('no-results-message');
+                
+                // Show loading spinner
+                loadingSpinner.classList.remove('d-none');
+                articlesContainer.classList.add('d-none');
+                noResultsMessage.classList.add('d-none');
+                
+                try {
+                    const querySnapshot = await getDocs(collection(db, 'Articles'));
+                    const articles = querySnapshot.docs.map(doc => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }));
+            
+                    // Apply search filter first
+                    const filteredBySearch = searchTerm ? articles.filter(article =>
+                        article.title.toLowerCase().includes(searchTerm.toLowerCase())
+                    ) : articles;
+            
+                    // Apply date filter if selected
+                    const filteredByDate = filter && filter !== 'Filter by Date' ? filteredBySearch.filter(article => {
+                        const articleDate = new Date(article.date.seconds * 1000);
+                        const now = new Date();
+                        switch (filter) {
+                            case 'This week':
+                                const weekAgo = new Date(now.setDate(now.getDate() - 7));
+                                return articleDate >= weekAgo;
+                            case 'This month':
+                                const monthAgo = new Date(now.setMonth(now.getMonth() - 1));
+                                return articleDate >= monthAgo;
+                            case 'This six months':
+                                const sixMonthsAgo = new Date(now.setMonth(now.getMonth() - 6));
+                                return articleDate >= sixMonthsAgo;
+                            case 'This year':
+                                const yearAgo = new Date(now.setFullYear(now.getFullYear() - 1));
+                                return articleDate >= yearAgo;
+                            default:
+                                return true;
+                        }
+                    }) : filteredBySearch;
+            
+                    // Sort articles by date in descending order
+                    filteredByDate.sort((a, b) => b.date.seconds - a.date.seconds);
+            
+                    // Clear previous content
+                    articlesContainer.innerHTML = '';
+            
+                    if (filteredByDate.length === 0) {
+                        // Display no results message
+                        noResultsMessage.classList.remove('d-none');
+                    } else {
+                        // Display filtered articles
+                        filteredByDate.forEach(article => {
+                            const articleElement = document.createElement('div');
+                            articleElement.classList.add('blog-article');
+                            
+                            articleElement.style.backgroundImage = `url(${article.imageUrl})`;
+                            articleElement.style.backgroundSize = 'cover'; // Cover the entire element
+                            articleElement.style.backgroundPosition = 'center'; // Center the image
+                        
+                            articleElement.innerHTML = `
+                                <div class="blog-article-title">
+                                    <h6>${article.title}</h6>
+                                </div>
+                                <div class="blog-article-info">
+                                    <p class="blog-article-author">Author: ${article.author}</p>
+                                    <p class="blog-article-date">${new Date(article.date.seconds * 1000).toLocaleString()}</p>
+                                    <p><a href="article.html?id=${article.id}">Read more --></a></p>
+                                </div>
+                            `;
+                            articlesContainer.appendChild(articleElement);
+                        });
+                    }
+                } catch (error) {
+                    console.error("Error fetching articles: ", error);
+                } finally {
+                    // Hide loading spinner and show articles container
+                    loadingSpinner.classList.add('d-none');
+                    articlesContainer.classList.remove('d-none');
+                }
+            }
+            
+            document.addEventListener('DOMContentLoaded', () => fetchArticles());
+            
+            document.querySelectorAll('.dropdown-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    const filterText = e.target.getAttribute('data-filter');
+                    document.getElementById('dropdownMenuButton').textContent = filterText;
+                    document.getElementById('clear-filter').classList.remove('d-none');
+                    fetchArticles(document.getElementById('search-input').value.trim(), filterText);
+                });
+            });
+            
+            document.getElementById('clear-filter').addEventListener('click', () => {
+                document.getElementById('dropdownMenuButton').textContent = 'Filter by Date';
+                document.getElementById('clear-filter').classList.add('d-none');
+                fetchArticles(); // Clear all filters and search
+            });
+            
+            document.getElementById('search-addon').addEventListener('click', () => {
+                const searchTerm = document.getElementById('search-input').value.trim();
+                fetchArticles(searchTerm, document.getElementById('dropdownMenuButton').textContent);
+            });
+        </script>
+        
+        <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    </body>
+</html>
