@@ -25,3 +25,32 @@
         font-size: 70px;
     }
 }
+
+.services-menu{
+    display: flex;
+    justify-content: space-around;
+    height: 500px;
+    gap: 60px;
+    flex-wrap: wrap;
+    padding: 30px 15%;
+
+    .services-menu-box{
+        display: flex;
+        align-items: center;
+        width: 450px;
+        padding: 20px;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        border-radius: 20px;
+
+        img{
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+        }
+    }
+
+    .services-menu-box:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+}
