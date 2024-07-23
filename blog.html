@@ -76,6 +76,7 @@
                 </div>
                 
             </section>
+            <button id="scrollToTopBtn" title="Go to top">↑</button>
             <footer>
                 <div class="footer-contact">
                     <div class="footer-title-newsletter">
@@ -244,5 +245,25 @@
         <!-- Bootstrap JS and Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        // Affiche le bouton lorsque l'utilisateur fait défiler vers le bas de 20 pixels à partir du haut du document
+        window.onscroll = function() { scrollFunction() };
+    
+        function scrollFunction() {
+            const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        }
+    
+        // Lorsque l'utilisateur clique sur le bouton, fait défiler vers le haut de la page
+        document.getElementById("scrollToTopBtn").addEventListener("click", function() {
+            document.body.scrollTop = 0; // Pour Safari
+            document.documentElement.scrollTop = 0; // Pour Chrome, Firefox, IE et Opera
+        });
+    </script>
     </body>
 </html>

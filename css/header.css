@@ -3,6 +3,27 @@ body {
     margin: 0;
 }
 
+#scrollToTopBtn {
+    display: none; /* Masqué par défaut */
+    position: fixed; /* Fixé en position */
+    bottom: 20px; /* Distance du bas */
+    right: 30px; /* Distance de la droite */
+    z-index: 99; /* Assurez-vous qu'il s'affiche par-dessus tout */
+    border: none; /* Pas de bordure */
+    outline: none; /* Pas de contour */
+    background-color: #555; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    cursor: pointer; /* Curseur pointeur */
+    padding: 15px; /* Espacement */
+    border-radius: 10px; /* Bords arrondis */
+    font-size: 18px; /* Taille du texte */
+}
+
+#scrollToTopBtn:hover {
+    background-color: #333; /* Couleur de fond au survol */
+}
+
+
 .menu {
     display: flex;
     justify-content: space-between;

@@ -34,6 +34,7 @@
             <section id="article-details">
                 <!-- Les détails de l'article seront insérés ici -->
             </section>
+            <button id="scrollToTopBtn" title="Go to top">↑</button>
             <footer>
                 <div class="footer-contact">
                     <div class="footer-title-newsletter">
@@ -122,6 +123,25 @@
                 } else {
                     document.getElementById('article-details').innerHTML = '<p>No article ID provided.</p>';
                 }
+            });
+        </script>
+        <script>
+            // Affiche le bouton lorsque l'utilisateur fait défiler vers le bas de 20 pixels à partir du haut du document
+            window.onscroll = function() { scrollFunction() };
+        
+            function scrollFunction() {
+                const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    scrollToTopBtn.style.display = "block";
+                } else {
+                    scrollToTopBtn.style.display = "none";
+                }
+            }
+        
+            // Lorsque l'utilisateur clique sur le bouton, fait défiler vers le haut de la page
+            document.getElementById("scrollToTopBtn").addEventListener("click", function() {
+                document.body.scrollTop = 0; // Pour Safari
+                document.documentElement.scrollTop = 0; // Pour Chrome, Firefox, IE et Opera
             });
         </script>
     </body>
