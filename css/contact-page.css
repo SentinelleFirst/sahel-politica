@@ -28,20 +28,27 @@
 
 .contact{
     margin: 50px 15%;
-
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .contact-form {
-    max-width: 600px;
-    margin: 50px auto;
+    min-width: 300px;
     padding: 30px;
 }
 .contact-form h2 {
     margin-bottom: 20px;
 }
 
-.contact img{
+.img-contact{
+    max-width: 300px;
     width: 45%;
-    height: auto;
+    min-width: 100px;
+
+    img{
+        width: 100%;
+        height: auto;
+    }
 }

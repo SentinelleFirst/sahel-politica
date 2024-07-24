@@ -96,7 +96,6 @@
     align-items: center;
     justify-content: space-between;
     padding: 50px 15% 50px 15%;
-    background-color: #797979;
 
     img{
         width: 200px;
@@ -113,6 +112,7 @@
 .about-our-vision{
     display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: space-between;
     padding: 50px 15% 50px 15%;
 
@@ -121,9 +121,19 @@
         height: 200px;
     }
 
-    div{
-        width: 60%;
-        min-width: 300px
+    .about-our-vision-p1{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        div{
+            min-width: 300px;
+            max-width: 500px;
+        }
+    }
+
+    .about-our-vision-p2{
+        align-items: center;
     }
 
     h5{
