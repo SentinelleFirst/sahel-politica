@@ -25,3 +25,23 @@
         font-size: 70px;
     }
 }
+
+.contact{
+    margin: 50px 15%;
+
+    display: flex;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+}
+.contact-form h2 {
+    margin-bottom: 20px;
+}
+
+.contact img{
+    width: 45%;
+    height: auto;
+}

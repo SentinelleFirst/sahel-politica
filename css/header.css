@@ -74,3 +74,50 @@ header {
 .menu a:hover {
     border-bottom: 3px solid white;
 }
+
+.menu-toggle {
+    display: none; /* Masquer le bouton par défaut */
+}
+
+/* Media query pour les écrans de largeur maximale de 1000px */
+@media (max-width: 1000px) {
+    .menu-link {
+        display: none;
+        flex-direction: column;
+        background-color: #333;
+        position: absolute;
+        top: 100px;
+        right: 0;
+        width: 200px;
+        z-index: 1;
+        transition: transform 0.3s ease-in-out;
+        transform: translateX(100%);
+        animation: slideLeft 0.5s forwards;
+        opacity: 0; /* Initialement invisible */
+    }
+
+@keyframes slideLeft {
+    0% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+}
+
+    .menu-link.active {
+        display: flex;
+        transform: translateX(0);
+    }
+
+    .menu-toggle {
+        display: block; /* Afficher le bouton pour les petits écrans */
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+    }
+}

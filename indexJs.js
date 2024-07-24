@@ -47,3 +47,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // Automatically change slides at the set interval
     setInterval(showNextItem, intervalTime);
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menuLink = document.querySelector('.menu-link');
+
+    menuToggle.addEventListener('click', function () {
+        menuLink.classList.toggle('active');
+    });
+});
