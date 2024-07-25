@@ -287,6 +287,21 @@
         align-items: center;
     }
 
+    .service-intro{
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    margin: 50px 0px;
+
+    div{
+        max-width: 500px;
+        min-width: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+}
+
     .service-duration-and-steps{
         padding: 50px 15%;
         display: flex;
@@ -416,6 +431,8 @@
     }
 }
 
+
+
 #service-3{
     padding: 100px 0px;
 
@@ -423,6 +440,21 @@
         display: flex;
         justify-content: start;
         align-items: center;
+    }
+
+    .service-intro{
+        display: flex;
+        justify-content: start;
+        flex-wrap: wrap;
+        margin: 50px 0px;
+    
+        div{
+            max-width: 500px;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
     }
 
     .service-duration-and-steps{
