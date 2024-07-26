@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Sahel Politica</title>
+        <link rel="icon" href="images/favicon.png" type="image/png">
         <link href="css/indexStyle.css" rel="stylesheet">
         <link href="css/footer.css" rel="stylesheet">
         <link href="css/header.css" rel="stylesheet">
@@ -27,7 +28,21 @@
                     <a href="blog.html">Blog</a>
                     <a href="contact.html">Contact us</a>
                 </div>
-                
+                <div class="language-selector">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Filter by Date
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="#" data-filter="This week">This week</a></li>
+                        <li><a class="dropdown-item" href="#" data-filter="This month">This month</a></li>
+                        <li><a class="dropdown-item" href="#" data-filter="This six months">This six months</a></li>
+                        <li><a class="dropdown-item" href="#" data-filter="This year">This year</a></li>
+                        <li><a class="dropdown-item" href="#" data-filter="All">All the dates</a></li>
+                    </ul>
+                    <button type="button" class="btn btn-outline-danger d-none" id="clear-filter">
+                        <span>&times;</span>
+                    </button>
+                </div>
             </div>
         </header>
         <main>

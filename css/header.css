@@ -121,3 +121,11 @@ header {
         cursor: pointer;
     }
 }
+
+.lang {
+    display: none;
+}
+
+.lang.en {
+    display: block;
+}
