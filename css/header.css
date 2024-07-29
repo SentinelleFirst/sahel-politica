@@ -50,6 +50,7 @@ header {
 
 .menu-logo {
     display: flex;
+    flex-grow: 4;
     margin-top: 0;
     margin-bottom: -40px;
     width: 150px;
@@ -63,9 +64,8 @@ header {
 }
 
 .menu a {
-    margin: 20px 5px 0px 0px;
+    margin: 20px 5px 15x 0px;
     padding: 14px 20px;
-    display: block;
     color: white;
     text-align: center;
     text-decoration: none;
@@ -80,7 +80,7 @@ header {
 }
 
 /* Media query pour les écrans de largeur maximale de 1000px */
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
     .menu-link {
         display: none;
         flex-direction: column;
@@ -113,19 +113,34 @@ header {
     }
 
     .menu-toggle {
+        order: 3;
         display: block; /* Afficher le bouton pour les petits écrans */
         background: none;
         border: none;
         color: white;
         font-size: 24px;
         cursor: pointer;
+        margin-left: 20px;
     }
 }
 
-.lang {
-    display: none;
+#myDropdown{
+    width: 120px;
+    height: 50px;
+    align-self: center;
+    background-color: #232C77;
+    border: none;
+    color: white;
+
+    img{
+        width: 20px;
+        height: 20px;
+    }
 }
 
-.lang.en {
+.langue-fr {
+    display: none;
+}
+.langue-en {
     display: block;
 }

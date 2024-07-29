@@ -2,6 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Contact</title>
         <link rel="icon" href="images/favicon.png" type="image/png">
         <link href="css/contact-page.css" rel="stylesheet">
@@ -18,36 +19,47 @@
             <div class="header-background"></div>
             <div class="menu">
                 <p class="menu-logo">
-                    <img src="images/logo.png" />
+                    <img alt="" src="images/logo.png" />
                 </p>
                 <button class="menu-toggle" aria-label="Toggle menu">☰</button>
                 <div class="menu-link">
-                    <a href="index.html">About us</a>
+                    <a class="langue-en" href="index.html">About us</a>
+                    <a class="langue-fr" href="index.html">A propos</a>
                     <a href="services.html">Services</a>
-                    <a href="our-team.html">Our team</a>
+                    <a class="langue-en" href="our-team.html">Our team</a>
+                    <a class="langue-fr" href="our-team.html">Notre équipe</a>
                     <a href="blog.html">Blog</a>
-                    <a href="contact.html">Contact us</a>
+                    <a class="langue-en" href="contact.html">Contact us</a>
+                    <a class="langue-fr" href="contact.html">Nous contacter</a>
                 </div>
-                
+                <select id="myDropdown" title="Choose a language">
+                    <option class="option" value="en">English - EN</option>
+                    <option class="option" value="fr">French - FR</option>
+                </select>
             </div>
         </header>
         <main>
             <section class="hero"></section>
             <section class="page-title">
-                <h1>Contact us</h1>
+                <h1 class="langue-en">Contact us</h1>
+                <h1 class="langue-fr">Contactez-nous</h1>
             </section>
             <section class="contact">
                 
                 <div class="contact-form" id="contactForm">
-                    <h2>Let's talk!</h2>
-                    <p>Go ahead and send us a brief of your project!</p>
+                    <h2 class="langue-en">Let's talk!</h2>
+                    <h2 class="langue-fr">Discutons!</h2>
+                    <p class="langue-en">Go ahead and send us a brief of your project!</p>
+                    <p class="langue-fr">N'hésitez pas à nous envoyer un brief de votre projet !</p>
                     
                         <div class="form-group">
-                            <label for="name">Name</label>
+                            <label class="langue-en" for="name">Name</label>
+                            <label class="langue-fr" for="name">Nom</label>
                             <input type="text" class="form-control" id="name" placeholder="Enter your name">
                         </div>
                         <div class="form-group">
-                            <label for="company">Company</label>
+                            <label class="langue-en" for="company">Company</label>
+                            <label class="langue-fr" for="company">Entreprise</label>
                             <input type="text" class="form-control" id="company" placeholder="Enter your company name">
                         </div>
                         <div class="form-group">
@@ -55,7 +67,8 @@
                             <input type="email" class="form-control" id="email" placeholder="Enter your email">
                         </div>
                         <div class="form-group">
-                            <label for="phone">Phone Number</label>
+                            <label class="langue-en" for="phone">Phone Number</label>
+                            <label class="langue-fr" for="phone">Téléphone</label>
                             <div class="input-group">
                                 <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
                             </div>
@@ -64,49 +77,54 @@
                             <label for="message">Message</label>
                             <textarea class="form-control" id="message" rows="4" placeholder="Enter your message"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary" id="contactButton">Submit</button>
+                        <button type="submit" class="btn btn-primary langue-en" id="contactButton">Submit</button>
+                        <button type="submit" class="btn btn-primary langue-fr" id="contactButton">Envoyer</button>
                     
                 </div>
                 
-                <div class="img-contact">
-                    <img src="images/africa.jpg">
+                <div class="img alt=""-contact">
+                    <img alt="" src="images/africa.jpg">
                 </div>
             </section>
             <button id="scrollToTopBtn" title="Go to top">↑</button>
             <footer>
                 <div class="footer-contact">
                     <div class="footer-title-newsletter">
-                        <h5>Stay up to date with all our news by subscribing to our newsletter.</h5>
+                        <h5 class="langue-en">Stay up to date with all our news by subscribing to our newsletter.</h5>
+                        <h5 class="langue-fr">Restez informé de toutes nos actualités en vous abonnant à notre newsletter.</h5>
                     </div>
                     <div class="footer-mail-form" id="footerMailForm">
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                            <label for="exampleFormControlInput1" class="form-label langue-en">Email address</label>
+                            <label for="exampleFormControlInput1" class="form-label langue-fr">Votre adresse email</label>
                             <input type="email" class="form-control newsletter-form" id="newsletterEmail" placeholder="name@example.com">
-                            <button type="button" class="btn btn-outline-light" id="registerButton">Register</button>
+                            <button type="button" class="btn btn-outline-light langue-en" id="registerButton">Register</button>
+                            <button type="button" class="btn btn-outline-light langue-fr" id="registerButton">Enregistrer</button>
                         </div>
                     </div>
                 </div>
                 <div class="footer-info">
-                    <img class="logo-footer" src="images/logo.png">
+                    <img alt="" class="logo-footer" src="images/logo.png">
                     <div class="footer-list-info">
                         <div class="footer-contact-adress">
-                            <img class="icon-info-footer" src="images/map.png">
+                            <img alt="" class="icon-info-footer" src="images/map.png">
                             <h4>SAPAS Gmbh, Chamerstrasse 172, 6300 Zug</h4>
                         </div>
                         <div class="footer-contact-mail">
-                            <img class="icon-info-footer" src="images/mail-black.png">
+                            <img alt="" class="icon-info-footer" src="images/mail-black.png">
                             <h4>info@sahelpolitica.ch</h4>
                         </div>
                         <div class="footer-contact-number">
-                            <img class="icon-info-footer" src="images/phone-black.png">
+                            <img alt="" class="icon-info-footer" src="images/phone-black.png">
                             <h4>+41 778 12 40 73</h4>
                         </div>
                     </div>
                     <div class="footer-follow-us">
-                        <h3>Follow us:</h3>
-                        <a href=""><img src="images/facebook.png"></a>
-                        <a target="_blank" href="https://www.linkedin.com/company/sahelpolitica/"><img src="images/linkedin.png"></a>
-                        <a target="_blank" href="https://x.com/SahelPolitica"><img src="images/twitter-x.png"></a>
+                        <h3 class="langue-en">Follow us:</h3>
+                        <h3 class="langue-fr">Nous suivre:</h3>
+                        <a href=""><img alt="" src="images/facebook.png"></a>
+                        <a target="_blank" href="https://www.linkedin.com/company/sahelpolitica/"><img alt="" src="images/linkedin.png"></a>
+                        <a target="_blank" href="https://x.com/SahelPolitica"><img alt="" src="images/twitter-x.png"></a>
                     </div>
                 </div>
             </footer>
@@ -134,5 +152,6 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="indexJs.js"></script>
+        <script src="script-language.js"></script>
     </body>
 </html>

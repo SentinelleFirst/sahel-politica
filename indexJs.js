@@ -85,7 +85,7 @@ document.getElementById('registerButton').addEventListener('click', async () => 
           <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
             <tr>
               <td align="center" bgcolor="#ffffff" style="padding: 20px 0 30px 0;">
-                <img src="https://firebasestorage.googleapis.com/v0/b/sahelpolitica.appspot.com/o/logo.png?alt=media&token=e1d68437-e822-41a1-913d-15c04e513b77" alt="Logo" style="display: block; max-width: 150px; height: auto;" />
+                <img alt="" src="https://firebasestorage.googleapis.com/v0/b/sahelpolitica.appspot.com/o/logo.png?alt=media&token=e1d68437-e822-41a1-913d-15c04e513b77" alt="Logo" style="display: block; max-width: 150px; height: auto;" />
               </td>
             </tr>
             <tr>
@@ -132,7 +132,7 @@ document.getElementById('registerButton').addEventListener('click', async () => 
             <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
               <tr>
                 <td align="center" bgcolor="#ffffff" style="padding: 20px 0 30px 0;">
-                  <img src="https://firebasestorage.googleapis.com/v0/b/sahelpolitica.appspot.com/o/logo.png?alt=media&token=e1d68437-e822-41a1-913d-15c04e513b77" alt="Logo" style="display: block; max-width: 150px; height: auto;" />
+                  <img alt="" src="https://firebasestorage.googleapis.com/v0/b/sahelpolitica.appspot.com/o/logo.png?alt=media&token=e1d68437-e822-41a1-913d-15c04e513b77" alt="Logo" style="display: block; max-width: 150px; height: auto;" />
                 </td>
               </tr>
               <tr>
@@ -187,7 +187,8 @@ document.getElementById('registerButton').addEventListener('click', async () => 
         
         document.getElementById('footerMailForm').innerHTML = `
           <div class="thank-you-message">
-            <h5>Thank you for subscribing to the Sahel Politica newsletter!\nWe have sent a welcome email to ${clientEmail}.</h5>
+            <h5 class="langue-en">Thank you for subscribing to the Sahel Politica newsletter!\nWe have sent a welcome email to ${clientEmail}.</h5>
+            <h5 class="langue-fr">Merci de vous être abonné à la newsletter Sahel Politica !\nNous avons envoyé un e-mail de bienvenue à ${clientEmail}.</h5>
           </div>
         `;
       } else {
@@ -287,7 +288,7 @@ document.getElementById('contactButton').addEventListener('click', async () => {
         <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
           <tr>
             <td align="center" bgcolor="#ffffff" style="padding: 20px 0 30px 0;">
-              <img src="https://firebasestorage.googleapis.com/v0/b/sahelpolitica.appspot.com/o/logo.png?alt=media&token=e1d68437-e822-41a1-913d-15c04e513b77" alt="Logo" style="display: block; max-width: 150px; height: auto;" />
+              <img alt="" src="https://firebasestorage.googleapis.com/v0/b/sahelpolitica.appspot.com/o/logo.png?alt=media&token=e1d68437-e822-41a1-913d-15c04e513b77" alt="Logo" style="display: block; max-width: 150px; height: auto;" />
             </td>
           </tr>
           <tr>
@@ -330,7 +331,7 @@ document.getElementById('contactButton').addEventListener('click', async () => {
         <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
           <tr>
             <td align="center" bgcolor="#ffffff" style="padding: 20px 0 30px 0;">
-              <img src="https://firebasestorage.googleapis.com/v0/b/sahelpolitica.appspot.com/o/logo.png?alt=media&token=e1d68437-e822-41a1-913d-15c04e513b77" alt="Logo" style="display: block; max-width: 150px; height: auto;" />
+              <img alt="" src="https://firebasestorage.googleapis.com/v0/b/sahelpolitica.appspot.com/o/logo.png?alt=media&token=e1d68437-e822-41a1-913d-15c04e513b77" alt="Logo" style="display: block; max-width: 150px; height: auto;" />
             </td>
           </tr>
           <tr>
@@ -390,7 +391,8 @@ document.getElementById('contactButton').addEventListener('click', async () => {
       
       document.getElementById('contactForm').innerHTML = `
         <div class="thank-you-message">
-          <h5>We have received your message and we will get back to you as soon as possible.</h5>
+          <h5 class="langue-en">We have received your message and we will get back to you as soon as possible.</h5>
+          <h5 class="langue-fr">Nous avons bien reçu votre message et nous vous répondrons dans les plus brefs délais.</h5>
         </div>
       `;
     } else {

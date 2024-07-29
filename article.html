@@ -2,6 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Blog</title>
         <link rel="icon" href="images/favicon.png" type="image/png">
         <link href="css/article-detail-page.css" rel="stylesheet">
@@ -18,17 +19,23 @@
             <div class="header-background"></div>
             <div class="menu">
                 <p class="menu-logo">
-                    <img src="images/logo.png" />
+                    <img alt="" src="images/logo.png" />
                 </p>
                 <button class="menu-toggle" aria-label="Toggle menu">☰</button>
                 <div class="menu-link">
-                    <a href="index.html">About us</a>
+                    <a class="langue-en" href="index.html">About us</a>
+                    <a class="langue-fr" href="index.html">A propos</a>
                     <a href="services.html">Services</a>
-                    <a href="our-team.html">Our team</a>
+                    <a class="langue-en" href="our-team.html">Our team</a>
+                    <a class="langue-fr" href="our-team.html">Notre équipe</a>
                     <a href="blog.html">Blog</a>
-                    <a href="contact.html">Contact us</a>
+                    <a class="langue-en" href="contact.html">Contact us</a>
+                    <a class="langue-fr" href="contact.html">Nous contacter</a>
                 </div>
-                
+                <select id="myDropdown" title="Choose a language">
+                    <option class="option" value="en">English - EN</option>
+                    <option class="option" value="fr">French - FR</option>
+                </select>
             </div>
         </header>
         <main>
@@ -40,37 +47,41 @@
             <footer>
                 <div class="footer-contact">
                     <div class="footer-title-newsletter">
-                        <h5>Stay up to date with all our news by subscribing to our newsletter.</h5>
+                        <h5 class="langue-en">Stay up to date with all our news by subscribing to our newsletter.</h5>
+                        <h5 class="langue-fr">Restez informé de toutes nos actualités en vous abonnant à notre newsletter.</h5>
                     </div>
                     <div class="footer-mail-form" id="footerMailForm">
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                            <label for="exampleFormControlInput1" class="form-label langue-en">Email address</label>
+                            <label for="exampleFormControlInput1" class="form-label langue-fr">Votre adresse email</label>
                             <input type="email" class="form-control newsletter-form" id="newsletterEmail" placeholder="name@example.com">
-                            <button type="button" class="btn btn-outline-light" id="registerButton">Register</button>
+                            <button type="button" class="btn btn-outline-light langue-en" id="registerButton">Register</button>
+                            <button type="button" class="btn btn-outline-light langue-fr" id="registerButton">Enregistrer</button>
                         </div>
                     </div>
                 </div>
                 <div class="footer-info">
-                    <img class="logo-footer" src="images/logo.png">
+                    <img alt="" class="logo-footer" src="images/logo.png">
                     <div class="footer-list-info">
                         <div class="footer-contact-adress">
-                            <img class="icon-info-footer" src="images/map.png">
+                            <img alt="" class="icon-info-footer" src="images/map.png">
                             <h4>SAPAS Gmbh, Chamerstrasse 172, 6300 Zug</h4>
                         </div>
                         <div class="footer-contact-mail">
-                            <img class="icon-info-footer" src="images/mail-black.png">
+                            <img alt="" class="icon-info-footer" src="images/mail-black.png">
                             <h4>info@sahelpolitica.ch</h4>
                         </div>
                         <div class="footer-contact-number">
-                            <img class="icon-info-footer" src="images/phone-black.png">
+                            <img alt="" class="icon-info-footer" src="images/phone-black.png">
                             <h4>+41 778 12 40 73</h4>
                         </div>
                     </div>
                     <div class="footer-follow-us">
-                        <h3>Follow us:</h3>
-                        <a href=""><img src="images/facebook.png"></a>
-                        <a target="_blank" href="https://www.linkedin.com/company/sahelpolitica/"><img src="images/linkedin.png"></a>
-                        <a target="_blank" href="https://x.com/SahelPolitica"><img src="images/twitter-x.png"></a>
+                        <h3 class="langue-en">Follow us:</h3>
+                        <h3 class="langue-fr">Nous suivre:</h3>
+                        <a href=""><img alt="" src="images/facebook.png"></a>
+                        <a target="_blank" href="https://www.linkedin.com/company/sahelpolitica/"><img alt="" src="images/linkedin.png"></a>
+                        <a target="_blank" href="https://x.com/SahelPolitica"><img alt="" src="images/twitter-x.png"></a>
                     </div>
                 </div>
             </footer>
@@ -102,10 +113,13 @@
                     if (docSnap.exists()) {
                         const article = docSnap.data();
                         articleDetails.innerHTML = `
-                            <img src="${article.imageUrl}" alt="${article.title}" style="width:100%; max-height:400px; object-fit:cover;">
-                            <h1>${article.title}</h1>
-                            <p class='article-content'>${article.content}</p>
-                            <p><strong>Author:</strong> ${article.author}</p>
+                            <img alt="" src="${article.imageUrl}" alt="${article.title}" style="width:100%; max-height:400px; object-fit:cover;">
+                            <h1 class="langue-en">${article.title}</h1>
+                            <h1 class="langue-fr">${article.titleFR}</h1>
+                            <p class='article-content langue-en'>${article.content}</p>
+                            <p class='article-content langue-fr'>${article.contentFR}</p>
+                            <p class="langue-en"><strong>Author:</strong> ${article.author}</p>
+                            <p class="langue-fr"><strong>Publié par:</strong> ${article.author}</p>
                             <p><strong>Date:</strong> ${new Date(article.date.seconds * 1000).toLocaleString()}</p>
                         `;
                     } else {
@@ -147,5 +161,6 @@
             });
         </script>
         <script src="indexJs.js"></script>
+        <script src="script-language.js"></script>
     </body>
 </html>

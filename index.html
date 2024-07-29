@@ -2,6 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sahel Politica</title>
         <link rel="icon" href="images/favicon.png" type="image/png">
         <link href="css/indexStyle.css" rel="stylesheet">
@@ -18,87 +19,105 @@
             <div class="header-background"></div>
             <div class="menu">
                 <p class="menu-logo">
-                    <img src="images/logo.png" />
+                    <img alt="" src="images/logo.png" />
                 </p>
                 <button class="menu-toggle" aria-label="Toggle menu">☰</button>
                 <div class="menu-link">
-                    <a href="index.html">About us</a>
+                    <a class="langue-en" href="index.html">About us</a>
+                    <a class="langue-fr" href="index.html">A propos</a>
                     <a href="services.html">Services</a>
-                    <a href="our-team.html">Our team</a>
+                    <a class="langue-en" href="our-team.html">Our team</a>
+                    <a class="langue-fr" href="our-team.html">Notre équipe</a>
                     <a href="blog.html">Blog</a>
-                    <a href="contact.html">Contact us</a>
+                    <a class="langue-en" href="contact.html">Contact us</a>
+                    <a class="langue-fr" href="contact.html">Nous contacter</a>
                 </div>
-                <div class="language-selector">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        Filter by Date
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#" data-filter="This week">This week</a></li>
-                        <li><a class="dropdown-item" href="#" data-filter="This month">This month</a></li>
-                        <li><a class="dropdown-item" href="#" data-filter="This six months">This six months</a></li>
-                        <li><a class="dropdown-item" href="#" data-filter="This year">This year</a></li>
-                        <li><a class="dropdown-item" href="#" data-filter="All">All the dates</a></li>
-                    </ul>
-                    <button type="button" class="btn btn-outline-danger d-none" id="clear-filter">
-                        <span>&times;</span>
-                    </button>
-                </div>
+                <select id="myDropdown" title="Choose a language">
+                    <option class="option" value="en">English - EN</option>
+                    <option class="option" value="fr">French - FR</option>
+                </select>
             </div>
         </header>
         <main>
             <section class="carousel-container">
                     <div class="carousel">
                         <div class="item active">
-                            <img src="images/home-page-carroussel-1.jpg" alt="Image 1" />
-                            <h1 class="caption">Anticipate, monitor and understand your risks</h1>
+                            <img alt="" src="images/home-page-carroussel-1.jpg" alt="Image 1" />
+                            <h1 class="caption langue-en">Anticipate, monitor and understand your risks</h1>
+                            <h1 class="caption langue-fr">Anticipation, suivi et analyse de vos risques</h1>
                         </div>
                         <div class="item">
-                            <img src="images/home-page-carroussel-2.png" alt="Image 2" />
-                            <h1 class="caption">Plan for, respond and recover from crisis</h1>
+                            <img alt="" src="images/home-page-carroussel-2.png" alt="Image 2" />
+                            <h1 class="caption langue-en">Plan for, respond and recover from crisis</h1>
+                            <h1 class="caption langue-fr">Planifier, gérer  et se remettre d'une crise</h1>
                         </div>
                         <div class="item">
-                            <img src="images/home-page-carroussel-3.jpg" alt="Image 3" />
-                            <h1 class="caption">Leverage risks and seize opportunities</h1>
+                            <img alt="" src="images/home-page-carroussel-3.jpg" alt="Image 3" />
+                            <h1 class="caption langue-en">Leverage risks and seize opportunities</h1>
+                            <h1 class="caption langue-fr">Tirer parti des risques et saisir les opportunités</h1>
                         </div>
                     </div>
                     <div class="dots"></div>
             </section>
             <section class="about-us-title">
-                <h1>About us</h1>
-                <p>We come with many years of experience in Intelligence analysis of African political and security affairs.</p>
+                <h1 class="langue-en">About us</h1>
+                <h1 class="langue-fr">A propos de nous</h1>
+                <p class="langue-en">We come with many years of experience in Intelligence analysis of African political and security affairs.</p>
+                <p class="langue-fr">Nous disposons de plusieurs années d'expérience à l'interface du renseignement, des relations internationales et des affaires africaines.</p>
             </section>
             <section class="about-our-mission">
-                <img src="images/mission-2.png" alt="mission 1" />
+                <img alt="" src="images/mission-2.png" alt="mission 1" />
                 <div>
-                    <h3>Our mission</h3>
-                    <p>Sahel Politica helps clients navigate the complex and volatile environment of West African geopolitics and avoid political and security incidents in the Sahel region so that they can make an impact for the greater good.</p>
-                    <p>With 17+ years of experience in Intelligence analysis of African political and security affairs, our proven Sahel risk and crisis preparedness™ framework enable our clients to invest or deliver aid response in volatile context while reducing security incidents in areas such as personnel and assets security or reputational damage.</p>
+                    <h3 class="langue-en">Our mission</h3>
+                    <h3 class="langue-fr">Notre mission</h3>
+                    <p class="langue-en">Sahel Politica helps clients navigate the complex and volatile environment of West African geopolitics and avoid political and security incidents in the Sahel region so that they can make an impact for the greater good.</p>
+                    <p class="langue-en">With 17+ years of experience in Intelligence analysis of African political and security affairs, our proven Sahel risk and crisis preparedness™ framework enable our clients to invest or deliver aid response in volatile context while reducing security incidents in areas such as personnel and assets security or reputational damage.</p>
+                    <p class="langue-fr">Sahel Politica aide les organisations humanitaires à appréhender l'environnement complexe et volatile de la géopolitique en Afrique de l'Ouest et à éviter les incidents politiques et sécuritaires dans la région du Sahel afin qu'elles puissent avoir un plus grand impact au bénéfice du plus grand nombre.</p>
+                    <p class="langue-fr">Avec plus de 17 ans d'expériences dans l'analyse intelligente des affaires politiques et sécuritaires en Afrique, l’approche confirmée de Sahel sur la préparation aux risques et aux crises permet à nos clients d'apporter une réponse d’aide dans un contexte instable tout en réduisant les incidents de sécurité dans des domaines tels que la sécurité du personnel et des biens ou les atteintes à la réputation.</p>
+                    <p class="langue-fr">Sahel Politica aide vous aide à prospérer dans l'environnement complexe et volatile de la géopolitique ouest-africaine et à gérer les crises politiques et sécuritaires dans la région du Sahel afin qu'elles puissent avoir un impact pour le plus grand bien de tous.</p>
+                    <p class="langue-fr">Avec plus de 17 ans d'expérience dans l'analyse des affaires politiques et sécuritaires africaines, notre méthode de préparation à la gestion des risques et crises dans le Sahel™ réduit vos incidents, sécurise votre personnel et vos biens, préserve la réputation de votre entreprise.</p>
                 </div>
                 
             </section>
             <section class="about-our-vision">
                 <div class="about-our-vision-p1">
-                    <img src="images/mission-1.png" alt="mission 2" />
+                    <img alt="" src="images/mission-1.png" alt="mission 2" />
                     <div>
-                        <h3>Our vision</h3>
-                        <ul>
+                        <h3 class="langue-en">Our vision</h3>
+                        <h3 class="langue-fr">Notre vision</h3>
+                        <ul class="langue-en">
                             <li>Are you a leader in supporting positive social change in Africa ?</li>
-                            <li>Are you struggling to detect, assess and mitigate risks</li>
-                            <li>Are you challenged to sustain the normal operations of your business or local aid programs?</li>
-                            <li>Do you strive to protect and promote confidence in your organization’s reputation with local stakeholders?</li>
-                            <li>Does uncertainty cause you loss of money, time, and trust?</li>
+                            <li>Are you struggling to detect, assess and mitigate risks ?</li>
+                            <li>Are you challenged to sustain the normal operations of your business or local aid programs ?</li>
+                            <li>Do you strive to protect and promote confidence in your organization’s reputation with local stakeholders ?</li>
+                            <li>Does uncertainty cause you loss of money, time, and trust ?</li>
+                        </ul>
+                        <ul class="langue-fr">
+                            <li>Êtes-vous un leader œuvrant dans le soutien au changement social positif en Afrique par le biais de l'aide au développement ?</li>
+                            <li>Eprouvez-vous des difficultés à détecter, évaluer et  atténuer vos risques ?</li>
+                            <li>Êtes-vous confrontés à des difficultés à maintenir le fonctionnement normal de vos programme-pays ?</li>
+                            <li>Cherchez-vous à protéger et promouvoir la réputation de votre organisation auprès des parties prenantes locales ?</li>
+                            <li>L'incertitude vous fait-elle perdre de l'argent, du temps et de la confiance ?</li>
                         </ul>
                     </div>    
                 </div>
                 
                 <div class="about-our-vision-p2">
-                   <h5>It doesn’t have to be. You can operate from a place of resilience to risks:</h5>
-                   <ul>
+                   <h5 class="langue-en">It doesn’t have to be. You can operate from a place of resilience to risks :</h5>
+                   <h5 class="langue-fr">Ce n'est pas une fatalité. Vous pouvez agir à partir d'un état d'esprit de résilience face aux risques :</h5>
+                   <ul class="langue-en">
                     <li>Where time and resources are dedicated to growth and social impact, not worry and stress.</li>
                     <li>Donors and investors enthusiastically invest greater resources in your project.</li>
                     <li>Your organization is recognized for the value and growth it generates in fragile contexts.</li>
                     <li>Local audiences and stakeholders support you, not work against you.</li>
                     <li>Your organization is trusted by local authorities as a cooperation or business partner.</li>
+                   </ul>
+                   <ul class="langue-fr">
+                    <li>Où le temps et les ressources sont consacrés à l'impact social, et non à l'inquiétude et au stress.</li>
+                    <li>Les donateurs investissent dans votre projet avec enthousiasme.</li>
+                    <li>Votre organisation est reconnue pour son travail et son soutien aux sociétés fragiles. </li>
+                    <li>Les  parties prenantes vous soutiennent, et collaborent de manière constructive avec votre organisation.</li>
+                    <li>Les autorités locales font confiance à votre organisation en tant que partenaires.</li>
                    </ul>
                 </div>
             </section>
@@ -107,40 +126,60 @@
                 <div class="services-title">
                     <h1>Services</h1>
                 </div>
-                <div class="services-container">
+                <div class="services-container langue-en">
                     <h3>Sahel Resilience Audit</h3>
                     <h4>Review your risk policy and local sites exposure.</h4>
                 </div>
-                <div class="services-container">
+                <div class="services-container langue-fr">
+                    <h3>Audit de Résilience</h3>
+                    <h4>Renforcez votre politique de gestion des risques et évaluez l'exposition de vos opérations sur le terrain.</h4>
+                </div>
+                <div class="services-container langue-en">
                     <h3>Sahel Risks prevention blueprint</h3>
                     <h4>Monitor, Understand and Anticipate Your Risks.</h4>
                 </div>
-                <div class="services-container">
+                <div class="services-container langue-fr">
+                    <h3>Schéma Directeur de Prévention des Risques Sahel</h3>
+                    <h4>Surveillez, Comprenez et Anticipez les menaces sur vos investissements.</h4>
+                </div>
+                <div class="services-container langue-en">
                     <h3>Sahel Crisis response Plan</h3>
                     <h4>Plan For, Respond and Recover from Crisis.</h4>
                 </div>
-                <div class="services-container">
+                <div class="services-container langue-fr">
+                    <h3>Plan d'Action en Cas de Crise</h3>
+                    <h4>Réagissez, préservez vos opérations et remettez-vous avec rapidité et efficacité lors crises.</h4>
+                </div>
+                <div class="services-container langue-en">
                     <h3>Sahel Opportunity Booster</h3>
                     <h4>Seize Opportunities for Market Entry/Expansion/Exit</h4>
                 </div>
+                <div class="services-container langue-fr">
+                    <h3>Accélérateur de croissance</h3>
+                    <h4>Créez ou saisissez les opportunités de la crise : entrée, expansion ou sortie réussie du marché.</h4>
+                </div>
                 <div class="services-button">
-                    <a href="services.html"><button type="button" class="btn btn-outline-light">Learn more</button></a>
+                    <a href="services.html">
+                        <button type="button" class="btn btn-outline-light langue-en">Learn more</button>
+                        <button type="button" class="btn btn-outline-light langue-fr">En savoir plus</button>
+                    </a>
                 </div>
             </section>
             <section class="our-clients">
-                <h1>Our Clients</h1>
+                <h1 class="langue-en">Our clients</h1>
+                <h1 class="langue-fr">Nos clients</h1>
                 <div>
                     <p>
-                        <img src="images/suisse-logo.png" alt="SUISSE" />
+                        <img alt="" src="images/suisse-logo.png" alt="SUISSE" />
                     </p>
                     <p>
-                        <img src="images/gcsp-logo.png" alt="GCSP" />
+                        <img alt="" src="images/gcsp-logo.png" alt="GCSP" />
                     </p>
                     <p>
-                        <img src="images/undp-logo.png" alt="UNDP" />
+                        <img alt="" src="images/undp-logo.png" alt="UNDP" />
                     </p>
                     <p>
-                        <img src="images/caritas-logo.png" alt="CARITAS" />
+                        <img alt="" src="images/caritas-logo.png" alt="CARITAS" />
                     </p>
                 </div>
             </section>
@@ -152,72 +191,85 @@
                     <!-- Articles will be dynamically inserted here -->
                 </div>
                 <div class="blog-button">
-                    <a href="blog.html"><button type="button" class="btn btn-outline-light">Discover</button></a>
+                    <a href="blog.html"><button type="button" class="btn btn-outline-light langue-en">Discover</button></a>
+                    <a href="blog.html"><button type="button" class="btn btn-outline-light langue-fr">Découvrire</button></a>
                 </div>
             </section>
             <section class="our-team">
-                <h1>Our Team</h1>
+                <h1 class="langue-en">Our Team</h1>
+                <h1 class="langue-fr">Notre équipe</h1>
                 <div class="teams">
                     <div class="team-box">
                         <div class="team-icon-1"></div>
                         <h5>Issaka Ouedraogo-iseli</h5>
-                        <h6>CEO and Founder</h6>
+                        <h6 class="langue-en">CEO and Founder</h6>
+                        <h6 class="langue-fr">Directeur Général et fondateur</h6>
                     </div>
                     <div class="team-box">
                         <div class="team-icon-2"></div>
                         <h5>Dr. Awalou Ouedraogo</h5>
-                        <h6>Associated Consultant</h6>
+                        <h6 class="langue-en">Associated Consultant</h6>
+                        <h6 class="langue-fr">Consultant associé</h6>
                     </div>
                     <div class="team-box">
                         <div class="team-icon-3"></div>
                         <h5>Dr. Abdourahmane Idrissa</h5>
-                        <h6>Associated Consultant</h6>
+                        <h6 class="langue-en">Associated Consultant</h6>
+                        <h6 class="langue-fr">Consultant associé</h6>
                     </div>
                     <div class="team-box">
                         <div class="team-icon-4"></div>
                         <h5>Gabriel Poda</h5>
-                        <h6>Administratice & Content Coordinator</h6>
+                        <h6 class="langue-en">Administratice & Content Coordinator</h6>
+                        <h6 class="langue-fr">Coordonnateur administratif et de contenu</h6>
                     </div>
                 </div>
                 <div class="team-button">
-                    <a href="our-team.html"><button type="button" class="btn btn-outline-dark">Meet our team</button></a>
+                    <a href="our-team.html">
+                        <button type="button" class="btn btn-outline-dark langue-en">Meet our team</button>
+                        <button type="button" class="btn btn-outline-dark langue-fr">Rencontrez notre équipe</button>
+                    </a>
                 </div>
             </section>
             <button id="scrollToTopBtn" title="Go to top">↑</button>
             <footer>
                 <div class="footer-contact">
                     <div class="footer-title-newsletter">
-                        <h5>Stay up to date with all our news by subscribing to our newsletter.</h5>
+                        <h5 class="langue-en">Stay up to date with all our news by subscribing to our newsletter.</h5>
+                        <h5 class="langue-fr">Restez informé de toutes nos actualités en vous abonnant à notre newsletter.</h5>
                     </div>
                     <div class="footer-mail-form" id="footerMailForm">
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                            <label for="exampleFormControlInput1" class="form-label langue-en">Email address</label>
+                            <label for="exampleFormControlInput1" class="form-label langue-fr">Votre adresse email</label>
                             <input type="email" class="form-control newsletter-form" id="newsletterEmail" placeholder="name@example.com">
-                            <button type="button" class="btn btn-outline-light" id="registerButton">Register</button>
+                            <button type="button" class="btn btn-outline-light langue-en" id="registerButton">Register</button>
+                            <button type="button" class="btn btn-outline-light langue-fr" id="registerButton">Enregistrer</button>
                         </div>
                     </div>
                 </div>
                 <div class="footer-info">
-                    <img class="logo-footer" src="images/logo.png">
+                    <img alt="" class="logo-footer" src="images/logo.png">
                     <div class="footer-list-info">
                         <div class="footer-contact-adress">
-                            <img class="icon-info-footer" src="images/map.png">
+                            <img alt="" class="icon-info-footer" src="images/map.png">
                             <h4>SAPAS Gmbh, Chamerstrasse 172, 6300 Zug</h4>
                         </div>
                         <div class="footer-contact-mail">
-                            <img class="icon-info-footer" src="images/mail-black.png">
+                            <img alt="" class="icon-info-footer" src="images/mail-black.png">
                             <h4>info@sahelpolitica.ch</h4>
                         </div>
                         <div class="footer-contact-number">
-                            <img class="icon-info-footer" src="images/phone-black.png">
+                            <img alt="" class="icon-info-footer" src="images/phone-black.png">
                             <h4>+41 778 12 40 73</h4>
                         </div>
                     </div>
                     <div class="footer-follow-us">
-                        <h3>Follow us:</h3>
-                        <a href=""><img src="images/facebook.png"></a>
-                        <a target="_blank" href="https://www.linkedin.com/company/sahelpolitica/"><img src="images/linkedin.png"></a>
-                        <a target="_blank" href="https://x.com/SahelPolitica"><img src="images/twitter-x.png"></a>
+                        <h3 class="langue-en">Follow us:</h3>
+                        <h3 class="langue-fr">Nous suivre:</h3>
+                        <a href=""><img alt="" src="images/facebook.png"></a>
+                        <a target="_blank" href="https://www.linkedin.com/company/sahelpolitica/"><img alt="" src="images/linkedin.png"></a>
+                        <a target="_blank" href="https://x.com/SahelPolitica"><img alt="" src="images/twitter-x.png"></a>
                     </div>
                 </div>
             </footer>
@@ -279,11 +331,15 @@
                         articleElement.innerHTML = `
                             
                             <div class="blog-article-title">
-                                <h6>${article.title}</h6>
+                                <h6 class="langue-en">${article.title}</h6>
+                                <h6 class="langue-fr">${article.titleFR}</h6>
                             </div>
                             <div class="blog-article-info">
-                                <p class="blog-article-author">Author: ${article.author}</p>
+                                <p class="blog-article-author langue-en">Author: ${article.author}</p>
+                                <p class="blog-article-author langue-fr">Publié par: ${article.author}</p>
                                 <p class="blog-article-date">${new Date(article.date.seconds * 1000).toLocaleString()}</p>
+                                <p class="langue-en"><a href="article.html?id=${article.id}">Read more --></a></p>
+                                <p class="langue-fr"><a href="article.html?id=${article.id}">Lire plus --></a></p>
                             </div>
                         `;
                         articlesContainer.appendChild(articleElement);
@@ -316,5 +372,6 @@
                 document.documentElement.scrollTop = 0; // Pour Chrome, Firefox, IE et Opera
             });
         </script>
+        <script src="script-language.js"></script>
     </body>
 </html>

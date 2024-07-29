@@ -267,7 +267,7 @@
 
         .blog-article-info {
             position: absolute;
-            bottom: -70px; /* Ajuste selon tes besoins */
+            bottom: -100px; /* Ajuste selon tes besoins */
             left: 30px;
             right: 30px;
             color: white;

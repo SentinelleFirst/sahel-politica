@@ -2,6 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Services</title>
         <link rel="icon" href="images/favicon.png" type="image/png">
         <link href="css/services-page.css" rel="stylesheet">
@@ -20,58 +21,81 @@
             <div class="header-background"></div>
             <div class="menu">
                 <p class="menu-logo">
-                    <img src="images/logo.png" />
+                    <img alt="" src="images/logo.png" />
                 </p>
                 <button class="menu-toggle" aria-label="Toggle menu">☰</button>
                 <div class="menu-link">
-                    <a href="index.html">About us</a>
+                    <a class="langue-en" href="index.html">About us</a>
+                    <a class="langue-fr" href="index.html">A propos</a>
                     <a href="services.html">Services</a>
-                    <a href="our-team.html">Our team</a>
+                    <a class="langue-en" href="our-team.html">Our team</a>
+                    <a class="langue-fr" href="our-team.html">Notre équipe</a>
                     <a href="blog.html">Blog</a>
-                    <a href="contact.html">Contact us</a>
+                    <a class="langue-en" href="contact.html">Contact us</a>
+                    <a class="langue-fr" href="contact.html">Nous contacter</a>
                 </div>
-                
+                <select id="myDropdown" title="Choose a language">
+                    <option class="option" value="en">English - EN</option>
+                    <option class="option" value="fr">French - FR</option>
+                </select>
             </div>
         </header>
         <main>
             <section class="hero"></section>
             <section class="page-title">
-                <h1>Our services</h1>
+                <h1 class="langue-en">Our services</h1>
+                <h1 class="langue-fr">Nos services</h1>
             </section>
             <section class="services-menu">
                 <a href="#service-1">
                     <div class="services-menu-box">
-                        <img src="images/undraw_predictive_analytics_re_wxt8.svg">
-                        <div class="services-menu-text">
+                        <img alt="" src="images/undraw_predictive_analytics_re_wxt8.svg">
+                        <div class="services-menu-text langue-en">
                             <h5>Sahel Resilience Audit</h5>
                             <h6>Review your risk policy and local sites exposure.</h6>
+                        </div>
+                        <div class="services-menu-text langue-fr">
+                            <h5>Audit de Résilience</h5>
+                            <h6>Renforcez votre politique de gestion des risques et évaluez l'exposition de vos opérations sur le terrain.</h6>
                         </div>
                     </div>
                 </a>
                 <a href="#service-2">    
                     <div class="services-menu-box">
-                        <img src="images/undraw_all_the_data_re_hh4w.svg">
-                        <div class="services-menu-text">
+                        <img alt="" src="images/undraw_all_the_data_re_hh4w.svg">
+                        <div class="services-menu-text langue-en">
                             <h5>Sahel Risks prevention blueprint</h5>
                             <h6>Monitor, Understand and Anticipate Your Risks.</h6>
+                        </div>
+                        <div class="services-menu-text langue-fr">
+                            <h5>Schéma Directeur de Prévention des Risques Sahel</h5>
+                            <h6>Surveillez, Comprenez et Anticipez les menaces sur vos investissements.</h6>
                         </div>
                     </div>
                 </a>
                 <a href="#service-3">    
                     <div class="services-menu-box">
-                        <img src="images/undraw_scrum_board_re_wk7v.svg">
-                        <div class="services-menu-text">
+                        <img alt="" src="images/undraw_scrum_board_re_wk7v.svg">
+                        <div class="services-menu-text langue-en">
                             <h5>Sahel Crisis response Plan</h5>
                             <h6>Plan For, Respond and Recover from Crisis.</h6>
+                        </div>
+                        <div class="services-menu-text langue-fr">
+                            <h5>Plan d'Action en Cas de Crise</h5>
+                            <h6>Réagissez, préservez vos opérations et remettez-vous avec rapidité et efficacité lors crises.</h6>
                         </div>
                     </div>
                 </a>
                 <a href="#service-4">    
                     <div class="services-menu-box">
-                        <img src="images/undraw_investment_data_re_sh9x.svg">
-                        <div class="services-menu-text">
+                        <img alt="" src="images/undraw_investment_data_re_sh9x.svg">
+                        <div class="services-menu-text langue-en">
                             <h5>Sahel Opportunity Booster</h5>
                             <h6>Seize Opportunities for Market Entry/Expansion/Exit.</h6>
+                        </div>
+                        <div class="services-menu-text langue-fr">
+                            <h5>Accélérateur de croissance</h5>
+                            <h6>Créez ou saisissez les opportunités de la crise : entrée, expansion ou sortie réussie du marché.</h6>
                         </div>
                     </div>
                 </a>    
@@ -80,14 +104,21 @@
                 <div id="title-back1">
                     <div class="title-back-2"></div>
                     <div class="service-title">
-                        <h3>SAHEL RESILIENCE AUDIT</h3>
+                        <h3 class="langue-en">SAHEL RESILIENCE AUDIT</h3>
+                        <h3 class="langue-fr">AUDIT DE RESILIENCE</h3>
                     <div class="divider"></div>
                     </div>
                     <div class="service-intro">
-                        <div>
+                        <div class="langue-en">
                             <h3>Review your risk policy and local sites exposure.</h3>
                             <p>
                                 This is the first step to navigate the complex and volatile environment of West African geopolitics and avoid political and security incidents. We work with you to create your risk portfolio, identify, and monitor your risk exposure. You will discover the risks to which your operations are exposed to. We will assess your operations, personnel, and assets exposure to local risk.
+                            </p>
+                        </div>
+                        <div class="langue-fr">
+                            <h3>Renforcez votre politique de gestion des risques et évaluez l'exposition de vos opérations sur le terrain.</h3>
+                            <p>
+                                Il s'agit de la première étape pour vous aider à prospérer dans l'environnement complexe et volatile de la géopolitique ouest-africaine et à gérer les crises politiques et sécuritaires. Nous travaillons avec vous pour créer votre portefeuille de risques, identifier et surveiller votre exposition aux risques. Vous découvrirez les risques auxquels vos opérations sont exposées. Nous évaluerons l'exposition de vos opérations, de votre personnel et de vos actifs aux risques locaux.
                             </p>
                         </div>
                     </div>
@@ -95,101 +126,140 @@
                 
                 <div class="service-gain">
                     <div class="service-gain-title">
-                        <h4>What will you gain at the end of the assessment?</h4>
+                        <h4 class="langue-en">What will you gain at the end of the assessment?</h4>
+                        <h4 class="langue-fr">A la fin de l'évaluation, vous aurez :</h4>
                     </div>
                     <div class="service-gain-list">
                         <ul>
-                            <li>Clarity on the nature of the current crisis you are facing</li>
+                            <li class="langue-en">Clarity on the nature of the current crisis you are facing</li>
+                            <li class="langue-fr">Une vision claire sur la nature de la crise actuelle.</li>
                         </ul>
                         <ul>
-                            <li>Clarity about your project’s exposure to local risks.</li>
+                            <li class="langue-en">Clarity about your project’s exposure to local risks.</li>
+                            <li class="langue-fr">Une vision claire de l'exposition du projet aux risques.</li>
                         </ul>
                         <ul>
-                            <li>Clarity about onsite personnel security</li>
+                            <li class="langue-en">Clarity about onsite personnel security</li>
+                            <li class="langue-fr">Une vision claire de la sécurité du personnel sur le terrain.</li>
                         </ul>
                         <ul>
-                            <li>Clarity about local risk trends and stakeholders.</li>
+                            <li class="langue-en">Clarity about local risk trends and stakeholders.</li>
+                            <li class="langue-fr">Une vision claire sur les tendances locales en matière de risques et sur les parties prenantes.</li>
                         </ul>
                         <ul>
-                            <li>Initial, actionable recommendations for your path out of the crisis.</li>
+                            <li class="langue-en">Initial, actionable recommendations for your path out of the crisis.</li>
+                            <li class="langue-fr">Des recommandations initiales et réalisables pour sortir de la crise.</li>
                         </ul>
                         <ul>
-                            <li>Recommendations for crisis preparedness mechanisms improvement</li>
+                            <li class="langue-en">Recommendations for crisis preparedness mechanisms improvement</li>
+                            <li class="langue-fr">Des recommandations pour l'amélioration de votre politique de gestion des risques et de de préparation à la crise.</li>
                         </ul>
                         <ul>
-                            <li>Understanding on how to address weaknesses so that your organization become resilient in the face of crisis.</li>
+                            <li class="langue-en">Understanding on how to address weaknesses so that your organization become resilient in the face of crisis.</li>
+                            <li class="langue-fr">Compréhension de la méthode à suivre pour remédier aux faiblesses de votre organisation afin qu'elle devienne résiliente face à la crise.</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="service-work">
                     <div class="service-work-title">
-                        <h4>To accomplish this audit, we work with you to:</h4>
-                        <img>
+                        <h4 class="langue-en">To accomplish this audit, we work with you to:</h4>
+                        <h4 class="langue-fr">Pour réaliser cet audit, nous travaillons avec vous pour :</h4>
+                        <img alt="">
                     </div>
                     <div class="service-work-list">
                         <ul>
-                            <li>Review your sites security and personnel safety plans to identify risks before they arise (field visit).</li>
+                            <li class="langue-en">Review your sites security and personnel safety plans to identify risks before they arise (field visit).</li>
+                            <li class="langue-fr">La révision de la politique de gestion des risques, des réglementations, des procédures et des documents connexes.</li>
                         </ul>
                         <ul>
-                            <li>Review your risk policies, regulations, procedures, and related documents.</li>
+                            <li class="langue-en">Review your risk policies, regulations, procedures, and related documents.</li>
+                            <li class="langue-fr">Examen du plan de sécurité du site et du personnel afin d'identifier les risques avant qu'ils ne surviennent (visite d'une semaine sur le terrain).</li>
                         </ul>
                         <ul>
-                            <li>Interview key HQ and 2 local program directors and staff members to capture and mapping of risk plan and procedures pain points.</li>
+                            <li class="langue-en">Interview key HQ and 2 local program directors and staff members to capture and mapping of risk plan and procedures pain points.</li>
+                            <li class="langue-fr">Entretiens avec les principaux directeurs et membres du personnel du siège et deux responsables des programmes locaux afin d'identifier et de cartographier les points faibles du plan de gestion des risques et des procédures.</li>
                         </ul>
                     </div>
                 </div>
                 <div class="service-duration-and-steps">
                     <div class="service-duration">
-                        <img src="images/time.svg">
-                        <h4>After 2 months of work</h4>
-                        <h4>Once the gap analysis is complete, we can move onto :</h4>
+                        <img alt="" src="images/time.svg">
+                        <h4 class="langue-en">After 2 months of work</h4>
+                        <h4 class="langue-fr">Après 2 mois de travail</h4>
+                        <h4 class="langue-en">Once the gap analysis is complete, we can move onto :</h4>
+                        <h4 class="langue-fr">Une fois l’analyse des écarts terminée, nous pouvons passer à :</h4>
                     </div>
                     <div class="service-steps">
-                        <div>
+                        <div class="langue-en">
                             <h6>Step 1:</h6>
                             <p>Anticipate, understand, and monitor your risks.</p>
                         </div>
-                        <div>
+                        <div class="langue-en">
                             <h6>Step 2:</h6>
                             <p>Plan for, respond and recover from crisis.</p>
                         </div>
-                        <div>
+                        <div class="langue-en">
                             <h6>Step 3:</h6>
                             <p>Leverage risks and seize opportunities.</p>
+                        </div>
+                        <div class="langue-fr">
+                            <h6>Etape 1:</h6>
+                            <p>Anticipez, comprenez et surveillez vos risques.</p>
+                        </div>
+                        <div class="langue-fr">
+                            <h6>Etape 2:</h6>
+                            <p>Planifier, réagir et se rétablir d'une crise.</p>
+                        </div>
+                        <div class="langue-fr">
+                            <h6>Etape 3:</h6>
+                            <p>Tirer parti des risques et saisir les opportunités.</p>
                         </div>
                     </div>
                 </div>
                 <div class="service-program-benefit">
                     <div class="service-program-benefit-title">
-                        <img src="images/businessman-finding-investment-options-for-batter-retirement-life.svg" alt="puzzle-icon">
-                        <h4>Program’s Benefits</h4>
+                        <img alt="" src="images/businessman-finding-investment-options-for-batter-retirement-life.svg" alt="puzzle-icon">
+                        <h4 class="langue-en">Program’s Benefits</h4>
+                        <h4 class="langue-fr">Avantages de ce programme</h4>
                     </div>
                     <div class="service-benefits">
                         <div class="benefit-list">
                             <div>
-                                <img src="images/puzzle-business.svg" alt="puzzle-icon">
-                                <h5>If struggling with...</h5>
+                                <img alt="" src="images/puzzle-business.svg" alt="puzzle-icon">
+                                <h5 class="langue-en">If struggling with...</h5>
+                                <h5 class="langue-fr">Défie/enjeux...</h5>
                             </div>
                             <ul>
-                                <li>Lack of clarity on the project risk portfolio.</li>
-                                <li>Lack of clarity on the project risk exposure.</li>
-                                <li>Uncertainty about site and employee’s security plans.</li>
+                                <li class="langue-en">Lack of clarity on the project risk portfolio.</li>
+                                <li class="langue-en">Lack of clarity on the project risk exposure.</li>
+                                <li class="langue-en">Uncertainty about site and employee’s security plans.</li>
+                                <li class="langue-fr">Le portefeuille de risques du programme n'est pas bien défini.</li>
+                                <li class="langue-fr">Manque de visibilité sur l'exposition aux risques du programme.</li>
+                                <li class="langue-fr">Manque de précisions sur les plans de sécurité du site et des employés.</li>
                             </ul>
                         </div>
                         <div class="benefit-list">
                             <div>
-                                <img src="images/performance.svg" alt="puzzle-icon">
-                                <h5>You will gain...</h5>
+                                <img alt="" src="images/performance.svg" alt="puzzle-icon">
+                                <h5 class="langue-en">You will gain...</h5>
+                                <h5 class="langue-fr">Résultats attendus...</h5>
                             </div>
                             <ul>
-                                <li>Clarity on nature of current crisis.</li>
-                                <li>Clarity about projects exposure to risk.</li>
-                                <li>Clarity about onsite personnel security.</li>
-                                <li>Clarity about local risk trends and stakeholders.</li>
-                                <li>Initial, actionable recommendations for path out of crisis.</li>
-                                <li>Recommendations for crisis preparedness mechanism improvement.</li>
-                                <li>Preview of how the true resilient character of the organization can be enhanced.</li>
+                                <li class="langue-en">Clarity on nature of current crisis.</li>
+                                <li class="langue-en">Clarity about projects exposure to risk.</li>
+                                <li class="langue-en">Clarity about onsite personnel security.</li>
+                                <li class="langue-en">Clarity about local risk trends and stakeholders.</li>
+                                <li class="langue-en">Initial, actionable recommendations for path out of crisis.</li>
+                                <li class="langue-en">Recommendations for crisis preparedness mechanism improvement.</li>
+                                <li class="langue-en">Preview of how the true resilient character of the organization can be enhanced.</li>
+                                <li class="langue-fr">Identification de la nature de la crise actuelle.</li>
+                                <li class="langue-fr">Vision claire sur l'exposition des projets aux risques.</li>
+                                <li class="langue-fr">Vision claire sur la sécurité du personnel sur place.</li>
+                                <li class="langue-fr">Vision claire sur les tendances locales en matière de risques et sur les parties prenantes.</li>
+                                <li class="langue-fr">Recommandations initiales et réalisables pour sortir de la crise.</li>
+                                <li class="langue-fr">Recommandations pour l'amélioration du mécanisme de préparation à la crise.</li>
+                                <li class="langue-fr">Aperçu de la manière dont la résilience de l'organisation peut être renforcée.</li>
                             </ul>
                         </div>
                     </div>
@@ -199,118 +269,161 @@
                 <div id="title-back2">
                     <div class="title-back-2"></div>
                     <div class="service-title">
-                        <h3>SAHEL RISKS PREVENTION BLUEPRINT</h3>
+                        <h3 class="langue-en">SAHEL RISKS PREVENTION BLUEPRINT</h3>
+                        <h3 class="langue-fr">SCHEMA DIRECTEUR DE PREVENTION DES RISQUES</h3>
                     <div class="divider"></div>
                     </div>
                     <div class="service-intro">
-                        <div>
+                        <div class="langue-en">
                             <h3>Monitor, Understand and Anticipate Your Risks.</h3>
                             <p>
                                 In this stage, we will work with you to create frameworks, plans and procedures to monitor, understand and forecasting the risks to your program’s portfolio.
                             </p>
                         </div>
-                        <img src="images/undraw_all_the_data_re_hh4w.svg">
+                        <div class="langue-fr">
+                            <h3>Surveillez, Comprenez et Anticipez les menaces sur vos investissements.</h3>
+                            <p>
+                                À ce stade, nous travaillerons avec vous pour créer des schémas, des plans et des procédures permettant de contrôler, de comprendre et de prévoir les risques pour votre portefeuille de projets.
+                            </p>
+                        </div>
+                        <img alt="" src="images/undraw_all_the_data_re_hh4w.svg">
                     </div>
                 </div>
                 
                 <div class="service-gain">
                     <div class="service-gain-title">
-                        <h4>At end of the review and redesign process, you will gain the following benefits :</h4>
+                        <h4 class="langue-en">At end of the review and redesign process, you will gain the following benefits :</h4>
+                        <h4 class="langue-fr">À la fin du processus de révision et de refonte, vous bénéficierez des avantages suivants :</h4>
                     </div>
                     <div class="service-gain-list">
                         <ul>
-                            <li>Clarity on the step-by-step process to detect, monitor, and anticipate risks to your local projects.</li>
+                            <li class="langue-en">Clarity on the step-by-step process to detect, monitor, and anticipate risks to your local projects.</li>
+                            <li class="langue-fr">Des processus clairs pour détecter, surveiller et anticiper les risques pour vos projets locaux.</li>
                         </ul>
                         <ul>
-                            <li>Effective forecasting frameworks and future scenarios to support your risk planning process.</li>
+                            <li class="langue-en">Effective forecasting frameworks and future scenarios to support your risk planning process.</li>
+                            <li class="langue-fr">Des plans et scénarios prévisionnels efficaces à l'appui de votre processus de planification des risques.</li>
                         </ul>
                         <ul>
-                            <li>Effective risk monitoring frameworks and implementation plans to support your strategy formulation at the country/regional level.</li>
+                            <li class="langue-en">Effective risk monitoring frameworks and implementation plans to support your strategy formulation at the country/regional level.</li>
+                            <li class="langue-fr">Des méthodes de suivi des risques et des plans de mise en œuvre efficaces à l'appui de la formulation de votre stratégie au niveau national/régional.</li>
                         </ul>
                         <ul>
-                            <li>Improvement of risk analysis skills for in-house analysts, risk managers, and executives.</li>
+                            <li class="langue-en">Improvement of risk analysis skills for in-house analysts, risk managers, and executives.</li>
+                            <li class="langue-fr">Amélioration des compétences en matière d'analyse des risques pour les analystes internes ou les gestionnaires de risques et les cadres supérieurs.</li>
                         </ul>
                         <ul>
-                            <li>Resolution of gaps in risk analysis and mitigation within the organization.</li>
+                            <li class="langue-en">Resolution of gaps in risk analysis and mitigation within the organization.</li>
+                            <li class="langue-fr">Résolution des lacunes dans l'analyse et la mitigation des risques au sein de l'organisation.</li>
                         </ul>
                         <ul>
-                            <li>Formulation of strategy and risk mitigation plans at the country/regional level within the organization.</li>
+                            <li class="langue-en">Formulation of strategy and risk mitigation plans at the country/regional level within the organization.</li>
+                            <li class="langue-fr">Formulation de stratégies/plans pour la mitigation des risques au niveau national/régional au sein de l'organisation.</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="service-work">
                     <div class="service-work-title">
-                        <h4>To reach these results, we work with you to:</h4>
-                        <img src="images/sales-team.svg">
+                        <h4 class="langue-en">To reach these results, we work with you to:</h4>
+                        <h4 class="langue-fr">Pour atteindre ces résultats, nous travaillons avec vous pour:</h4>
+                        <img alt="" src="images/sales-team.svg">
                     </div>
                     <div class="service-work-list">
                         <ul>
-                            <li>Review the risk monitoring function, strategy, regulations, and procedures at HQ and local program levels to identify pain points in the monitoring/anticipation process.</li>
+                            <li class="langue-en">Review the risk monitoring function, strategy, regulations, and procedures at HQ and local program levels to identify pain points in the monitoring/anticipation process.</li>
+                            <li class="langue-fr">Analyser la fonction de suivi des risques, la stratégie, les règlements, les procédures au niveau du siège et des programmes locaux afin d'identifier les points faibles du processus de suivi et d'anticipation des risques.</li>
                         </ul>
                         <ul>
-                            <li>Design and implement early warning systems to support risk monitoring plans.</li>
+                            <li class="langue-en">Design and implement early warning systems to support risk monitoring plans.</li>
+                            <li class="langue-fr">Mettre en place des systèmes d'alerte précoce pour renforcer les plans de surveillance des risques.</li>
                         </ul>
                         <ul>
-                            <li>Design and implement crisis scenarios to support strategy formulation at the country/regional level within the organization.</li>
+                            <li class="langue-en">Design and implement crisis scenarios to support strategy formulation at the country/regional level within the organization.</li>
+                            <li class="langue-fr">Concevoir et mettre en œuvre des scénarios de crise pour améliorer la formulation de stratégies au niveau national/régional au sein de l'organisation.</li>
                         </ul>
                         <ul>
-                            <li>Educate and train in-house analysts or risk managers on political risk analysis so they are equipped with the frameworks, methodologies, tools, and contextual local knowledge to mitigate risks and handle crises.</li>
+                            <li class="langue-en">Educate and train in-house analysts or risk managers on political risk analysis so they are equipped with the frameworks, methodologies, tools, and contextual local knowledge to mitigate risks and handle crises.</li>
+                            <li class="langue-fr">Sensibiliser et former les analystes internes ou les gestionnaires de risques à l'analyse des risques politiques afin qu'ils disposent des cadres, des méthodologies, des outils et des connaissances locales contextuelles nécessaires pour atténuer les risques et gérer les crises.</li>
                         </ul>
                         <ul>
-                            <li>Coach executives so they have a clear understanding of what it takes to successfully work with stakeholders.</li>
+                            <li class="langue-en">Coach executives so they have a clear understanding of what it takes to successfully work with stakeholders.</li>
+                            <li class="langue-fr">Former vos cadres afin qu'ils comprennent bien ce qu'il faut faire pour travailler avec succès avec les parties prenantes.</li>
                         </ul>
                         <ul>
-                            <li>Embed a political risk expert vetted by us in your team to build capacity and/or fill capability gaps.</li>
+                            <li class="langue-en">Embed a political risk expert vetted by us in your team to build capacity and/or fill capability gaps.</li>
+                            <li class="langue-fr">Intégrer dans votre équipe un expert en risques politiques que nous avons sélectionné pour renforcer les capacités et/ou combler les lacunes en la matière.</li>
                         </ul>
                     </div>
                 </div>
                 <div class="service-duration-and-steps">
                     <div class="service-duration">
-                        <img src="images/time.svg">
-                        <h4>After 4 months of work</h4>
-                        <h4>Once your frameworks, plans and procedures for monitoring, understanding, and forecasting the risks to your program’s portfolio are set, we move onto :</h4>
+                        <img alt="" src="images/time.svg">
+                        <h4 class="langue-en">After 4 months of work</h4>
+                        <h4 class="langue-fr">Après 4 mois de travail</h4>
+                        <h4 class="langue-en">Once your frameworks, plans and procedures for monitoring, understanding, and forecasting the risks to your program’s portfolio are set, we move onto :</h4>
+                        <h4 class="langue-fr">Une fois que vos cadres, plans et procédures de suivi, de compréhension et de prévision des risques pour le portefeuille de votre programme sont définis, nous passons à :</h4>
                     </div>
                     <div class="service-steps">
-                        <div>
+                        <div class="langue-en">
                             <h6>Step 1:</h6>
                             <p>Plan for, respond and recover from crisis.</p>
                         </div>
-                        <div>
+                        <div class="langue-en">
                             <h6>Step 2:</h6>
                             <p>Leverage risks and seize opportunities.</p>
+                        </div>
+                        <div class="langue-fr">
+                            <h6>Etape 1:</h6>
+                            <p>Planifier, réagir et se rétablir d'une crise.</p>
+                        </div>
+                        <div class="langue-fr">
+                            <h6>Etape 2:</h6>
+                            <p>Tirer parti des risques et saisir les opportunités.</p>
                         </div>
                     </div>
                 </div>
                 <div class="service-program-benefit">
                     <div class="service-program-benefit-title">
-                        <img src="images/businessman-finding-investment-options-for-batter-retirement-life.svg" alt="puzzle-icon">
-                        <h4>Program’s Benefits</h4>
+                        <img alt="" src="images/businessman-finding-investment-options-for-batter-retirement-life.svg" alt="puzzle-icon">
+                        <h4 class="langue-en">Program’s Benefits</h4>
+                        <h4 class="langue-fr">Avantages de ce programme</h4>
                     </div>
                     <div class="service-benefits">
                         <div class="benefit-list">
                             <div>
-                                <img src="images/puzzle-business.svg" alt="puzzle-icon">
-                                <h5>If struggling with...</h5>
+                                <img alt="" src="images/puzzle-business.svg" alt="puzzle-icon">
+                                <h5 class="langue-en">If struggling with...</h5>
+                                <h5 class="langue-fr">Défis/enjeux...</h5>
                             </div>
                             <ul>
-                                <li>Insufficient insight into local risk ecosystem, dynamics, and stakeholders.</li>
-                                <li>Insufficient foresight to detect early signs of risk.</li>
-                                <li>Inexistant or lacking risk monitoring function, policy, plans and procedures.</li>
+                                <li class="langue-en">Insufficient insight into local risk ecosystem, dynamics, and stakeholders.</li>
+                                <li class="langue-en">Insufficient foresight to detect early signs of risk.</li>
+                                <li class="langue-en">Inexistant or lacking risk monitoring function, policy, plans and procedures.</li>
+                                <li class="langue-fr">Manque de visibilité sur les risques de l'écosystème local, de sa dynamique et de ses acteurs.</li>
+                                <li class="langue-fr">Manque de prévoyance pour détecter les premiers signes de risques.</li>
+                                <li class="langue-fr">La politique, les plans et procédures de suivi des risques sont inexistants ou insuffisants.</li>
                             </ul>
                         </div>
                         <div class="benefit-list">
                             <div>
-                                <img src="images/performance.svg" alt="puzzle-icon">
-                                <h5>You will gain...</h5>
+                                <img alt="" src="images/performance.svg" alt="puzzle-icon">
+                                <h5 class="langue-en">You will gain...</h5>
+                                <h5 class="langue-fr">Résultats attendus...</h5>
                             </div>
                             <ul>
-                                <li>Clarity on risk detect/monitoring/anticipation process pain points.</li>
-                                <li>Effective forecasting frameworks and future scenarios in support of your risk planning process.</li>
-                                <li>Effective risk monitoring frameworks and implementation plans in support of your strategy formulation at country/regional level.</li>
-                                <li>Political risk analysis skills improvement for in-house analysts or risk managers and execs.</li>
-                                <li>Capability gaps resorption in risk analysis/mitigation in the organization.</li>
-                                <li>Optimized strategy formulation/risk mitigation plans at country/regional level in the organization.</li>
+                                <li class="langue-en">Clarity on risk detect/monitoring/anticipation process pain points.</li>
+                                <li class="langue-en">Effective forecasting frameworks and future scenarios in support of your risk planning process.</li>
+                                <li class="langue-en">Effective risk monitoring frameworks and implementation plans in support of your strategy formulation at country/regional level.</li>
+                                <li class="langue-en">Political risk analysis skills improvement for in-house analysts or risk managers and execs.</li>
+                                <li class="langue-en">Capability gaps resorption in risk analysis/mitigation in the organization.</li>
+                                <li class="langue-en">Optimized strategy formulation/risk mitigation plans at country/regional level in the organization.</li>
+                                <li class="langue-fr">Une meilleure compréhension des points faibles du processus d’identification, de suivi et d'anticipation des risques.</li>
+                                <li class="langue-fr">Des schémas  et des scénarios prévisionnels efficaces pour soutenir votre processus de planification des risques.</li>
+                                <li class="langue-fr">Des schemas de suivi des risques et des plans de mise en œuvre efficaces pour appuyer la formulation de votre stratégie au niveau national/régional.</li>
+                                <li class="langue-fr">Amélioration des compétences en matière d'analyse des risques politiques pour les analystes internes ou les gestionnaires de risques et les cadres supérieurs.</li>
+                                <li class="langue-fr">Combler les lacunes en matière d'analyse et de mitigation des risques au sein de l'organisation.</li>
+                                <li class="langue-fr">Optimisation de la formulation de la stratégie/des plans de mitigation des risques au niveau national/régional dans l'organisation.</li>
                             </ul>
                         </div>
                     </div>
@@ -320,14 +433,21 @@
                 <div id="title-back3">
                     <div class="title-back-2"></div>
                     <div class="service-title">
-                        <h3>SAHEL CRISIS RESPONSE PLAN</h3>
+                        <h3 class="langue-en">SAHEL CRISIS RESPONSE PLAN</h3>
+                        <h3 class="langue-fr">PLAN D'ACTION EN CAS DE CRISE</h3>
                     <div class="divider"></div>
                     </div>
                     <div class="service-intro">
-                        <div>
+                        <div class="langue-en">
                             <h3>Plan For, Respond and Recover from Crisis.</h3>
                             <p>
                                 The goal at this stage is to optimize your crisis response efficiency so that you will get:
+                            </p>
+                        </div>
+                        <div class="langue-fr">
+                            <h3>Réagissez, préservez vos opérations et remettez-vous avec rapidité et efficacité lors crises.</h3>
+                            <p>
+                                L'objectif, à ce stade, est d'optimiser l'efficacité de votre réponse à la crise
                             </p>
                         </div>
                         <div></div>
@@ -336,95 +456,126 @@
                 
                 <div class="service-gain">
                     <div class="service-gain-title">
-                        <h4>What are the benefits that you will get?</h4>
+                        <h4 class="langue-en">What are the benefits that you will get ?</h4>
+                        <h4 class="langue-fr">Quelles sont les solutions proposées ?</h4>
                     </div>
                     <div class="service-gain-list">
                         <ul>
-                            <li>Monitoring and assessment plans to understand key risks, anticipate stakeholder reactions, identify, and prioritize potential threats.</li>
+                            <li class="langue-en">Monitoring and assessment plans to understand key risks, anticipate stakeholder reactions, identify, and prioritize potential threats.</li>
+                            <li class="langue-fr">Des plans de suivi et d'évaluation pour comprendre les principaux risques, anticiper les réactions des parties prenantes, identifier les menaces potentielles et les classer par ordre de priorité.</li>
                         </ul>
                         <ul>
-                            <li>Incident management plans to prepare for different crisis scenarios and plan for an accelerated exit.</li>
+                            <li class="langue-en">Incident management plans to prepare for different crisis scenarios and plan for an accelerated exit.</li>
+                            <li class="langue-fr">Des plans de gestion des incidents pour se préparer à différents scénarios de crise et planifier une sortie accélérée.</li>
                         </ul>
                         <ul>
-                            <li>Security plans and scenarios to protect your people, including those you leave behind, as well as your assets, and move them out of the country safely, while also securing any facilities and preventing damage.</li>
+                            <li class="langue-en">Security plans and scenarios to protect your people, including those you leave behind, as well as your assets, and move them out of the country safely, while also securing any facilities and preventing damage.</li>
+                            <li class="langue-fr">Des plans et des scénarios de sécurité pour protéger votre personnel, y compris ceux que vous laissez derrière, ainsi que vos biens, et les faire sortir du pays en toute sécurité, tout en sécurisant les installations et en évitant les dommages.</li>
                         </ul>
                         <ul>
-                            <li>Communication strategy to plan stakeholder management and limit reputational risks.</li>
+                            <li class="langue-en">Communication strategy to plan stakeholder management and limit reputational risks.</li>
+                            <li class="langue-fr">Une stratégie de communication pour planifier la gestion des parties prenantes et limiter les risques de réputation.</li>
                         </ul>
                         <ul>
-                            <li>Two briefings for the executive board on current political, strategic, and security issues.</li>
+                            <li class="langue-en">Two briefings for the executive board on current political, strategic, and security issues.</li>
+                            <li class="langue-fr">2 réunions d'information pour le conseil d'administration sur les questions politiques, stratégiques et de sécurité.</li>
                         </ul>
                         <ul>
-                            <li>One scenario planning workshop on how future developments may impact the client's exposure to risk and operational disruption.</li>
+                            <li class="langue-en">One scenario planning workshop on how future developments may impact the client's exposure to risk and operational disruption.</li>
+                            <li class="langue-fr">1 atelier de planification de scénarios sur la façon dont les développements futurs peuvent avoir un impact sur l'exposition du client aux risques/perturbations opérationnelles.</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="service-work">
                     <div class="service-work-title">
-                        <h4>To reach these results, we work with you to:</h4>
-                        <img src="images/sales-team.svg">
+                        <h4 class="langue-en">To reach these results, we work with you to :</h4>
+                        <h4 class="langue-fr">Pour atteindre ces résultats, nous travaillons avec vous pour :</h4>
+                        <img alt="" src="images/sales-team.svg">
                     </div>
                     <div class="service-work-list">
                         <ul>
-                            <li>Test your framework for managing political risk within your organization, considering local humanitarian, social, and political changes.</li>
+                            <li class="langue-en">Test your framework for managing political risk within your organization, considering local humanitarian, social, and political changes.</li>
+                            <li class="langue-fr">Tester votre schéma de gestion des risques politiques au sein de votre organisation en tenant compte des dynamiques sécuritaires, humanitaires, sociaux et politiques locaux.</li>
                         </ul>
                         <ul>
-                            <li>Develop new tools, templates, processes, and governance frameworks for managing political risk within your organization, based on what you want your aid programs to achieve.</li>
+                            <li class="langue-en">Develop new tools, templates, processes, and governance frameworks for managing political risk within your organization, based on what you want your aid programs to achieve.</li>
+                            <li class="langue-fr">Développer de nouveaux outils, modèles, processus et schemas de gouvernance pour gérer le risque politique au sein de votre organisation, en fonction des objectifs que vous souhaitez atteindre.</li>
                         </ul>
                         <ul>
-                            <li>Benchmark the resilience of your risk management framework against the best practices of other organizations in the humanitarian landscape.</li>
+                            <li class="langue-en">Benchmark the resilience of your risk management framework against the best practices of other organizations in the humanitarian landscape.</li>
+                            <li class="langue-fr">Comparer la résilience de votre schéma de gestion des risques avec les meilleures pratiques d'autres organisations similaires.</li>
                         </ul>
                         <ul>
-                            <li>Train your in-house analysts, risk managers, and executives in incident/emergency response.</li>
+                            <li class="langue-en">Train your in-house analysts, risk managers, and executives in incident/emergency response.</li>
+                            <li class="langue-fr">Former vos analystes internes, vos gestionnaires de risques et vos cadres à réagir aux incidents et aux situations d'urgence.</li>
                         </ul>
                         <ul>
-                            <li>Embed our experts in your organization to support your crisis response team.</li>
+                            <li class="langue-en">Embed our experts in your organization to support your crisis response team.</li>
+                            <li class="langue-fr">Intégrer nos experts dans votre organisation pour soutenir votre équipe de réponse aux crises.</li>
                         </ul>
                     </div>
                 </div>
                 <div class="service-duration-and-steps">
                     <div class="service-duration">
-                        <img src="images/time.svg">
-                        <h4>After 6 months of work</h4>
-                        <h4>Once your frameworks, plans and procedures to respond to and recover from crisis are optimized, we can move onto:</h4>
+                        <img alt="" src="images/time.svg">
+                        <h4 class="langue-en">After 6 months of work</h4>
+                        <h4 class="langue-fr">Après 6 mois de travail</h4>
+                        <h4 class="langue-en">Once your frameworks, plans and procedures to respond to and recover from crisis are optimized, we can move onto :</h4>
+                        <h4 class="langue-fr">Une fois que vos cadres, plans et procédures de réponse et de rétablissement en cas de crise sont optimisés, nous pouvons passer à :</h4>
                     </div>
                     <div class="service-steps">
-                        <div>
+                        <div class="langue-en">
                             <h6>Step 1:</h6>
                             <p>Leverage risks and seize opportunities.</p>
+                        </div>
+                        <div class="langue-fr">
+                            <h6>Etape 1:</h6>
+                            <p>Optimiser les risques et saisir les opportunités.</p>
                         </div>
                     </div>
                 </div>
                 <div class="service-program-benefit">
                     <div class="service-program-benefit-title">
-                        <img src="images/businessman-finding-investment-options-for-batter-retirement-life.svg" alt="puzzle-icon">
-                        <h4>Program’s Benefits</h4>
+                        <img alt="" src="images/businessman-finding-investment-options-for-batter-retirement-life.svg" alt="puzzle-icon">
+                        <h4 class="langue-en">Program’s Benefits</h4>
+                        <h4 class="langue-fr">Avantages de ce programme</h4>
                     </div>
                     <div class="service-benefits">
                         <div class="benefit-list">
                             <div>
-                                <img src="images/puzzle-business.svg" alt="puzzle-icon">
-                                <h5>If struggling with...</h5>
+                                <img alt="" src="images/puzzle-business.svg" alt="puzzle-icon">
+                                <h5 class="langue-en">If struggling with...</h5>
+                                <h5 class="langue-fr">Défis/enjeux...</h5>
                             </div>
                             <ul>
-                                <li>Organization/project’s operations disrupted; significant financial and staff resources spent on firefighting.</li>
-                                <li>Donors and stakeholders alarmed; talent pool deterred.</li>
-                                <li>Little coordination. and Response mechanism.</li>
+                                <li class="langue-en">Organization/project’s operations disrupted; significant financial and staff resources spent on firefighting.</li>
+                                <li class="langue-en">Donors and stakeholders alarmed; talent pool deterred.</li>
+                                <li class="langue-en">Little coordination. and Response mechanism.</li>
+                                <li class="langue-fr">Les activités de l'organisation/du projet sont perturbées ; des ressources financières et humaines importantes sont allouées à la lutte contre les incidents.</li>
+                                <li class="langue-fr">Les donateurs et les parties prenantes s'alarment ; le bassin de talents est découragé.</li>
+                                <li class="langue-fr">Peu de coordination et de mécanismes de réponse aux crises.</li>
                             </ul>
                         </div>
                         <div class="benefit-list">
                             <div>
-                                <img src="images/performance.svg" alt="puzzle-icon">
-                                <h5>You will gain...</h5>
+                                <img alt="" src="images/performance.svg" alt="puzzle-icon">
+                                <h5 class="langue-en">You will gain...</h5>
+                                <h5 class="langue-fr">Résultats attendus...</h5>
                             </div>
                             <ul>
-                                <li>Risk assessment framework plans to understand key risks, anticipate stakeholder reactions, identify, and prioritize potential threats.</li>
-                                <li>Crisis management plan to prepare for crisis scenarios and plan for an accelerated exit.</li>
-                                <li>Security plans and scenarios to protect your people, including those you leave behind, as well as your assets, and move them out of the country safely, while also securing any facilities and prevent damage.</li>
-                                <li>Communication strategy to plan stakeholder management and limit reputational risks.</li>
-                                <li>Regular briefings for executive board on current political, strategic and security issues.</li>
-                                <li>Regular forecast on how future developments may impact on the client’s exposure to risk/operational disruption.</li>
+                                <li class="langue-en">Risk assessment framework plans to understand key risks, anticipate stakeholder reactions, identify, and prioritize potential threats.</li>
+                                <li class="langue-en">Crisis management plan to prepare for crisis scenarios and plan for an accelerated exit.</li>
+                                <li class="langue-en">Security plans and scenarios to protect your people, including those you leave behind, as well as your assets, and move them out of the country safely, while also securing any facilities and prevent damage.</li>
+                                <li class="langue-en">Communication strategy to plan stakeholder management and limit reputational risks.</li>
+                                <li class="langue-en">Regular briefings for executive board on current political, strategic and security issues.</li>
+                                <li class="langue-en">Regular forecast on how future developments may impact on the client’s exposure to risk/operational disruption.</li>
+                                <li class="langue-fr">Des plans d'évaluation des risques pour comprendre les principaux risques, anticiper les réactions des parties prenantes, identifier les menaces potentielles et les classer par ordre de priorité.</li>
+                                <li class="langue-fr">Plan de gestion de crise pour se préparer à des scénarios de crise et planifier une sortie accélérée .</li>
+                                <li class="langue-fr">Plans et scénarios de sécurité pour protéger vos employés, y compris ceux que vous laissez derrière ainsi que vos biens, et les faire sortir du pays en toute sécurité, tout en sécurisant les installations et en mitigeant les dommages.</li>
+                                <li class="langue-fr">Une stratégie de communication pour planifier la gestion des parties prenantes et limiter les risques de réputation.</li>
+                                <li class="langue-fr">Des réunions d'information régulières pour le conseil d'administration sur les questions politiques, stratégiques et sécurité.</li>
+                                <li class="langue-fr">Prévisions régulières sur la façon dont les développements futurs peuvent avoir un impact sur l'exposition du client aux risques/ perturbations opérationnelles.</li>
                             </ul>
                         </div>
                     </div>
@@ -434,103 +585,133 @@
                 <div id="title-back4">
                     <div class="title-back-2"></div>
                     <div class="service-title">
-                        <h3>SAHEL OPPORTUNITY BOOSTER</h3>
+                        <h3 class="langue-en">SAHEL OPPORTUNITY BOOSTER</h3>
+                        <h3 class="langue-fr">ACCELERATEUR DE CROISSANCE</h3>
                     <div class="divider"></div>
                     </div>
                     <div class="service-intro">
-                        <div>
+                        <div class="langue-en">
                             <h3>Seize Opportunities for Market Entry/Expansion/Exit.</h3>
                             <p>
                                 You have a clear vision of what you want the organization to be. To achieve your goals, we conduct a comprehensive analysis and provide you with a customized risk management strategy.
                             </p>
                         </div>
-                        <img src="images/undraw_investment_data_re_sh9x.svg">
+                        <div class="langue-fr">
+                            <h3>Créez ou saisissez les opportunités de la crise : entrée, expansion ou sortie réussie du marché.</h3>
+                            <p>
+                                Nous concevons une stratégie de gestion de risque optimale qui soutienne et sécurise les objectifs  que votre organisation souhaite atteindre.
+                            </p>
+                        </div>
+                        <img alt="" src="images/undraw_investment_data_re_sh9x.svg">
                     </div>
                 </div>
                 
                 <div class="service-gain">
                     <div class="service-gain-title">
-                        <h4>Our services include :</h4>
+                        <h4 class="langue-en">Our services include :</h4>
+                        <h4 class="langue-fr">Quelles sont les solutions que nous proposons ?</h4>
                     </div>
                     <div class="service-gain-list">
                         <ul>
-                            <li>Country Due Diligence/Risk Assessments: We provide a detailed view of the political, security, operational, and social risks specific to your project, enabling you to make an informed decision on whether to proceed with a risk mitigation plan or not.</li>
+                            <li class="langue-en">Country Due Diligence/Risk Assessments: We provide a detailed view of the political, security, operational, and social risks specific to your project, enabling you to make an informed decision on whether to proceed with a risk mitigation plan or not.</li>
+                            <li class="langue-fr">Vérifications préalables et évaluations des risques par pays afin de fournir une vue d'ensemble des risques politiques, sécuritaires, opérationnels et sociaux propres à votre projet.</li>
                         </ul>
                         <ul>
-                            <li>Feasibility Study Reports: We provide you with a detailed report on the feasibility of your project, providing information to inform your go/no-go decision and risk mitigation plan.</li>
+                            <li class="langue-en">Feasibility Study Reports: We provide you with a detailed report on the feasibility of your project, providing information to inform your go/no-go decision and risk mitigation plan.</li>
+                            <li class="langue-fr">Rapports d'étude de faisabilité du projet.</li>
                         </ul>
                         <ul>
-                            <li>Stakeholder Mapping: We identify key decision-makers and actors who are impacted by your program, allowing you to develop a stakeholder engagement and government relations strategy.</li>
+                            <li class="langue-en">Stakeholder Mapping: We identify key decision-makers and actors who are impacted by your program, allowing you to develop a stakeholder engagement and government relations strategy.</li>
+                            <li class="langue-fr">Cartographie des parties prenantes, des principaux décideurs et acteurs concernés par votre programme afin d'éclairer votre stratégie d'engagement auprès des parties prenantes et les pouvoirs publics.</li>
                         </ul>
                         <ul>
-                            <li>Partner Due Diligence: We help you benchmark potential local partners against your own compliance and integrity criteria.</li>
+                            <li class="langue-en">Partner Due Diligence: We help you benchmark potential local partners against your own compliance and integrity criteria.</li>
+                            <li class="langue-fr">L'audit préalable de vos partenaires locaux.</li>
                         </ul>
                         <ul>
-                            <li>Location Benchmarking: We provide you with location benchmarking based on granular threat exposure assessments, enabling you to decide on the best project/office location.</li>
+                            <li class="langue-en">Location Benchmarking: We provide you with location benchmarking based on granular threat exposure assessments, enabling you to decide on the best project/office location.</li>
+                            <li class="langue-fr">Analyse comparative de l'emplacement : nous vous fournissons une analyse comparative de l'emplacement basée sur des évaluations granulaires de l'exposition aux menaces, vous permettant de décider du meilleur emplacement pour votre projet/bureau.</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="service-work">
                     <div class="service-work-title">
-                        <h4>To reach these results, we work with you to:</h4>
-                        <img src="images/sales-team.svg">
+                        <h4 class="langue-en">To reach these results, we work with you to :</h4>
+                        <h4 class="langue-fr">Pour atteindre ces résultats, nous travaillons avec vous pour :</h4>
+                        <img alt="" src="images/sales-team.svg">
                     </div>
                     <div class="service-work-list">
                         <ul>
-                            <li>Assess your organization's exposure, risk tolerance, and interests regarding Entry/Expansion/Exit issues.</li>
+                            <li class="langue-en">Assess your organization's exposure, risk tolerance, and interests regarding Entry/Expansion/Exit issues.</li>
+                            <li class="langue-fr">Évaluer l'exposition, la tolérance aux risques et les intérêts de l'organisation en ce qui concerne les questions d'entrée/d'expansion/de sortie du marché.</li>
                         </ul>
                         <ul>
-                            <li>Assess the motivations driving your Entry/Expansion/Exit decisions.</li>
+                            <li class="langue-en">Assess the motivations driving your Entry/Expansion/Exit decisions.</li>
+                            <li class="langue-fr">Évaluer les motivations internes de l'organisation qui influencent les décisions d'entrée/d'expansion/de sortie du marché.</li>
                         </ul>
                         <ul>
-                            <li>Identify roadblocks and enabling factors for a successful Entry/Expansion/Exit operation in the area/country/aid cluster.</li>
+                            <li class="langue-en">Identify roadblocks and enabling factors for a successful Entry/Expansion/Exit operation in the area/country/aid cluster.</li>
+                            <li class="langue-fr">Évaluer les obstacles et les facteurs favorables à une opération d'entrée/d'expansion/de sortie réussie.</li>
                         </ul>
                         <ul>
-                            <li>Provide 3 briefings for the executive board on current political, strategic, and security issues.</li>
+                            <li class="langue-en">Provide 3 briefings for the executive board on current political, strategic, and security issues.</li>
+                            <li class="langue-fr">3 réunions d'information pour le conseil d'administration sur les questions politiques, stratégiques et de sécurité.</li>
                         </ul>
                         <ul>
-                            <li>Conduct 2 scenario planning workshops on how future developments may impact your Entry/Expansion/Exit decisions.</li>
+                            <li class="langue-en">Conduct 2 scenario planning workshops on how future developments may impact your Entry/Expansion/Exit decisions.</li>
+                            <li class="langue-fr">2 ateliers de planification de scénarios sur la manière dont les développements futurs peuvent avoir un impact sur les décisions d'entrée/d'expansion/de sortie du client.</li>
                         </ul>
                     </div>
                 </div>
                 <div class="service-duration-and-steps">
                     <div class="service-duration">
-                        <img src="images/time.svg">
-                        <h4>In 12 months of work</h4>
+                        <img alt="" src="images/time.svg">
+                        <h4 class="langue-en">In 12 months of work</h4>
+                        <h4 class="langue-fr">En 12 mois de travail</h4>
                     </div>
                 </div>
                 <div class="service-program-benefit">
                     <div class="service-program-benefit-title">
-                        <img src="images/businessman-finding-investment-options-for-batter-retirement-life.svg" alt="puzzle-icon">
-                        <h4>Program’s Benefits</h4>
+                        <img alt="" src="images/businessman-finding-investment-options-for-batter-retirement-life.svg" alt="puzzle-icon">
+                        <h4 class="langue-en">Program’s Benefits</h4>
+                        <h4 class="langue-fr">Avantages de ce programme</h4>
                     </div>
                     <div class="service-benefits">
                         <div class="benefit-list">
                             <div>
-                                <img src="images/puzzle-business.svg" alt="puzzle-icon">
-                                <h5>If struggling with...</h5>
+                                <img alt="" src="images/puzzle-business.svg" alt="puzzle-icon">
+                                <h5 class="langue-en">If struggling with...</h5>
+                                <h5 class="langue-fr">Défis/enjeux...</h5>
                             </div>
                             <ul>
-                                <li>Unclear about project Entry/Expansion/Exit strategy.</li>
-                                <li>Unclear feasibility/implement framework.</li>
-                                <li>Struggling with low community engagement.</li>
-                                <li>Misunderstood/contested/attacked for alleged social or governance missteps, donors and stakeholders alarmed.</li>
-                                <li>Unclear about project Entry/Expansion/Exit strategy.</li>
-                                <li>Unclear feasibility/implement framework.</li>
-                                <li>Struggling with low community engagement.</li>
+                                <li class="langue-en">Unclear about project Entry/Expansion/Exit strategy.</li>
+                                <li class="langue-en">Unclear feasibility/implement framework.</li>
+                                <li class="langue-en">Struggling with low community engagement.</li>
+                                <li class="langue-en">Misunderstood/contested/attacked for alleged social or governance missteps, donors and stakeholders alarmed.</li>
+                                <li class="langue-fr">Le programme d'engagement communautaire du projet est mal compris/contesté/attaqué pour des raisons de manquements sociaux ou de gouvernance ; les donateurs et les parties prenantes s'alarment.</li>
+                                <li class="langue-fr">Manque de clarté sur la stratégie d'entrée, d'expansion et de clôture du projet.</li>
+                                <li class="langue-fr">Manque de précisions au niveau de l’étude de faisabilité et de sa mise en œuvre.</li>
+                                <li class="langue-fr">Faible engagement de la part de la communauté.</li>
                             </ul>
                         </div>
                         <div class="benefit-list">
                             <div>
-                                <img src="images/performance.svg" alt="puzzle-icon">
-                                <h5>You will gain...</h5>
+                                <img alt="" src="images/performance.svg" alt="puzzle-icon">
+                                <h5 class="langue-en">You will gain...</h5>
+                                <h5 class="langue-fr">Résultats attendus...</h5>
                             </div>
                             <ul>
-                                <li>Country due diligence / risk assessments to provide a comprehensive view of the political, security, operational and social risks specific to that project to inform a go/no-go decision and risk mitigation plan.</li>
-                                <li>Feasibility Study Reports project to inform a go/no-go decision and risk mitigation plan. Stakeholder mapping of key decision-makers and actors relevant to/or impacted by your investment to inform your stakeholder engagement and government relations strategy.</li>
-                                <li>Partner due diligence to help you benchmark potential local partners against your own compliance and integrity criteria.</li>
-                                <li>Location benchmarking to help you decide on your project/office location based on granular threat exposure assessments.</li>
+                                <li class="langue-en">Country due diligence / risk assessments to provide a comprehensive view of the political, security, operational and social risks specific to that project to inform a go/no-go decision and risk mitigation plan.</li>
+                                <li class="langue-en">Feasibility Study Reports project to inform a go/no-go decision and risk mitigation plan.</li>
+                                <li class="langue-en">Stakeholder mapping of key decision-makers and actors relevant to/or impacted by your investment to inform your stakeholder engagement and government relations strategy.</li>
+                                <li class="langue-en">Partner due diligence to help you benchmark potential local partners against your own compliance and integrity criteria.</li>
+                                <li class="langue-en">Location benchmarking to help you decide on your project/office location based on granular threat exposure assessments.</li>
+                                <li class="langue-fr">Audit juridique et évaluation des risques par pays afin d'obtenir une vue d'ensemble des risques politiques, sécuritaires, opérationnels et sociaux spécifiques au projet, afin d'éclairer une décision de refus et un plan de mitigation des risques.</li>
+                                <li class="langue-fr">Rapports d'étude de faisabilité du projet permettant d’apporter des précisions à une décision d’acceptation ou de refus et un plan de mitigation des risques.</li>
+                                <li class="langue-fr">Cartographie des parties prenantes, des principaux décideurs et acteurs concernés ou impactés par votre investissement afin d'informer votre engagement auprès des parties prenantes et votre stratégie de relations gouvernementales.</li>
+                                <li class="langue-fr">L'audit préalable des partenaires pour vous aider à comparer les partenaires locaux potentiels à vos propres critères de conformité et d'intégrité.</li>
+                                <li class="langue-fr">Analyse comparative des lieux pour vous aider à choisir le lieu de votre projet ou de votre bureau sur la base d'évaluations granulaires de l'exposition aux menaces.</li>
                             </ul>
                         </div>
                     </div>
@@ -540,37 +721,41 @@
             <footer>
                 <div class="footer-contact">
                     <div class="footer-title-newsletter">
-                        <h5>Stay up to date with all our news by subscribing to our newsletter.</h5>
+                        <h5 class="langue-en">Stay up to date with all our news by subscribing to our newsletter.</h5>
+                        <h5 class="langue-fr">Restez informé de toutes nos actualités en vous abonnant à notre newsletter.</h5>
                     </div>
                     <div class="footer-mail-form" id="footerMailForm">
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                            <label for="exampleFormControlInput1" class="form-label langue-en">Email address</label>
+                            <label for="exampleFormControlInput1" class="form-label langue-fr">Votre adresse email</label>
                             <input type="email" class="form-control newsletter-form" id="newsletterEmail" placeholder="name@example.com">
-                            <button type="button" class="btn btn-outline-light" id="registerButton">Register</button>
+                            <button type="button" class="btn btn-outline-light langue-en" id="registerButton">Register</button>
+                            <button type="button" class="btn btn-outline-light langue-fr" id="registerButton">Enregistrer</button>
                         </div>
                     </div>
                 </div>
                 <div class="footer-info">
-                    <img class="logo-footer" src="images/logo.png">
+                    <img alt="" class="logo-footer" src="images/logo.png">
                     <div class="footer-list-info">
                         <div class="footer-contact-adress">
-                            <img class="icon-info-footer" src="images/map.png">
+                            <img alt="" class="icon-info-footer" src="images/map.png">
                             <h4>SAPAS Gmbh, Chamerstrasse 172, 6300 Zug</h4>
                         </div>
                         <div class="footer-contact-mail">
-                            <img class="icon-info-footer" src="images/mail-black.png">
+                            <img alt="" class="icon-info-footer" src="images/mail-black.png">
                             <h4>info@sahelpolitica.ch</h4>
                         </div>
                         <div class="footer-contact-number">
-                            <img class="icon-info-footer" src="images/phone-black.png">
+                            <img alt="" class="icon-info-footer" src="images/phone-black.png">
                             <h4>+41 778 12 40 73</h4>
                         </div>
                     </div>
                     <div class="footer-follow-us">
-                        <h3>Follow us:</h3>
-                        <a href=""><img src="images/facebook.png"></a>
-                        <a target="_blank" href="https://www.linkedin.com/company/sahelpolitica/"><img src="images/linkedin.png"></a>
-                        <a target="_blank" href="https://x.com/SahelPolitica"><img src="images/twitter-x.png"></a>
+                        <h3 class="langue-en">Follow us:</h3>
+                        <h3 class="langue-fr">Nous suivre:</h3>
+                        <a href=""><img alt="" src="images/facebook.png"></a>
+                        <a target="_blank" href="https://www.linkedin.com/company/sahelpolitica/"><img alt="" src="images/linkedin.png"></a>
+                        <a target="_blank" href="https://x.com/SahelPolitica"><img alt="" src="images/twitter-x.png"></a>
                     </div>
                 </div>
             </footer>
@@ -599,5 +784,6 @@
         <script>
             AOS.init();
         </script>
+        <script src="script-language.js"></script>
     </body>
 </html>
