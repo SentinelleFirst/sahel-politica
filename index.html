@@ -5,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sahel Politica</title>
         <link rel="icon" href="images/favicon.png" type="image/png">
-        <link href="css/indexStyle.css" rel="stylesheet">
-        <link href="css/footer.css" rel="stylesheet">
-        <link href="css/header.css" rel="stylesheet">
+        <link href="indexStyle.css" rel="stylesheet">
+        <link href="footer.css" rel="stylesheet">
+        <link href="header.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
         <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
@@ -26,15 +26,14 @@
                     <a class="langue-en" href="index.html">About us</a>
                     <a class="langue-fr" href="index.html">A propos</a>
                     <a href="services.html">Services</a>
-                    <a class="langue-en" href="our-team.html">Our team</a>
-                    <a class="langue-fr" href="our-team.html">Notre équipe</a>
-                    <a href="blog.html">Blog</a>
+                    <a href="#">Keynote</a>
+                    <a href="blog.html">Publication</a>
                     <a class="langue-en" href="contact.html">Contact us</a>
                     <a class="langue-fr" href="contact.html">Nous contacter</a>
                 </div>
                 <select id="myDropdown" title="Choose a language">
-                    <option class="option" value="en">English - EN</option>
-                    <option class="option" value="fr">French - FR</option>
+                    <option class="option" value="en">EN</option>
+                    <option class="option" value="fr">FR</option>
                 </select>
             </div>
         </header>
@@ -165,27 +164,9 @@
                     </a>
                 </div>
             </section>
-            <section class="our-clients">
-                <h1 class="langue-en">Our clients</h1>
-                <h1 class="langue-fr">Nos clients</h1>
-                <div>
-                    <p>
-                        <img alt="" src="images/suisse-logo.png" alt="SUISSE" />
-                    </p>
-                    <p>
-                        <img alt="" src="images/gcsp-logo.png" alt="GCSP" />
-                    </p>
-                    <p>
-                        <img alt="" src="images/undp-logo.png" alt="UNDP" />
-                    </p>
-                    <p>
-                        <img alt="" src="images/caritas-logo.png" alt="CARITAS" />
-                    </p>
-                </div>
-            </section>
             <section class="blog">
                 <div class="blog-title">
-                    <h1>Blog</h1>
+                    <h1>Publication</h1>
                 </div>
                 <div class="blog-boxs" id="blog-boxs">
                     <!-- Articles will be dynamically inserted here -->
@@ -217,18 +198,30 @@
                         <h6 class="langue-en">Associated Consultant</h6>
                         <h6 class="langue-fr">Consultant associé</h6>
                     </div>
-                    <div class="team-box">
-                        <div class="team-icon-4"></div>
-                        <h5>Gabriel Poda</h5>
-                        <h6 class="langue-en">Administratice & Content Coordinator</h6>
-                        <h6 class="langue-fr">Coordonnateur administratif et de contenu</h6>
-                    </div>
                 </div>
                 <div class="team-button">
                     <a href="our-team.html">
                         <button type="button" class="btn btn-outline-dark langue-en">Meet our team</button>
                         <button type="button" class="btn btn-outline-dark langue-fr">Rencontrez notre équipe</button>
                     </a>
+                </div>
+            </section>
+            <section class="our-clients">
+                <h1 class="langue-en">Our clients</h1>
+                <h1 class="langue-fr">Nos clients</h1>
+                <div>
+                    <p>
+                        <img alt="" src="images/suisse-logo.png" alt="SUISSE" />
+                    </p>
+                    <p>
+                        <img alt="" src="images/gcsp-logo.png" alt="GCSP" />
+                    </p>
+                    <p>
+                        <img alt="" src="images/undp-logo.png" alt="UNDP" />
+                    </p>
+                    <p>
+                        <img alt="" src="images/caritas-logo.png" alt="CARITAS" />
+                    </p>
                 </div>
             </section>
             <button id="scrollToTopBtn" title="Go to top">↑</button>
@@ -261,16 +254,18 @@
                         </div>
                         <div class="footer-contact-number">
                             <img alt="" class="icon-info-footer" src="images/phone-black.png">
-                            <h4>+41 778 12 40 73</h4>
+                            <h4>+41 77 503 63 94</h4>
                         </div>
                     </div>
                     <div class="footer-follow-us">
                         <h3 class="langue-en">Follow us:</h3>
                         <h3 class="langue-fr">Nous suivre:</h3>
-                        <a href=""><img alt="" src="images/facebook.png"></a>
                         <a target="_blank" href="https://www.linkedin.com/company/sahelpolitica/"><img alt="" src="images/linkedin.png"></a>
                         <a target="_blank" href="https://x.com/SahelPolitica"><img alt="" src="images/twitter-x.png"></a>
                     </div>
+                </div>
+                <div class="copyright">
+                    <h4>@copyright 2024, Sahel Politica by <a target="_blank" href="https://www.sentinelle.dev">Sentinelle</a></h4>
                 </div>
             </footer>
         </main>
@@ -335,8 +330,6 @@
                                 <h6 class="langue-fr">${article.titleFR}</h6>
                             </div>
                             <div class="blog-article-info">
-                                <p class="blog-article-author langue-en">Author: ${article.author}</p>
-                                <p class="blog-article-author langue-fr">Publié par: ${article.author}</p>
                                 <p class="blog-article-date">${new Date(article.date.seconds * 1000).toLocaleString()}</p>
                                 <p class="langue-en"><a href="article.html?id=${article.id}">Read more --></a></p>
                                 <p class="langue-fr"><a href="article.html?id=${article.id}">Lire plus --></a></p>

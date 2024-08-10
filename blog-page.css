@@ -4,7 +4,7 @@
     height: 300px;
     margin: auto;
     position: relative;
-    background-image: url('../images/home-page-carroussel-2.png');
+    background-image: url('images/home-page-carroussel-2.png');
     background-size: cover;
     background-position: center;
 
@@ -93,7 +93,6 @@
             border-radius: 5px; /* Pour des coins arrondis */
         }
         
-        .blog-article-author,
         .blog-article-date {
             margin: 0;
         }

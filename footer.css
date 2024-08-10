@@ -102,3 +102,10 @@
     }
 }
 
+.copyright{
+    padding: 50px ;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(250, 203, 1);
+    text-align: center;
+}

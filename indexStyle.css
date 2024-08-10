@@ -151,7 +151,7 @@
     justify-content: space-around;
     padding: 50px 15% 50px 15%;
     height: 700px;
-    background-image: url("../images/Homepage-picture-scaled.jpg");
+    background-image: url("images/Homepage-picture-scaled.jpg");
     background-size: cover;
     background-position: center;
     position: relative;
@@ -277,7 +277,6 @@
             border-radius: 5px; /* Pour des coins arrondis */
         }
         
-        .blog-article-author,
         .blog-article-date {
             margin: 0;
         }
@@ -329,17 +328,17 @@
     }
 
     .team-icon-1 {
-        background-image: url('../images/team-ceo.png');
+        background-image: url('images/team-ceo.png');
     }
 
     .team-icon-2 {
-        background-image: url('../images/team-awalou.png');
+        background-image: url('images/team-awalou.png');
     }
     .team-icon-3 {
-        background-image: url('../images/team-idrissa.png');
+        background-image: url('images/team-idrissa.png');
     }
     .team-icon-4 {
-        background-image: url('../images/team-poda.png');
+        background-image: url('images/team-poda.png');
     }
 
     .team-button{
