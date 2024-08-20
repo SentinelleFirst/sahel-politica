@@ -1,89 +1,370 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sahel Politica</title>
+        <link rel="icon" href="images/favicon.png" type="image/png">
+        <link href="indexStyle.css" rel="stylesheet">
+        <link href="footer.css" rel="stylesheet">
+        <link href="header.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+        <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/10.13.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/10.13.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/10.13.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/10.13.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/10.13.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/10.13.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/10.13.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/10.13.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/10.13.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/10.13.0/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
-  </body>
+    </head>
+    <body>
+        <header>
+            <div class="header-background"></div>
+            <div class="menu">
+                <p class="menu-logo">
+                    <img alt="" src="images/logo.png" />
+                </p>
+                <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+                <div class="menu-link">
+                    <a class="langue-en" href="index.html">About us</a>
+                    <a class="langue-fr" href="index.html">A propos</a>
+                    <a href="services.html">Services</a>
+                    <a href="#">Keynote</a>
+                    <a href="blog.html">Publication</a>
+                    <a class="langue-en" href="contact.html">Contact us</a>
+                    <a class="langue-fr" href="contact.html">Nous contacter</a>
+                </div>
+                <select id="myDropdown" title="Choose a language">
+                    <option class="option" value="en">EN</option>
+                    <option class="option" value="fr">FR</option>
+                </select>
+            </div>
+        </header>
+        <main>
+            <section class="carousel-container">
+                    <div class="carousel">
+                        <div class="item active">
+                            <img alt="" src="images/home-page-carroussel-1.jpg" alt="Image 1" />
+                            <h1 class="caption langue-en">Anticipate, monitor and understand your risks</h1>
+                            <h1 class="caption langue-fr">Anticipation, suivi et analyse de vos risques</h1>
+                        </div>
+                        <div class="item">
+                            <img alt="" src="images/home-page-carroussel-2.png" alt="Image 2" />
+                            <h1 class="caption langue-en">Plan for, respond and recover from crisis</h1>
+                            <h1 class="caption langue-fr">Planifier, gérer  et se remettre d'une crise</h1>
+                        </div>
+                        <div class="item">
+                            <img alt="" src="images/home-page-carroussel-3.jpg" alt="Image 3" />
+                            <h1 class="caption langue-en">Leverage risks and seize opportunities</h1>
+                            <h1 class="caption langue-fr">Tirer parti des risques et saisir les opportunités</h1>
+                        </div>
+                    </div>
+                    <div class="dots"></div>
+            </section>
+            <section class="about-us-title">
+                <h1 class="langue-en">About us</h1>
+                <h1 class="langue-fr">A propos de nous</h1>
+                <p class="langue-en">We come with many years of experience in Intelligence analysis of African political and security affairs.</p>
+                <p class="langue-fr">Nous disposons de plusieurs années d'expérience à l'interface du renseignement, des relations internationales et des affaires africaines.</p>
+            </section>
+            <section class="about-our-mission">
+                <img alt="" src="images/mission-2.png" alt="mission 1" />
+                <div>
+                    <h3 class="langue-en">Our mission</h3>
+                    <h3 class="langue-fr">Notre mission</h3>
+                    <p class="langue-en">Sahel Politica helps clients navigate the complex and volatile environment of West African geopolitics and avoid political and security incidents in the Sahel region so that they can make an impact for the greater good.</p>
+                    <p class="langue-en">With 17+ years of experience in Intelligence analysis of African political and security affairs, our proven Sahel risk and crisis preparedness™ framework enable our clients to invest or deliver aid response in volatile context while reducing security incidents in areas such as personnel and assets security or reputational damage.</p>
+                    <p class="langue-fr">Sahel Politica aide les organisations humanitaires à appréhender l'environnement complexe et volatile de la géopolitique en Afrique de l'Ouest et à éviter les incidents politiques et sécuritaires dans la région du Sahel afin qu'elles puissent avoir un plus grand impact au bénéfice du plus grand nombre.</p>
+                    <p class="langue-fr">Avec plus de 17 ans d'expériences dans l'analyse intelligente des affaires politiques et sécuritaires en Afrique, l’approche confirmée de Sahel sur la préparation aux risques et aux crises permet à nos clients d'apporter une réponse d’aide dans un contexte instable tout en réduisant les incidents de sécurité dans des domaines tels que la sécurité du personnel et des biens ou les atteintes à la réputation.</p>
+                    <p class="langue-fr">Sahel Politica aide vous aide à prospérer dans l'environnement complexe et volatile de la géopolitique ouest-africaine et à gérer les crises politiques et sécuritaires dans la région du Sahel afin qu'elles puissent avoir un impact pour le plus grand bien de tous.</p>
+                    <p class="langue-fr">Avec plus de 17 ans d'expérience dans l'analyse des affaires politiques et sécuritaires africaines, notre méthode de préparation à la gestion des risques et crises dans le Sahel™ réduit vos incidents, sécurise votre personnel et vos biens, préserve la réputation de votre entreprise.</p>
+                </div>
+                
+            </section>
+            <section class="about-our-vision">
+                <div class="about-our-vision-p1">
+                    <img alt="" src="images/mission-1.png" alt="mission 2" />
+                    <div>
+                        <h3 class="langue-en">Our vision</h3>
+                        <h3 class="langue-fr">Notre vision</h3>
+                        <ul class="langue-en">
+                            <li>Are you a leader in supporting positive social change in Africa ?</li>
+                            <li>Are you struggling to detect, assess and mitigate risks ?</li>
+                            <li>Are you challenged to sustain the normal operations of your business or local aid programs ?</li>
+                            <li>Do you strive to protect and promote confidence in your organization’s reputation with local stakeholders ?</li>
+                            <li>Does uncertainty cause you loss of money, time, and trust ?</li>
+                        </ul>
+                        <ul class="langue-fr">
+                            <li>Êtes-vous un leader œuvrant dans le soutien au changement social positif en Afrique par le biais de l'aide au développement ?</li>
+                            <li>Eprouvez-vous des difficultés à détecter, évaluer et  atténuer vos risques ?</li>
+                            <li>Êtes-vous confrontés à des difficultés à maintenir le fonctionnement normal de vos programme-pays ?</li>
+                            <li>Cherchez-vous à protéger et promouvoir la réputation de votre organisation auprès des parties prenantes locales ?</li>
+                            <li>L'incertitude vous fait-elle perdre de l'argent, du temps et de la confiance ?</li>
+                        </ul>
+                    </div>    
+                </div>
+                
+                <div class="about-our-vision-p2">
+                   <h5 class="langue-en">It doesn’t have to be. You can operate from a place of resilience to risks :</h5>
+                   <h5 class="langue-fr">Ce n'est pas une fatalité. Vous pouvez agir à partir d'un état d'esprit de résilience face aux risques :</h5>
+                   <ul class="langue-en">
+                    <li>Where time and resources are dedicated to growth and social impact, not worry and stress.</li>
+                    <li>Donors and investors enthusiastically invest greater resources in your project.</li>
+                    <li>Your organization is recognized for the value and growth it generates in fragile contexts.</li>
+                    <li>Local audiences and stakeholders support you, not work against you.</li>
+                    <li>Your organization is trusted by local authorities as a cooperation or business partner.</li>
+                   </ul>
+                   <ul class="langue-fr">
+                    <li>Où le temps et les ressources sont consacrés à l'impact social, et non à l'inquiétude et au stress.</li>
+                    <li>Les donateurs investissent dans votre projet avec enthousiasme.</li>
+                    <li>Votre organisation est reconnue pour son travail et son soutien aux sociétés fragiles. </li>
+                    <li>Les  parties prenantes vous soutiennent, et collaborent de manière constructive avec votre organisation.</li>
+                    <li>Les autorités locales font confiance à votre organisation en tant que partenaires.</li>
+                   </ul>
+                </div>
+            </section>
+            <section class="services">
+                <div class="services-background"></div>
+                <div class="services-title">
+                    <h1>Services</h1>
+                </div>
+                <div class="services-container langue-en">
+                    <h3>Sahel Resilience Audit</h3>
+                    <h4>Review your risk policy and local sites exposure.</h4>
+                </div>
+                <div class="services-container langue-fr">
+                    <h3>Audit de Résilience</h3>
+                    <h4>Renforcez votre politique de gestion des risques et évaluez l'exposition de vos opérations sur le terrain.</h4>
+                </div>
+                <div class="services-container langue-en">
+                    <h3>Sahel Risks prevention blueprint</h3>
+                    <h4>Monitor, Understand and Anticipate Your Risks.</h4>
+                </div>
+                <div class="services-container langue-fr">
+                    <h3>Schéma Directeur de Prévention des Risques Sahel</h3>
+                    <h4>Surveillez, Comprenez et Anticipez les menaces sur vos investissements.</h4>
+                </div>
+                <div class="services-container langue-en">
+                    <h3>Sahel Crisis response Plan</h3>
+                    <h4>Plan For, Respond and Recover from Crisis.</h4>
+                </div>
+                <div class="services-container langue-fr">
+                    <h3>Plan d'Action en Cas de Crise</h3>
+                    <h4>Réagissez, préservez vos opérations et remettez-vous avec rapidité et efficacité lors crises.</h4>
+                </div>
+                <div class="services-container langue-en">
+                    <h3>Sahel Opportunity Booster</h3>
+                    <h4>Seize Opportunities for Market Entry/Expansion/Exit</h4>
+                </div>
+                <div class="services-container langue-fr">
+                    <h3>Accélérateur de croissance</h3>
+                    <h4>Créez ou saisissez les opportunités de la crise : entrée, expansion ou sortie réussie du marché.</h4>
+                </div>
+                <div class="services-button">
+                    <a href="services.html">
+                        <button type="button" class="btn btn-outline-light langue-en">Learn more</button>
+                        <button type="button" class="btn btn-outline-light langue-fr">En savoir plus</button>
+                    </a>
+                </div>
+            </section>
+            <section class="blog">
+                <div class="blog-title">
+                    <h1>Publication</h1>
+                </div>
+                <div class="blog-boxs" id="blog-boxs">
+                    <!-- Articles will be dynamically inserted here -->
+                </div>
+                <div class="blog-button">
+                    <a href="blog.html"><button type="button" class="btn btn-outline-light langue-en">Discover</button></a>
+                    <a href="blog.html"><button type="button" class="btn btn-outline-light langue-fr">Découvrire</button></a>
+                </div>
+            </section>
+            <section class="our-team">
+                <h1 class="langue-en">Our Team</h1>
+                <h1 class="langue-fr">Notre équipe</h1>
+                <div class="teams">
+                    <div class="team-box">
+                        <div class="team-icon-1"></div>
+                        <h5>Issaka Ouedraogo-iseli</h5>
+                        <h6 class="langue-en">CEO and Founder</h6>
+                        <h6 class="langue-fr">Directeur Général et fondateur</h6>
+                    </div>
+                    <div class="team-box">
+                        <div class="team-icon-2"></div>
+                        <h5>Dr. Awalou Ouedraogo</h5>
+                        <h6 class="langue-en">Associated Consultant</h6>
+                        <h6 class="langue-fr">Consultant associé</h6>
+                    </div>
+                    <div class="team-box">
+                        <div class="team-icon-3"></div>
+                        <h5>Dr. Abdourahmane Idrissa</h5>
+                        <h6 class="langue-en">Associated Consultant</h6>
+                        <h6 class="langue-fr">Consultant associé</h6>
+                    </div>
+                </div>
+                <div class="team-button">
+                    <a href="our-team.html">
+                        <button type="button" class="btn btn-outline-dark langue-en">Meet our team</button>
+                        <button type="button" class="btn btn-outline-dark langue-fr">Rencontrez notre équipe</button>
+                    </a>
+                </div>
+            </section>
+            <section class="our-clients">
+                <h1 class="langue-en">Our clients</h1>
+                <h1 class="langue-fr">Nos clients</h1>
+                <div>
+                    <p>
+                        <img alt="" src="images/suisse-logo.png" alt="SUISSE" />
+                    </p>
+                    <p>
+                        <img alt="" src="images/gcsp-logo.png" alt="GCSP" />
+                    </p>
+                    <p>
+                        <img alt="" src="images/undp-logo.png" alt="UNDP" />
+                    </p>
+                    <p>
+                        <img alt="" src="images/caritas-logo.png" alt="CARITAS" />
+                    </p>
+                </div>
+            </section>
+            <button id="scrollToTopBtn" title="Go to top">↑</button>
+            <footer>
+                <div class="footer-contact">
+                    <div class="footer-title-newsletter">
+                        <h5 class="langue-en">Stay up to date with all our news by subscribing to our newsletter.</h5>
+                        <h5 class="langue-fr">Restez informé de toutes nos actualités en vous abonnant à notre newsletter.</h5>
+                    </div>
+                    <div class="footer-mail-form" id="footerMailForm">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label langue-en">Email address</label>
+                            <label for="exampleFormControlInput1" class="form-label langue-fr">Votre adresse email</label>
+                            <input type="email" class="form-control newsletter-form" id="newsletterEmail" placeholder="name@example.com">
+                            <button type="button" class="btn btn-outline-light langue-en" id="registerButton">Register</button>
+                            <button type="button" class="btn btn-outline-light langue-fr" id="registerButton">Enregistrer</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-info">
+                    <img alt="" class="logo-footer" src="images/logo.png">
+                    <div class="footer-list-info">
+                        <div class="footer-contact-adress">
+                            <img alt="" class="icon-info-footer" src="images/map.png">
+                            <h4>SAPAS Gmbh, Chamerstrasse 172, 6300 Zug</h4>
+                        </div>
+                        <div class="footer-contact-mail">
+                            <img alt="" class="icon-info-footer" src="images/mail-black.png">
+                            <h4>info@sahelpolitica.ch</h4>
+                        </div>
+                        <div class="footer-contact-number">
+                            <img alt="" class="icon-info-footer" src="images/phone-black.png">
+                            <h4>+41 77 503 63 94</h4>
+                        </div>
+                    </div>
+                    <div class="footer-follow-us">
+                        <h3 class="langue-en">Follow us:</h3>
+                        <h3 class="langue-fr">Nous suivre:</h3>
+                        <a target="_blank" href="https://www.linkedin.com/company/sahelpolitica/"><img alt="" src="images/linkedin.png"></a>
+                        <a target="_blank" href="https://x.com/SahelPolitica"><img alt="" src="images/twitter-x.png"></a>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <h4>@copyright 2024, Sahel Politica by <a target="_blank" href="https://www.sentinelle.dev">Sentinelle</a></h4>
+                </div>
+            </footer>
+        </main>
+        
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-analytics.js";
+            import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+    
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyCyYxzhPSc_Izx4PY1V4ij0PxxoWdqz7xM",
+                authDomain: "sahelpolitica.firebaseapp.com",
+                projectId: "sahelpolitica",
+                storageBucket: "sahelpolitica.appspot.com",
+                messagingSenderId: "11417703739",
+                appId: "1:11417703739:web:882052b747e7b761bdd31e",
+                measurementId: "G-WFFDBTWRKV"
+            };
+    
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+            const db = getFirestore(app);
+    
+            // Function to fetch and display articles
+            async function fetchArticles() {
+                const articlesContainer = document.getElementById('blog-boxs');
+                try {
+                    // Récupérer tous les articles de la collection
+                    const querySnapshot = await getDocs(collection(db, 'Articles'));
+    
+                    // Convertir les documents en tableau d'articles
+                    const articles = querySnapshot.docs.map(doc => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }));
+    
+                    // Trier les articles par 'date' en ordre décroissant
+                    articles.sort((a, b) => b.date - a.date);
+    
+                    // Limiter le nombre d'articles à 3
+                    const limitedArticles = articles.slice(0, 3);
+    
+                    // Effacer le contenu précédent
+                    articlesContainer.innerHTML = '';
+    
+                    // Afficher les articles limités
+                    limitedArticles.forEach(article => {
+                        const articleElement = document.createElement('div');
+                        articleElement.classList.add('blog-article');
+                        
+                        articleElement.style.backgroundImage = `url(${article.imageUrl})`;
+                        articleElement.style.backgroundSize = 'cover'; // Pour couvrir tout l'élément
+                        articleElement.style.backgroundPosition = 'center'; // Pour centrer l'image
+                    
+                        articleElement.innerHTML = `
+                            
+                            <div class="blog-article-title">
+                                <h6 class="langue-en">${article.title}</h6>
+                                <h6 class="langue-fr">${article.titleFR}</h6>
+                            </div>
+                            <div class="blog-article-info">
+                                <p class="blog-article-date">${new Date(article.date.seconds * 1000).toLocaleString()}</p>
+                                <p class="langue-en"><a href="article.html?id=${article.id}">Read more --></a></p>
+                                <p class="langue-fr"><a href="article.html?id=${article.id}">Lire plus --></a></p>
+                            </div>
+                        `;
+                        articlesContainer.appendChild(articleElement);
+                    });
+                } catch (error) {
+                    console.error("Error fetching articles: ", error);
+                }
+            }
+    
+            // Fetch articles on page load
+            document.addEventListener('DOMContentLoaded', fetchArticles);
+        </script>
+        <script src="indexJs.js"></script>
+        <script>
+            // Affiche le bouton lorsque l'utilisateur fait défiler vers le bas de 20 pixels à partir du haut du document
+            window.onscroll = function() { scrollFunction() };
+        
+            function scrollFunction() {
+                const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    scrollToTopBtn.style.display = "block";
+                } else {
+                    scrollToTopBtn.style.display = "none";
+                }
+            }
+        
+            // Lorsque l'utilisateur clique sur le bouton, fait défiler vers le haut de la page
+            document.getElementById("scrollToTopBtn").addEventListener("click", function() {
+                document.body.scrollTop = 0; // Pour Safari
+                document.documentElement.scrollTop = 0; // Pour Chrome, Firefox, IE et Opera
+            });
+        </script>
+        <script src="script-language.js"></script>
+    </body>
 </html>
