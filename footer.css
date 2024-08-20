@@ -2,7 +2,7 @@
     display: flex;
     background-color: black;
     justify-content: space-around;
-    padding: 50px 15%;
+    padding: 50px 10%;
     flex-wrap: wrap;
 
     img{
