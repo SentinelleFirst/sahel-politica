@@ -1,0 +1,108 @@
+.hero {
+    z-index: 1;
+    width: 100%;
+    height: 800px;
+    position: relative;
+    color: white;
+    display: flex;
+    align-items: end;
+    
+    
+
+    .hero-img{
+        z-index: -2;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: right;
+        filter: brightness(0.4);
+    }
+
+    .trapez-yellow{
+        position: absolute;
+        opacity: 0.66;
+        z-index: -1;
+        width: 70%;
+        height: 100%;
+        background-color: #646400;
+        object-fit: cover;
+        object-position: right;
+        clip-path: polygon(0% 0%, 100% 0%, 70% 100%, 0% 100%);
+    }
+
+    .hero-intro{
+        position: absolute;
+        max-width: 800px;
+        margin: 0 10%;
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        padding-top: 100px;
+
+        h1{
+            margin-bottom: 30px;
+            font-size: 48px;
+        }
+        p{
+            margin-bottom: 30px;
+            max-width: 500px;
+            font-size: 20px;
+            font-weight: 500;
+        }
+    }
+
+    button{
+        width: 200px;
+        margin: 20px 0px;
+    }
+}
+
+.training-1{
+    min-height: 700px;
+    width: 100%;
+    display: flex;
+    padding: 50px 10%;
+    justify-content: space-between;
+    align-items: center;
+
+    .divider{
+        width: 350px;
+        height: 6px;
+        background-color: black;
+        border-radius: 3px;
+        margin: 30px 0;
+    }
+
+    .text{
+        max-width: 500px;
+
+        p{
+            display: flex;
+            flex-direction: column;
+            background-image: url('images/home-page-carroussel-3.png');
+            max-width: 500px;
+            padding: 30px;
+            min-height: 300px;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 22px;
+            border-radius: 20px;
+        }
+    }
+}
+
+
+.visible {
+    opacity: 1;
+    /* Rendre l'élément visible */
+}
+
+a {
+    text-decoration: none !important;
+
+    h5,
+    h6 {
+        color: black;
+    }
+}

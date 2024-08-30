@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training</title>
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link href="training.css" rel="stylesheet">
+    <link href="footer.css" rel="stylesheet">
+    <link href="header.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <div class="header-background"></div>
+        <div class="menu">
+            <p class="menu-logo">
+                <img alt="" src="images/logo.png" />
+            </p>
+            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+            <div class="menu-link">
+                <a class="langue-en" href="index.html">About us</a>
+                <a class="langue-fr" href="index.html">A propos</a>
+                <a href="services.html">Services</a>
+                <a href="training.html">Training</a>
+                <a href="blog.html">Publication</a>
+                <a class="langue-en" href="contact.html">Contact us</a>
+                <a class="langue-fr" href="contact.html">Nous contacter</a>
+            </div>
+            <select id="myDropdown" title="Choose a language">
+                <option class="option" value="en">EN</option>
+                <option class="option" value="fr">FR</option>
+            </select>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <img class="hero-img" src="images/conference.jpeg" alt="">
+            <div class="trapez-yellow"></div>
+            <div class="hero-intro">
+                <h1>Comprendre les enjeux internationaux au Sahel : défis politiques et sécuritaires</h1>
+                <p>Sahel Politica, à Berne, Suisse, propose des solutions personnalisées pour guider entreprises, ONG et
+                    responsables publics à travers les défis du Sahel.</p>
+                <button type="button" class="btn btn-warning">Register now</button>
+            </div>
+        </section>
+        <section class="training-1">
+            <div class="text">
+                <h1>Analyse Géopolitique du Sahel</h1>
+                <div class="divider"></div>
+                <div class="paragraphe">
+                    <p>Découvrez les forces politiques et économiques qui façonnent le Sahel. Cette formation vous offre
+                        une compréhension approfondie des dynamiques régionales.</p>
+                </div>
+                <button type="button" class="btn btn-warning">Register now</button>
+            </div>
+            <div class="advantage">
+                <div class="advantage-options">
+                    <img src="" alt="">
+                    <p></p>
+                </div>
+            </div>
+        </section>
+        <button id="scrollToTopBtn" title="Go to top">↑</button>
+        <footer>
+            <div class="footer-contact">
+                <div class="footer-title-newsletter">
+                    <h5 class="langue-en">Stay up to date with all our news by subscribing to our newsletter.</h5>
+                    <h5 class="langue-fr">Restez informé de toutes nos actualités en vous abonnant à notre newsletter.
+                    </h5>
+                </div>
+                <div class="footer-mail-form" id="footerMailForm">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label langue-en">Email address</label>
+                        <label for="exampleFormControlInput1" class="form-label langue-fr">Votre adresse email</label>
+                        <input type="email" class="form-control newsletter-form" id="newsletterEmail"
+                            placeholder="name@example.com">
+                        <button type="button" class="btn btn-outline-light langue-en"
+                            id="registerButton">Register</button>
+                        <button type="button" class="btn btn-outline-light langue-fr"
+                            id="registerButton">Enregistrer</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-info">
+                <img alt="" class="logo-footer" src="images/logo.png">
+                <div class="footer-list-info">
+                    <div class="footer-contact-adress">
+                        <img alt="" class="icon-info-footer" src="images/map.png">
+                        <h4>SAPAS Gmbh, Chamerstrasse 172, 6300 Zug</h4>
+                    </div>
+                    <div class="footer-contact-mail">
+                        <img alt="" class="icon-info-footer" src="images/mail-black.png">
+                        <h4>info@sahelpolitica.ch</h4>
+                    </div>
+                    <div class="footer-contact-number">
+                        <img alt="" class="icon-info-footer" src="images/phone-black.png">
+                        <h4>+41 77 503 63 94</h4>
+                    </div>
+                </div>
+                <div class="footer-follow-us">
+                    <h3 class="langue-en">Follow us:</h3>
+                    <h3 class="langue-fr">Nous suivre:</h3>
+                    <a target="_blank" href="https://www.linkedin.com/company/sahelpolitica/"><img alt=""
+                            src="images/linkedin.png"></a>
+                    <a target="_blank" href="https://x.com/SahelPolitica"><img alt="" src="images/twitter-x.png"></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <h4>@copyright 2024, Sahel Politica by <a target="_blank"
+                        href="https://www.sentinelle.dev">Sentinelle</a></h4>
+            </div>
+        </footer>
+    </main>
+    <script>
+        // Affiche le bouton lorsque l'utilisateur fait défiler vers le bas de 20 pixels à partir du haut du document
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        }
+
+        // Lorsque l'utilisateur clique sur le bouton, fait défiler vers le haut de la page
+        document.getElementById("scrollToTopBtn").addEventListener("click", function () {
+            document.body.scrollTop = 0; // Pour Safari
+            document.documentElement.scrollTop = 0; // Pour Chrome, Firefox, IE et Opera
+        });
+    </script>
+    <script src="indexJs.js"></script>
+    <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script src="script-language.js"></script>
+</body>
+
+</html>
