@@ -6,10 +6,10 @@
     color: white;
     display: flex;
     align-items: end;
-    
-    
 
-    .hero-img{
+
+
+    .hero-img {
         z-index: -2;
         width: 100%;
         height: 100%;
@@ -18,7 +18,7 @@
         filter: brightness(0.4);
     }
 
-    .trapez-yellow{
+    .trapez-yellow {
         position: absolute;
         opacity: 0.66;
         z-index: -1;
@@ -30,7 +30,7 @@
         clip-path: polygon(0% 0%, 100% 0%, 70% 100%, 0% 100%);
     }
 
-    .hero-intro{
+    .hero-intro {
         position: absolute;
         max-width: 800px;
         margin: 0 10%;
@@ -39,25 +39,28 @@
         flex-direction: column;
         padding-top: 100px;
 
-        h1{
+        h1 {
             margin-bottom: 30px;
             font-size: 48px;
+            font-weight: bold;
         }
-        p{
+
+        p {
             margin-bottom: 30px;
             max-width: 500px;
             font-size: 20px;
             font-weight: 500;
+            font-weight: bold;
         }
     }
 
-    button{
+    button {
         width: 200px;
         margin: 20px 0px;
     }
 }
 
-.training-1{
+.training-1 {
     min-height: 700px;
     width: 100%;
     display: flex;
@@ -65,7 +68,7 @@
     justify-content: space-between;
     align-items: center;
 
-    .divider{
+    .divider {
         width: 350px;
         height: 6px;
         background-color: black;
@@ -73,10 +76,16 @@
         margin: 30px 0;
     }
 
-    .text{
+    .text {
+        min-width: 350px;
         max-width: 500px;
+        margin-right: 20px;
 
-        p{
+        h1 {
+            font-weight: bold;
+        }
+
+        p {
             display: flex;
             flex-direction: column;
             background-image: url('images/home-page-carroussel-3.png');
@@ -90,8 +99,343 @@
             border-radius: 20px;
         }
     }
+
+    .advantages {
+        margin-left: 20px;
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .advantage-options {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border: #EAEAEA 4px solid;
+        border-radius: 20px;
+        align-items: center;
+        align-content: center;
+        min-width: 250px;
+        max-width: 330px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+        img {
+            width: 30px;
+            height: 30px;
+            margin-right: 20px;
+        }
+
+        h6 {
+            font-weight: bold;
+        }
+    }
+
+    button {
+        width: 200px;
+        color: white;
+        background-color: #929200;
+        border: none;
+    }
 }
 
+.training-2 {
+    min-height: 700px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 50px 10%;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+        font-weight: bold;
+    }
+
+    p {
+        font-weight: bold;
+    }
+
+    .divider {
+        width: 350px;
+        height: 6px;
+        background-color: black;
+        border-radius: 3px;
+        margin: 30px 0;
+    }
+
+    .text {
+        margin-top: 150px;
+        min-width: 350px;
+        margin-right: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h1 {
+            font-weight: bold;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        p {
+            max-width: 800px;
+            font-weight: bold;
+            font-size: 22px;
+            text-align: center;
+        }
+    }
+
+    .advantages {
+        margin-top: 150px;
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        position: relative;
+        height: 800px;
+
+        .img-africa {
+            z-index: -1;
+            position: absolute;
+            justify-self: center;
+            align-self: center;
+            width: 600px;
+            height: 600px;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .list-advantage {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .advantage-options {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: white;
+            border: #EAEAEA 4px solid;
+            border-radius: 20px;
+            align-content: center;
+            align-items: center;
+            width: 160px;
+            height: 191px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+            img {
+                width: 40px;
+                height: 40px;
+            }
+
+            h6 {
+                font-weight: bold;
+                text-align: center;
+            }
+        }
+
+        .list-advantage1{
+            padding-top: 100px;
+            padding-bottom: 200px;
+        }
+    }
+
+    button {
+        width: 200px;
+        color: white;
+        background-color: #929200;
+        border: none;
+    }
+}
+
+.training-3 {
+    min-height: 700px;
+    width: 100%;
+    display: flex;
+    padding: 50px 10%;
+    justify-content: space-between;
+    align-items: center;
+    
+
+    .divider {
+        width: 70%;
+        height: 6px;
+        background-color: white;
+        border-radius: 3px;
+        margin: 30px;
+    }
+
+    .text {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        min-width: 350px;
+        max-width: 500px;
+        min-height: 550px;
+        margin-right: 20px;
+        position: relative;
+        color: white;
+
+        img{
+            z-index: -1;
+            position: absolute;
+            object-fit: cover;
+            object-position: center;
+            filter: brightness(0.4);
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-weight: bold;
+            margin: 0 30px;
+        }
+
+        p {
+            color: white;
+            font-weight: bold;
+            font-size: 22px;
+            margin: 0 30px;
+        }
+    }
+
+    .advantages {
+        margin-left: 20px;
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .advantage-options {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border: #EAEAEA 4px solid;
+        border-radius: 20px;
+        align-items: center;
+        align-content: center;
+        min-width: 250px;
+        max-width: 330px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+        img {
+            width: 30px;
+            height: 30px;
+            margin-right: 20px;
+        }
+
+        h6 {
+            font-weight: bold;
+        }
+    }
+
+    button {
+        width: 200px;
+        color: white;
+        background-color: #929200;
+        border: none;
+        margin: 0 30px;
+    }
+}
+
+.training-4 {
+    min-height: 700px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 50px 10%;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+        font-weight: bold;
+    }
+
+    p, li {
+        font-weight: bold;
+        font-size: 22px;
+    }
+
+    .divider {
+        width: 350px;
+        height: 6px;
+        background-color: black;
+        border-radius: 3px;
+        margin: 30px 0;
+    }
+
+    .title {
+        margin-top: 150px;
+        min-width: 350px;
+        margin-right: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h1 {
+            font-weight: bold;
+            text-align: center;
+            max-width: 600px;
+        }
+    }
+
+    .text{
+        border-radius: 20px;
+        background-color: #134140;
+        padding: 50px;
+        margin-top: 50px;
+        width: 100%;
+        margin-right: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .paragraphe1, .paragraphe2{
+        display: flex;
+        align-items: center;
+        color: white;
+    }
+
+    .paragraphe1{
+        margin-bottom: 25px;
+       img{
+        width: 40%;
+        height: 300px;
+        object-fit: cover;
+        object-position: right;
+        border-radius: 10px;
+        margin-left: 100px;
+       }
+
+    }
+
+    .paragraphe2{
+        margin-top: 25px;
+        img{
+         width: 40%;
+         height: 430px;
+         object-fit: cover;
+         object-position: right;
+         border-radius: 10px;
+         margin-right: 50px;
+        }
+ 
+     }
+
+    button {
+        margin: 50px;
+        width: 200px;
+        color: white;
+        background-color: #929200;
+        border: none;
+    }
+}
 
 .visible {
     opacity: 1;
