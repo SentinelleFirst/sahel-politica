@@ -1,0 +1,111 @@
+.footer-contact{
+    display: flex;
+    background-color: black;
+    justify-content: space-around;
+    padding: 50px 5%;
+    flex-wrap: wrap;
+
+    img{
+        width: 50px;
+        height: 50px;
+        margin-right: 20px;
+    }
+
+    h5{
+        color: white;
+    }
+
+    .footer-title-newsletter{
+        display: flex;
+        align-items: center;
+        width: 300px;
+        padding: 2px;
+    }
+
+    .thank-you-message{
+        display: flex;
+        align-items: center;
+        width: 300px;
+        padding: 2px;
+    }
+
+    .footer-mail-form{
+        display: flex;
+        align-items: center;
+
+        .newsletter-form{
+            width: 300px;
+            height: 50px;
+        }
+    }
+}
+
+.footer-info{
+    display: flex;
+    background-color: rgb(250, 203, 1);
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 300px;
+
+    .logo-footer{
+        width: 150;
+        height: 150px;
+        margin: 30px;
+    }
+
+    .icon-info-footer{
+        width: 40px;
+        height: 40px;
+        margin-right: 20px;
+    }
+
+    .footer-list-info{
+        min-width: 300px;
+        padding: 0px 5%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .footer-contact-adress{
+        display: flex;
+        align-items: center;
+    }
+
+    .footer-contact-mail{
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .footer-contact-number{
+        display: flex;
+        align-items: center;
+    }
+
+    .footer-follow-us{
+        margin: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        width: 150px;
+        height: 100%;
+        justify-content: space-around;
+        align-items: center;
+        
+        img{
+            width: 40px;
+            height: 40px;
+        }
+    }
+}
+
+.copyright{
+    padding: 50px ;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(250, 203, 1);
+    text-align: center;
+}

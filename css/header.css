@@ -1,0 +1,153 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+#scrollToTopBtn {
+    display: none; /* Masqué par défaut */
+    position: fixed; /* Fixé en position */
+    bottom: 20px; /* Distance du bas */
+    right: 30px; /* Distance de la droite */
+    z-index: 99; /* Assurez-vous qu'il s'affiche par-dessus tout */
+    border: none; /* Pas de bordure */
+    outline: none; /* Pas de contour */
+    background-color: #555; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    cursor: pointer; /* Curseur pointeur */
+    padding: 15px; /* Espacement */
+    border-radius: 10px; /* Bords arrondis */
+    font-size: 18px; /* Taille du texte */
+}
+
+#scrollToTopBtn:hover {
+    background-color: #333; /* Couleur de fond au survol */
+}
+
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid white;
+}
+
+header {
+    position: relative;
+    z-index: 2;
+    height: 100px;
+    padding: 0% 5% 0% 5%;
+    margin-bottom: -200px;
+}
+
+header:hover{
+    background-color: black;
+    transition: background-color 0.3s ease;
+
+    .menu{
+        border-bottom: 1px solid black;
+    }
+}
+
+.menu-logo{
+    width: 300px;
+}
+
+.menu-link {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.menu a {
+    margin: 20px 5px 15x 0px;
+    padding: 14px 20px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.menu a:hover {
+    border-bottom: 3px solid white;
+}
+
+.menu-toggle {
+    display: none; /* Masquer le bouton par défaut */
+}
+
+/* Media query pour les écrans de largeur maximale de 1000px */
+@media (max-width: 1200px) {
+    .menu-link {
+        display: none;
+        flex-direction: column;
+        background-color: #333;
+        position: absolute;
+        top: 100px;
+        right: 0;
+        width: 200px;
+        z-index: 1;
+        transition: transform 0.3s ease-in-out;
+        transform: translateX(100%);
+        animation: slideLeft 0.5s forwards;
+        opacity: 0; /* Initialement invisible */
+    }
+
+    @keyframes slideLeft {
+        0% {
+        transform: translateX(100%);
+        opacity: 0;
+        }
+        100% {
+        transform: translateX(0);
+        opacity: 1;
+        }
+    }
+
+    .menu-link.active {
+        display: flex;
+        transform: translateX(0);
+    }
+
+    .menu-toggle {
+        order: 3;
+        display: block; /* Afficher le bouton pour les petits écrans */
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 650px) {
+    .menu-logo{
+        width: 120px;
+        height: 120px;
+    }
+}
+
+#myDropdown{
+    width: 70px;
+    height: 50px;
+    align-self: center;
+    background-color: transparent;
+    border: 2px solid white;
+    border: none;
+    color: white;
+
+    img{
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.langue-fr {
+    display: none;
+}
+.langue-en {
+    display: block;
+}
+
+h1, h2, h3, h4, h5, h6, p, label{
+    font-family: 'Roboto', sans-serif;
+}
+
