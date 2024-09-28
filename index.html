@@ -38,22 +38,9 @@
     </header>
     <main>
         <section class="carousel-container">
-            <div class="carousel">
-                <div class="item active">
-                    <img alt="" src="images/home-page-carroussel-1.jpg" alt="Image 1" />
-                    <h1 class="caption langue-en">Anticipate, monitor and understand your risks</h1>
-                    <h1 class="caption langue-fr">Anticipation, suivi et analyse de vos risques</h1>
-                </div>
-                <div class="item">
-                    <img alt="" src="images/home-page-carroussel-2.png" alt="Image 2" />
-                    <h1 class="caption langue-en">Plan for, respond and recover from crisis</h1>
-                    <h1 class="caption langue-fr">Planifier, gérer et se remettre d'une crise</h1>
-                </div>
-                <div class="item">
-                    <img alt="" src="images/home-page-carroussel-3.jpg" alt="Image 3" />
-                    <h1 class="caption langue-en">Leverage risks and seize opportunities</h1>
-                    <h1 class="caption langue-fr">Tirer parti des risques et saisir les opportunités</h1>
-                </div>
+            <div class="carousel" id="hero-events">
+
+
             </div>
             <div class="dots"></div>
         </section>
@@ -353,15 +340,75 @@
         const analytics = getAnalytics(app);
         const db = getFirestore(app);
 
+        // Function to fetch and display events
+        // Function to fetch and display events
+        async function fetchEvents() {
+            const eventsContainer = document.getElementById('hero-events');
+            try {
+                // Récupérer tous les événements de la collection
+                const querySnapshotEvents = await getDocs(collection(db, 'Events'));
+
+                // Convertir les documents en tableau d'événements
+                const events = querySnapshotEvents.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+
+                // Trier les événements par 'date' en ordre décroissant
+                events.sort((a, b) => b.date.seconds - a.date.seconds);
+
+                // Limiter le nombre d'événements à 5
+                const limitedEvents = events.slice(0, 5);
+
+                // Effacer le contenu précédent
+                eventsContainer.innerHTML = '';
+
+                // Afficher les événements limités
+                limitedEvents.forEach((event, index) => {
+                    const eventElement = document.createElement('div');
+                    eventElement.classList.add('item');
+
+                    // Appliquer la classe 'active' au premier élément pour qu'il s'affiche
+                    if (index === 0) {
+                        eventElement.classList.add('active');
+                    }
+
+                    eventElement.innerHTML = `
+                <img src="${event.imageUrl}" class="backimg">
+                <div class="caption">
+                    <h4>Our latest events</h4>
+                    <div class="divider"></div>    
+                    <h1 class="langue-en">${event.title}</h1>
+                    <h1 class="langue-fr">${event.titleFR}</h1>
+                    <a class="langue-en" href="article.html?id=${event.id}">Read more<img src="images/right-arrow-yellow.svg" alt=""
+                    class="arrow-icon"></a>
+                    <a class="langue-fr" href="article.html?id=${event.id}">Voir plus<img src="images/right-arrow-yellow.svg" alt=""
+                    class="arrow-icon"></a>
+                </div>
+            `;
+
+                    // Ajouter l'élément à la liste des événements
+                    eventsContainer.appendChild(eventElement);
+                });
+
+            } catch (error) {
+                console.error("Error fetching events: ", error);
+            }
+        }
+
+        // Fetch events on page load
+        document.addEventListener('DOMContentLoaded', fetchEvents);
+
+
         // Function to fetch and display articles
         async function fetchArticles() {
             const firstaArticleContainer = document.getElementById('first-blog-box');
             const articlesContainer = document.getElementById('blog-boxs'); try {
                 // Récupérer tous les articles de la collection
-                const querySnapshot = await getDocs(collection(db, 'Articles'));
+                const querySnapshotArticles = await getDocs(collection(db, 'Articles'));
 
                 // Convertir les documents en tableau d'articles
-                const articles = querySnapshot.docs.map(doc => ({
+                const articles = querySnapshotArticles.docs.map(doc => ({
                     id: doc.id,
                     ...doc.data()
                 }));
@@ -408,9 +455,9 @@
                                 <h6 class="langue-en">${article.smallTitle}</h6>
                                 <h6 class="langue-fr">${article.smallTitleFR}</h6>
                                 <p>${new Date(article.date.seconds * 1000).toLocaleString()}</p>
-                                <a class="langue-en" href="article.html?id=${articles[0].id}">Read more<img src="images/right-arrow-yellow.svg" alt=""
+                                <a class="langue-en" href="article.html?id=${article.id}">Read more<img src="images/right-arrow-yellow.svg" alt=""
                                 class="arrow-icon"></a>
-                                <a class="langue-fr" href="article.html?id=${articles[0].id}">Voir plus<img src="images/right-arrow-yellow.svg" alt=""
+                                <a class="langue-fr" href="article.html?id=${article.id}">Voir plus<img src="images/right-arrow-yellow.svg" alt=""
                                 class="arrow-icon"></a>
                             </div>
                             
