@@ -1,54 +1,202 @@
+.btn-nice {
+    z-index: 2;
+    cursor: pointer;
+    color: white;
+    transition: all 0.3s;
+    position: relative;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-nice img {
+    opacity: 0.8;
+    margin-left: 20px;
+    width: 40px;
+    display: none;
+    transition: all 0.3s;
+}
+
+.btn-nice span {
+    transition: all 0.3s;
+    color: white;
+}
+
+.btn-nice::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.3s;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-top-color: #848404;
+    border-bottom-color: #848404;
+    transform: scale(0.1, 1);
+}
+
+.btn-nice:hover span {
+    letter-spacing: 2px;
+    color: black;
+}
+
+.btn-nice:hover img {
+    display: block;
+}
+
+.btn-nice:hover::before {
+    opacity: 1;
+    transform: scale(1, 1);
+}
+
+.btn-nice::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transition: all 0.3s;
+    background-color: #848404;
+
+    border-radius: 5px;
+}
+
+.btn-nice:hover::after {
+    opacity: 0;
+    transform: scale(0.1, 1);
+}
+
 .hero {
     z-index: 1;
     width: 100%;
-    height: 300px;
-    margin: auto;
+    min-height: 900px;
+    overflow: hidden;
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
     position: relative;
-    background-image: url('../images/home-page-carroussel-2.png');
-    background-size: cover;
-    background-position: center;
+    color: white;
 
-    h1{
-        color: rgb(250, 203, 1);
+    @media (max-width: 810px) {
+        flex-direction: column;
+        padding-top: 200px;
+    }
+
+    .divider {
+        width: 250px;
+        height: 3px;
+        background-color: white;
+        border-radius: 50%;
+        margin: 30px 0;
+    }
+
+    .hero-intro {
+        padding: 110px 5% 0px 5%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+
+        @media (min-width: 810px) {
+            max-width: 50%;
+        }
+    
+        @media (max-width: 810px) {
+            max-width: 100%;
+        }
+
+        h3 {
+            font-weight: bold;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        p {
+            margin-bottom: 30px;
+            font-size: 17px;
+            font-weight: 500;
+            text-align: justify;
+        }
+    }
+
+    .formular{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        @media (min-width: 810px) {
+            align-items: end;
+            padding: 200px 5% 50px 5%;
+        }
+
+        @media (max-width: 810px) {
+            align-items: center;
+            width: 100%;
+            padding: 50px 5% 50px 5%;
+        }
+
+        @media (max-width: 400px) {
+            scale: 0.80;
+        }
+    }
+
+    .contact-form{
+        @media (min-width: 810px) {
+            min-width: 400px;
+        }
+
+        @media (max-width: 810px) {
+            min-width: 350px;
+        }
+        min-height: 500px;
+        background-color: white;
+        padding: 40px;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    label {
+        color: black;
+    }
+
+    .duo-form{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .form-group{
+            width: 48%;
+        }
     }
 }
 
-.page-title{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 50px 5% 50px 5%;
-
-    h1{
-        font-weight: bold;
-        color: rgb(250, 203, 1);
-        font-size: 70px;
-    }
-}
-
-.contact{
-    margin: 50px 5%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.contact-form {
-    min-width: 300px;
-    padding: 30px;
-}
-.contact-form h2 {
-    margin-bottom: 20px;
-}
-
-.img-contact{
-    max-width: 300px;
-    width: 45%;
-    min-width: 100px;
-
-    img{
-        width: 100%;
-        height: auto;
-    }
+/* Vidéo de fond */
+#bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    z-index: -1;
+    /* Met la vidéo derrière le contenu */
+    transform: translate(-40%, -40%);
+    /* Centre la vidéo */
+    object-fit: cover;
+    /* Assure que la vidéo couvre bien tout le fond */
+    filter: brightness(0.6);
 }

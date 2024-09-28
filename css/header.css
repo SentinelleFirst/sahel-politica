@@ -30,6 +30,12 @@ body {
     border-bottom: 1px solid white;
 }
 
+.principal-menu {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
 header {
     position: relative;
     z-index: 2;
@@ -74,7 +80,7 @@ header:hover{
 }
 
 /* Media query pour les écrans de largeur maximale de 1000px */
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
     .menu-link {
         display: none;
         flex-direction: column;
@@ -82,7 +88,7 @@ header:hover{
         position: absolute;
         top: 100px;
         right: 0;
-        width: 200px;
+        width: 300px;
         z-index: 1;
         transition: transform 0.3s ease-in-out;
         transform: translateX(100%);

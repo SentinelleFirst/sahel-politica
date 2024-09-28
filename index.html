@@ -57,6 +57,20 @@
             </div>
             <div class="dots"></div>
         </section>
+        <section class="blog">
+            <div class="blog-title">
+                <h1>Explore our latest insights and updates here.</h1>
+                <div class="divider"></div>
+            </div>
+            <div class="articles">
+                <div class="first-blog-box" id="first-blog-box">
+                    <!-- The latest article will be dynamically inserted here -->
+                </div>
+                <div class="blog-boxs" id="blog-boxs">
+                    <!-- The other articles will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
         <section class="what-we-do">
             <img src="images/pexels-pnw-prod-8276369.jpg" alt="" class="left-img">
             <div class="text">
@@ -341,8 +355,8 @@
 
         // Function to fetch and display articles
         async function fetchArticles() {
-            const articlesContainer = document.getElementById('blog-boxs');
-            try {
+            const firstaArticleContainer = document.getElementById('first-blog-box');
+            const articlesContainer = document.getElementById('blog-boxs'); try {
                 // Récupérer tous les articles de la collection
                 const querySnapshot = await getDocs(collection(db, 'Articles'));
 
@@ -355,8 +369,31 @@
                 // Trier les articles par 'date' en ordre décroissant
                 articles.sort((a, b) => b.date - a.date);
 
-                // Limiter le nombre d'articles à 3
-                const limitedArticles = articles.slice(0, 3);
+                // Afficher le premier élément le plus récent
+                const firstElement = document.createElement('div');
+                firstElement.classList.add('first-article');
+
+                firstElement.innerHTML = `
+                            <img src="${articles[0].imageUrl}">
+                            <div class="blog-article-title">
+                                <h4 class="langue-en">${articles[0].smallTitle}</h4>
+                                <h4 class="langue-fr">${articles[0].smallTitleFR}</h4>
+                                <p>${new Date(articles[0].date.seconds * 1000).toLocaleString()}</p>
+                            </div>
+                            <div class="blog-article-info">
+                                <p class="langue-en">${articles[0].title}</p>
+                                <p class="langue-fr">${articles[0].titleFR}</p>
+                                <a class="langue-en" href="article.html?id=${articles[0].id}">Read more<img src="images/right-arrow-yellow.svg" alt=""
+                                class="arrow-icon"></a>
+                                <a class="langue-fr" href="article.html?id=${articles[0].id}">Voir plus<img src="images/right-arrow-yellow.svg" alt=""
+                                class="arrow-icon"></a>
+                            </div>
+                        `;
+
+                firstaArticleContainer.appendChild(firstElement);
+
+                // Limiter le nombre d'articles à 3 après le premier article
+                const limitedArticles = articles.slice(1, 5);
 
                 // Effacer le contenu précédent
                 articlesContainer.innerHTML = '';
@@ -365,22 +402,18 @@
                 limitedArticles.forEach(article => {
                     const articleElement = document.createElement('div');
                     articleElement.classList.add('blog-article');
-
-                    articleElement.style.backgroundImage = `url(${article.imageUrl})`;
-                    articleElement.style.backgroundSize = 'cover'; // Pour couvrir tout l'élément
-                    articleElement.style.backgroundPosition = 'center'; // Pour centrer l'image
-
                     articleElement.innerHTML = `
-                            
+                            <img src="${article.imageUrl}">
                             <div class="blog-article-title">
-                                <h6 class="langue-en">${article.title}</h6>
-                                <h6 class="langue-fr">${article.titleFR}</h6>
+                                <h6 class="langue-en">${article.smallTitle}</h6>
+                                <h6 class="langue-fr">${article.smallTitleFR}</h6>
+                                <p>${new Date(article.date.seconds * 1000).toLocaleString()}</p>
+                                <a class="langue-en" href="article.html?id=${articles[0].id}">Read more<img src="images/right-arrow-yellow.svg" alt=""
+                                class="arrow-icon"></a>
+                                <a class="langue-fr" href="article.html?id=${articles[0].id}">Voir plus<img src="images/right-arrow-yellow.svg" alt=""
+                                class="arrow-icon"></a>
                             </div>
-                            <div class="blog-article-info">
-                                <p class="blog-article-date">${new Date(article.date.seconds * 1000).toLocaleString()}</p>
-                                <p class="langue-en"><a href="article.html?id=${article.id}">Read more --></a></p>
-                                <p class="langue-fr"><a href="article.html?id=${article.id}">Lire plus --></a></p>
-                            </div>
+                            
                         `;
                     articlesContainer.appendChild(articleElement);
                 });
