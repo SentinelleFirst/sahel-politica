@@ -35,13 +35,12 @@ h1 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: right;
     filter: brightness(0.5);
 }
 
 .caption {
     max-width: 500px;
-    padding: 20px;
     position: absolute;
     bottom: 30%;
     left: 5%;
@@ -63,9 +62,9 @@ h1 {
 
     a {
         text-decoration: none;
-        font-size: 17px;
+        font-size: 20px;
         font-weight: bold;
-        color: #848404;
+        color: white;
         transition: all 0.3s ease;
 
         .arrow-icon {
@@ -92,29 +91,60 @@ h1 {
     z-index: 1;
 }
 
-.dots {
+#dots {
     display: flex;
-    align-items: last baseline;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: start;
     gap: 10px;
     position: absolute;
     bottom: 5%;
-    right: 5%;
-    z-index: 2;
+    left: 5%;
+    width: 90%;
+    z-index: 1;
+
+    .divider{
+        height: 4px;
+        border-radius: 2px;
+    }
 }
 
 .dot {
     cursor: pointer;
-    height: 30px;
-    width: 30px;
-    background-color: #242421;
-    transition: background-color 0.2s ease;
-    border-radius: 15px;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    gap: 10px;
+    flex-direction: column;
+    width: 15%;
+    z-index: 2;
+    color: white;
+    
+    h5{
+        font-weight: bold;
+    }
+
+    .constant-divider{
+        background-color: white;
+        width: 100%;
+    }
+
+    .progress-divider{
+        background-color: #D1D100;
+        width: 0px;
+    }
 }
 
-.dot.active,
-.dot:hover {
-    background-color: #ffffe6;
+
+.dot.active{
+
+    .constant-divider{
+        background-color: transparent;
+    }
+
+    .progress-divider{
+        width: 100%;
+        transition: all 10s ease-in-out;
+    }
 }
 
 .blog {
