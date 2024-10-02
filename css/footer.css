@@ -60,11 +60,11 @@ footer {
     background-color: black;
 
     @media (max-width: 1200px) {
-        padding: 50px 5% 20px 5%;
+        padding: 50px 5% 100px 5%;
     }
 
     @media (min-width: 1200px) {
-        padding: 50px 15% 20px 15%;
+        padding: 50px 15% 100px 15%;
     }
 
     color: white;
@@ -128,11 +128,11 @@ footer {
     background-color: #FACB01;
 
     @media (max-width: 1200px) {
-        padding: 50px 5% 20px 5%;
+        padding: 20px 5% 20px 5%;
     }
 
     @media (min-width: 1200px) {
-        padding: 50px 15% 20px 15%;
+        padding: 20px 15% 20px 15%;
     }
 
     p img {

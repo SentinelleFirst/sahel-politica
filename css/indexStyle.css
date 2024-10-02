@@ -418,17 +418,6 @@ h1 {
             justify-content: start;
             align-items: end;
 
-            .link1,
-            .link2 {
-                border-left: 1px solid black;
-                border-top: 1px solid black;
-            }
-
-            .link2 {
-                border-right: 1px solid black;
-                ;
-            }
-
             .link {
                 width: 50%;
                 height: 220px;

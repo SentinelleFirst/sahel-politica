@@ -16,21 +16,57 @@
 <body>
     <header>
         <div class="menu">
-            <img alt="" src="images/logo_long_blanc.svg" class="menu-logo" />
-            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
-            <div class="menu-link">
-                <a class="langue-en" href="index.html">About us</a>
-                <a class="langue-fr" href="index.html">A propos</a>
-                <a href="services.html">Services</a>
-                <a href="training.html">Training</a>
-                <a href="blog.html">Publication</a>
-                <a class="langue-en" href="contact.html">Contact us</a>
-                <a class="langue-fr" href="contact.html">Nous contacter</a>
+            <div class="menu-left">
+                <a href="index.html"><img alt="" src="images/logo_long_blanc.svg" class="menu-logo" /></a>
+                <div class="menu-link">
+                    <div class="menu-option">
+                        <div class="option-title">
+                            <p>Who we are</p>
+                            <img src="images/dropdown-arrow-menu.svg" alt=""> 
+                        </div>
+                        <div class="list-options">
+                            <a href="about-us.html">About us</a>
+                            <a href="about-us.html#team">Our team</a>
+                            <a href="about-us.html#clients">Partners</a>
+                        </div>
+                    </div>
+
+                    <div class="menu-option">
+                        <div class="option-title">
+                            <p>What we do</p>
+                            <img src="images/dropdown-arrow-menu.svg" alt=""> 
+                        </div>
+                        <div class="list-options">
+                            <a href="training.html">Training</a>
+                            <a href="services.html">Services</a>
+                            <a href="">Keynote</a>
+                        </div>
+                    </div>
+
+                    <div class="menu-option">
+                        <div class="option-title">
+                            <p>News</p>
+                            <img src="images/dropdown-arrow-menu.svg" alt=""> 
+                        </div>
+                        <div class="list-options">
+                            <a href="">Events</a>
+                            <a href="">Publication</a>
+                            <a href="blog.html">In-depth analysis</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <select id="myDropdown" title="Choose a language">
-                <option class="option" value="en">EN</option>
-                <option class="option" value="fr">FR</option>
-            </select>
+
+            <div class="menu-end">
+                <div class="menu-global">
+                    <a href="contact.html">Contact us</a>
+                    <select id="myDropdown" title="Choose a language">
+                        <option class="option" value="en">Global - EN</option>
+                        <option class="option" value="fr">Global - FR</option>
+                    </select>
+                </div>
+                <img id="menu-search-icon" src="images/menu-search-icon.svg" alt="">
+            </div>
         </div>
     </header>
     <main>
@@ -101,7 +137,8 @@
                 </div>
             </div>
         </section>
-        <section class="team">
+        <section class="team"  id="team">
+
             <div class="title">
                 <img src="images/team-icon.png" alt="">
                 <h3>OUR TEAM</h3>
@@ -194,7 +231,7 @@
                 </div>
             </section>
         </section>
-        <section class="clients">
+        <section class="clients"  id="clients">
             <div class="text">
                 <div>
                     <div class="title">

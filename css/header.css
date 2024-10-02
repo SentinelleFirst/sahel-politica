@@ -27,23 +27,10 @@ body {
     background-color: #333; /* Couleur de fond au survol */
 }
 
-
-.menu {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid white;
-}
-
-.principal-menu {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
 header {
     position: relative;
     z-index: 2;
-    height: 100px;
+    height: 120px;
     padding: 0% 5% 0% 5%;
     margin-bottom: -200px;
 }
@@ -57,86 +44,136 @@ header:hover{
     }
 }
 
+.menu {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
+    border-bottom: 1px solid white;
+    width: 100%;
+    color: white;
+}
+
+.menu-left {
+    display: flex;
+    justify-content: space-between;
+    gap: 100px;
+
+}
+
+.menu a {
+    text-decoration: none;
+    color: white;
+}
+
+.principal-menu {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
 .menu-logo{
     width: 300px;
 }
 
 .menu-link {
     display: flex;
-    justify-content: flex-end;
+    justify-content: start;
+    align-items: center;
+    gap: 90px;
+    padding-top: 20px;
+}
+
+.menu-option {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+
+    .option-title{
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 20px;
+    }
+
+    p{
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    img{
+        width: 15px;
+        transition: all 0.2s ease;
+    }
+
+    .list-options{
+        position: absolute;
+        overflow: hidden;
+        width: 300px;
+        height: 0px;
+        transition: all 0.5s ease;
+        background-color: black;
+        top: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+        color: white;
+        font-size: 17px;
+
+        a{
+            padding: 10px 30px;
+            height: 70px;
+            width: 100%;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        a:hover{
+            background-color: rgb(22, 22, 22);
+        }
+    }
+}
+
+.menu-option:hover {
+    img{
+        transform: rotate(180deg);
+    }
+    .list-options {
+        height: 250px;
+    }
+}
+
+.menu-end {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: end;
+}
+
+.menu-global {
+    display: flex;
+    gap: 50px;
+    justify-content: space-between;
     align-items: center;
 }
 
-.menu a {
-    margin: 20px 5px 15x 0px;
-    padding: 14px 20px;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-}
-
-.menu a:hover {
-    border-bottom: 3px solid white;
+#menu-search-icon {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    object-position: center;
 }
 
 .menu-toggle {
     display: none; /* Masquer le bouton par défaut */
 }
 
-/* Media query pour les écrans de largeur maximale de 1000px */
-@media (max-width: 1024px) {
-    .menu-link {
-        display: none;
-        flex-direction: column;
-        background-color: #333;
-        position: absolute;
-        top: 100px;
-        right: 0;
-        width: 300px;
-        z-index: 1;
-        transition: transform 0.3s ease-in-out;
-        transform: translateX(100%);
-        animation: slideLeft 0.5s forwards;
-        opacity: 0; /* Initialement invisible */
-    }
-
-    @keyframes slideLeft {
-        0% {
-        transform: translateX(100%);
-        opacity: 0;
-        }
-        100% {
-        transform: translateX(0);
-        opacity: 1;
-        }
-    }
-
-    .menu-link.active {
-        display: flex;
-        transform: translateX(0);
-    }
-
-    .menu-toggle {
-        order: 3;
-        display: block; /* Afficher le bouton pour les petits écrans */
-        background: none;
-        border: none;
-        color: white;
-        font-size: 24px;
-        cursor: pointer;
-        margin-left: 20px;
-    }
-}
-
-@media (max-width: 650px) {
-    .menu-logo{
-        width: 120px;
-        height: 120px;
-    }
-}
-
 #myDropdown{
-    width: 70px;
+    width: 110px;
     height: 50px;
     align-self: center;
     background-color: transparent;
