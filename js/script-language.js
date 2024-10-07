@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    var dropdown = document.getElementById('myDropdown');
+    var dropdown = document.getElementById('desktopLangDropdown');
     if (!dropdown) {
         return;
     }

@@ -1,0 +1,219 @@
+.hero {
+    z-index: 1;
+    width: 100%;
+    height: 900px;
+    position: relative;
+    color: white;
+    display: flex;
+    align-items: end;
+
+    .divider {
+        width: 50%;
+        height: 4px;
+        border-radius: 50%;
+        background-color: white;
+    }
+
+    .hero-img {
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: right;
+        filter: brightness(0.4);
+    }
+
+    .hero-intro {
+        position: absolute;
+        max-width: 800px;
+        margin: 0 5%;
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+        padding-top: 100px;
+        gap: 30px;
+
+        h1 {
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        h3 {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 20px;
+            font-weight: 500;
+        }
+    }
+}
+
+.reports-filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px 5% 30px 5%;
+    gap: 50px;
+}
+
+.search-group {
+    width: 100%;
+    max-width: 1200px;
+    background-color: #D9D9D9;
+    border-radius: 35px;
+    display: flex;
+    justify-content: space-between;
+
+    input {
+        height: 70px;
+        border-radius: 35px;
+        background-color: #D9D9D9;
+        border: 1px solid #D9D9D9;
+        padding: 20px;
+        width: 95%;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    button {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background-color: #FACB01;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 20px;
+            object-fit: contain;
+            object-position: center;
+        }
+    }
+
+}
+
+.other-filter {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 50px;
+
+    .btn {
+        height: 50px;
+        width: 200px;
+        border-radius: 25px;
+    }
+
+    .btn.active {
+        background-color: #FACB01;
+        color: black;
+    }
+}
+
+.report-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 50px 5% 100px 5%;
+
+    .report-boxs {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        gap: 50px;
+        width: 100%;
+        margin-top: 50px;
+        max-width: 1500px;
+    }
+
+    .report {
+        width: 100%;
+        min-height: 400px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+
+        .backimg {
+            z-index: -1;
+            position: absolute;
+            width: 45%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 15px;
+        }
+
+        .caption {
+            min-height: 500px;
+            width: 75%;
+            margin: 50px 0 50px 30%;
+            padding: 50px;
+            border-radius: 15px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: start;
+            gap: 20px;
+        }
+
+        h3{
+            font-weight: bold;
+        }
+
+        .more-info {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+            p {
+                font-style: italic;
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            padding: 10px 20px;
+            border-radius: 25px;
+            height: 50px;
+            background-color: #E5F04A;
+            transition: all 0.3s ease;
+
+            img {
+                width: 30px;
+                transition: all 0.3s ease;
+            }
+        }
+
+        a:hover {
+            background-color: #FACB01;
+
+            img {
+                width: 40px;
+            }
+        }
+
+        p {
+            text-align: justify;
+            font-size: 18px;
+        }
+    }
+}

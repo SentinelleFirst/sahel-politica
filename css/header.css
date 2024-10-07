@@ -1,6 +1,6 @@
 html {
     scroll-behavior: smooth;
-  }  
+}
 
 body {
     font-family: 'Roboto', sans-serif;
@@ -8,23 +8,37 @@ body {
 }
 
 #scrollToTopBtn {
-    display: none; /* Masqué par défaut */
-    position: fixed; /* Fixé en position */
-    bottom: 20px; /* Distance du bas */
-    right: 30px; /* Distance de la droite */
-    z-index: 99; /* Assurez-vous qu'il s'affiche par-dessus tout */
-    border: none; /* Pas de bordure */
-    outline: none; /* Pas de contour */
-    background-color: #555; /* Couleur de fond */
-    color: white; /* Couleur du texte */
-    cursor: pointer; /* Curseur pointeur */
-    padding: 15px; /* Espacement */
-    border-radius: 10px; /* Bords arrondis */
-    font-size: 18px; /* Taille du texte */
+    display: none;
+    /* Masqué par défaut */
+    position: fixed;
+    /* Fixé en position */
+    bottom: 20px;
+    /* Distance du bas */
+    right: 30px;
+    /* Distance de la droite */
+    z-index: 99;
+    /* Assurez-vous qu'il s'affiche par-dessus tout */
+    border: none;
+    /* Pas de bordure */
+    outline: none;
+    /* Pas de contour */
+    background-color: #555;
+    /* Couleur de fond */
+    color: white;
+    /* Couleur du texte */
+    cursor: pointer;
+    /* Curseur pointeur */
+    padding: 15px;
+    /* Espacement */
+    border-radius: 10px;
+    /* Bords arrondis */
+    font-size: 18px;
+    /* Taille du texte */
 }
 
 #scrollToTopBtn:hover {
-    background-color: #333; /* Couleur de fond au survol */
+    background-color: #333;
+    /* Couleur de fond au survol */
 }
 
 header {
@@ -35,11 +49,11 @@ header {
     margin-bottom: -200px;
 }
 
-header:hover{
+header:hover {
     background-color: black;
     transition: background-color 0.3s ease;
 
-    .menu{
+    .menu {
         border-bottom: 1px solid black;
     }
 }
@@ -54,10 +68,9 @@ header:hover{
 }
 
 .menu-left {
+    flex-grow: 1;
     display: flex;
-    justify-content: space-between;
-    gap: 100px;
-
+    justify-content: start;
 }
 
 .menu a {
@@ -71,108 +84,275 @@ header:hover{
     width: 100%;
 }
 
-.menu-logo{
+.menu-logo {
     width: 300px;
 }
 
-.menu-link {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 90px;
-    padding-top: 20px;
-}
+@media (min-width: 1024px) {
 
-.menu-option {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-
-    .option-title{
+    .menu-link {
         display: flex;
-        justify-content: space-between;
-        align-items: baseline;
+        justify-content: start;
+        align-items: center;
+        padding-top: 20px;
+        flex-grow: 1;
+        max-width: 600px;
+
+        .menu-global {
+            display: none;
+        }
+    }
+
+    .options {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
         gap: 20px;
     }
 
-    p{
-        font-weight: bold;
-        font-size: 18px;
-    }
-
-    img{
-        width: 15px;
-        transition: all 0.2s ease;
-    }
-
-    .list-options{
-        position: absolute;
-        overflow: hidden;
-        width: 300px;
-        height: 0px;
-        transition: all 0.5s ease;
-        background-color: black;
-        top: 100%;
+    .menu-option {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: start;
-        color: white;
-        font-size: 17px;
+        justify-content: start;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
 
-        a{
-            padding: 10px 30px;
-            height: 70px;
-            width: 100%;
-            transition: all 0.2s ease;
+        .option-title {
             display: flex;
-            align-items: center;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 20px;
         }
 
-        a:hover{
-            background-color: rgb(22, 22, 22);
+        p {
+            font-weight: bold;
+            font-size: 18px;
         }
+
+        img {
+            width: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .list-options {
+            position: absolute;
+            overflow: hidden;
+            width: 300px;
+            height: 0px;
+            transition: all 0.5s ease;
+            background-color: black;
+            top: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+            color: white;
+            font-size: 17px;
+
+            a {
+                padding: 10px 30px;
+                height: 70px;
+                width: 100%;
+                transition: all 0.2s ease;
+                display: flex;
+                align-items: center;
+            }
+
+            a:hover {
+                background-color: rgb(22, 22, 22);
+            }
+        }
+    }
+
+    .menu-option:hover {
+        img {
+            transform: rotate(180deg);
+        }
+
+        .list-options {
+            height: 250px;
+        }
+    }
+
+    
+
+    #menu-open{
+        display: none;
+    }
+
+}
+
+@media (max-width: 1024px) {
+    .menu-link {
+        background-color: black;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: start;
+
+        @media (min-width: 512px) {
+            width: 350px;
+        }
+
+        @media (max-width: 512px) {
+            width: 76vh;
+        }
+        margin-top: 100px;
+        min-height: calc(100vh - 100px);
+        right: 0px;
+        padding: 30px 30px;
+        gap: 10px;
+        /* referring directly to the animation's @keyframe declaration */
+        animation-duration: 1s;
+        /* don't forget to set a duration! */
+    }
+
+    .menu-link.active{
+        display: flex;
+        animation: slideInRight 1s forwards;
+    }
+
+    .menu-link.hide{
+        animation: slideOutRight 1s forwards;
+        pointer-events: none;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: start;
+        width: 100%;
+    }
+
+    .menu-option {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        cursor: pointer;
+        width: 100%;
+
+        .option-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            width: 100%;
+            height: 40px;
+        }
+
+        p {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        img {
+            width: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .list-options {
+            overflow: hidden;
+            width: 100%;
+            height: 0px;
+            transition: all 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+            color: white;
+            font-size: 17px;
+
+            a {
+                padding: 10px 30px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+
+    .menu-option.active {
+        margin-bottom: 20px;
+
+        .list-options {
+            height: 130px !important;
+        }
+
+        img {
+            transform: rotate(180deg);
+        }
+    }
+
+    .menu-link {
+        display: none;
+        .menu-global {
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: end;
+            flex-wrap: 1;
+
+            img {
+                width: 20px;
+            }
+
+            a,
+            .lang-btn {
+                display: flex;
+                align-items: center;
+                justify-content: start;
+                gap: 20px;
+            }
+        }
+    }
+
+    .menu-button{
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 20px;
+    }
+
+    .menu-end .menu-global{
+        display: none !important;
     }
 }
 
-.menu-option:hover {
-    img{
-        transform: rotate(180deg);
-    }
-    .list-options {
-        height: 250px;
-    }
-}
 
 .menu-end {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: end;
+
+    .menu-global {
+        display: flex;
+        gap: 50px;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
 
-.menu-global {
-    display: flex;
-    gap: 50px;
-    justify-content: space-between;
-    align-items: center;
-}
 
-#menu-search-icon {
+#menu-search-icon, #menu-open {
     width: 25px;
     height: 25px;
     object-fit: contain;
     object-position: center;
+    cursor: pointer;
 }
 
 .menu-toggle {
-    display: none; /* Masquer le bouton par défaut */
+    display: none;
+    /* Masquer le bouton par défaut */
 }
 
-#myDropdown{
+#desktopLangDropdown {
     width: 110px;
     height: 50px;
     align-self: center;
@@ -181,20 +361,50 @@ header:hover{
     border: none;
     color: white;
 
-    img{
+    img {
         width: 20px;
         height: 20px;
+    }
+
+    option {
+        background-color: black;
+    }
+}
+
+#mobilLangDropdown {
+    width: 110px;
+    height: 50px;
+    align-self: center;
+    background-color: transparent;
+    border: 2px solid white;
+    border: none;
+    color: white;
+
+    img {
+        width: 20px;
+        height: 20px;
+    }
+
+    option {
+        background-color: black;
     }
 }
 
 .langue-fr {
     display: none;
 }
+
 .langue-en {
     display: block;
 }
 
-h1, h2, h3, h4, h5, h6, p, label{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+label {
     font-family: 'Roboto', sans-serif;
 }
-

@@ -91,16 +91,31 @@ h1 {
     z-index: 1;
 }
 
+@media (max-width: 600px) {
+    
+    .dot h5{
+        display: none;
+    }        
+}
+
 #dots {
     display: flex;
     justify-content: space-between;
     align-items: start;
     gap: 10px;
     position: absolute;
-    bottom: 5%;
     left: 5%;
-    width: 90%;
     z-index: 1;
+
+    @media (min-width: 600px){
+        width: 90%;
+        bottom: 5%;
+    }
+
+    @media (max-width: 600px){
+        width: 200px;
+        bottom: 20%;
+    }
 
     .divider{
         height: 4px;
