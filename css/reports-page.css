@@ -132,7 +132,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
-        gap: 50px;
+        gap: 100px;
         width: 100%;
         margin-top: 50px;
         max-width: 1500px;
@@ -140,35 +140,68 @@
 
     .report {
         width: 100%;
-        min-height: 400px;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        position: relative;
+
+        @media (min-height: 760px) {
+            min-height: 400px;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        @media (max-width: 760px) {
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
 
         .backimg {
-            z-index: -1;
-            position: absolute;
-            width: 45%;
-            height: 100%;
             object-fit: cover;
             object-position: center;
-            border-radius: 15px;
+
+            @media (min-width: 760px) {
+                z-index: -1;
+                position: absolute;
+                width: 45%;
+                height: 100%;
+                border-radius: 15px;
+            }
+
+            @media (max-width: 760px) {
+                width: 100%;
+                height: 200px;
+                border-radius: 15px 15px 0px 0px;
+            }
         }
 
         .caption {
-            min-height: 500px;
-            width: 75%;
-            margin: 50px 0 50px 30%;
-            padding: 50px;
-            border-radius: 15px;
             background-color: white;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: start;
             gap: 20px;
+            
+            @media (min-width: 760px) {
+                padding: 50px;
+                border-radius: 15px;
+                min-height: 500px;
+                width: 75%;
+                margin: 50px 0 50px 30%;
+            }
+
+            @media (max-width: 760px) {
+                border: 1px solid black;
+                padding: 20px;
+                border-radius: 0px 0px 15px 15px;
+                width: 100%;
+                .resume{
+                    display: none;
+                }
+            }
         }
+
+        
 
         h3{
             font-weight: bold;
@@ -179,6 +212,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+
+            @media (max-width: 760px) {
+                flex-wrap: wrap;
+            }
             
             p {
                 font-style: italic;
