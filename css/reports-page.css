@@ -143,6 +143,10 @@
         display: flex;
         align-items: center;
 
+        @media (max-width: 1200px) {
+            scale: 0.9;
+        }
+
         @media (min-height: 760px) {
             min-height: 400px;
             justify-content: space-between;
@@ -150,6 +154,7 @@
         }
 
         @media (max-width: 760px) {
+            scale: 1;
             justify-content: center;
             align-items: center;
             flex-direction: column;
