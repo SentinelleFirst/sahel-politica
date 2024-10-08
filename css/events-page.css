@@ -54,7 +54,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 50px 5% 30px 5%;
+    margin: 50px 5% 0px 5%;
     gap: 50px;
 }
 
@@ -126,7 +126,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    padding: 50px 5% 100px 5%;
+    padding: 0px 5% 100px 5%;
 
     .event-boxs {
         display: flex;
@@ -241,7 +241,7 @@
 
         .event-title:hover {
             .colored-div {
-                width: 60%;
+                width: 80%;
             }
         }
 

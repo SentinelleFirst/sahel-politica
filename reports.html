@@ -22,6 +22,7 @@
         <div class="menu">
             <div class="menu-left">
                 <a href="index.html"><img alt="" src="images/logo_long_blanc.svg" class="menu-logo" /></a>
+                <a href="index.html"><img alt="" src="images/favicon.svg" class="menu-logo-mobile" /></a>
                 <div class="menu-link" id="menu-link">
                     <div class="options">
 
@@ -109,8 +110,31 @@
                         src="images/search-icon.svg" alt=""></button>
             </div>
             <div class="other-filter">
-                <button class="btn btn-outline-warning" id="filter-upcomming">Upcoming Events</button>
-                <button class="btn btn-outline-warning" id="filter-past">Past Events</button>
+                <h3>Filters</h3>
+                <select id="reportCategoryFilter" title="Category">
+                    <option value="A">Category A</option>
+                    <option value="B">Category A</option>
+                    <option value="C">Category A</option>
+                    <option value="D">Category A</option>
+                </select>
+                <select id="reportYearFilter" title="Year">
+                    <option value="A">Category A</option>
+                    <option value="B">Category A</option>
+                    <option value="C">Category A</option>
+                    <option value="D">Category A</option>
+                </select>
+                <select id="reportDateStartFilter" title="Date from">
+                    <option value="A">Category A</option>
+                    <option value="B">Category A</option>
+                    <option value="C">Category A</option>
+                    <option value="D">Category A</option>
+                </select>
+                <select id="reportDateEndFilter" title="Date to">
+                    <option value="A">Category A</option>
+                    <option value="B">Category A</option>
+                    <option value="C">Category A</option>
+                    <option value="D">Category A</option>
+                </select>
             </div>
         </section>
         <section class="report-section">
@@ -328,18 +352,6 @@
             displayEvents(filteredEvents);
         });
     
-        // Event listeners for filter buttons
-        document.getElementById('filter-upcomming').addEventListener('click', () => {
-            const now = new Date();
-            const filteredEvents = reports.filter(report => new Date(report.date.seconds * 1000) > now);
-            displayEvents(filteredEvents);
-        });
-    
-        document.getElementById('filter-past').addEventListener('click', () => {
-            const now = new Date();
-            const filteredEvents = reports.filter(report => new Date(report.date.seconds * 1000) < now);
-            displayEvents(filteredEvents);
-        });
     
         document.addEventListener('DOMContentLoaded', fetchEvents);
     </script>

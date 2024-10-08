@@ -22,6 +22,7 @@
         <div class="menu">
             <div class="menu-left">
                 <a href="index.html"><img alt="" src="images/logo_long_blanc.svg" class="menu-logo" /></a>
+                <a href="index.html"><img alt="" src="images/favicon.svg" class="menu-logo-mobile" /></a>
                 <div class="menu-link" id="menu-link">
                     <div class="options">
 
@@ -291,7 +292,12 @@
     
                 let eventEndString = "";
                 if (!isSameDay(new Date(event.start.seconds * 1000), new Date(event.end.seconds * 1000))) {
-                    eventEndString = " to " + formatterMD.format(new Date(event.end.seconds * 1000));
+                    eventEndString = " - " + formatterMD.format(new Date(event.end.seconds * 1000));
+                }
+
+                let eventLink = "";
+                if (!(event.linkedinPost === "")){
+                    eventLink = 'target="_blank" href="' + event.linkedinPost + '"';
                 }
     
                 eventElement.innerHTML = `
@@ -306,7 +312,7 @@
                             <div class="divider"></div>
                             <p>${event.category}</p>
                         </div>   
-                        <a href="article.html?id=${event.id}" class="event-title">
+                        <a ${eventLink} class="event-title">
                             <div class="colored-div"></div>
                             <h3 class="langue-en">${event.title}</h3>
                             <h3 class="langue-fr">${event.titleFR}</h3>

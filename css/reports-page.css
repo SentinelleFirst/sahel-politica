@@ -103,21 +103,34 @@
 
 .other-filter {
     width: 100%;
+    min-height: 150px;
+    padding: 30px;
     max-width: 1200px;
     display: flex;
     justify-content: start;
     align-items: center;
     gap: 50px;
-
-    .btn {
-        height: 50px;
-        width: 200px;
-        border-radius: 25px;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    box-shadow: 0 50px 1000px rgba(0, 0, 0, 0.521);
+    
+    h3 {
+        width: 100%;
+        font-weight: bold;
+        color: rgba(128, 128, 128, 0.534);
+        margin-bottom: -30px;
     }
 
-    .btn.active {
-        background-color: #FACB01;
-        color: black;
+    select {
+        padding: 10px;
+        width: 170px;
+        height: 50px;
+        border-radius: 10px 10px 0px 0px;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 5px solid #FACB01;
+        background-color: #EAEAEA;
     }
 }
 
