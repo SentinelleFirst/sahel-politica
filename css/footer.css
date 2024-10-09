@@ -17,7 +17,7 @@ footer {
     }
 
     @media (min-width: 1200px) {
-        padding: 40px 15%;
+        padding: 40px 5%;
     }
 
     @media (min-width: 750px) {
@@ -147,14 +147,7 @@ footer {
     display: flex;
     justify-content: space-between;
     background-color: #FACB01;
-
-    @media (max-width: 1200px) {
-        padding: 10px 5% 10px 5%;
-    }
-
-    @media (min-width: 1200px) {
-        padding: 10px 15% 10px 15%;
-    }
+    padding: 10px 5%;
 
     @media (max-width: 550px) {
         align-items: center;
