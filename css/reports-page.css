@@ -132,18 +132,6 @@
         border-bottom: 5px solid #FACB01;
         background-color: #EAEAEA;
     }
-
-    .btn {
-        width: 40px;
-        height: 40px;
-        background-image: url("../images/filter-clear-red.svg");
-        background-position: center;
-        background-size: contain;
-    }
-
-    .btn:hover {
-        background-image: url("../images/filter-clear-white.svg");
-    }
 }
 
 .report-section {
