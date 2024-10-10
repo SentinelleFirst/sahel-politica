@@ -97,9 +97,9 @@
         <section class="hero">
             <img class="hero-img" src="images/events-hero.png" alt="">
             <div class="hero-intro">
-                <h1>Analyses et reflexions</h1>
+                <h1>In-depth analysis</h1>
                 <div class="divider"></div>
-                <h3>Explorez notre univers à travers nos articles approfondis et études de cas.</h3>
+                <h3>Explore our world through our in-depth analyses and case studies.</h3>
                 <p>Find out about all our past and upcoming reports, including conferences, webinars and workshops. Join
                     us for moments of exchange and sharing, where innovation meets collaboration.</p>
             </div>
@@ -276,14 +276,14 @@
         });
 
         function displayEvents(filteredEvents) {
-            const eventsContainer = document.getElementById('report-boxs');
-            eventsContainer.innerHTML = '';
+            const reportsContainer = document.getElementById('report-boxs');
+            reportsContainer.innerHTML = '';
 
             filteredEvents.forEach((report) => {
-                const eventElement = document.createElement('div');
-                eventElement.classList.add('report');
+                const reportElement = document.createElement('div');
+                reportElement.classList.add('report');
 
-                eventElement.innerHTML = `
+                reportElement.innerHTML = `
                     <img src="${report.imageUrl}" class="backimg">
                     <div class="caption">
                         <h3 class="langue-en">${report.title}</h3>
@@ -299,7 +299,7 @@
                         </div>
                     </div>
                 `;
-                eventsContainer.appendChild(eventElement);
+                reportsContainer.appendChild(reportElement);
             });
         }
 

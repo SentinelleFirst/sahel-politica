@@ -105,7 +105,7 @@
             border-radius: 20px;
         }
 
-        .advantage-options {
+        .advantage-advs {
             flex-direction: row !important;
             align-self: center !important;
             height: 150px !important;
@@ -120,18 +120,18 @@
             }
         }
 
-        .advantage-options1,
-        .advantage-options2,
-        .advantage-options3,
-        .advantage-options4 {
+        .advantage-advs1,
+        .advantage-advs2,
+        .advantage-advs3,
+        .advantage-advs4 {
             margin-bottom: 10px !important;
         }
 
-        .advantage-options1 {
+        .advantage-advs1 {
             margin-right: 0px !important;
         }
 
-        .advantage-options5 {
+        .advantage-advs5 {
             margin-right: 0px !important;
         }
     }
@@ -175,7 +175,7 @@
 
 
 
-    .advantage-options {
+    .advantage-advs {
         display: flex;
         justify-content: space-between;
         padding: 10px;
@@ -200,27 +200,27 @@
         }
     }
 
-    .advantage-options3 {
+    .advantage-advs3 {
         align-self: flex-start;
     }
 
-    .advantage-options2,
-    .advantage-options4 {
+    .advantage-advs2,
+    .advantage-advs4 {
         align-self: flex-end;
     }
 
-    .advantage-options1,
-    .advantage-options2,
-    .advantage-options3,
-    .advantage-options4 {
+    .advantage-advs1,
+    .advantage-advs2,
+    .advantage-advs3,
+    .advantage-advs4 {
         margin-bottom: -20px;
     }
 
-    .advantage-options1 {
+    .advantage-advs1 {
         margin-right: 150px;
     }
 
-    .advantage-options5 {
+    .advantage-advs5 {
         margin-right: 100px;
     }
 
@@ -339,7 +339,7 @@
             justify-content: space-between;
         }
 
-        .advantage-options {
+        .advantage-advs {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -442,7 +442,7 @@
         align-items: end;
     }
 
-    .advantage-options {
+    .advantage-advs {
         display: flex;
         justify-content: space-between;
         padding: 10px;

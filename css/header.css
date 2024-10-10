@@ -7,6 +7,10 @@ body {
     margin: 0;
 }
 
+.hero, #hero-events{
+    background-color: black;
+}
+
 #scrollToTopBtn {
     display: none;
     /* Masqué par défaut */
