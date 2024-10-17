@@ -144,7 +144,7 @@
                         </div>
                     </div>
                 </div>
-            </div>    
+            </div>
         </section>
         <section class="socials-section">
             <h3>Find us on social media</h3>
@@ -159,10 +159,17 @@
                         class="social-link">@sahel_politica</a>
                     <div class="posts-list" id="linkedin-posts">
                         <!--Add post heare-->
-                        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7173594059247239168" height="500" width="25%" frameborder="0" allowfullscreen="" title="Post intégré"></iframe>
+                        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7173594059247239168"
+                            frameborder="0" allowfullscreen="" title="Post intégré"></iframe>
+                        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7173594059247239168"
+                            frameborder="0" allowfullscreen="" title="Post intégré"></iframe>
+                        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7173594059247239168"
+                            frameborder="0" allowfullscreen="" title="Post intégré"></iframe>
+                        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7173594059247239168"
+                            frameborder="0" allowfullscreen="" title="Post intégré"></iframe>
                     </div>
                 </div>
-                <div class="socials-post linkedin-section">
+                <div class="socials-post twitter-section">
                     <div class="title">
                         <img src="images/social-more-icon.svg" alt="" class="social-more-icon">
                         <img src="images/social-minus-icon.svg" alt="" class="social-minus-icon">
@@ -170,11 +177,58 @@
                     </div>
                     <a href="https://x.com/SahelPolitica" target="_blank" rel="Linkdink profil"
                         class="social-link">@SahelPolitica</a>
-                    <div class="posts-list" id="linkedin-posts">
+                    <div class="posts-list" id="twitter-posts">
                         <!--Add post heare-->
+                        <div class="twitter-container">
+                            <blockquote class="twitter-tweet">
+                                <p lang="en" dir="ltr">
+                                    Our director Issaka Ouedraogo has been invited to speak at the ARI, School of
+                                    Humanities and Social Sciences, maiden workshop on Africa titled: "West Africa and
+                                    the Sahel : Understanding the Changing Landscape".
+                                    Please click on the link below to event:
+                                    <a href="https://t.co/0j7cXGtZAe">https://t.co/0j7cXGtZAe</a>
+                                </p>&mdash; Sahel Politica (@SahelPolitica)
+                                <a
+                                    href="https://twitter.com/SahelPolitica/status/1773404404743320013?ref_src=twsrc%5Etfw">March
+                                    28, 2024</a>
+                            </blockquote>
+                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </div>
+
+                        <div class="twitter-container">
+                            <blockquote class="twitter-tweet">
+                                <p lang="en" dir="ltr">
+                                    Our director Issaka Ouedraogo has been invited to speak at the ARI, School of
+                                    Humanities and Social Sciences, maiden workshop on Africa titled: "West Africa and
+                                    the Sahel : Understanding the Changing Landscape".
+                                    Please click on the link below to event:
+                                    <a href="https://t.co/0j7cXGtZAe">https://t.co/0j7cXGtZAe</a>
+                                </p>&mdash; Sahel Politica (@SahelPolitica)
+                                <a
+                                    href="https://twitter.com/SahelPolitica/status/1773404404743320013?ref_src=twsrc%5Etfw">March
+                                    28, 2024</a>
+                            </blockquote>
+                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </div>
+
+                        <div class="twitter-container">
+                            <blockquote class="twitter-tweet">
+                                <p lang="en" dir="ltr">
+                                    Our director Issaka Ouedraogo has been invited to speak at the ARI, School of
+                                    Humanities and Social Sciences, maiden workshop on Africa titled: "West Africa and
+                                    the Sahel : Understanding the Changing Landscape".
+                                    Please click on the link below to event:
+                                    <a href="https://t.co/0j7cXGtZAe">https://t.co/0j7cXGtZAe</a>
+                                </p>&mdash; Sahel Politica (@SahelPolitica)
+                                <a
+                                    href="https://twitter.com/SahelPolitica/status/1773404404743320013?ref_src=twsrc%5Etfw">March
+                                    28, 2024</a>
+                            </blockquote>
+                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </div>
                     </div>
                 </div>
-                <div class="socials-post linkedin-section">
+                <div class="socials-post youtube-section">
                     <div class="title">
                         <img src="images/social-more-icon.svg" alt="" class="social-more-icon">
                         <img src="images/social-minus-icon.svg" alt="" class="social-minus-icon">
@@ -182,7 +236,7 @@
                     </div>
                     <a href="https://www.youtube.com/@SahelPolitica_A" target="_blank" rel="Linkdink profil"
                         class="social-link">@SahelPolitica_A</a>
-                    <div class="posts-list" id="linkedin-posts">
+                    <div class="posts-list" id="youtube-posts">
                         <!--Add post heare-->
                     </div>
                 </div>
@@ -376,11 +430,11 @@
         function displayEvents(filteredEvents) {
             const articlesContainer = document.getElementById('article-boxs');
             articlesContainer.innerHTML = '';
-        
+
             filteredEvents.forEach((article) => {
                 const articleElement = document.createElement('div');
                 articleElement.classList.add('article');
-        
+
                 articleElement.innerHTML = `
                     <img src="${article.imageUrl}" alt="">
                     <div class="article-info">
@@ -395,11 +449,11 @@
                         <p>${formatter.format(new Date(article.date.seconds * 1000))}</p>
                     </div>
                 `;
-        
+
                 articlesContainer.appendChild(articleElement);
             });
         }
-        
+
 
         function populateCategoryFilter() {
             const categorySelect = document.getElementById('articleCategoryFilter');
@@ -494,16 +548,16 @@
             locale: "en",
         });
 
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             if (event.target.closest('.article-btn')) {
                 const button = event.target.closest('.article-btn');
                 const articleId = button.getAttribute('data-article-id');
 
                 console.log('Article ID:', articleId);
-        
+
                 // Trouver l'article correspondant
                 const selectedArticle = articles.find(article => article.id === articleId);
-        
+
                 if (selectedArticle) {
                     // Ajouter les détails de l'article au modal
                     const articleContentDialog = document.getElementById('article-content-dialog');
