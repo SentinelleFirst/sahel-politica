@@ -106,6 +106,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: start;
+        animation: fadeInLeft 1s forwards;
 
         @media (min-width: 810px) {
             max-width: 50%;
@@ -188,15 +189,11 @@
 /* Vidéo de fond */
 #bg-video {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 150%;
-    height: 150%;
+    width: 110%;
+    height: 110%;
     z-index: -1;
-    /* Met la vidéo derrière le contenu */
-    transform: translate(-40%, -40%);
-    /* Centre la vidéo */
     object-fit: cover;
-    /* Assure que la vidéo couvre bien tout le fond */
-    filter: brightness(0.6);
+    object-position: right;
+    filter: brightness(0.6) blur(5px);
+
 }

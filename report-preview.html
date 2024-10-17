@@ -45,7 +45,7 @@
                             </div>
                             <div class="list-options">
                                 <a href="training.html">Training & Workshops</a>
-                                <a href="services.html">Consulting</a>
+                                <a href="consulting.html">Consulting</a>
                                 <a href="">Keynote</a>
                             </div>
                         </div>
@@ -259,6 +259,28 @@
                         subtitleFR = '<h4 class="langue-fr">'+ report.subtitleFR + '</h4>';
                     }
 
+                    let pdfEN = "";
+                    if (!(report.linkPDFEN === "")) {
+                        pdfEN = `<a target="_blank" href="${report.linkPDFEN}" class="a1">
+                            <img src="images/report-download-icon.svg" alt="">
+                            <div>
+                                <h6>Download the report in english</h6>
+                                <p>2.5 MB</p>
+                            </div>
+                        </a>`;
+                    }
+
+                    let pdfFR = "";
+                    if (!(report.linkPDFFR === "")) {
+                        pdfEN = `<a target="_blank" href="${report.linkPDFFR}" class="a1">
+                            <img src="images/report-download-icon.svg" alt="">
+                            <div>
+                                <h6>Download the report in french</h6>
+                                <p>2.5 MB</p>
+                            </div>
+                        </a>`;
+                    }
+
                     reportDetails.innerHTML = `
                             <div class="report-category">
                                 <h5 class="category">--- ${report.category}</h5>
@@ -269,13 +291,8 @@
                             ${subtitle}
                             ${subtitleFR}
                             <div class="action-button">
-                                <a target="_blank" href="${report.linkPDFFR}" class="a1">
-                                    <img src="images/report-download-icon.svg" alt="">
-                                    <div>
-                                        <h6>Download the report</h6>
-                                        <p>2.5 MB</p>
-                                    </div>
-                                </a>
+                                ${pdfEN}
+                                ${pdfFR}
                                 <a target="_blank" href="" class="a2">
                                     <img src="images/report-share-icon.svg" alt="">
                                     <div>
@@ -285,7 +302,7 @@
                                 <a target="_blank" href="" class="a3">
                                     <img src="images/report-linkedin-icon.svg" alt="">
                                     <div>
-                                        <h6>See the post</h6>
+                                        <h6>Get to know more on LinkedIn</h6>
                                     </div>
                                 </a>
                             </div>

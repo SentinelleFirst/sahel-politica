@@ -32,6 +32,7 @@
         flex-direction: column;
         padding-top: 100px;
         gap: 30px;
+        animation: fadeInLeft 1s forwards;
 
         h1 {
             font-size: 48px;

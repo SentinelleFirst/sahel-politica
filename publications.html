@@ -47,7 +47,7 @@
                             </div>
                             <div class="list-options">
                                 <a href="training.html">Training & Workshops</a>
-                                <a href="services.html">Consulting</a>
+                                <a href="consulting.html">Consulting</a>
                                 <a href="">Keynote</a>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                                 <img src="images/dropdown-arrow-menu.svg" alt="">
                             </div>
                             <div class="list-options">
-                                <a href="articles.html">Events</a>
+                                <a href="events.html">Events</a>
                                 <a href="publications.html">Publications</a>
                                 <a href="reports.html">In-depth analysis</a>
                             </div>
@@ -104,20 +104,21 @@
                     prarticleion plans, crisis response and expansion strategies.</p>
             </div>
         </section>
-        <section class="blog-filter">
+        <section class="blog-filter" id="blog-filter">
             <div class="search-group">
                 <button class="btn btn-outline-warning" type="button" id="search-addon"><img
                         src="images/search-icon.svg" alt=""></button>
                 <input type="search" id="search-input" placeholder="Search" aria-label="Search"
                     aria-describedby="search-addon" />
-                <button class="btn btn-outline-warning" type="button" id="filter-addon"><img
+                <button class="btn btn-outline-warning filter-addon" type="button" id="filter-addon"><img
                         src="images/filter-icon.svg" alt=""></button>
+                <button class="btn btn-outline-warning filter-addon-active" type="button" id="filter-addon-active"><img
+                        src="images/filter-active-icon.svg" alt=""></button>
                 <div class="vertical-divider"></div>
                 <button class="btn btn-outline-warning" type="button" id="clear-addon"><img
                         src="images/close-black-icon.svg" alt=""></button>
             </div>
             <div class="other-filter">
-                <h3>Filters</h3>
                 <select id="articleCategoryFilter" title="Category">
                     <option value="" disabled selected>Choose a category</option>
                     <!-- Insérer dynamiquement les différentes catégorie -->
@@ -130,6 +131,20 @@
             <div class="article-boxs" id="article-boxs">
                 <!-- Articles will be dynamically inserted here -->
             </div>
+            <!-- articles content dialog -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="article-content-dialog">
+                            ...<!-- Articles content will be dynamically inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>    
         </section>
         <section class="socials-section">
             <h3>Find us on social media</h3>
@@ -178,10 +193,13 @@
                 <img src="images/social-code.png" class="codeimg">
                 <div class="caption">
                     <h3>Social media code of conduct</h3>
-                    <p class="resume">While digital interaction brings huge benefits, it also comes with certain risks and responsibilities. As a result, we have developed a code of conduct to ensure that behavior from Sahel politica employees is safe, positive, and truly representative of the Sahel politica brand.</p>
+                    <p class="resume">While digital interaction brings huge benefits, it also comes with certain risks
+                        and responsibilities. As a result, we have developed a code of conduct to ensure that behavior
+                        from Sahel politica employees is safe, positive, and truly representative of the Sahel politica
+                        brand.</p>
                     <div class="more-info">
-                        <a href="report-preview.html?id=${report.id}" class="report-title">See our social media code of conduct<img
-                                src="images/long-right-arrow.png"></a>
+                        <a href="report-preview.html?id=${report.id}" class="report-title">See our social media code of
+                            conduct<img src="images/long-right-arrow.png"></a>
                     </div>
                 </div>
             </div>
@@ -189,10 +207,12 @@
                 <img src="images/media-rules.png" class="codeimg">
                 <div class="caption">
                     <h3>Social media house rules</h3>
-                    <p class="resume">Our social media house rules explain the kind of behavior we expect from anyone interacting with us on social media. The aim is to keep our social media channels a pleasant experience and ensure our communities are positive, constructive, and supportive.</p>
+                    <p class="resume">Our social media house rules explain the kind of behavior we expect from anyone
+                        interacting with us on social media. The aim is to keep our social media channels a pleasant
+                        experience and ensure our communities are positive, constructive, and supportive.</p>
                     <div class="more-info">
-                        <a href="report-preview.html?id=${report.id}" class="report-title">See our social media code of conduct<img
-                                src="images/long-right-arrow.png"></a>
+                        <a href="report-preview.html?id=${report.id}" class="report-title">See our social media code of
+                            conduct<img src="images/long-right-arrow.png"></a>
                     </div>
                 </div>
             </div>
@@ -311,6 +331,20 @@
 
     </script>
     <script type="module">
+        const filterIcon = document.getElementById('filter-addon');
+        const filterActiveIcon = document.getElementById('filter-addon-active');
+        const filters = document.getElementById('blog-filter');
+
+        filterIcon.addEventListener('click', function () {
+            filters.classList.add('active');
+        });
+
+        filterActiveIcon.addEventListener('click', function () {
+            filters.classList.remove('active');
+        });
+
+    </script>
+    <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-analytics.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
@@ -341,11 +375,11 @@
         function displayEvents(filteredEvents) {
             const articlesContainer = document.getElementById('article-boxs');
             articlesContainer.innerHTML = '';
-
+        
             filteredEvents.forEach((article) => {
                 const articleElement = document.createElement('div');
                 articleElement.classList.add('article');
-
+        
                 articleElement.innerHTML = `
                     <img src="${article.imageUrl}" alt="">
                     <div class="article-info">
@@ -353,14 +387,18 @@
                             <div class="divider"></div>
                             <h6>${article.category}</h6>
                         </div>
-                        <a href='article.html?id=${articles[0].id}'><h5 class="langue-en">${article.title}</h5>
-                        <h5 class="langue-fr">${article.titleFR}</h5></a>
+                        <button type="button" class="article-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-article-id="${article.id}">
+                            <h5 class="langue-en">${article.title}</h5>
+                            <h5 class="langue-fr">${article.titleFR}</h5>
+                        </button>
                         <p>${formatter.format(new Date(article.date.seconds * 1000))}</p>
                     </div>
                 `;
+        
                 articlesContainer.appendChild(articleElement);
             });
         }
+        
 
         function populateCategoryFilter() {
             const categorySelect = document.getElementById('articleCategoryFilter');
@@ -453,6 +491,31 @@
         flatpickr("#articleDateEndFilter", {
             dateFormat: "Y-m-d",
             locale: "en",
+        });
+
+        document.addEventListener('click', function(event) {
+            if (event.target.closest('.article-btn')) {
+                const button = event.target.closest('.article-btn');
+                const articleId = button.getAttribute('data-article-id');
+
+                console.log('Article ID:', articleId);
+        
+                // Trouver l'article correspondant
+                const selectedArticle = articles.find(article => article.id === articleId);
+        
+                if (selectedArticle) {
+                    // Ajouter les détails de l'article au modal
+                    const articleContentDialog = document.getElementById('article-content-dialog');
+                    articleContentDialog.innerHTML = `
+                        <img src="${selectedArticle.imageUrl}" alt="${selectedArticle.title}" class="article-dialog-img">
+                        <div>
+                            <h3>${selectedArticle.title}</h3>
+                            <p>${formatter.format(new Date(selectedArticle.date.seconds * 1000))}</p>
+                            <p>${selectedArticle.content}</p>
+                        </div>
+                    `;
+                }
+            }
         });
 
         document.addEventListener('DOMContentLoaded', fetchEvents);
