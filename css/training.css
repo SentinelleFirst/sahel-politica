@@ -1,3 +1,67 @@
+.btn-three {
+    color: #FFF;
+    transition: all 0.5s;
+    position: relative;
+    width: 300px;
+    height: 50px;
+}
+
+.btn-three h6 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-three img {
+    opacity: 0.8;
+    margin-left: 0px;
+    width: 0px;
+    transition: all 0.3s;
+}
+
+.btn-three::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: #FACB01;
+    transition: all 0.3s;
+}
+
+.btn-three:hover::before {
+    opacity: 0;
+    transform: scale(0.5, 0.5);
+}
+
+.btn-three:hover img {
+    margin-left: 20px;
+    width: 25px;
+}
+
+.btn-three::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.3s;
+    border: 1px solid #FACB01;
+    transform: scale(1.2, 1.2);
+}
+
+.btn-three:hover::after {
+    opacity: 1;
+    transform: scale(1, 1);
+}
+
 .hero {
     z-index: 1;
     width: 100%;
@@ -5,65 +69,44 @@
     position: relative;
     color: white;
     display: flex;
-    align-items: end;
+    align-items: center;
+    justify-content: start;
 
 
 
     .hero-img {
-        z-index: -2;
+        position: absolute;
+        z-index: -1;
         width: 100%;
         height: 100%;
         object-fit: cover;
         object-position: right;
-        filter: brightness(0.4);
-    }
-
-    .trapez-yellow {
-        position: absolute;
-        opacity: 0.66;
-        z-index: -1;
-        width: 70%;
-        height: 100%;
-        background-color: #646400;
-        object-fit: cover;
-        object-position: right;
-        clip-path: polygon(0% 0%, 100% 0%, 70% 100%, 0% 100%);
+        filter: brightness(0.3);
     }
 
     .hero-intro {
-        position: absolute;
-        max-width: 800px;
+        max-width: 55%;
         margin: 0 5%;
-        height: 600px;
         display: flex;
         flex-direction: column;
-        padding-top: 100px;
         animation: fadeInLeft 1s forwards;
+        gap: 30px;
 
         h3 {
-            margin-bottom: 30px;
             font-size: 36px;
             font-weight: bold;
         }
 
         h1 {
-            margin-bottom: 30px;
             font-size: 48px;
             font-weight: bold;
         }
 
         p {
-            margin-bottom: 30px;
-            max-width: 500px;
             font-size: 20px;
             font-weight: 500;
             font-weight: bold;
         }
-    }
-
-    button {
-        width: 200px;
-        margin: 20px 0px;
     }
 }
 
@@ -73,190 +116,106 @@
     padding: 50px 5%;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 
     .divider {
-        width: 350px;
+        min-width: 350px;
+        width: 70%;
         height: 6px;
         background-color: black;
         border-radius: 3px;
-        margin: 30px 0;
-    }
-
-    @media (max-width: 770px) {
-        flex-direction: column;
-
-        .text {
-            max-width: 100% !important;
-        }
-    }
-
-    @media (max-width: 1000px) {
-        .glob {
-            display: none;
-        }
-
-        p {
-            display: flex;
-            flex-direction: column;
-            background-image: url('../images/home-page-carroussel-3.png');
-            padding: 30px;
-            min-height: 300px;
-            justify-content: center;
-            color: white;
-            border-radius: 20px;
-        }
-
-        .advantage-advs {
-            flex-direction: row !important;
-            align-self: center !important;
-            height: 150px !important;
-            width: 300px !important;
-
-            img {
-                margin-right: 20px;
-            }
-
-            h6 {
-                text-align: start !important;
-            }
-        }
-
-        .advantage-advs1,
-        .advantage-advs2,
-        .advantage-advs3,
-        .advantage-advs4 {
-            margin-bottom: 10px !important;
-        }
-
-        .advantage-advs1 {
-            margin-right: 0px !important;
-        }
-
-        .advantage-advs5 {
-            margin-right: 0px !important;
-        }
     }
 
     .text {
         min-width: 350px;
-        max-width: 500px;
+        max-width: calc(50% - 160px);
         margin-right: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
 
         h1 {
             font-weight: bold;
         }
 
         p {
-            max-width: 500px;
             font-weight: bold;
             font-size: 20px;
         }
-    }
 
-    .advantages {
-        position: relative;
-        margin-left: 20px;
-        height: 500px;
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        .glob {
-            z-index: -1;
-            position: absolute;
-            object-fit: cover;
-            object-position: center;
-            width: 350px;
-            height: 350px;
-            border-radius: 175px;
+        .paragraphe {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
         }
     }
 
+    .glob {
+        z-index: -1;
+        position: absolute;
+        object-fit: cover;
+        object-position: center;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 
+    .advantages {
+        height: 100%;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        gap: 10px;
+    }
 
     .advantage-advs {
         display: flex;
-        justify-content: space-between;
-        padding: 10px;
-        border: #EAEAEA 4px solid;
-        border-radius: 20px;
         align-items: center;
-        align-content: center;
-        flex-direction: column;
-        height: 150px;
-        width: 200px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        background-color: white;
+        width: 80%;
+
+        h3 {
+            width: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            font-weight: bold;
+            color: white;
+            background-color: #FACB01;
+            border-radius: 25px;
+            animation: zoomIn 0.7s forwards;
+        }
 
         img {
-            width: 30px;
-            height: 30px;
+            width: 60px;
+            margin-left: -2px;
+            animation: zoomInLeft 0.7s forwards;
         }
 
         h6 {
             font-weight: bold;
             text-align: center;
+            padding: 15px 30px;
+            border-radius: 15px;
+            margin-left: 10px;
+            box-shadow: 2px 5px 4px rgba(0, 0, 0, 0.2);
+            background-color: rgba(0, 0, 0, 0.062);
+            animation: slideInRight 0.7s forwards;
         }
+    }
+    .advantage-advs2,
+    .advantage-advs4 {
+        margin-left: 10%;
     }
 
     .advantage-advs3 {
-        align-self: flex-start;
-    }
-
-    .advantage-advs2,
-    .advantage-advs4 {
-        align-self: flex-end;
-    }
-
-    .advantage-advs1,
-    .advantage-advs2,
-    .advantage-advs3,
-    .advantage-advs4 {
-        margin-bottom: -20px;
-    }
-
-    .advantage-advs1 {
-        margin-right: 150px;
-    }
-
-    .advantage-advs5 {
-        margin-right: 100px;
-    }
-
-    button {
-        width: 200px;
-        color: white;
-        background-color: #929200;
-        border: none;
-    }
-}
-
-@media (max-width: 1000px) {
-    #training2 {
-        flex-direction: column-reverse;
-
-        .text {
-            margin-left: 0px !important;
-            align-items: center !important;
-
-            h1 {
-                text-align: center !important;
-            }
-
-            p {
-                text-align: center !important;
-            }
-        }
-    }
-
-    .btn1 {
-        display: none !important;
-    }
-
-    .btn2 {
-        display: block !important;
+        margin-left: 20%;
     }
 }
 
@@ -832,7 +791,7 @@
         overflow: hidden;
     }
 
-    .faq-item-first{
+    .faq-item-first {
         border-top: 1px solid black;
     }
 
