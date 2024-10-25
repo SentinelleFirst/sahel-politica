@@ -202,10 +202,6 @@ main {
         gap: 30px;
         text-align: justify;
 
-        h3 {
-            
-        }
-
         p {
             font-size: 18px;
         }
@@ -251,10 +247,6 @@ main {
         flex-direction: column;
         gap: 15px;
         padding: 30px;
-
-        h5 {
-            
-        }
 
         button {
             text-decoration: none;
@@ -325,10 +317,6 @@ main {
     align-items: start;
     gap: 30px;
     padding: 50px 5%;
-
-    h3 {
-        
-    }
 
     .socials-list {
         width: 100%;
@@ -548,10 +536,6 @@ main {
         }
 
 
-
-        h3 {
-            
-        }
 
         .more-info {
             width: 100%;
