@@ -94,18 +94,18 @@
 
         h3 {
             font-size: 36px;
-            font-weight: bold;
+            
         }
 
         h1 {
             font-size: 48px;
-            font-weight: bold;
+            
         }
 
         p {
             font-size: 20px;
             font-weight: 500;
-            font-weight: bold;
+            
         }
     }
 }
@@ -135,11 +135,11 @@
         gap: 30px;
 
         h1 {
-            font-weight: bold;
+            
         }
 
         p {
-            font-weight: bold;
+            
             font-size: 20px;
         }
 
@@ -185,7 +185,7 @@
             justify-content: center;
             align-items: center;
             height: 50px;
-            font-weight: bold;
+            
             color: white;
             background-color: #FACB01;
             border-radius: 25px;
@@ -199,7 +199,7 @@
         }
 
         h6 {
-            font-weight: bold;
+            
             text-align: center;
             padding: 15px 30px;
             border-radius: 15px;
@@ -238,12 +238,12 @@
         align-items: end;
 
         h1 {
-            font-weight: bold;
+            
             text-align: end;
         }
 
         p {
-            font-weight: bold;
+            
             font-size: 20px;
             text-align: end;
         }
@@ -319,7 +319,7 @@
             }
 
             h6 {
-                font-weight: bold;
+                
                 text-align: center;
             }
         }
@@ -379,12 +379,12 @@
 
 
         h1 {
-            font-weight: bold;
+            
             margin: 0 30px;
         }
 
         p {
-            font-weight: bold;
+            
             font-size: 22px;
             margin: 0 30px;
             width: 80%;
@@ -422,7 +422,7 @@
         }
 
         h6 {
-            font-weight: bold;
+            
         }
     }
 
@@ -446,12 +446,12 @@
     justify-content: space-between;
 
     h1 {
-        font-weight: bold;
+        
     }
 
     p,
     li {
-        font-weight: bold;
+        
         font-size: 22px;
     }
 
@@ -465,7 +465,7 @@
 
 
             h1 {
-                font-weight: bold;
+                
                 text-align: center;
                 width: 60%;
             }
@@ -516,7 +516,7 @@
         align-items: start;
 
         h1 {
-            font-weight: bold;
+            
             max-width: 600px;
             z-index: 1;
             margin: 30px;
@@ -649,7 +649,7 @@
     }
 
     h1 {
-        font-weight: bold;
+        
     }
 
     p {
@@ -673,7 +673,7 @@
         align-items: start;
 
         h1 {
-            font-weight: bold;
+            
             max-width: 600px;
         }
     }
@@ -764,7 +764,7 @@
         margin-bottom: 50px;
 
         h1 {
-            font-weight: bold;
+            
             max-width: 600px;
         }
     }
@@ -805,7 +805,7 @@
         align-items: center;
 
         h5 {
-            font-weight: bold;
+            
             font-size: 17px;
             width: 600px;
         }

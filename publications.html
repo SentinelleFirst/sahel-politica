@@ -510,6 +510,12 @@
             displayEvents(filteredEvents);
         }
 
+        function getArticleIdFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('id');
+        }
+
+
         // Écouteurs d'événements pour les filtres
         document.getElementById('articleCategoryFilter').addEventListener('change', applyFilters);
         document.getElementById('articleDateStartFilter').addEventListener('change', applyFilters);
@@ -528,10 +534,41 @@
                 populateCategoryFilter();
 
                 displayEvents(articles);
+
+                // Après avoir récupéré tous les articles, trouver l'article correspondant à l'ID dans l'URL
+                const articleIdFromUrl = getArticleIdFromUrl();
+                if (articleIdFromUrl) {
+                    displayArticleInDialog(articleIdFromUrl);
+                }
+
             } catch (error) {
                 console.error("Error fetching articles: ", error);
             }
         }
+
+        function displayArticleInDialog(articleId) {
+            const selectedArticle = articles.find(article => article.id === articleId);
+        
+            if (selectedArticle) {
+                // Ajouter les détails de l'article au modal
+                const articleContentDialog = document.getElementById('article-content-dialog');
+                articleContentDialog.innerHTML = `
+                    <img src="${selectedArticle.imageUrl}" alt="${selectedArticle.title}" class="article-dialog-img">
+                    <div>
+                        <h3>${selectedArticle.title}</h3>
+                        <p>${formatter.format(new Date(selectedArticle.date.seconds * 1000))}</p>
+                        <p>${selectedArticle.content}</p>
+                    </div>
+                `;
+        
+                // Afficher le modal
+                const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+                modal.show();
+            } else {
+                console.error('Article not found for ID:', articleId);
+            }
+        }
+        
 
         document.getElementById('search-addon').addEventListener('click', () => {
             applyFilters();

@@ -44,14 +44,14 @@
 
     .date {
         color: #848404;
-        font-weight: bold;
+        
     }
 }
 
 h1, h4 {
     width: 90%;
     text-align: center;
-    font-weight: bold;
+    
 }
 
 h1{
@@ -74,14 +74,14 @@ h4{
     }
 
     h3 {
-        font-weight: bold;
+        
         text-align: center;
         margin: 50px 0px 20px 0px;
     }
 
     h6 {
         
-        font-weight: bold;
+        
         text-align: start;
         width: 100%;
         margin: 30px 0px 10px 0px;
@@ -132,7 +132,7 @@ h4{
             justify-content: space-around;
 
             h6 {
-                font-weight: bold;
+                
             }
         }
     }

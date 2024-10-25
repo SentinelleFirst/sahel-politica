@@ -36,12 +36,12 @@
         animation: fadeInLeft 1s forwards;
 
         h3 {
-            font-weight: bold;
+            
         }
 
         p {
             margin-bottom: 30px;
-            font-size: 17px;
+            font-size: 20px;
             font-weight: 500;
             text-align: justify;
         }
@@ -173,12 +173,12 @@ a {
             justify-content: center;
 
             h3 {
-                font-weight: bold;
+                
             }
 
             p {
                 margin-bottom: 30px;
-                font-size: 17px;
+                font-size: 20px;
                 font-weight: 500;
                 text-align: justify;
             }
@@ -213,7 +213,7 @@ a {
         justify-content: space-between;
 
         h3 {
-            font-weight: bold;
+            
         }
 
         p {
@@ -292,7 +292,7 @@ a {
         }
 
         h6 {
-            font-weight: bold;
+            
             font-size: 18px;
         }
 
@@ -333,7 +333,7 @@ a {
                 }
 
                 h3 {
-                    font-weight: bold;
+                    
                 }
 
                 p {
@@ -397,7 +397,7 @@ a {
                 }
 
                 h3 {
-                    font-weight: bold;
+                    
                 }
 
                 p {
@@ -473,6 +473,10 @@ a {
         height: 35%;
         padding: 20px;
         cursor: pointer;
+
+        P {
+            font-size: 20px;
+        }
 
         div {
             display: flex;
@@ -551,7 +555,7 @@ a {
         }
 
         h3 {
-            font-weight: bold;
+            
         }
 
         .client-info {
@@ -577,7 +581,7 @@ a {
         }
 
         h5 {
-            font-weight: bold;
+            
         }
 
         p {

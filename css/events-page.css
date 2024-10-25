@@ -36,12 +36,12 @@
 
         h1 {
             font-size: 48px;
-            font-weight: bold;
+            
         }
 
         h3 {
             font-size: 36px;
-            font-weight: bold;
+            
         }
 
         p {
@@ -180,12 +180,12 @@
 
         .date {
             font-size: 30px;
-            font-weight: bold;
+            
         }
 
         .year {
             font-size: 40px;
-            font-weight: bold;
+            
         }
 
         .fuso {

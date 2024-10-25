@@ -121,12 +121,12 @@
         animation: fadeInLeft 1s forwards;
 
         h3 {
-            font-weight: bold;
+            
         }
 
         h1 {
             margin-bottom: 30px;
-            font-weight: bold;
+            
         }
 
         p {
@@ -219,7 +219,7 @@ a {
             align-items: center;
 
             h3 {
-                font-weight: bold;
+                
             }
 
             .divider {
@@ -232,7 +232,7 @@ a {
 
         h1 {
             font-size: 25px;
-            font-weight: bold;
+            
         }
 
         p {
@@ -273,7 +273,7 @@ a {
 
                     h5 {
                         width: 200px;
-                        font-weight: bold;
+                        
                     }
 
                     img {
@@ -325,11 +325,11 @@ a {
 
             h1 {
                 font-size: 25px;
-                font-weight: bold;
+                
             }
 
             h3 {
-                font-weight: bold;
+                
                 color: #848404;
             }
         }
@@ -480,7 +480,7 @@ a {
                     align-items: start;
 
                     h5 {
-                        font-weight: bold;
+                        
                     }
 
                     p {
@@ -523,7 +523,7 @@ a {
 
         h3 {
             width: 300px;
-            font-weight: bold;
+            
             color: #848404;
         }
 
@@ -558,7 +558,7 @@ a {
             h1, h3 {
                 margin: 30px;
                 position: absolute;
-                font-weight: bold;
+                
                 z-index: 2;
                 top: 15%;
                 color: white;
@@ -733,7 +733,7 @@ a {
 
                         h5 {
                             width: 200px;
-                            font-weight: bold;
+                            
                         }
 
                         img {
@@ -849,7 +849,7 @@ a {
                 align-items: start;
 
                 h5 {
-                    font-weight: bold;
+                    
                 }
 
                 p {
@@ -882,7 +882,7 @@ a {
             align-items: center;
 
             h3 {
-                font-weight: bold;
+                
             }
 
             .divider {
@@ -895,7 +895,7 @@ a {
 
         h1 {
             font-size: 25px;
-            font-weight: bold;
+            
         }
 
         p {
@@ -931,7 +931,7 @@ a {
         margin-bottom: 50px;
 
         h1 {
-            font-weight: bold;
+            
             max-width: 600px;
         }
     }
@@ -972,7 +972,7 @@ a {
         align-items: center;
 
         h5 {
-            font-weight: bold;
+            
             width: 600px;
         }
 
