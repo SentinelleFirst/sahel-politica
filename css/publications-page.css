@@ -393,14 +393,32 @@ main {
     iframe {
         height: 0px;
         transition: all 1.1s ease;
-        width: 24%;
+        width: 33%;
         margin-bottom: 0px;
+    }
+}
+
+.youtube-section {
+    iframe {
+        height: 0px;
+        transition: all 1.1s ease;
+        width: 45%;
+        margin-bottom: 0px;
+        border-radius: 20px;
+        overflow: hidden;
     }
 }
 
 .linkedin-section.open {
     iframe {
-        height: 500px;
+        height: 700px;
+        margin-bottom: 30px;
+    }
+}
+
+.youtube-section.open {
+    iframe {
+        height: 315px;
         margin-bottom: 30px;
     }
 }
