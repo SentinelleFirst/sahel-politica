@@ -6,6 +6,75 @@ footer {
     background-color: black;
 }
 
+.footer-logo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 1200px) {
+        padding: 30px 5%;
+    }
+
+    @media (min-width: 1200px) {
+        padding: 40px 5%;
+    }
+
+    @media (min-width: 870px) {
+        justify-content: start;
+    }
+
+    @media (max-width: 870px) {
+        justify-content: center;
+    }
+
+    img {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+.footer-permalinks {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    gap: 50px;
+
+    @media (max-width: 1200px) {
+        padding: 30px 5%;
+    }
+
+    @media (min-width: 1200px) {
+        padding: 10px 5%;
+    }
+
+    @media (max-width: 870px) {
+        flex-direction: column-reverse;
+        
+        h2 {
+            margin-top: 50px;
+            align-self: self-start;
+        }
+    }
+
+    .permalinks {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+
+        a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 700;
+            align-items: center;
+        }
+    }
+}
+
 .footer-content {
     width: 100%;
     display: flex;
@@ -40,20 +109,11 @@ footer {
 
     @media (min-width: 750px) {
         max-width: 500px;
-
-        img {
-            width: 400px;
-        }
     }
 
     @media (max-width: 750px) {
         width: 100%;
         max-width: 100%;
-
-        img {
-            align-self: center;
-            width: 300px;
-        }
     }
 
     p {
@@ -83,10 +143,6 @@ footer {
         max-width: 500px;
         align-items: end;
 
-        .permalinks {
-            justify-content: end;
-        }
-
         .list-info {
             align-items: end;
         }
@@ -97,26 +153,8 @@ footer {
         width: 100%;
         align-items: center;
 
-        .permalinks {
-            justify-content: center;
-        }
-
         .list-info {
             align-items: center;
-        }
-    }
-
-    .permalinks {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 20px;
-
-        a {
-            color: white;
-            text-decoration: none;
-            font-size: 20px;
-            font-weight: 700;
         }
     }
 
