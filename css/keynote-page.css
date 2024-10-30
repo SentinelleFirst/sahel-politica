@@ -517,12 +517,23 @@
             justify-content: start;
             gap: 50px;
             color: white;
-            background-color: black;
-            border-radius: 10px;
 
             p {
                 font-size: 22px;
             }
+        }
+
+        .packages1 {
+            background-color: #032C4A;
+            border-radius: 100px 5px 100px 5px;
+        }
+        .packages2 {
+            background-color: #124140;
+            border-radius: 20px;
+        }
+        .packages3 {
+            background-color: black;
+            border-radius: 5px 100px 5px 100px;
         }
     }
 }
