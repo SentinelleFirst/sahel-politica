@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" id="article-medium">
+  <rect width="256" height="256" fill="none"></rect>
+  <line x1="24.012" x2="40.012" y1="56.001" y2="56.001" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+  <line x1="120.012" x2="136.012" y1="56.001" y2="56.001" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+  <line x1="24.012" x2="48.012" y1="136.001" y2="136.001" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+  <line x1="112.012" x2="136.012" y1="136.001" y2="136.001" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+  <line x1="168.012" x2="240.012" y1="104.001" y2="104.001" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+  <line x1="168.012" x2="240.012" y1="136.001" y2="136.001" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+  <line x1="72.012" x2="240.012" y1="168.001" y2="168.001" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+  <line x1="72.012" x2="240.012" y1="200.001" y2="200.001" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+  <polyline fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" points="40.012 136.001 40.012 56.001 80.012 120.001 120.012 56.001 120.012 136.001"></polyline>
+</svg>

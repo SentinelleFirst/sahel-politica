@@ -521,6 +521,22 @@
             p {
                 font-size: 22px;
             }
+
+            a {
+                margin-top: auto;
+                z-index: 3;
+                width: 100%;
+
+                .btn {
+                    width: 100%;
+                }
+            }
+
+            .btn:hover {
+                h6{
+                    color: white !important;
+                }
+            }
         }
 
         .packages1 {

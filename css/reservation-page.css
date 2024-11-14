@@ -1,0 +1,331 @@
+main {
+    background-color: black;
+}
+
+.hero {
+    z-index: 1;
+    width: 100%;
+    height: 900px;
+    position: relative;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: start;    
+
+    .hero-img {
+        position: absolute;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: bottom;
+        filter: brightness(0.3);
+    }
+
+    .hero-intro {
+        max-width: 70%;
+        margin: 0 10%;
+        display: flex;
+        flex-direction: column;
+        animation: fadeInLeft 1s forwards;
+        gap: 30px;
+
+        h1 {
+            font-size: 48px;
+
+        }
+
+        .divider {
+            width: 80%;
+            height: 5px;
+            border-radius: 50%;
+            background-color: white;
+        }
+
+        h3 {
+            font-size: 36px;
+        }
+    }
+}
+
+.general-bloc-title {
+    color: white;
+    margin: 100px 10% 20px 10%;
+}
+
+/* Changer la couleur du texte dans la liste des indicatifs */
+.iti__country-list {
+    color: #000000; /* Couleur du texte des indicatifs (ici noir) */
+}
+
+/* Changer la couleur du texte dans l'élément sélectionné */
+.iti__selected-flag {
+    color: #000000; /* Couleur du texte pour l'indicatif sélectionné */
+}
+
+/* Changer la couleur du texte pour l'indicatif actif lors du survol */
+.iti__country:hover {
+    color: #ff0000; /* Couleur du texte au survol (ici rouge) */
+}
+
+.question-bocs-item.hide {
+    display: none !important;
+}
+
+.general-questions {
+    background-color: black;
+    width: 100%;
+    height: 600px;
+    padding: 50px 10%;
+    position: relative;
+
+    .progress-bar {
+        position: absolute;
+        padding: 0 30px;
+        width: 80%;
+        height: 30px;
+        background-color: white;
+        border-radius: 30px 30px 0 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: start;
+    }
+
+    .progress-steps {
+        width: 20%;
+        height: 6px;
+        border-radius: 3px;
+    }
+
+    .progress-steps.active {
+        background-color: #FACB01;
+    }
+
+}
+.question-boxs.active {
+    display: flex;
+}
+
+h1.consulting-bloc,
+h1.training-bloc,
+h1.keynote-bloc{
+    color: white;
+    margin: 50px 10% 20px 10%;
+}
+.consulting-bloc .progress-steps,
+.training-bloc .progress-steps {
+    width: 50%;
+}
+
+.keynote-bloc .progress-steps {
+    width: 25%;
+}
+
+.consulting-bloc,
+.training-bloc,
+.keynote-bloc {
+    animation: fadeInDown 1s forwards;
+}
+
+
+
+.question-boxs {
+    background-color: black;
+    margin-top: 6px;
+    color: white;
+    width: 80%;
+    height: 500px;
+    border-radius: 30px;
+    box-shadow: 3px 3px 30px #c9c9c9bb;
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    padding: 0px 8%;
+    gap: 20px;
+
+    .question {
+        font-size: 30px;
+        font-weight: bold;
+
+        span {
+            margin-right: 30px;
+        }
+    }
+
+    .question-detail {
+        gap: 30px;
+        font-size: 20px;
+        width: 70%;
+        max-width: 1000px;
+        font-weight: 100;
+        margin-left: 80px;
+    }
+
+    .info-fil {
+        width: 70%;
+        max-width: 1000px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        margin-left: 80px;
+
+        select{
+            height: 70px;
+            border-radius: 10px;
+            background-color: black;
+            border: none;
+            border-bottom: 3px solid #ffffff;
+            padding: 20px;
+            width: 100%;
+            color: white;
+            font-size: 20px;
+            transition: all 0.4s ease;
+        }
+
+        input {
+            height: 70px;
+            border-radius: 10px;
+            background-color: black;
+            border: none;
+            border-bottom: 3px solid #ffffff;
+            padding: 20px;
+            width: 100%;
+            color: white;
+            font-size: 20px;
+            transition: all 0.4s ease;
+        }
+
+        input:focus {
+            border: solid 2px white;
+        }
+
+        .date-picker {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            input {
+                width: 40%;
+            }
+
+            p{
+                font-size: 25px;
+                height: 70px;
+                display: flex;
+                justify-content: center;
+                align-items: end;
+            }
+        }
+
+        .btn-next, .btn-submit {
+            background-color: #FACB01;
+            color: black;
+            height: 44px;
+            border-radius: 22px;
+            font-size: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-next {
+            width: 85px;
+        }
+
+        .btn-submit {
+            width: 130px;
+        }
+
+        .btn:hover {
+            box-shadow: 0px 0px 20px #FACB01;
+        }
+    }
+
+    .steps-buttons {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: end;
+        align-items: end;
+        gap: 30px;
+
+        p {
+            font-size: 25px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            object-position: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 50%;
+        }
+
+        img:hover {
+            box-shadow: 0px 0px 20px white;
+        }
+    }
+}
+
+[data-service] {
+    display: none; /* Cache tous les blocs de service au chargement */
+}
+
+#confirmation-message.validate {
+    display: flex;
+}
+
+#confirmation-message {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    background-color: black;
+    padding: 50px 10%;
+    color: white;
+    text-align: center;
+    width: 100%;
+    min-height: 100vh;
+
+    p {
+        font-size: 25px;
+    }
+
+    .redirection {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 30px;
+        justify-content: center;
+
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+        height: 60px;
+        width: 200px;
+        background-color: #FACB01;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 30px;
+        transition: all 0.4s ease;
+    }
+
+    a:hover {
+        color: white;
+        box-shadow: 0px 0px 15px #FACB01;
+    }
+}

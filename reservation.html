@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation</title>
+    <link rel="icon" href="images/favicon.svg" type="image/png">
+    <link href="css/reservation-page.css" rel="stylesheet">
+    <link href="css/footer.css" rel="stylesheet">
+    <link href="css/header.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+</head>
+
+<body>
+    <header>
+        <div class="menu">
+            <div class="menu-left">
+                <a href="index.html"><img alt="" src="images/logo_long_blanc.svg" class="menu-logo" /></a>
+                <a href="index.html"><img alt="" src="images/favicon.svg" class="menu-logo-mobile" /></a>
+                <div class="menu-link" id="menu-link">
+                    <div class="options">
+
+                        <div class="menu-option">
+                            <div class="option-title">
+                                <p>Who we are</p>
+                                <img src="images/dropdown-arrow-menu.svg" alt="">
+                            </div>
+                            <div class="list-options">
+                                <a href="about-us.html">About us</a>
+                                <a href="about-us.html#team">Our team</a>
+                                <a href="about-us.html#clients">Partners</a>
+                            </div>
+                        </div>
+
+                        <div class="menu-option">
+                            <div class="option-title">
+                                <p>What we do</p>
+                                <img src="images/dropdown-arrow-menu.svg" alt="">
+                            </div>
+                            <div class="list-options">
+                                <a href="training.html">Training & Workshops</a>
+                                <a href="consulting.html">Consulting</a>
+                                <a href="keynote.html">Keynote</a>
+                            </div>
+                        </div>
+
+                        <div class="menu-option">
+                            <div class="option-title">
+                                <p>News</p>
+                                <img src="images/dropdown-arrow-menu.svg" alt="">
+                            </div>
+                            <div class="list-options">
+                                <a href="events.html">Events</a>
+                                <a href="publications.html">Publications</a>
+                                <a href="reports.html">In-depth analysis</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-global">
+                        <a href="contact.html"><img src="images/footer-icon-phone.svg" alt="">Contact us</a>
+                        <div class="lang-btn">
+                            <img src="images/glob-icon.svg" alt="">
+                            <select id="mobilLangDropdown" title="Choose a language">
+                                <option class="option" value="en">Global - EN</option>
+                                <option class="option" value="fr">Global - FR</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-end">
+                <div class="menu-global">
+                    <a href="contact.html">Contact us</a>
+                    <select id="desktopLangDropdown" title="Choose a language">
+                        <option class="option" value="en">Global - EN</option>
+                        <option class="option" value="fr">Global - FR</option>
+                    </select>
+                </div>
+                <div class="menu-button">
+                    <img id="menu-search-icon" src="images/menu-search-icon.svg" alt="">
+                    <img id="menu-open" src="images/menu-icon.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <img class="hero-img" src="images/reservation-hero.png" alt="">
+            <div class="hero-intro">
+                <h1>Take an appointment</h1>
+                <div class="divider"></div>
+                <h3>We will get back to you within 10 hours</h3>
+            </div>
+        </section>
+        <section id="confirmation-message">
+            <h2>Thank you for your submission, <span class="displayName"></span> !</h2>
+            <p>We have received your request and a member of our team will deal with it as soon as possible. You will be
+                contacted shortly for further details. In the meantime, please feel free to explore our other services
+                or contact us with any questions you may have.</p>
+            <div class="redirection">
+                <a href="consulting.html">Consulting</a>
+                <a href="training.html">Training</a>
+                <a href="keynote.html">Keynote</a>
+                <a href="events.html">Events</a>
+                <a href="publications.html">Publications</a>
+                <a href="reports.html">In-depth analysis</a>
+            </div>
+        </section>
+        <h1 class="question-bocs-item general-bloc-title">GENERAL INFO</h1>
+        <section class="question-bocs-item general-questions">
+            <div class="progress-bar">
+                <div class="progress-steps active"></div>
+                <div class="progress-steps"></div>
+                <div class="progress-steps"></div>
+                <div class="progress-steps"></div>
+                <div class="progress-steps"></div>
+                <div class="progress-steps"></div>
+                <div class="progress-steps"></div>
+                <div class="progress-steps"></div>
+            </div>
+            <div class="question-boxs active">
+                <p class="question">1 <span style="color: #FACB01;">•</span> What is your name ?</p>
+                <div class="info-fil">
+                    <input type="name" class="form-control" id="nameReservation" placeholder="John">
+                    <button type="button" class="btn btn-outline-warning btn-next">OK</button>
+                </div>
+                <div class="steps-buttons">
+                    <img src="images/reservation-left-arrow-questions-icon.png" alt="">
+                    <p>1 / 7</p>
+                    <img src="images/reservation-right-arrow-questions-icon.png" alt="">
+                </div>
+            </div>
+            <div class="question-boxs">
+                <p class="question">2 <span style="color: #FACB01;">•</span> What is your lastname, <span
+                        class="displayName"></span>?</p>
+                <div class="info-fil">
+                    <input type="lastname" class="form-control" id="lastNameReservation" placeholder="Doe">
+                    <button type="button" class="btn btn-outline-warning btn-next">OK</button>
+                </div>
+                <div class="steps-buttons">
+                    <img src="images/reservation-left-arrow-questions-icon.png" alt="">
+                    <p>2 / 7</p>
+                    <img src="images/reservation-right-arrow-questions-icon.png" alt="">
+                </div>
+            </div>
+            <div class="question-boxs">
+                <p class="question">3 <span style="color: #FACB01;">•</span> What is the name of your company, <span
+                        class="displayName"></span>?</p>
+                <div class="info-fil">
+                    <input type="" class="form-control" id="companyNameReservation" placeholder="Sahel Politica ...">
+                    <button type="button" class="btn btn-outline-warning btn-next">OK</button>
+                </div>
+                <div class="steps-buttons">
+                    <img src="images/reservation-left-arrow-questions-icon.png" alt="">
+                    <p>3 / 7</p>
+                    <img src="images/reservation-right-arrow-questions-icon.png" alt="">
+                </div>
+            </div>
+            <div class="question-boxs">
+                <p class="question">4 <span style="color: #FACB01;">•</span> What is your position in the company ?<span
+                        class="displayName"></span>?</p>
+                <div class="info-fil">
+                    <input type="" class="form-control" id="postReservation" placeholder="Administration...">
+                    <button type="button" class="btn btn-outline-warning btn-next">OK</button>
+                </div>
+                <div class="steps-buttons">
+                    <img src="images/reservation-left-arrow-questions-icon.png" alt="">
+                    <p>4 / 7</p>
+                    <img src="images/reservation-right-arrow-questions-icon.png" alt="">
+                </div>
+            </div>
+            <div class="question-boxs">
+                <p class="question">5 <span style="color: #FACB01;">•</span> How can we reach you by phone ?</p>
+                <div class="info-fil">
+                    <input id="phoneNumberReservation" type="tel" class="form-control">
+                    <button type="button" class="btn btn-outline-warning btn-next">OK</button>
+                </div>
+                <div class="steps-buttons">
+                    <img src="images/reservation-left-arrow-questions-icon.png" alt="">
+                    <p>5 / 7</p>
+                    <img src="images/reservation-right-arrow-questions-icon.png" alt="">
+                </div>
+            </div>
+            <div class="question-boxs">
+                <p class="question">6 <span style="color: #FACB01;">•</span> To which email do you want us to reply ?
+                </p>
+                <div class="info-fil">
+                    <input type="email" class="form-control" id="emailReservation" placeholder="johndoe@gmail.com">
+                    <button type="button" class="btn btn-outline-warning btn-next">OK</button>
+                </div>
+                <div class="steps-buttons">
+                    <img src="images/reservation-left-arrow-questions-icon.png" alt="">
+                    <p>6 / 7</p>
+                    <img src="images/reservation-right-arrow-questions-icon.png" alt="">
+                </div>
+            </div>
+            <div class="question-boxs">
+                <p class="question">7 <span style="color: #FACB01;">•</span> Which service do you require ?</p>
+                <div class="info-fil">
+                    <select id="selectedService" title="Choose a service">
+                        <option class="option" value="consulting">Consulting</option>
+                        <option class="option" value="training">Training & Workshop</option>
+                        <option class="option" value="keynote">Keynote</option>
+                    </select>
+                    <button type="button" class="btn btn-outline-warning btn-next">OK</button>
+                </div>
+                <div class="steps-buttons">
+                    <img src="images/reservation-left-arrow-questions-icon.png" alt="">
+                    <p>7 / 7</p>
+                    <img src="images/reservation-right-arrow-questions-icon.png" alt="">
+                </div>
+            </div>
+        </section>
+        <h1 class="question-bocs-item consulting-bloc" data-service="consulting">CONSULTING</h1>
+        <section class="question-bocs-item general-questions consulting-bloc" data-service="consulting">
+            <div class="progress-bar">
+                <div class="progress-steps active"></div>
+                <div class="progress-steps"></div>
+            </div>
+            <div class="question-boxs active">
+                <p class="question">1 <span style="color: #FACB01;">•</span> What is your company domain of activity ?
+                </p>
+                <div class="info-fil">
+                    <input type="text" class="form-control" id="companyActivityReservation" placeholder="Humanitarian">
+                    <button type="button" class="btn btn-outline-warning btn-next">OK</button>
+                </div>
+                <div class="steps-buttons">
+                    <img src="images/reservation-left-arrow-questions-icon.png" alt="">
+                    <p>1 / 2</p>
+                    <img src="images/reservation-right-arrow-questions-icon.png" alt="">
+                </div>
+            </div>
+            <div class="question-boxs">
+                <p class="question">2 <span style="color: #FACB01;">•</span> Tell us more about your company</p>
+                <p class="question-detail"><span class="displayName"></span>, here you can send us all the details about
+                    your company so that we can give you the best possible advice.</p>
+                <div class="info-fil">
+                    <input type="text" class="form-control" id="companyInfoReservation" placeholder="Lorem ipsum ...">
+                    <button type="button" class="btn btn-outline-warning btn-submit">SUBMIT</button>
+                </div>
+                <div class="steps-buttons">
+                    <img src="images/reservation-left-arrow-questions-icon.png" alt="">
+                    <p>2 / 2</p>
+                    <img src="images/reservation-right-arrow-questions-icon.png" alt="">
+                </div>
+            </div>
+        </section>
+        <h1 class="question-bocs-item training-bloc" data-service="training">TRAINING & WORKSHOP</h1>
+        <section class="question-bocs-item general-questions training-bloc" data-service="training">
+            <div class="progress-bar">
+                <div class="progress-steps active"></div>
+                <div class="progress-steps"></div>
+            </div>
+            <div class="question-boxs active">
+                <p class="question">1 <span style="color: #FACB01;">•</span> Select a time period for your training</p>
+                <div class="info-fil">
+                    <div class="date-picker">
+                        <input type="text" id="trainingDateStart" placeholder="aaaa / mm / dd" />
+                        <p>to</p>
+                        <input type="text" id="trainingDateEnd" placeholder="aaaa / mm / dd" />
+                    </div>
+                    <button type="button" class="btn btn-outline-warning btn-next">OK</button>
+                </div>
+                <div class="steps-buttons">
+                    <img src="images/reservation-left-arrow-questions-icon.png" alt="">
+                    <p>1 / 2</p>
+                    <img src="images/reservation-right-arrow-questions-icon.png" alt="">
+                </div>
+            </div>
+            <div class="question-boxs">
+                <p class="question">2 <span style="color: #FACB01;">•</span> Provide more details about your training
+                </p>
+                <p class="question-detail"><span class="displayName"></span>, here you can send us all the details
+                    about your training so that we can further assist you the best.
+                    (Important details include the number of attendees, the location, the topics, etc...)</p>
+                <div class="info-fil">
+                    <input type="text" class="form-control" id="trainingDetailsReservation"
+                        placeholder="Lorem ipsum ...">
+                    <button type="button" class="btn btn-outline-warning btn-submit">SUBMIT</button>
+                </div>
+                <div class="steps-buttons">
+                    <img src="images/reservation-left-arrow-questions-icon.png" alt="">
+                    <p>2 / 2</p>
+                    <img src="images/reservation-right-arrow-questions-icon.png" alt="">
+                </div>
+            </div>
+        </section>
+        <h1 class="question-bocs-item keynote-bloc" data-service="keynote">KEYNOTE</h1>
+        <section class="question-bocs-item general-questions keynote-bloc" data-service="keynote">
+            <div class="progress-bar">
+                <div class="progress-steps active"></div>
+                <div class="progress-steps"></div>
+                <div class="progress-steps"></div>
+                <div class="progress-steps"></div>
+            </div>
+            <div class="question-boxs active">
+                <p class="question">1 <span style="color: #FACB01;">•</span> Select your package</p>
+                <div class="info-fil">
+                    <select id="selectedKeynoteOffer" title="Choose an option">
+                        <option class="option" value="virtualKeynote">Virtual Keynote</option>
+                        <option class="option" value="inPersonKeynote">In-Person Keynote</option>
+                        <option class="option" value="fullDayKeynote">Full-Day Workshop & Keynote Package</option>
+                    </select>
+                    <button type="button" class="btn btn-outline-warning btn-next">OK</button>
+                </div>
+                <div class="steps-buttons">
+                    <img src="images/reservation-left-arrow-questions-icon.png" alt="">
+                    <p>1 / 4</p>
+                    <img src="images/reservation-right-arrow-questions-icon.png" alt="">
+                </div>
+            </div>
+            <div class="question-boxs">
+                <p class="question">2 <span style="color: #FACB01;">•</span> What type of company are you requesting the
+                    presentation for ?</p>
+                <p class="question-detail"><span class="displayName"></span>, here you can send us all the details about
+                    your event so that we can give you the best possible advice.</p>
+                <div class="info-fil">
+                    <input type="text" class="form-control" id="companyKeynoteReservation"
+                        placeholder="Lorem ipsum ...">
+                    <button type="button" class="btn btn-outline-warning btn-next">OK</button>
+                </div>
+                <div class="steps-buttons">
+                    <img src="images/reservation-left-arrow-questions-icon.png" alt="">
+                    <p>2 / 4</p>
+                    <img src="images/reservation-right-arrow-questions-icon.png" alt="">
+                </div>
+            </div>
+            <div class="question-boxs">
+                <p class="question">3 <span style="color: #FACB01;">•</span> Provide more details about your event and
+                    the topics</p>
+                <div class="info-fil">
+                    <input type="text" class="form-control" id="keynoteTopicsReservation"
+                        placeholder="Sahel Politics and development ...">
+                    <button type="button" class="btn btn-outline-warning btn-next">OK</button>
+                </div>
+                <div class="steps-buttons">
+                    <img src="images/reservation-left-arrow-questions-icon.png" alt="">
+                    <p>3 / 4</p>
+                    <img src="images/reservation-right-arrow-questions-icon.png" alt="">
+                </div>
+            </div>
+            <div class="question-boxs">
+                <p class="question">4 <span style="color: #FACB01;">•</span> Pick a date an a time</p>
+                <div class="info-fil">
+                    <div class="date-picker">
+                        <input type="text" id="keynoteDate" placeholder="aaaa / mm / dd" />
+                        <input type="text" class="form-control" id="keynoteHour" placeholder="10:00 AM">
+                    </div>
+                    <button type="button" class="btn btn-outline-warning btn-submit">SUBMIT</button>
+                </div>
+                <div class="steps-buttons">
+                    <img src="images/reservation-left-arrow-questions-icon.png" alt="">
+                    <p>4 / 4</p>
+                    <img src="images/reservation-right-arrow-questions-icon.png" alt="">
+                </div>
+            </div>
+        </section>
+        <button id="scrollToTopBtn" title="Go to top">↑</button>
+        <footer>
+            <div class="footer-logo">
+                <img src="images/logo_long_blanc.svg" alt="Logo">
+            </div>
+
+            <div class="footer-permalinks">
+                <h2>Subscribe</h2>
+                <div class="permalinks">
+                    <a href="contact.html">Contact us</a>
+                    <a href="policies.html?option=privacy-policy">Privacy policy</a>
+                    <a href="policies.html?option=terms-of-use">Terms of use</a>
+                    <a href="policies.html?option=conditions-of-sales">Conditions of sales</a>
+                </div>
+            </div>
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>Stay up to date with all our news by subscribing to our newsletter.</p>
+                    <div class="newsletter-fil">
+                        <input type="email" class="form-control newsletter-form" id="newsletterEmail"
+                            placeholder="email address">
+                        <button type="button" class="btn btn-outline-warning" id="registerButton">Submit</button>
+                    </div>
+                </div>
+                <div class="footer-right">
+                    <div class="list-info">
+                        <div class="info">
+                            <p>Sahel Politica, Chamerstrasse 172, 6300 Zug</p>
+                            <img alt="" class="icon-info-footer" src="images/footer-icon-location.svg">
+                        </div>
+                        <div class="info">
+                            <p>info@sahelpolitica.ch</p>
+                            <img alt="" class="icon-info-footer" src="images/footer-icon-email.svg">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="copyright">
+                <h6><img src="images/copyright.svg" alt=""> sahel policica, 2024, All rights reserved</h6>
+                <div class="socials">
+                    <a target="_blank" href="https://www.youtube.com/@SahelPolitica_A"><img alt="Youtube"
+                            src="images/footer-youtube-icon.svg"></a>
+                    <a target="_blank" href="https://x.com/SahelPolitica"><img alt="X"
+                            src="images/footer-x-icon.svg"></a>
+                    <a target="_blank" href="https://www.linkedin.com/company/sahelpolitica/"><img alt="Linkedin"
+                            src="images/footer-linkedin-icon.svg"></a>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script>
+        const phoneInputField = document.querySelector("#phone");
+        const phoneInput = window.intlTelInput(phoneInputField, {
+            initialCountry: "ch", // Pays par défaut
+            geoIpLookup: function (callback) {
+                fetch("https://ipinfo.io/json?token=1f83c1fc25d15f") // Pour détecter automatiquement le pays de l'utilisateur
+                    .then((resp) => resp.json())
+                    .then((resp) => callback(resp.country))
+                    .catch(() => callback("us"));
+            },
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js" // pour le formatage et la validation
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const questionSections = document.querySelectorAll(".general-questions");
+            questionSections.forEach(section => {
+                const questions = section.querySelectorAll(".question-boxs");
+                const progressSteps = section.querySelectorAll(".progress-steps");
+                const leftArrows = section.querySelectorAll(".steps-buttons img:first-child");
+                const rightArrows = section.querySelectorAll(".steps-buttons img:last-child");
+                const okButtons = section.querySelectorAll(".btn-next");
+                const submitButtons = section.querySelectorAll(".btn-submit");
+                let currentStep = 0;
+
+                function updateDisplay() {
+                    questions.forEach((question, index) => {
+                        question.classList.toggle("active", index === currentStep);
+                    });
+                    progressSteps.forEach((step, index) => {
+                        step.classList.toggle("active", index <= currentStep);
+                    });
+                    const stepCounter = section.querySelector(".steps-buttons p");
+                    stepCounter.textContent = `${currentStep + 1} / ${questions.length}`;
+                }
+
+                function nextStep() {
+                    if (currentStep < questions.length - 1) {
+                        currentStep++;
+                        updateDisplay();
+                    }
+                }
+
+                function prevStep() {
+                    if (currentStep > 0) {
+                        currentStep--;
+                        updateDisplay();
+                    }
+                }
+
+                // Attach event listeners to OK buttons
+                okButtons.forEach(button => {
+                    button.addEventListener("click", nextStep);
+                });
+
+                // Attach event listeners to arrow buttons
+                rightArrows.forEach(arrow => {
+                    arrow.addEventListener("click", nextStep);
+                });
+
+                leftArrows.forEach(arrow => {
+                    arrow.addEventListener("click", prevStep);
+                });
+
+                // Handle submit button (only in the last question)
+                submitButtons.forEach(button => {
+                    button.addEventListener("click", () => {
+                        document.getElementById("confirmation-message").classList.add("validate");
+                        // Masque toutes les sections de type .general-questions
+                        const questionSections = document.querySelectorAll('.question-bocs-item');
+                        questionSections.forEach(section => {
+                            section.classList.add("hide");
+                        });
+                    });
+                });
+
+                // Initial display update
+                updateDisplay();
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const btnNextService = document.querySelector('#selectedService + .btn-next'); // Bouton OK de la dernière question
+            const serviceDropdown = document.getElementById('selectedService');
+            const serviceBlocks = document.querySelectorAll('[data-service]');
+
+            // Gestionnaire d'événement pour le bouton "OK" de la question 7
+            btnNextService.addEventListener('click', function () {
+                // Récupère le service sélectionné
+                const selectedService = serviceDropdown.value;
+
+                // Masque tous les blocs de services
+                serviceBlocks.forEach(block => {
+                    block.style.display = 'none';
+                });
+
+                // Affiche tous les éléments correspondant au service sélectionné (titre et section)
+                const selectedBlocks = document.querySelectorAll(`[data-service="${selectedService}"]`);
+                selectedBlocks.forEach(block => {
+                    block.style.display = 'block';
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Récupère l'input de la première question (le nom de l'utilisateur)
+            const nameInput = document.getElementById('nameReservation'); // Assurez-vous que cet ID correspond au champ de la première question
+
+            // Sélectionne tous les spans avec la classe displayName
+            const displayNameSpans = document.querySelectorAll('.displayName');
+
+            // Met à jour les spans avec le nom de l'utilisateur
+            nameInput.addEventListener('input', function () {
+                const name = nameInput.value;
+                displayNameSpans.forEach(span => {
+                    span.textContent = name; // Met à jour le contenu de chaque span
+                });
+            });
+        });
+
+
+    </script>
+
+    <script type="module">
+        const menuIcon = document.getElementById('menu-open');
+        const dropLink = document.getElementById('menu-link');
+
+        const openIcon = 'images/menu-icon.svg';  // Image pour ouvrir le menu
+        const closeIcon = 'images/menu-close.svg';  // Image pour fermer le menu
+
+        menuIcon.addEventListener('click', function () {
+            if (dropLink.classList.contains('active')) {
+                // Si le menu est déjà ouvert, applique l'animation de fermeture
+                dropLink.classList.remove('active');
+                dropLink.classList.add('hide');
+
+                // Attends la fin de l'animation (1s ici), puis masque complètement l'élément
+                setTimeout(function () {
+                    dropLink.classList.remove('hide');
+                    dropLink.style.display = 'none'; // Cache le menu après l'animation
+                }, 1000); // Temps de l'animation
+
+                // Change l'icône en "menu ouvert"
+                menuIcon.src = openIcon;
+            } else {
+                // Si le menu est fermé, montre-le et applique l'animation d'ouverture
+                dropLink.style.display = 'flex'; // Affiche le menu avant l'animation
+                dropLink.classList.add('active');
+
+                // Change l'icône en "fermer"
+                menuIcon.src = closeIcon;
+            }
+        });
+
+        // Sélectionner tous les menus dans .menu-link
+        const menus = document.querySelectorAll('.menu-link .menu-option');
+
+        // Ajouter un écouteur d'événement de clic pour chaque bouton
+        menus.forEach(menu => {
+            menu.addEventListener('click', function () {
+                // Si ce bouton est déjà actif, on le désactive (on retire 'active')
+                if (this.classList.contains('active')) {
+                    this.classList.remove('active');
+                } else {
+                    // Désactiver le bouton actif actuel s'il y en a un
+                    const activeButton = document.querySelector('.other-filter .btn.active');
+                    if (activeButton) {
+                        activeButton.classList.remove('active');
+                    }
+                    // Activer le bouton cliqué
+                    this.classList.add('active');
+                }
+            });
+        });
+
+    </script>
+    <script>
+        // Affiche le bouton lorsque l'utilisateur fait défiler vers le bas de 20 pixels à partir du haut du document
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        }
+
+        // Lorsque l'utilisateur clique sur le bouton, fait défiler vers le haut de la page
+        document.getElementById("scrollToTopBtn").addEventListener("click", function () {
+            document.body.scrollTop = 0; // Pour Safari
+            document.documentElement.scrollTop = 0; // Pour Chrome, Firefox, IE et Opera
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+
+        // Appliquer Flatpickr sur les champs de date
+        flatpickr("#trainingDateStart", {
+            dateFormat: "Y-m-d", // Format de date
+            locale: "en",        // Forcer l'affichage en anglais
+        });
+
+        flatpickr("#trainingDateEnd", {
+            dateFormat: "Y-m-d",
+            locale: "en",
+        });
+
+        flatpickr("#keynoteDate", {
+            dateFormat: "Y-m-d", // Format de date
+            locale: "en",        // Forcer l'affichage en anglais
+        });
+    </script>
+    <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script src="js/indexJs.js"></script>
+    <script src="js/script-language.js"></script>
+</body>
+
+</html>
