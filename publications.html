@@ -606,10 +606,18 @@
                     const articleContentDialog = document.getElementById('article-content-dialog');
                     articleContentDialog.innerHTML = `
                         <img src="${selectedArticle.imageUrl}" alt="${selectedArticle.title}" class="article-dialog-img">
-                        <div>
+                        <div class="dialog-content">
                             <h3>${selectedArticle.title}</h3>
                             <p>${formatter.format(new Date(selectedArticle.date.seconds * 1000))}</p>
                             <p>${selectedArticle.content}</p>
+                        </div>
+                        <div class="links-dialog">
+                        <a target="_blank" href="${selectedArticle.linkedinPost}">
+                            <img src="images/report-linkedin-icon.svg" alt="">
+                            <div>
+                                <h6>Find this publication on Linkedin</h6>
+                            </div>
+                        </a>
                         </div>
                     `;
                 }

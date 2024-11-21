@@ -97,7 +97,7 @@
     </header>
     <main>
         <section class="hero">
-            <img class="hero-img" src="images/reservation-hero.png" alt="">
+            <img class="hero-img" src="images/reservation-image.jpg" alt="">
             <div class="hero-intro">
                 <h1>Take an appointment</h1>
                 <div class="divider"></div>
@@ -138,7 +138,7 @@
                 </div>
                 <div class="steps-buttons">
                     <img src="images/reservation-left-arrow-questions-icon.png" alt="">
-                    <p>1 / 7</p>
+                    <p>1 / 6</p>
                     <img src="images/reservation-right-arrow-questions-icon.png" alt="">
                 </div>
             </div>
@@ -151,7 +151,7 @@
                 </div>
                 <div class="steps-buttons">
                     <img src="images/reservation-left-arrow-questions-icon.png" alt="">
-                    <p>2 / 7</p>
+                    <p>2 / 6</p>
                     <img src="images/reservation-right-arrow-questions-icon.png" alt="">
                 </div>
             </div>
@@ -164,37 +164,24 @@
                 </div>
                 <div class="steps-buttons">
                     <img src="images/reservation-left-arrow-questions-icon.png" alt="">
-                    <p>3 / 7</p>
+                    <p>3 / 6</p>
                     <img src="images/reservation-right-arrow-questions-icon.png" alt="">
                 </div>
             </div>
             <div class="question-boxs">
-                <p class="question">4 <span style="color: #FACB01;">•</span> What is your position in the company ?<span
-                        class="displayName"></span>?</p>
-                <div class="info-fil">
-                    <input type="" class="form-control" id="postReservation" placeholder="Administration...">
-                    <button type="button" class="btn btn-outline-warning btn-next">OK</button>
-                </div>
-                <div class="steps-buttons">
-                    <img src="images/reservation-left-arrow-questions-icon.png" alt="">
-                    <p>4 / 7</p>
-                    <img src="images/reservation-right-arrow-questions-icon.png" alt="">
-                </div>
-            </div>
-            <div class="question-boxs">
-                <p class="question">5 <span style="color: #FACB01;">•</span> How can we reach you by phone ?</p>
+                <p class="question">4 <span style="color: #FACB01;">•</span> How can we reach you by phone ?</p>
                 <div class="info-fil">
                     <input id="phoneNumberReservation" type="tel" class="form-control">
                     <button type="button" class="btn btn-outline-warning btn-next">OK</button>
                 </div>
                 <div class="steps-buttons">
                     <img src="images/reservation-left-arrow-questions-icon.png" alt="">
-                    <p>5 / 7</p>
+                    <p>4 / 6</p>
                     <img src="images/reservation-right-arrow-questions-icon.png" alt="">
                 </div>
             </div>
             <div class="question-boxs">
-                <p class="question">6 <span style="color: #FACB01;">•</span> To which email do you want us to reply ?
+                <p class="question">5 <span style="color: #FACB01;">•</span> To which email do you want us to reply ?
                 </p>
                 <div class="info-fil">
                     <input type="email" class="form-control" id="emailReservation" placeholder="johndoe@gmail.com">
@@ -202,12 +189,12 @@
                 </div>
                 <div class="steps-buttons">
                     <img src="images/reservation-left-arrow-questions-icon.png" alt="">
-                    <p>6 / 7</p>
+                    <p>5 / 6</p>
                     <img src="images/reservation-right-arrow-questions-icon.png" alt="">
                 </div>
             </div>
             <div class="question-boxs">
-                <p class="question">7 <span style="color: #FACB01;">•</span> Which service do you require ?</p>
+                <p class="question">6 <span style="color: #FACB01;">•</span> Which service do you require ?</p>
                 <div class="info-fil">
                     <select id="selectedService" title="Choose a service">
                         <option class="option" value="consulting">Consulting</option>
@@ -218,7 +205,7 @@
                 </div>
                 <div class="steps-buttons">
                     <img src="images/reservation-left-arrow-questions-icon.png" alt="">
-                    <p>7 / 7</p>
+                    <p>6 / 6</p>
                     <img src="images/reservation-right-arrow-questions-icon.png" alt="">
                 </div>
             </div>
@@ -264,7 +251,7 @@
                 <div class="progress-steps"></div>
             </div>
             <div class="question-boxs active">
-                <p class="question">1 <span style="color: #FACB01;">•</span> Select a time period for your training</p>
+                <p class="question">1 <span style="color: #FACB01;">•</span> What is the projected timeline ?</p>
                 <div class="info-fil">
                     <div class="date-picker">
                         <input type="text" id="trainingDateStart" placeholder="aaaa / mm / dd" />
@@ -352,7 +339,7 @@
                 </div>
             </div>
             <div class="question-boxs">
-                <p class="question">4 <span style="color: #FACB01;">•</span> Pick a date an a time</p>
+                <p class="question">4 <span style="color: #FACB01;">•</span> What is the horizon of the event ?</p>
                 <div class="info-fil">
                     <div class="date-picker">
                         <input type="text" id="keynoteDate" placeholder="aaaa / mm / dd" />
@@ -421,7 +408,7 @@
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <script>
-        const phoneInputField = document.querySelector("#phone");
+        const phoneInputField = document.querySelector("#phoneNumberReservation");
         const phoneInput = window.intlTelInput(phoneInputField, {
             initialCountry: "ch", // Pays par défaut
             geoIpLookup: function (callback) {

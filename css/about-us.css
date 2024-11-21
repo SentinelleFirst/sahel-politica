@@ -35,10 +35,6 @@
         margin-top: 100px;
         animation: fadeInLeft 1s forwards;
 
-        h3 {
-            
-        }
-
         p {
             margin-bottom: 30px;
             font-size: 20px;
@@ -172,10 +168,6 @@ a {
             flex-direction: column;
             justify-content: center;
 
-            h3 {
-                
-            }
-
             p {
                 margin-bottom: 30px;
                 font-size: 20px;
@@ -211,10 +203,6 @@ a {
         align-items: center;
         width: 100%;
         justify-content: space-between;
-
-        h3 {
-            
-        }
 
         p {
             font-size: 22px;
@@ -311,13 +299,12 @@ a {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                align-items: end;
+                align-items: start;
                 gap: 20px;
                 width: calc(100% - 400px);
-                min-height: 70%;
+                min-height: 100%;
                 right: 0px;
                 text-align: justify;
-                text-align-last: right;
                 animation: slideInRight 1s forwards;
 
                 @media (min-width: 1075px) {
@@ -332,13 +319,8 @@ a {
                     width: 100%;
                 }
 
-                h3 {
-                    
-                }
-
                 p {
                     font-size: 20px;
-                    text-align: left;
                 }
 
                 .team-socials {
@@ -395,10 +377,6 @@ a {
                     h3 {
                         display: none;
                     }
-                }
-
-                h3 {
-                    
                 }
 
                 p {
@@ -555,10 +533,6 @@ a {
             }
         }
 
-        h3 {
-            
-        }
-
         .client-info {
             position: relative;
             display: flex;
@@ -579,10 +553,6 @@ a {
 
         .paragraphe.active {
             opacity: 1;
-        }
-
-        h5 {
-            
         }
 
         p {
