@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Poppins', 'Roboto', sans-serif;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 500;
+}
+
+a,
+p,
+li,
+label {
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+/* Conteneur global */
+body {
+    background-color: #F5F5F5;
+    display: flex;
+    height: 100vh;
+    /* Prend toute la hauteur de la fenêtre */
+}
+
+/* Barre de navigation */
+.sidebar {
+    width: 250px;
+    /* Largeur de la barre de navigation */
+    background-color: white;
+    /* Couleur de fond typique */
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    a {
+        color: black;
+        text-decoration: none;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-radius: 4px;
+        transition: background 0.3s ease;
+        gap: 10px;
+    
+        img {
+            width: 25px;
+            height: 25px;
+            object-fit: contain;
+            object-position: center;
+        }
+    }
+
+
+}
+
+.sidebar .profil-btn {
+    border-radius: 4px;
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 0px;
+
+    img {
+        width: 40px;
+        height: 40px;
+    }
+
+    p {
+        font-size: 17px;
+        margin-bottom: 0px;
+    }
+}
+
+.sidebar a:hover,
+.sidebar a.active:hover {
+    background-color: #facc0149;
+    /* Couleur au survol */
+}
+
+.sidebar a.active {
+    background-color: #facc0149;
+    /* Couleur au survol */
+}
+
+/* Zone de contenu principal */
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    flex-grow: 1;
+    /* S'étend pour occuper tout l'espace restant */
+    padding: 30px;
+    background-color: #ecf0f1;
+    overflow-y: auto;
+    /* Permet le défilement si nécessaire */
+}

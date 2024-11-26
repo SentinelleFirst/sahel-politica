@@ -154,7 +154,7 @@
         }
     }
 
-    .contact-form{
+    #thanks-message, .contact-form{
         @media (min-width: 810px) {
             min-width: 400px;
         }
@@ -166,9 +166,19 @@
         background-color: white;
         padding: 40px;
         border-radius: 20px;
-        display: flex;
+        display: none;
         flex-direction: column;
         gap: 20px;
+    }
+
+    #thanks-message.active {
+        display: flex;
+        justify-content: center;
+        color: black;
+    }
+
+    .contact-form.active {
+        display: flex;
     }
 
     label {

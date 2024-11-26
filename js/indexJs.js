@@ -1,12 +1,3 @@
-//Gestion du menu
-document.addEventListener('DOMContentLoaded', function () {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const menuLink = document.querySelector('.menu-link');
-
-    menuToggle.addEventListener('click', function () {
-        menuLink.classList.toggle('active');
-    });
-});
 
 //Langue manager
 
