@@ -205,8 +205,7 @@
     </main>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
-    
+        import { getFirestore, collection, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
         // Configuration Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyCyYxzhPSc_Izx4PY1V4ij0PxxoWdqz7xM",
@@ -256,7 +255,7 @@
                 // Préparation des données
                 const newMessage = {
                     company: company || null,
-                    date: new Date().toISOString(),
+                    date: Timestamp.now(),
                     email: email,
                     firstname: firstname,
                     lastname: lastname,
