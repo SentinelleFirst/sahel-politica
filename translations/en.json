@@ -1,0 +1,45 @@
+{
+    "header": {
+        "who_we_are": {
+            "who_we_are": "Who we are",
+            "about_us": "About us",
+            "our_team": "Our team",
+            "partners": "Partners"},
+
+        "what_we_do":{    
+            "what_we_do": "What we do",
+            "training": "Training",
+            "consulting": "Consulting",
+            "keynote": "keynote"},
+
+        "news": {        
+            "news": "News",
+            "events": "Events",
+            "publications": "Publications",
+            "analysis": "Analysis"}
+    },
+    "contact_us": "Contact us",
+    "language": "Language",
+    "english": "English",
+    "french": "French",
+    "german": "German",
+    "home" : {
+        "blog-title":"Explore our latest insights and updates here",
+        "what_we_do":{
+            "title": "Your path to resilience",
+            "divider": "Navigate challenges, unlock new opportunities"
+            }
+        },
+    "our_services":"Our Services",
+    "our_team":"Our Team",
+    "our_trainings":"Our Training",
+    "service-options":{
+        "title":"Sahel Resilience Audit"
+    },
+    "see_more":"See More",
+    "services":{
+        "option":{
+            "title":"Risk Prevention Strategy"}
+        }
+  }
+  

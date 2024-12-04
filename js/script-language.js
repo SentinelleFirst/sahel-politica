@@ -67,3 +67,48 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mettre à jour l'affichage initialement avec la valeur par défaut ou celle de localStorage
     updateTitle(false);  // Ne pas enregistrer dans localStorage lors de l'initialisation
 });
+
+// Chargement des fichiers de langue json et traductions
+const translations = {};
+
+// Charger les traductions depuis un fichier JSON
+async function loadTranslations(lang) {
+  if (!translations[lang]) {
+    const response = await fetch(`translations/${lang}.json`);
+    translations[lang] = await response.json();
+  }
+  applyTranslations(lang);
+}
+
+// Appliquer les traductions aux éléments
+function applyTranslations(lang) {
+  const elements = document.querySelectorAll("[data-translate-key]");
+  elements.forEach((el) => {
+    const key = el.getAttribute("data-translate-key");
+    const keys = key.split('.'); // Exemple : "header.home"
+    let translation = translations[lang];
+
+    // Parcourir les niveaux d'objet dans le JSON
+    keys.forEach((k) => {
+      if (translation[k]) translation = translation[k];
+    });
+
+    if (translation) {
+      el.textContent = translation; // Remplacer le texte
+    }
+  });
+}
+
+// Changer la langue
+document.addEventListener('DOMContentLoaded', () => {
+    const langDropdown = document.getElementById('mobilLangDropdown');
+  
+    langDropdown.addEventListener('change', () => {
+      const selectedLanguage = langDropdown.value;
+      loadTranslations(selectedLanguage);
+    });
+  });
+
+// Charger la langue par défaut
+loadTranslations('en');
+console.log("JavaScript file is linked!");

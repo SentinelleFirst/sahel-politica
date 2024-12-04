@@ -1,0 +1,46 @@
+{
+    "header": {
+        "who_we_are": {
+            "who_we_are": "Qui nous sommes",
+            "about_us": "À propos de nous",
+            "our_team": "Notre équipe",
+            "partners": "Partenaires"
+        },
+        "what_we_do": {
+            "what_we_do": "Nos services",
+            "training": "Formations & Workshops",
+            "consulting": "Consultation",
+            "keynote": "Keynote"
+        },
+        "news": {
+            "news": "Nouveautés",
+            "events": "Événements",
+            "publications": "Publications",
+            "analysis": "Analyses"
+        }
+    },
+    "contact_us": "Contactez-nous",
+    "language": "Langue",
+    "english": "Anglais",
+    "french": "Français",
+    "german": "Allemand",
+    "home": {
+        "blog-title": "Découvrez nos dernières idées et mises à jour ici",
+        "what_we_do": {
+            "title": "Votre chemin vers la résilience",
+            "divider": "Naviguez à travers les défis, débloquez de nouvelles opportunités"
+        }
+    },
+    "our_services": "Nos Services",
+    "our_team": "Notre Équipe",
+    "our_trainings": "Nos Formations",
+    "service-options": {
+        "title": "Audit de Résilience du Sahel"
+    },
+    "see_more": "Voir Plus",
+    "services": {
+        "option": {
+            "title": "Stratégie de Prévention des Risques"
+        }
+    }
+}
