@@ -39,83 +39,78 @@
     </nav>
     <main>
         <section class="page-title">
-            <h1>Events</h1>
-            <div class="divider"></div>
-        </section>
-        <section class="messages-list">
-            <div class="title">
-                <h4>Latest message</h4>
-                <div class="search-field">
-                    <button class="btn" type="button" id="search-addon"><img src="images/admin-page-search-icon.svg"
-                            alt=""></button>
-                    <input type="search" id="search-input" placeholder="Search..." aria-label="Search"
-                        aria-describedby="search-addon" />
-                </div>
+            <div class="left">
+                <h1>Events</h1>
+                <div class="divider"></div>
+                <button type="button" id="new-event-btn"><img src="images/admin-page-add-icon.svg" alt="">New
+                    event</button>
             </div>
-            <ul id="messages">
-                <!--Ajoute des messages ici via Firebase-->
-            </ul>
+            <div class="search-field">
+                <button class="btn" type="button" id="search-addon"><img src="images/admin-page-search-icon.svg"
+                        alt=""></button>
+                <input type="search" id="search-input" placeholder="Search..." aria-label="Search"
+                    aria-describedby="search-addon" />
+            </div>
         </section>
-        <section class="message-dialog">
-            <div class="message-view">
+        <section id="events-list">
+            <!--Ajoute des events ici via Firebase-->
+        </section>
+        <section class="event-dialog">
+            <div class="edit-event">
                 <div class="top">
-                    <div class="title"></div>
-                    <button type="button" class="btn btn-warning" id="answer-btn">Answer</button>
+                    <h4 class="title">Modify</h4>
+                    <button type="button" class="btn btn-warning" id="save-btn">Save</button>
                     <button type="button" class="close-dialog" id="close-dialog1"><img
                             src="images/admin-page-close-dialog-icon.svg" alt=""></button>
                 </div>
-                <div class="message-email">
-                    <h5>Email</h5>
-                    <p></p>
+                <div class="download-img">
+                    <button><img src="images/admin-page-download-image-icon.svg" alt=""></button>
                 </div>
-                <div class="message-company-contact">
-                    <div class="company">
-                        <h5>Company</h5>
-                        <p></p>
-                    </div>
-                    <div class="contact">
-                        <h5>Contact</h5>
-                        <p></p>
-                    </div>
+                <div class="event-title">
+                    <h5>Title</h5>
+                    <input type="text" placeholder="..." id="event-title">
                 </div>
-                <div class="message-object">
-                    <h5>Object</h5>
-                    <p></p>
+                <div class="event-short-title">
+                    <h5>Short title</h5>
+                    <input type="text" placeholder="..." id="event-short-title">
                 </div>
-                <div class="message-content">
-                    <h5>Message</h5>
-                    <p></p>
+                <div class="event-location">
+                    <h5>Location</h5>
+                    <input type="text" placeholder="..." id="event-location">
+                </div>
+                <div class="event-category">
+                    <h5>Category</h5>
+                    <input type="text" placeholder="..." id="event-category">
+                </div>
+                <div class="event-link">
+                    <h5>Link</h5>
+                    <input type="text" placeholder="..." id="event-link">
+                </div>
+                <div class="event-date">
+                    <h5>Date</h5>
+                    <input type="text" placeholder="..." id="event-date-start">
+                    <input type="text" placeholder="..." id="event-date-end">
                 </div>
             </div>
 
-            <div class="message-answer">
+            <div class="new-event">
                 <div class="top">
-                    <h4 class="message-answer message-answer-title">Your answer</h4>
-                    <button type="button" class="btn btn-warning" id="send-btn">Send</button>
+                    <h4 class="event-answer event-answer-title">Your answer</h4>
+                    <button type="button" class="btn btn-warning" id="publish-btn">Publish</button>
                     <button type="button" class="close-dialog" id="close-dialog2"><img
                             src="images/admin-page-close-dialog-icon.svg" alt=""></button>
                 </div>
-                <div class="message-object">
+                <div class="event-object">
                     <h5>Object</h5>
                     <input type="text" placeholder="..." id="awswer-object">
                 </div>
-                <div class="message-content">
+                <div class="event-content">
                     <h5>Message</h5>
-                    <textarea class="form-control" id="answer-message" rows="4" placeholder="..."></textarea>
+                    <textarea class="form-control" id="answer-event" rows="4" placeholder="..."></textarea>
                 </div>
             </div>
         </section>
     </main>
-    <script>
-        // Function to close the message dialog
-        function closeDialog() {
-            const messageDialog = document.querySelector('.message-dialog');
-            messageDialog.classList.remove('open');
-        }
-
-        // Add event listener to the close button
-        document.getElementById('close-dialog').addEventListener('click', closeDialog);
-    </script>
     <script type="module">
         // Importer les fonctions nécessaires depuis le SDK Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
@@ -124,13 +119,13 @@
 
         // Configuration de votre application Firebase
         const firebaseConfig = {
-            apiKey: "AIzaSyCyYxzhPSc_Izx4PY1V4ij0PxxoWdqz7xM",
-            authDomain: "sahelpolitica.firebaseapp.com",
-            projectId: "sahelpolitica",
-            storageBucket: "sahelpolitica.appspot.com",
-            messagingSenderId: "11417703739",
-            appId: "1:11417703739:web:882052b747e7b761bdd31e",
-            measurementId: "G-WFFDBTWRKV"
+            apiKey: "AIzaSyC0CxRpNrWfbog-gXHIj-PQlNoUgZPyuFU",
+            authDomain: "websitesapo-79e6f.firebaseapp.com",
+            projectId: "websitesapo-79e6f",
+            storageBucket: "websitesapo-79e6f.firebasestorage.app",
+            messagingSenderId: "437960963379",
+            appId: "1:437960963379:web:56b1405d1ddaac30207a46",
+            measurementId: "G-6BPX26NN2Q"
         };
 
         // Initialiser Firebase
@@ -138,117 +133,164 @@
         const analytics = getAnalytics(app);
         const db = getFirestore(app);
 
-        // Formatteur de date en anglais (États-Unis)
-        const formatter = new Intl.DateTimeFormat('en-US', {
+        //Comparateur de date
+        function isSameDay(date1, date2) {
+            return (
+                date1.getFullYear() === date2.getFullYear() &&
+                date1.getMonth() === date2.getMonth() &&
+                date1.getDate() === date2.getDate()
+            );
+        }
+
+        // Formateur de date
+        const formatterMD = new Intl.DateTimeFormat('en-US', {
             day: 'numeric',
             month: 'short',
+        });
+
+        const formatterY = new Intl.DateTimeFormat('en-US', {
             year: 'numeric',
         });
 
-        // Variable pour stocker le message sélectionné
-        let selectedMessage = null;
+        // Variable pour stocker le event sélectionné
+        let selectedEvent = null;
 
-        // Fonction pour récupérer et afficher les messages
-        async function fetchMessages() {
-            const messagesContainer = document.getElementById('messages');
+        // Fonction pour récupérer et afficher les events
+        async function fetchEvents() {
+            const eventsContainer = document.getElementById('events-list');
             try {
-                // Récupérer tous les messages de la collection
-                const querySnapshotMessages = await getDocs(collection(db, 'ContactFormMessage'));
+                // Récupérer tous les events de la collection
+                const querySnapshotEvents = await getDocs(collection(db, 'Events'));
 
-                // Convertir les documents en tableau de messages
-                const messages = querySnapshotMessages.docs.map(doc => ({
+                // Convertir les documents en tableau de events
+                const events = querySnapshotEvents.docs.map(doc => ({
                     id: doc.id,
                     ...doc.data()
                 }));
 
-                // Trier les messages par 'date' en ordre décroissant
-                messages.sort((a, b) => b.date - a.date);
+                // Trier les events par 'date' en ordre décroissant
+                events.sort((a, b) => b.date - a.date);
 
                 // Effacer le contenu précédent
-                messagesContainer.innerHTML = '';
+                eventsContainer.innerHTML = '';
 
-                // Afficher les messages
-                messages.forEach(message => {
-                    const messageElement = document.createElement('div');
-                    messageElement.classList.add('message');
-                    messageElement.setAttribute('data-id', message.id); // Ajouter l'ID pour la sélection
-                    if (message.readStatus == true) {
-                        messageElement.classList.add('read');
+                // Afficher les events
+                events.forEach(event => {
+                    const eventElement = document.createElement('div');
+                    eventElement.classList.add('event');
+
+                    let eventEndString = "";
+                    if (!isSameDay(new Date(event.start.seconds * 1000), new Date(event.end.seconds * 1000))) {
+                        eventEndString = " - " + formatterMD.format(new Date(event.end.seconds * 1000));
                     }
-                    messageElement.innerHTML = `
-                        <div class="status"><div class="ball"></div></div>
-                        <p class="name">${message.firstname} ${message.lastname}</p>
-                        <p class="object">${message.object}</p>
-                        <p class="content">-  ${message.message}</p>
-                        <p class="date">${formatter.format(new Date(message.date.seconds * 1000))}</p>
-                    `;
 
-                    // Ajout d'un gestionnaire d'événements pour ouvrir le message
-                    messageElement.addEventListener('click', () => {
-                        openMessageDialog(message);
+                    let eventLink = "";
+                    if (!(event.linkedinPost === "")) {
+                        eventLink = 'target="_blank" href="' + event.linkedinPost + '"';
+                    }
+                    eventElement.setAttribute('data-id', event.id); // Ajouter l'ID pour la sélection
+                    eventElement.innerHTML = `
+                <div class="date-box">
+                    <img src="${event.imageUrl}" class="backimg">
+                    <p class="date">${formatterMD.format(new Date(event.start.seconds * 1000))}${eventEndString}</p>
+                    <p class="year">${formatterY.format(new Date(event.start.seconds * 1000))}</p>
+                    <p class="fuso">GMT</p>
+                </div>
+                <div class="caption">
+                    <div class="event-cat">
+                        <div class="divider"></div>
+                        <p>${event.category}</p>
+                    </div>
+                    <h3>${event.title}</h3>   
+                    <p>${event.location}</p>
+                </div>
+                <div class="more">
+                    <button>
+                        <img src="images/admin-page-more-icon.svg" alt="">
+                    </button>
+                    <div class="more-options">
+                        <img class="edit-icon" src="images/admin-page-edit-icon.svg" alt="">
+                        <a target="_blank" ${eventLink} class="event-title">
+                            <img src="images/admin-page-eye-icon.svg" alt="">
+                        </a>
+                        <img class="trash-icon" src="images/admin-page-trash-icon.svg" alt="">
+                    </div>
+                </div>
+            `;
+
+                    // Ajout d'un gestionnaire d'événements pour ouvrir l'event
+                    eventElement.querySelector('.more-options .edit-icon').addEventListener('click', () => {
+                        openEventDialog(event);
                     });
 
-                    messagesContainer.appendChild(messageElement);
+                    eventsContainer.appendChild(eventElement);
                 });
             } catch (error) {
-                console.error("Error fetching messages: ", error);
+                console.error("Error fetching events: ", error);
             }
         }
 
-        // Fonction pour réinitialiser les classes du dialogue du message
-        function resetMessageDialogClasses() {
-            const messageViewElements = document.querySelectorAll('.message-view');
-            const messageAnswerElements = document.querySelectorAll('.message-answer');
+        // Fonction pour réinitialiser les classes du dialogue du event
+        function resetEventDialogClasses() {
+            const eventViewElements = document.querySelectorAll('.event-view');
+            const eventAnswerElements = document.querySelectorAll('.event-answer');
 
 
-            messageViewElements.forEach(element => {
+            eventViewElements.forEach(element => {
                 element.classList.remove('hide');
             });
 
-            messageAnswerElements.forEach(element => {
+            eventAnswerElements.forEach(element => {
                 element.classList.remove('show');
             });
         }
 
-        // Fonction pour ouvrir le dialogue du message et le peupler avec les détails du message
-        async function openMessageDialog(message) {
-            resetMessageDialogClasses();
-            // Enregistrer le message sélectionné dans la variable
-            selectedMessage = message;
-
-            const messageDialog = document.querySelector('.message-dialog');
-            const messageEmail = document.querySelector('.message-email p');
-            const messageCompany = document.querySelector('.message-company-contact .company p');
-            const messageContact = document.querySelector('.message-company-contact .contact p');
-            const messageObject = document.querySelector('.message-object p');
-            const messageContent = document.querySelector('.message-content p');
-            const messageTitle = document.querySelector('.message-dialog .top .title');
-
-            // Mettre à jour le contenu du message dialog
-            messageEmail.textContent = message.email;
-            messageCompany.textContent = message.company;
-            messageContact.textContent = message.phone;
-            messageObject.textContent = message.object;
-            messageContent.textContent = message.message;
-
-            // Mettre à jour la date et le nom de l'expéditeur
-            messageTitle.innerHTML = `
-                <h4>The ${formatter.format(new Date(message.date.seconds * 1000))}</h4>
-                <h4>by ${message.firstname} ${message.lastname}</h4>
-            `;
-
-            // Ajouter la classe 'open' pour afficher le message dialog
-            messageDialog.classList.add('open');
-
-            if (!message.readStatus) {
-                const messageRef = doc(db, 'ContactFormMessage', message.id);
+        // Fonction pour ouvrir le dialogue du event et le peupler avec les détails du event
+        async function openEventDialog(event) {
+            resetEventDialogClasses();
+            // Enregistrer le event sélectionné dans la variable
+            selectedEvent = event;
+        
+            const eventDialog = document.querySelector('.event-dialog');
+            const eventTitleInput = document.getElementById('event-title');
+            const eventShortTitleInput = document.getElementById('event-short-title');
+            const eventLocationInput = document.getElementById('event-location');
+            const eventCategoryInput = document.getElementById('event-category');
+            const eventLinkInput = document.getElementById('event-link');
+            const eventDateStartInput = document.getElementById('event-date-start');
+            const eventDateEndInput = document.getElementById('event-date-end');
+            const downloadImgButton = document.querySelector('.download-img button');
+        
+            // Remplir les champs d'entrée avec les informations de l'événement
+            eventTitleInput.value = event.title || '';
+            eventShortTitleInput.value = event.shortTitle || '';
+            eventLocationInput.value = event.location || '';
+            eventCategoryInput.value = event.category || '';
+            eventLinkInput.value = event.linkedinPost || '';
+            eventDateStartInput.value = event.start ? formatterMD.format(new Date(event.start.seconds * 1000)) : '';
+            eventDateEndInput.value = event.end ? formatterMD.format(new Date(event.end.seconds * 1000)) : '';
+        
+            // Ajouter l'image de l'événement comme arrière-plan du bouton
+            if (event.imageUrl) {
+                downloadImgButton.style.backgroundImage = `url(${event.imageUrl})`;
+                downloadImgButton.style.backgroundSize = 'cover'; // Ajuster la taille de l'image
+                downloadImgButton.style.backgroundPosition = 'center'; // Centrer l'image
+            } else {
+                downloadImgButton.style.backgroundImage = 'none'; // Enlever l'arrière-plan si pas d'image
+            }
+        
+            // Ajouter la classe 'open' pour afficher le event dialog
+            eventDialog.classList.add('open');
+        
+            if (!event.readStatus) {
+                const eventRef = doc(db, 'ContactFormEvent', event.id);
                 try {
-                    await updateDoc(messageRef, { readStatus: true });
-                    message.readStatus = true; // Mettre à jour l'objet message localement
+                    await updateDoc(eventRef, { readStatus: true });
+                    event.readStatus = true; // Mettre à jour l'objet event localement
                     // Optionnel : Vous pouvez également mettre à jour l'interface utilisateur ici
-                    const messageElement = document.querySelector(`.message[data-id="${message.id}"]`);
-                    if (messageElement) {
-                        messageElement.classList.add('read'); // Ajouter la classe 'read' à l'élément
+                    const eventElement = document.querySelector(`.event[data-id="${event.id}"]`);
+                    if (eventElement) {
+                        eventElement.classList.add('read'); // Ajouter la classe 'read' à l'élément
                     }
                 } catch (error) {
                     console.error("Error updating read status: ", error);
@@ -256,38 +298,40 @@
             }
         }
 
-        // Fonction pour fermer le dialogue du message
+        // Fonction pour fermer le dialogue du event
         function closeDialog() {
-            const messageDialog = document.querySelector('.message-dialog');
-            messageDialog.classList.remove('open');
+            const eventDialog = document.querySelector('.event-dialog');
+            eventDialog.classList.remove('open');
         }
 
         // Fonction pour afficher le dialogue de réponse
         function showAnswerDialog() {
-            // Sélectionner tous les éléments avec la classe message-view
-            const messageViewElements = document.querySelectorAll('.message-view');
-            // Ajouter la classe hide à tous les éléments message-view
-            messageViewElements.forEach(element => {
+            // Sélectionner tous les éléments avec la classe event-view
+            const eventViewElements = document.querySelectorAll('.event-view');
+            // Ajouter la classe hide à tous les éléments event-view
+            eventViewElements.forEach(element => {
                 element.classList.add('hide');
             });
 
-            // Sélectionner tous les éléments avec la classe message-answer
-            const messageAnswerElements = document.querySelectorAll('.message-answer');
-            // Ajouter la classe show à tous les éléments message-answer
-            messageAnswerElements.forEach(element => {
+            // Sélectionner tous les éléments avec la classe event-answer
+            const eventAnswerElements = document.querySelectorAll('.event-answer');
+            // Ajouter la classe show à tous les éléments event-answer
+            eventAnswerElements.forEach(element => {
                 element.classList.add('show');
             });
         }
 
         // Ajouter un écouteur d'événements au bouton de réponse
-        document.getElementById('answer-btn').addEventListener('click', showAnswerDialog);
+        document.getElementById('save-btn').addEventListener('click', showAnswerDialog);
 
         // Ajouter un écouteur d'événements au bouton de fermeture
         document.getElementById('close-dialog1').addEventListener('click', closeDialog);
         document.getElementById('close-dialog2').addEventListener('click', closeDialog);
 
-        // Récupérer les messages au chargement de la page
-        document.addEventListener('DOMContentLoaded', fetchMessages);
+        // Récupérer les events au chargement de la page
+        document.addEventListener('DOMContentLoaded', fetchEvents);
+
+
     </script>
 </body>
 
