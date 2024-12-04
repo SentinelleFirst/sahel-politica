@@ -6,7 +6,14 @@ main {
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
+
+    .left {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
 
     .divider {
         width: 200px;
@@ -14,9 +21,67 @@ main {
         background-color: #FACB01;
         border-radius: 3px;
     }
+
+    button {
+        border: 2px solid black;
+        height: 40px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        justify-content: space-between;
+        gap: 10px;
+        color: #AC8C00;
+        font-weight: bold;
+        transition: all 0.5s ease;
+    }
+
+    .left button:hover {
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.308);
+    }
 }
 
-.messages-list {
+.search-field {
+    width: 300px;
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+
+    input {
+        height: 50px;
+        border-radius: 10px;
+        background-color: #D9D9D9;
+        border: 1px solid #D9D9D9;
+        padding: 20px;
+        width: 100%;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    button {
+        width: 50px;
+        height: 50px;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 30px;
+            object-fit: contain;
+            object-position: center;
+        }
+    }
+
+}
+
+#events-list {
     width: 100%;
     height: 100%;
     background-color: white;
@@ -24,135 +89,169 @@ main {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
 
-
-    .title {
+    .event {
         width: 100%;
+        min-height: 300px;
+        padding: 50px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: 100px;
-        padding: 20px;
-    }
+        gap: 50px;
+        border-bottom: 2px solid rgba(0, 0, 0, 0.377);
 
-    .search-field {
-        width: 300px;
-        background-color: #D9D9D9;
-        border-radius: 10px;
-        display: flex;
-        justify-content: space-between;
-
-        input {
-            height: 50px;
-            border-radius: 10px;
-            background-color: #D9D9D9;
-            border: 1px solid #D9D9D9;
-            padding: 20px;
-            width: 100%;
-        }
-
-        input:focus {
-            outline: none;
-        }
-
-        button {
-            width: 50px;
-            height: 50px;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            img {
-                width: 30px;
-                object-fit: contain;
-                object-position: center;
-            }
-        }
-
-    }
-
-    #messages {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        padding: 0;
-    }
-
-    .message {
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-        height: 40px;
-        width: 100%;
-        transition: all 0.2s ease;
-        padding: 0px 10px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.233);
-
-        .status {
-            width: 20px;
-            height: 20px;
-            padding: 5px;
-
-            .ball {
-                width: 10px;
-                height: 10px;
-                border-radius: 50%;
-                background-color: #FACB01;
-            }
-
-        }
-
-        .name {
-            width: 20%;
-            font-weight: bold;
-        }
-
-        .object {
+        .date-box {
             width: 25%;
-        }
-
-        .content {
-            flex-grow: 1;
-        }
-
-        .date {
-            width: 120px;
-        }
-
-        p {
-            padding: 5px;
-            height: 40px;
+            height: 250px;
+            min-width: 250px;
+            background-color: #D7D702;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: start;
-            margin-bottom: 0;
+            align-items: center;
+
+            p {
+                color: white;
+                text-align: center;
+                z-index: 2;
+            }
         }
-    }
 
-    .message:hover {
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.247);
-    }
+        .backimg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: brightness(0.5);
+        }
 
-    .message.read .ball {
-        background-color: white;
+        .date {
+            font-size: 30px;
+
+        }
+
+        .year {
+            font-size: 40px;
+
+        }
+
+        .fuso {
+            font-size: 20px;
+        }
+
+        .caption {
+            min-height: 250px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: start;
+        }
+
+        .event-cat {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            gap: 10px;
+            height: 50px;
+            opacity: 0.5;
+
+            .divider {
+                width: 30px;
+                height: 3px;
+                border-radius: 1px;
+                background-color: rgba(0, 0, 0, 0.596);
+            }
+
+            p {
+                margin: 0;
+            }
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            max-width: 80%;
+        }
+
+        .event-title {
+            position: relative;
+            overflow: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .more {
+            height: 150px;
+            width: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+
+            button {
+                width: 50px;
+                height: 100px;
+                background-color: white;
+                border: none;
+
+                img {
+                    width: 50px;
+                    height: 50px;
+                    object-fit: contain;
+                    object-position: center;
+                }
+
+
+            }
+
+            .more-options {
+                background-color: white;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border: 1px solid black;
+                border-radius: 10px;
+                z-index: 2;
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-around;
+                padding: 10px;
+
+                img {
+                    width: 25px;
+                    height: 25px;
+                    object-fit: contain;
+                    opacity: 0.7;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .more:hover {
+            .more-options {
+                display: flex;
+            }
+        }
     }
 }
 
-.message-dialog.open {
+.event-dialog.open {
     display: flex;
 }
 
 
 
-.message-dialog {
+.event-dialog {
     position: fixed;
     padding: 20px;
     width: 600px;
@@ -167,9 +266,9 @@ main {
     overflow-y: auto;
     overflow-x: hidden;
 
-    
 
-    .message-view {
+
+    .edit-event {
         width: 100%;
         height: 100%;
         display: flex;
@@ -214,9 +313,33 @@ main {
             }
         }
 
-        .message-content,
-        .message-email,
-        .message-object {
+        .download-img {
+            width: 100%;
+
+            button {
+                width: 100%;
+                height: 200px;
+                border-radius: 10px;
+                background-color: #D9D9D9;
+                border: none;
+            }
+
+            img {
+                width: 40px;
+                opacity: 0.6;
+                transition: width 0.3s ease;
+            }
+            img:hover {
+                width: 50px;
+            }
+        }
+
+        .event-date,
+        .event-title,
+        .event-short-title,
+        .event-location,
+        .event-category,
+        .event-link {
             width: 100%;
             border-radius: 10px;
             background-color: white;
@@ -226,49 +349,24 @@ main {
             gap: 10px;
             padding: 20px;
 
-            p {
+            input {
                 font-size: 20px;
                 width: 100%;
+                height: 50px;
                 padding: 5px 20px;
                 border-radius: 5px;
-                margin: 0;
-                background-color: #ECECEC;
-            }
-        }
-
-        .message-company-contact {
-            width: 100%;
-            border-radius: 10px;
-            background-color: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            padding: 20px;
-
-            div {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                width: calc(50% - 5px);
-            }
-
-            p {
-                font-size: 20px;
-                width: 100%;
-                padding: 5px 20px;
-                border-radius: 5px;
+                border: none;
                 margin: 0;
                 background-color: #ECECEC;
             }
         }
     }
 
-    .message-view.hide {
+    .edit-event.hide {
         display: none;
     }
 
-    .message-answer {
+    .new-event {
         width: 100%;
         height: 100%;
         display: none;
@@ -316,7 +414,7 @@ main {
             }
         }
 
-        .message-object {
+        .event-object {
             width: 100%;
             border-radius: 10px;
             background-color: white;
@@ -338,7 +436,7 @@ main {
             }
         }
 
-        .message-content {
+        .event-content {
             width: 100%;
             border-radius: 10px;
             background-color: white;
@@ -362,7 +460,7 @@ main {
         }
     }
 
-    .message-answer.show {
+    .new-event.show {
         display: flex;
     }
 }
