@@ -64,30 +64,52 @@
                             src="images/admin-page-close-dialog-icon.svg" alt=""></button>
                 </div>
                 <div class="download-img">
-                    <button><img src="images/admin-page-download-image-icon.svg" alt=""></button>
+                    <button><img class="icone" src="images/admin-page-download-image-icon.svg" alt=""></button>
                 </div>
                 <div class="event-title">
-                    <h5>Title</h5>
+                    <div class="event-box-info-title">
+                        <h5>Title</h5>
+                        <div class="lang-btn">
+                            <button type="button" class="btn-lang-en active">EN</button>
+                            <button type="button" class="btn-lang-fr">FR</button>
+                        </div>
+                    </div>
                     <input type="text" placeholder="..." id="event-title">
+                    <input type="text" placeholder="..." id="event-title-fr" style="display: none;">
                 </div>
                 <div class="event-short-title">
-                    <h5>Short title</h5>
+                    <div class="event-box-info-title">
+                        <h5>Short title</h5>
+                        <div class="lang-btn">
+                            <button type="button" class="btn-lang-en active">EN</button>
+                            <button type="button" class="btn-lang-fr">FR</button>
+                        </div>
+                    </div>
                     <input type="text" placeholder="..." id="event-short-title">
+                    <input type="text" placeholder="..." id="event-short-title-fr" style="display: none;">
                 </div>
                 <div class="event-location">
-                    <h5>Location</h5>
+                    <div class="event-box-info-title">
+                        <h5>Location</h5>
+                    </div>
                     <input type="text" placeholder="..." id="event-location">
                 </div>
                 <div class="event-category">
-                    <h5>Category</h5>
+                    <div class="event-box-info-title">
+                        <h5>Category</h5>
+                    </div>
                     <input type="text" placeholder="..." id="event-category">
                 </div>
                 <div class="event-link">
-                    <h5>Link</h5>
+                    <div class="event-box-info-title">
+                        <h5>Link</h5>
+                    </div>
                     <input type="text" placeholder="..." id="event-link">
                 </div>
                 <div class="event-date">
-                    <h5>Date</h5>
+                    <div class="event-box-info-title">
+                        <h5>Date</h5>
+                    </div>
                     <input type="text" placeholder="..." id="event-date-start">
                     <input type="text" placeholder="..." id="event-date-end">
                 </div>
@@ -250,38 +272,47 @@
             resetEventDialogClasses();
             // Enregistrer le event sélectionné dans la variable
             selectedEvent = event;
-        
+
             const eventDialog = document.querySelector('.event-dialog');
             const eventTitleInput = document.getElementById('event-title');
             const eventShortTitleInput = document.getElementById('event-short-title');
+            const eventTitleFrInput = document.getElementById('event-title-fr');
+            const eventShortTitleFrInput = document.getElementById('event-short-title-fr');
             const eventLocationInput = document.getElementById('event-location');
             const eventCategoryInput = document.getElementById('event-category');
             const eventLinkInput = document.getElementById('event-link');
             const eventDateStartInput = document.getElementById('event-date-start');
             const eventDateEndInput = document.getElementById('event-date-end');
             const downloadImgButton = document.querySelector('.download-img button');
-        
+
             // Remplir les champs d'entrée avec les informations de l'événement
             eventTitleInput.value = event.title || '';
-            eventShortTitleInput.value = event.shortTitle || '';
+            eventShortTitleInput.value = event.smallTitle || '';
+            eventTitleFrInput.value = event.titleFR || '';
+            eventShortTitleFrInput.value = event.smallTitleFR || '';
             eventLocationInput.value = event.location || '';
             eventCategoryInput.value = event.category || '';
-            eventLinkInput.value = event.linkedinPost || '';
+            eventLinkInput.value = event.link || '';
             eventDateStartInput.value = event.start ? formatterMD.format(new Date(event.start.seconds * 1000)) : '';
             eventDateEndInput.value = event.end ? formatterMD.format(new Date(event.end.seconds * 1000)) : '';
-        
-            // Ajouter l'image de l'événement comme arrière-plan du bouton
+
+            // Vider le contenu précédent, sauf l'icône
+            const iconElement = downloadImgButton.querySelector('.icone');
+            downloadImgButton.innerHTML = ''; // Vider le contenu précédent
+            downloadImgButton.appendChild(iconElement); // Réajouter l'icône
+
+            // Ajouter une balise <img> avec l'URL de l'image de l'événement
             if (event.imageUrl) {
-                downloadImgButton.style.backgroundImage = `url(${event.imageUrl})`;
-                downloadImgButton.style.backgroundSize = 'cover'; // Ajuster la taille de l'image
-                downloadImgButton.style.backgroundPosition = 'center'; // Centrer l'image
-            } else {
-                downloadImgButton.style.backgroundImage = 'none'; // Enlever l'arrière-plan si pas d'image
+                const imgElement = document.createElement('img');
+                imgElement.classList.add("event-edit-back-img");
+                imgElement.src = event.imageUrl;
+                imgElement.alt = 'Event Image';
+                downloadImgButton.appendChild(imgElement); // Ajouter l'image au bouton
             }
-        
+
             // Ajouter la classe 'open' pour afficher le event dialog
             eventDialog.classList.add('open');
-        
+
             if (!event.readStatus) {
                 const eventRef = doc(db, 'ContactFormEvent', event.id);
                 try {
@@ -302,6 +333,24 @@
         function closeDialog() {
             const eventDialog = document.querySelector('.event-dialog');
             eventDialog.classList.remove('open');
+
+            // Réinitialiser les champs d'entrée
+            document.getElementById('event-title').value = '';
+            document.getElementById('event-short-title').value = '';
+            document.getElementById('event-title-fr').value = '';
+            document.getElementById('event-short-title-fr').value = '';
+            document.getElementById('event-location').value = '';
+            document.getElementById('event-category').value = '';
+            document.getElementById('event-link').value = '';
+            document.getElementById('event-date-start').value = '';
+            document.getElementById('event-date-end').value = '';
+
+            // Vider le contenu du bouton de téléchargement d'image
+            const downloadImgButton = document.querySelector('.download-img button');
+            // Vider le contenu précédent, sauf l'icône
+            const iconElement = downloadImgButton.querySelector('.icone');
+            downloadImgButton.innerHTML = ''; // Vider le contenu précédent
+            downloadImgButton.appendChild(iconElement); // Réajouter l'icône
         }
 
         // Fonction pour afficher le dialogue de réponse
@@ -320,6 +369,33 @@
                 element.classList.add('show');
             });
         }
+
+        // Fonction pour gérer le changement de langue
+        function toggleLanguage(event) {
+            const langButtons = event.currentTarget.parentElement.querySelectorAll('button');
+            const inputEn = event.currentTarget.parentElement.parentElement.querySelector('input[type="text"]:not([id$="-fr"])');
+            const inputFr = event.currentTarget.parentElement.parentElement.querySelector('input[type="text"][id$="-fr"]');
+
+            // Vérifier quel bouton a été cliqué
+            if (event.target.classList.contains('btn-lang-en')) {
+                // Afficher l'input en anglais et masquer celui en français
+                inputEn.style.display = 'block';
+                inputFr.style.display = 'none';
+                langButtons[0].classList.add('active');
+                langButtons[1].classList.remove('active');
+            } else if (event.target.classList.contains('btn-lang-fr')) {
+                // Afficher l'input en français et masquer celui en anglais
+                inputEn.style.display = 'none';
+                inputFr.style.display = 'block';
+                langButtons[1].classList.add('active');
+                langButtons[0].classList.remove('active');
+            }
+        }
+
+        // Ajouter des écouteurs d'événements aux boutons de langue
+        document.querySelectorAll('.lang-btn button').forEach(button => {
+            button.addEventListener('click', toggleLanguage);
+        });
 
         // Ajouter un écouteur d'événements au bouton de réponse
         document.getElementById('save-btn').addEventListener('click', showAnswerDialog);
