@@ -60,7 +60,25 @@ document.addEventListener('DOMContentLoaded', function () {
      * Tu peux mettre toute ta fonction applyTranslations(lang) ici pour qu'il soit include dans le DOM
      * et qu'il soit exécuté après avoir sélectionné la langue
      */
+     // Appliquer les traductions aux éléments
+    //Cette fonction doit setrouver dans le document.addEventListener si non il ne sera pas lu
+    function applyTranslations(lang) {
+        const elements = document.querySelectorAll("[data-translate-key]");
+        elements.forEach((el) => {
+            const key = el.getAttribute("data-translate-key");
+            const keys = key.split('.'); // Exemple : "header.home"
+            let translation = translations[lang];
 
+            // Parcourir les niveaux d'objet dans le JSON
+            keys.forEach((k) => {
+                if (translation[k]) translation = translation[k];
+            });
+
+            if (translation) {
+                el.textContent = translation; // Remplacer le texte
+            }
+        });
+    }
     // Récupérer la valeur de la langue depuis localStorage si elle existe et l'appliquer
     var savedLang = getLanguage('lang');
 
@@ -78,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Mettre à jour l'affichage initialement avec la valeur par défaut ou celle de localStorage
     updateTitle(false);  // Ne pas enregistrer dans localStorage lors de l'initialisation
+    
 });
 
 // Chargement des fichiers de langue json et traductions
@@ -92,28 +111,9 @@ async function loadTranslations(lang) {
     applyTranslations(lang);
 }
 
-// Appliquer les traductions aux éléments
-//Cette fonction doit setrouver dans le document.addEventListener si non il ne sera pas lu
-function applyTranslations(lang) {
-    const elements = document.querySelectorAll("[data-translate-key]");
-    elements.forEach((el) => {
-        const key = el.getAttribute("data-translate-key");
-        const keys = key.split('.'); // Exemple : "header.home"
-        let translation = translations[lang];
-
-        // Parcourir les niveaux d'objet dans le JSON
-        keys.forEach((k) => {
-            if (translation[k]) translation = translation[k];
-        });
-
-        if (translation) {
-            el.textContent = translation; // Remplacer le texte
-        }
-    });
-}
-
 // Changer la langue
 //Inutile de mettre ce document.addEventListener puisque y'en a déjà un en haut, celui ne sera pas compilé
+/*
 document.addEventListener('DOMContentLoaded', () => {
     const langDropdown = document.getElementById('mobilLangDropdown');
 
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loadTranslations(selectedLanguage);
     });
 });
-
+*/
 // Charger la langue par défaut
 loadTranslations('en');
 console.log("JavaScript file is linked!");
