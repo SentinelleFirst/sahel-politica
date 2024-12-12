@@ -1,169 +1,165 @@
 {
-    "header": {
-        "who_we_are": {
-            "who_we_are": "Who we are",
-            "about_us": "About us",
-            "our_team": "Our team",
-            "partners": "Partners"},
-
-        "what_we_do":{    
-            "what_we_do": "What we do",
-            "training": "Training",
-            "consulting": "Consulting",
-            "keynote": "keynote"},
-
-        "news": {        
-            "news": "News",
-            "events": "Events",
-            "publications": "Publications",
-            "analysis": "Analysis"}
+  "header": {
+    "who_we_are": {
+      "who_we_are": "Who we are",
+      "about_us": "About us",
+      "our_team": "Our team",
+      "partners": "Partners"
     },
-    "homepage": {
-      "hero": {
-        "title": "Sahel Politica",
-        "subtitle": "Expertise in political and security risk management",
-        "description": "Your trusted partner in navigating the challenges of the Sahel region with tailored solutions for your needs."
-      },
-      "blog": {
-        "title": "Explore our latest insights and updates",
-        "subtitle": "Stay informed with the most recent developments, analyses, and events."
-      },
-      "what_we_do": {
-        "section_title": "Your path to resilience",
-        "description": "Navigate challenges, unlock opportunities, and strengthen your operations in the Sahel region.",
-        "services": {
-          "solution1": {
-            "title": "Tailored solutions for complex environments",
-            "cta": "Learn more about our services"
-          },
-          "solution2": {
-            "title": "Master the dynamics of the Sahel",
-            "cta": "Discover our training programs"
-          }
-        }
-      },
+    "what_we_do": {
+      "what_we_do": "What we do",
+      "training": "Training",
+      "consulting": "Consulting",
+      "keynote": "keynote"
+    },
+    "news": {
+      "news": "News",
+      "events": "Events",
+      "publications": "Publications",
+      "analysis": "Analysis"
+    }
+  },
+  "homepage": {
+    "hero": {
+      "title": "Sahel Politica",
+      "subtitle": "Expertise in political and security risk management",
+      "description": "Your trusted partner in navigating the challenges of the Sahel region with tailored solutions for your needs."
+    },
+    "blog": {
+      "title": "Explore our latest insights and updates",
+      "subtitle": "Stay informed with the most recent developments, analyses, and events."
+    },
+    "what_we_do": {
+      "section_title": "Your path to resilience",
+      "description": "Navigate challenges, unlock opportunities, and strengthen your operations in the Sahel region.",
       "services": {
-        "title": "Anticipate, Protect, Succeed",
-        "description": "Our services help you assess risks, manage crises, and strengthen the security of your operations in the Sahel region.",
-        "offerings": {
-          "audit": {
-            "title": "Sahel Resilience Audit",
-            "description": "Gain clarity on crisis impact and boost organizational resilience in volatile environments."
-          },
-          "risk_prevention": {
-            "title": "Risk Prevention Strategy",
-            "description": "Identify vulnerabilities and strengthen your risk management framework with tailored strategies."
-          },
-          "crisis_plan": {
-            "title": "Crisis Action Plan",
-            "description": "Prepare for the unexpected with comprehensive crisis scenarios and security plans."
-          },
-          "growth_accelerator": {
-            "title": "Growth Accelerator",
-            "description": "Seize opportunities with strategic insights and risk mitigation for sustainable expansion in the Sahel."
-          }
-        }
-      },
-      "training": {
-        "title": "Master Sahel Challenges",
-        "description": "Our training programs equip you with the tools to navigate geopolitical risks and build resilience in the Sahel region.",
-        "programs": {
-          "geopolitical_analysis": "Sahel geopolitical analysis",
-          "risk_management": "Risk Management and Security in the Sahel",
-          "engagement_strategies": "Strategies for Engagement and Collaboration in the Sahel",
-          "osint": "OSINT (Open Source Intelligence) in the Sahel"
-        }
-      },
-      "team": {
-        "title": "Discover more about who we are",
-        "description": "Learn about our mission, vision, and the dedicated team working to guide organizations through the complexities of the Sahel region.",
-        "cta": "Meet the team"
-      },
-      "clients": {
-        "title": "They trust us",
-        "logos_alt_text": {
-          "undp": "UNDP logo",
-          "gcsp": "GCSP logo",
-          "sdc": "Swiss Agency for Development and Cooperation logo",
-          "caritas": "Caritas logo",
-          "international_sos": "International SOS logo"
-        }
-      },
-      "footer": {
-        "subscribe": "Stay up to date with all our news by subscribing to our newsletter.",
-        "contact_us": "Contact us",
-        "address": "Sahel Politica, Chamerstrasse 172, 6300 Zug",
-        "email": "info@sahelpolitica.ch",
-        "privacy_policy": "Privacy Policy",
-        "terms_of_use": "Terms of Use",
-        "conditions_of_sales": "Conditions of Sales",
-        "submit": "Submit",
-        "social_media": {
-          "youtube": "Youtube",
-          "x": "X",
-          "linkedin": "LinkedIn"
+        "solution1": {
+          "title": "Tailored solutions for complex environments",
+          "cta": "Learn more about our services"
         },
-        "copyright": "© Sahel Politica, 2024, All rights reserved"
+        "solution2": {
+          "title": "Master the dynamics of the Sahel",
+          "cta": "Discover our training programs"
+        }
       }
     },
-    
-    "about_us": {
-        "title": "Who we are",
-        "hero": {
-        "heading": "WHO WE ARE",
-        "paragraph1": "Sahel Politica is an expert in political and security risk and crisis management in West Africa. With over 17 years' experience, we help organizations navigate through the geopolitical complexities of the Sahel while protecting their people, assets and reputation.",
-        "paragraph2": "Our services are designed to identify, anticipate and mitigate the risks that threaten field operations. We offer tailor-made solutions to ensure the safety, stability and resilience of projects in challenging environments."
+    "services": {
+      "title": "Anticipate, Protect, Succeed",
+      "description": "Our services help you assess risks, manage crises, and strengthen the security of your operations in the Sahel region.",
+      "offerings": {
+        "audit": {
+          "title": "Sahel Resilience Audit",
+          "description": "Gain clarity on crisis impact and boost organizational resilience in volatile environments."
         },
-        "mission": {
-        "heading": "OUR MISSION",
-        "paragraph1": "Our mission is to help humanitarian organizations and other development players anticipate and mitigate political and security risks in the Sahel. Thanks to our expertise, we enable our customers to focus on their social impact while securing their operations and teams in an unstable environment.",
-        "paragraph2": "We work alongside our partners to develop effective resilience strategies, combining risk analysis, crisis management and operational support. Our training courses, audits and prevention plans are specially designed to enable each organization to react quickly and effectively to the geopolitical challenges of the region."
+        "risk_prevention": {
+          "title": "Risk Prevention Strategy",
+          "description": "Identify vulnerabilities and strengthen your risk management framework with tailored strategies."
         },
-        "vision": {
-        "heading": "OUR VISION",
-        "paragraph1": "We aspire to a future where organizations working for social change in Africa can operate without fear of political and security risks. We believe that by being well prepared, every player can ensure the sustainability of their projects, strengthen their reputation, and build trusting partnerships with local communities and authorities.",
-        "paragraph2": "Our vision is to create a framework where organizations can focus fully on their humanitarian or development missions, without being paralyzed by uncertainty. By fostering an environment of collaboration with local stakeholders, we aim to transform risk into opportunity, enabling organizations to thrive even in the most volatile contexts."
+        "crisis_plan": {
+          "title": "Crisis Action Plan",
+          "description": "Prepare for the unexpected with comprehensive crisis scenarios and security plans."
         },
-        "team": {
-        "heading": "OUR TEAM",
-        "subheading": "A small team of experts passionate about safety and resilience in the Sahel.",
-        "description": "Experienced risk management and security professionals, our team provides tailor-made solutions to strengthen the resilience of organizations operating in the Sahel.",
-        "members": {
-            "ceo": {
-            "name": "Issaka Ouedraogo-Iseli",
-            "role": "CEO and Founder",
-            "description": "Sahel Risks and Strategy expert"
-            },
-            "consultant1": {
-            "name": "Dr. Awalou Ouedraogo",
-            "role": "Associated Consultant",
-            "description": "African governance, peacebuilding & International relations expert"
-            },
-            "consultant2": {
-            "name": "Dr. Abdourahmane Idrissa",
-            "role": "Associated Consultant",
-            "description": "African politics and Ideologies specialist"
-            },
-            "consultant3": {
-            "name": "ZOMBRE Gerard Jean Joris",
-            "role": "Junior Consultant",
-            "description": "Sahel Risks and Strategy"
-            }
+        "growth_accelerator": {
+          "title": "Growth Accelerator",
+          "description": "Seize opportunities with strategic insights and risk mitigation for sustainable expansion in the Sahel."
         }
-        },
-        "clients": {
-          "heading": "OUR CLIENTS",
-          "paragraphs": {
-              "gcsp": "The Geneva Center for Security Policy (GCSP) is a leading think tank dedicated to peace and security issues globally. By collaborating with Sahel Politica, GCSP enhances its understanding of the complex geopolitical landscape in West Africa, supporting initiatives that strengthen regional stability and resilience against political and security risks.",
-              "undp": "The United Nations Development Programme (UNDP) works to eradicate poverty and reduce inequalities through sustainable development. Partnering with Sahel Politica, UNDP leverages its expertise to navigate the challenging political environment in the Sahel, ensuring that development efforts are effectively aligned with the region's security needs.",
-              "caritas": "Caritas is a global confederation focused on humanitarian aid and social development. By working with Sahel Politica, CARITAS gains insights into the geopolitical dynamics affecting its operations in the Sahel, allowing for more effective humanitarian responses and better risk management in complex environments.",
-              "sdc": "The Swiss Agency for Development and Cooperation (SDC) aims to promote sustainable development and reduce poverty in developing countries. Collaborating with Sahel Politica enables SDC to assess political risks and enhance its programmatic strategies in West Africa, ensuring that its interventions are resilient and impactful.",
-              "sos": "International SOS is a leader in health and security services for organizations operating in complex environments. By partnering with Sahel Politica, International SOS can better understand the regional risks affecting its clients in the Sahel, facilitating the development of tailored health and safety solutions that ensure the well-being of personnel and assets."
-        }
-        }
+      }
+    },
+    "training": {
+      "title": "Master Sahel Challenges",
+      "description": "Our training programs equip you with the tools to navigate geopolitical risks and build resilience in the Sahel region.",
+      "programs": {
+        "geopolitical_analysis": "Sahel geopolitical analysis",
+        "risk_management": "Risk Management and Security in the Sahel",
+        "engagement_strategies": "Strategies for Engagement and Collaboration in the Sahel",
+        "osint": "OSINT (Open Source Intelligence) in the Sahel"
+      }
+    },
+    "team": {
+      "title": "Discover more about who we are",
+      "description": "Learn about our mission, vision, and the dedicated team working to guide organizations through the complexities of the Sahel region.",
+      "cta": "Meet the team"
+    },
+    "clients": {
+      "title": "They trust us",
+      "logos_alt_text": {
+        "undp": "UNDP logo",
+        "gcsp": "GCSP logo",
+        "sdc": "Swiss Agency for Development and Cooperation logo",
+        "caritas": "Caritas logo",
+        "international_sos": "International SOS logo"
+      }
+    },
+    "footer": {
+      "subscribe": "Stay up to date with all our news by subscribing to our newsletter.",
+      "contact_us": "Contact us",
+      "address": "Sahel Politica, Chamerstrasse 172, 6300 Zug",
+      "email": "info@sahelpolitica.ch",
+      "privacy_policy": "Privacy Policy",
+      "terms_of_use": "Terms of Use",
+      "conditions_of_sales": "Conditions of Sales",
+      "submit": "Submit",
+      "social_media": {
+        "youtube": "Youtube",
+        "x": "X",
+        "linkedin": "LinkedIn"
+      },
+      "copyright": "© Sahel Politica, 2024, All rights reserved"
     }
-      
-          
+  },
+  "about_us": {
+    "title": "Who we are",
+    "hero": {
+      "heading": "WHO WE ARE",
+      "paragraph1": "Sahel Politica is an expert in political and security risk and crisis management in West Africa. With over 17 years' experience, we help organizations navigate through the geopolitical complexities of the Sahel while protecting their people, assets and reputation.",
+      "paragraph2": "Our services are designed to identify, anticipate and mitigate the risks that threaten field operations. We offer tailor-made solutions to ensure the safety, stability and resilience of projects in challenging environments."
+    },
+    "mission": {
+      "heading": "OUR MISSION",
+      "paragraph1": "Our mission is to help humanitarian organizations and other development players anticipate and mitigate political and security risks in the Sahel. Thanks to our expertise, we enable our customers to focus on their social impact while securing their operations and teams in an unstable environment.",
+      "paragraph2": "We work alongside our partners to develop effective resilience strategies, combining risk analysis, crisis management and operational support. Our training courses, audits and prevention plans are specially designed to enable each organization to react quickly and effectively to the geopolitical challenges of the region."
+    },
+    "vision": {
+      "heading": "OUR VISION",
+      "paragraph1": "We aspire to a future where organizations working for social change in Africa can operate without fear of political and security risks. We believe that by being well prepared, every player can ensure the sustainability of their projects, strengthen their reputation, and build trusting partnerships with local communities and authorities.",
+      "paragraph2": "Our vision is to create a framework where organizations can focus fully on their humanitarian or development missions, without being paralyzed by uncertainty. By fostering an environment of collaboration with local stakeholders, we aim to transform risk into opportunity, enabling organizations to thrive even in the most volatile contexts."
+    },
+    "team": {
+      "heading": "OUR TEAM",
+      "subheading": "A small team of experts passionate about safety and resilience in the Sahel.",
+      "description": "Experienced risk management and security professionals, our team provides tailor-made solutions to strengthen the resilience of organizations operating in the Sahel.",
+      "members": {
+        "ceo": {
+          "name": "Issaka Ouedraogo-Iseli",
+          "role": "CEO and Founder",
+          "description": "Sahel Risks and Strategy expert"
+        },
+        "consultant1": {
+          "name": "Dr. Awalou Ouedraogo",
+          "role": "Associated Consultant",
+          "description": "African governance, peacebuilding & International relations expert"
+        },
+        "consultant2": {
+          "name": "Dr. Abdourahmane Idrissa",
+          "role": "Associated Consultant",
+          "description": "African politics and Ideologies specialist"
+        },
+        "consultant3": {
+          "name": "ZOMBRE Gerard Jean Joris",
+          "role": "Junior Consultant",
+          "description": "Sahel Risks and Strategy"
+        }
+      }
+    },
+    "clients": {
+      "heading": "OUR CLIENTS",
+      "paragraphs": {
+        "gcsp": "The Geneva Center for Security Policy (GCSP) is a leading think tank dedicated to peace and security issues globally. By collaborating with Sahel Politica, GCSP enhances its understanding of the complex geopolitical landscape in West Africa, supporting initiatives that strengthen regional stability and resilience against political and security risks.",
+        "undp": "The United Nations Development Programme (UNDP) works to eradicate poverty and reduce inequalities through sustainable development. Partnering with Sahel Politica, UNDP leverages its expertise to navigate the challenging political environment in the Sahel, ensuring that development efforts are effectively aligned with the region's security needs.",
+        "caritas": "Caritas is a global confederation focused on humanitarian aid and social development. By working with Sahel Politica, CARITAS gains insights into the geopolitical dynamics affecting its operations in the Sahel, allowing for more effective humanitarian responses and better risk management in complex environments.",
+        "sdc": "The Swiss Agency for Development and Cooperation (SDC) aims to promote sustainable development and reduce poverty in developing countries. Collaborating with Sahel Politica enables SDC to assess political risks and enhance its programmatic strategies in West Africa, ensuring that its interventions are resilient and impactful.",
+        "sos": "International SOS is a leader in health and security services for organizations operating in complex environments. By partnering with Sahel Politica, International SOS can better understand the regional risks affecting its clients in the Sahel, facilitating the development of tailored health and safety solutions that ensure the well-being of personnel and assets."
+      }
+    }
   }
-  
-  
+}

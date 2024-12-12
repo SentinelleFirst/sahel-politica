@@ -4,30 +4,31 @@
             "who_we_are": "Qui sommes-nous ?",
             "about_us": "A propos de nous",
             "our_team": "Notre équipe",
-            "partners": "Partenaires"},
-
-        "what_we_do":{    
+            "partners": "Partenaires"
+        },
+        "what_we_do": {
             "what_we_do": "Ce que nous faisons",
             "training": "Formations",
             "consulting": "Conseil",
-            "keynote": "Conférences"},
-
-        "news": {        
+            "keynote": "Conférences"
+        },
+        "news": {
             "news": "Actualités",
             "events": "Evénements",
             "publications": "Publications",
-            "analysis": "Analyses"}
+            "analysis": "Analyses"
+        }
     },
     "homepage": {
         "hero": {
             "title": "Sahel Politica",
             "subtitle": "Expertise en matière de gestion des risques politiques et sécuritaires",
-            "description" : "Votre partenaire de confiance pour relever les défis de la région du Sahel avec des solutions adaptées à vos besoins."
-      },
+            "description": "Votre partenaire de confiance pour relever les défis de la région du Sahel avec des solutions adaptées à vos besoins."
+        },
         "blog": {
             "title": "Découvrez nos dernières analyses et nouveautés",
             "subtitle": "Restez informé des développements, analyses et événements les plus récents."
-      },
+        },
         "what_we_do": {
             "section_title": "Votre chemin vers la résilience",
             "description": "Relever les défis, débloquer les opportunités et renforcer vos opérations dans la région du Sahel",
@@ -41,10 +42,10 @@
                     "cta": "Découvrez nos programmes de formation"
                 }
             }
-      },
+        },
         "services": {
             "title": "Anticiper, protéger, réussir",
-            "description" : "Nos services vous aident à évaluer les risques, à gérer les crises et à renforcer la sécurité de vos opérations dans la région du Sahel",
+            "description": "Nos services vous aident à évaluer les risques, à gérer les crises et à renforcer la sécurité de vos opérations dans la région du Sahel",
             "offerings": {
                 "audit": {
                     "title": "Audit de la résilience du Sahel",
@@ -63,7 +64,7 @@
                     "description": "Saisir les opportunités grâce à une vision stratégique et à la réduction des risques pour une expansion durable au Sahel."
                 }
             }
-      },
+        },
         "training": {
             "title": "Maîtriser les défis du Sahel",
             "description": "Nos programmes de formation vous équipent des outils nécessaires pour naviguer dans les risques géopolitiques et construire la résilience dans la région du Sahel.",
@@ -73,7 +74,7 @@
                 "engagement_strategies": "Stratégies d'engagement et de collaboration dans le Sahel",
                 "osint": "OSINT (Open Source Intelligence) dans le Sahel"
             }
-    },
+        },
         "team": {
             "title": "Découvrez-en plus sur qui nous sommes",
             "description": "Apprenez-en plus sur notre mission, notre vision et l'équipe dédiée qui guide les organisations à travers les complexités de la région du Sahel.",
@@ -106,7 +107,6 @@
             "copyright": "© Sahel Politica, 2024, Tous droits réservés"
         }
     },
-    
     "about_us": {
         "title": "Qui sommes nous",
         "hero": {
@@ -162,8 +162,4 @@
             }
         }
     }
-    
-         
-  }
-  
-  
+}

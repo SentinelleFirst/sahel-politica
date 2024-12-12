@@ -91,6 +91,32 @@ document.addEventListener('DOMContentLoaded', function () {
         applyTranslations(lang);
     }
     //loadTranslations('en');
+    //Traduction avec Deepl
+    async function translateWithDeepL(text, targetLang) {
+        const apiKey = "60eacb02-4951-40ca-9758-949c06c021e8:fx";
+        const url = `https://api-free.deepl.com/v2/translate`;
+        const params = new URLSearchParams();
+        params.append("auth_key", apiKey);
+        params.append("text", text);
+        params.append("target_lang", targetLang.toUpperCase());
+      
+        const response = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: params,
+        });
+        const data = await response.json();
+        return data.translations[0].text;
+      }
+      
+      async function translateDynamicContent(targetLang) {
+        const elements = document.querySelectorAll("[data-translate='true']");
+        for (const el of elements) {
+          const translatedText = await translateWithDeepL(el.textContent, targetLang);
+          el.textContent = translatedText;
+        }
+      }
+      
     // Récupérer la valeur de la langue depuis localStorage si elle existe et l'appliquer
     var savedLang = getLanguage('lang');
 
