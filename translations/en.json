@@ -91,11 +91,13 @@
       },
       "footer": {
         "subscribe": "Stay up to date with all our news by subscribing to our newsletter.",
+        "contact_us": "Contact us",
         "address": "Sahel Politica, Chamerstrasse 172, 6300 Zug",
         "email": "info@sahelpolitica.ch",
         "privacy_policy": "Privacy Policy",
         "terms_of_use": "Terms of Use",
         "conditions_of_sales": "Conditions of Sales",
+        "submit": "Submit",
         "social_media": {
           "youtube": "Youtube",
           "x": "X",
@@ -142,7 +144,7 @@
             "role": "Associated Consultant",
             "description": "African politics and Ideologies specialist"
             },
-            "junior_consultant": {
+            "consultant3": {
             "name": "ZOMBRE Gerard Jean Joris",
             "role": "Junior Consultant",
             "description": "Sahel Risks and Strategy"
@@ -150,13 +152,13 @@
         }
         },
         "clients": {
-        "heading": "OUR CLIENTS",
-        "paragraphs": {
-            "gcsp": "The Geneva Center for Security Policy (GCSP) is a leading think tank dedicated to peace and security issues globally. By collaborating with Sahel Politica, GCSP enhances its understanding of the complex geopolitical landscape in West Africa, supporting initiatives that strengthen regional stability and resilience against political and security risks.",
-            "undp": "The United Nations Development Programme (UNDP) works to eradicate poverty and reduce inequalities through sustainable development. Partnering with Sahel Politica, UNDP leverages its expertise to navigate the challenging political environment in the Sahel, ensuring that development efforts are effectively aligned with the region's security needs.",
-            "caritas": "Caritas is a global confederation focused on humanitarian aid and social development. By working with Sahel Politica, CARITAS gains insights into the geopolitical dynamics affecting its operations in the Sahel, allowing for more effective humanitarian responses and better risk management in complex environments.",
-            "sdc": "The Swiss Agency for Development and Cooperation (SDC) aims to promote sustainable development and reduce poverty in developing countries. Collaborating with Sahel Politica enables SDC to assess political risks and enhance its programmatic strategies in West Africa, ensuring that its interventions are resilient and impactful.",
-            "sos": "International SOS is a leader in health and security services for organizations operating in complex environments. By partnering with Sahel Politica, International SOS can better understand the regional risks affecting its clients in the Sahel, facilitating the development of tailored health and safety solutions that ensure the well-being of personnel and assets."
+          "heading": "OUR CLIENTS",
+          "paragraphs": {
+              "gcsp": "The Geneva Center for Security Policy (GCSP) is a leading think tank dedicated to peace and security issues globally. By collaborating with Sahel Politica, GCSP enhances its understanding of the complex geopolitical landscape in West Africa, supporting initiatives that strengthen regional stability and resilience against political and security risks.",
+              "undp": "The United Nations Development Programme (UNDP) works to eradicate poverty and reduce inequalities through sustainable development. Partnering with Sahel Politica, UNDP leverages its expertise to navigate the challenging political environment in the Sahel, ensuring that development efforts are effectively aligned with the region's security needs.",
+              "caritas": "Caritas is a global confederation focused on humanitarian aid and social development. By working with Sahel Politica, CARITAS gains insights into the geopolitical dynamics affecting its operations in the Sahel, allowing for more effective humanitarian responses and better risk management in complex environments.",
+              "sdc": "The Swiss Agency for Development and Cooperation (SDC) aims to promote sustainable development and reduce poverty in developing countries. Collaborating with Sahel Politica enables SDC to assess political risks and enhance its programmatic strategies in West Africa, ensuring that its interventions are resilient and impactful.",
+              "sos": "International SOS is a leader in health and security services for organizations operating in complex environments. By partnering with Sahel Politica, International SOS can better understand the regional risks affecting its clients in the Sahel, facilitating the development of tailored health and safety solutions that ensure the well-being of personnel and assets."
         }
         }
     }
