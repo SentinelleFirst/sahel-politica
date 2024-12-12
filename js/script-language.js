@@ -79,6 +79,18 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+    // Chargement des fichiers de langue json et traductions
+    const translations = {};
+
+    // Charger les traductions depuis un fichier JSON
+    async function loadTranslations(lang) {
+        if (!translations[lang]) {
+            const response = await fetch(`translations/${lang}.json`);
+            translations[lang] = await response.json();
+        }
+        applyTranslations(lang);
+    }
+    //loadTranslations('en');
     // Récupérer la valeur de la langue depuis localStorage si elle existe et l'appliquer
     var savedLang = getLanguage('lang');
 
@@ -99,17 +111,6 @@ document.addEventListener('DOMContentLoaded', function () {
     
 });
 
-// Chargement des fichiers de langue json et traductions
-const translations = {};
-
-// Charger les traductions depuis un fichier JSON
-async function loadTranslations(lang) {
-    if (!translations[lang]) {
-        const response = await fetch(`translations/${lang}.json`);
-        translations[lang] = await response.json();
-    }
-    applyTranslations(lang);
-}
 
 // Changer la langue
 //Inutile de mettre ce document.addEventListener puisque y'en a déjà un en haut, celui ne sera pas compilé
@@ -124,5 +125,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 */
 // Charger la langue par défaut
-loadTranslations('en');
-console.log("JavaScript file is linked!");
+
