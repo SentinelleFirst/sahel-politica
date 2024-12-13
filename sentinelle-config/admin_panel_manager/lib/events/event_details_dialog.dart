@@ -500,7 +500,7 @@ class _EventDetailsDialogState extends State<EventDetailsDialog>
                     ],
                   ),
                 ),
-                //Location info
+                //Category info
                 Container(
                   margin: const EdgeInsets.only(top: 10),
                   width: MediaQuery.of(context).size.width,

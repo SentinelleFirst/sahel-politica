@@ -1,4 +1,5 @@
 import 'package:admin_panel_manager/constants.dart';
+import 'package:admin_panel_manager/messages/message_details_dialog.dart';
 import 'package:admin_panel_manager/widgets/simple_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,6 +25,7 @@ class _MessagesViewState extends State<MessagesView> {
     messages = List<Message>.generate(
       5,
       (int index) => Message(
+          "$index",
           "masterpiecebf@gmail.com",
           "Saydil",
           "SIDIBE $index",
@@ -56,11 +58,17 @@ class _MessagesViewState extends State<MessagesView> {
     });
   }
 
-  void openMessage(Message messages) {
+  void openMessage(Message message) {
     // Ajoutez une action pour ouvrir l'événement
+    setState(() {
+      messages.firstWhere((m) => m.id == message.id).markRead();
+    });
+    showDialog(
+      context: context,
+      builder: (context) =>
+          MessageDetailsDialog(message: message, refresh: () {}),
+    );
   }
-
-  void sendEmail() {}
 
   @override
   Widget build(BuildContext context) {
