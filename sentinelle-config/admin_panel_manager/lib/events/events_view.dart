@@ -221,13 +221,11 @@ class EventInfoLine extends StatelessWidget {
                     Row(
                       children: [
                         const SimpleDivider(
+                            margin: EdgeInsets.only(right: 10),
                             width: 30,
                             height: 3,
                             color: Colors.grey,
                             borderRadius: 2),
-                        const SizedBox(
-                          width: 10,
-                        ),
                         Text(
                           event.category,
                           style: GoogleFonts.poppins(

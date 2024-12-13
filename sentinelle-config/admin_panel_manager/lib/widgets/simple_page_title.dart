@@ -20,7 +20,12 @@ class SimplePageTitle extends StatelessWidget {
           width: 20,
         ),
         const SimpleDivider(
-            width: 200, height: 6, color: Color(0xFFFACB01), borderRadius: 30)
+          width: 200,
+          height: 6,
+          color: Color(0xFFFACB01),
+          borderRadius: 30,
+          margin: EdgeInsets.symmetric(horizontal: 20),
+        )
       ],
     );
   }
@@ -54,10 +59,8 @@ class _ComplexePageTitleState extends State<ComplexePageTitle> {
               widget.title,
               style: pageTitleStyle,
             ),
-            const SizedBox(
-              width: 20,
-            ),
             const SimpleDivider(
+                margin: EdgeInsets.symmetric(horizontal: 20),
                 width: 200,
                 height: 6,
                 color: Color(0xFFFACB01),

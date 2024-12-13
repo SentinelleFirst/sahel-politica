@@ -12,3 +12,5 @@ TextStyle secondTitleStyle =
 
 TextStyle thirdTitleStyle =
     GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold);
+
+TextStyle noramlTextStylz = GoogleFonts.nunitoSans(fontSize: 15);
