@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    menuSelect(7);
+    menuSelect(4);
   }
 
   double menuIconSize = 25;
