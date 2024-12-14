@@ -195,7 +195,7 @@ class _NewEventDialogState extends State<NewEventDialog>
                           fitAndroidIos: BoxFit.cover,
                           fitWeb: BoxFitWeb.cover,
                           onLoading: const CircularProgressIndicator(
-                            color: Colors.indigoAccent,
+                            color: Color(0xffFACB01),
                           ),
                         ),
                       ),

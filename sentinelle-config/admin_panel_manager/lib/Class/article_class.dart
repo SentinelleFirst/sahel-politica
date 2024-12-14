@@ -10,7 +10,7 @@ class Article {
   String imageUrl;
   String category;
   String author;
-  bool publiched; //Que 2 status possible: soit publié, soit brouillons
+  bool published; //Que 2 status possible: soit publié, soit brouillons
   DateTime date;
 
   Article(
@@ -25,7 +25,7 @@ class Article {
       this.imageUrl,
       this.category,
       this.author,
-      this.publiched,
+      this.published,
       this.date);
 
   factory Article.empty() {
@@ -59,7 +59,7 @@ class Article {
       e.imageUrl,
       e.category,
       e.author,
-      e.publiched,
+      e.published,
       e.date,
     );
   }

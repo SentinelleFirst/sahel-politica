@@ -186,7 +186,7 @@ class EventInfoLine extends StatelessWidget {
                       fitAndroidIos: BoxFit.cover,
                       fitWeb: BoxFitWeb.cover,
                       onLoading: const CircularProgressIndicator(
-                        color: Colors.indigoAccent,
+                        color: Color(0xffFACB01),
                       ),
                     ),
                   ),
