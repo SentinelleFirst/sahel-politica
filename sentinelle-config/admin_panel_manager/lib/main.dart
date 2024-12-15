@@ -5,11 +5,13 @@ import 'package:admin_panel_manager/reservations/reservations_view.dart';
 import 'package:admin_panel_manager/events/events_view.dart';
 import 'package:admin_panel_manager/widgets/menu_items.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'analysis/analysis_view.dart';
 import 'analytics/analytics_view.dart';
 import 'dashboard/dashboard_view.dart';
+import 'login-manager/login_page.dart';
 import 'users/users_view.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -19,7 +21,25 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+
+  final FlutterSecureStorage storage = const FlutterSecureStorage();
+  String? savedEmail = await storage.read(key: "user_email");
+
+  runApp(MyAppWrapper(savedEmail: savedEmail));
+}
+
+class MyAppWrapper extends StatelessWidget {
+  final String? savedEmail;
+
+  const MyAppWrapper({Key? key, this.savedEmail}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: savedEmail != null ? const MyApp() : const LoginPage(),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {

@@ -16,7 +16,7 @@ class _AnalysisViewState extends State<AnalysisView> {
   @override
   void initState() {
     super.initState();
-    showEditAnalysisView(
+    /*showEditAnalysisView(
       Analysis(
           "1",
           "Burkina Faso - First anniversary of Ibrahim Traoré's accession to power",
@@ -34,7 +34,8 @@ class _AnalysisViewState extends State<AnalysisView> {
           "Issaka OUEDRAOGO",
           true,
           DateTime.now()),
-    );
+    );*/
+    showAnalysisViewList();
   }
 
   void showNewAnalysisView() {
