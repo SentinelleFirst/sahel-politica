@@ -168,88 +168,73 @@ class MessageInfoLine extends StatefulWidget {
 }
 
 class _MessageInfoLineState extends State<MessageInfoLine> {
-  bool isSameDay(DateTime a, DateTime b) {
-    return a.day == b.day && a.month == b.month && a.year == b.year;
-  }
-
-  bool isHovered = false;
-
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (event) => setState(() {
-        isHovered = true;
-      }),
-      onExit: (event) => setState(() {
-        isHovered = false;
-      }),
-      child: Container(
-        decoration: BoxDecoration(
-            border: Border(
-                bottom: BorderSide(
-                    width: 1, color: Colors.black.withOpacity(0.3)))),
-        child: ListTile(
-          onTap: widget.readAction,
-          leading: Container(
-            width: 10,
-            height: 10,
-            decoration: BoxDecoration(
-                color: widget.message.readStatus
-                    ? Colors.white
-                    : const Color(0xffFACB01),
-                borderRadius: BorderRadius.circular(5)),
-          ),
-          title: Row(
-            children: [
-              SizedBox(
-                  width: 130,
-                  child: Text(
-                    widget.message.displayName(),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: GoogleFonts.nunitoSans(
-                        fontSize: 15,
-                        fontWeight: !widget.message.readStatus
-                            ? FontWeight.bold
-                            : null),
-                  )),
-              const SizedBox(width: 20),
-              Expanded(
-                flex: 1,
+    return Container(
+      decoration: BoxDecoration(
+          border: Border(
+              bottom:
+                  BorderSide(width: 1, color: Colors.black.withOpacity(0.3)))),
+      child: ListTile(
+        onTap: widget.readAction,
+        leading: Container(
+          width: 10,
+          height: 10,
+          decoration: BoxDecoration(
+              color: widget.message.readStatus
+                  ? Colors.white
+                  : const Color(0xffFACB01),
+              borderRadius: BorderRadius.circular(5)),
+        ),
+        title: Row(
+          children: [
+            SizedBox(
+                width: 130,
                 child: Text(
-                  widget.message.object,
+                  widget.message.displayName(),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: GoogleFonts.nunitoSans(
                       fontSize: 15,
                       fontWeight:
                           !widget.message.readStatus ? FontWeight.bold : null),
-                ),
-              ),
-              const SimpleDivider(
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  width: 10,
-                  height: 1,
-                  color: Colors.black,
-                  borderRadius: 0),
-              Expanded(
-                flex: 2,
-                child: Text(
-                  widget.message.message,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                  style: GoogleFonts.nunitoSans(
+                )),
+            const SizedBox(width: 20),
+            Expanded(
+              flex: 1,
+              child: Text(
+                widget.message.object,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                style: GoogleFonts.nunitoSans(
                     fontSize: 15,
-                  ),
+                    fontWeight:
+                        !widget.message.readStatus ? FontWeight.bold : null),
+              ),
+            ),
+            const SimpleDivider(
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                width: 10,
+                height: 1,
+                color: Colors.black,
+                borderRadius: 0),
+            Expanded(
+              flex: 2,
+              child: Text(
+                widget.message.message,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                style: GoogleFonts.nunitoSans(
+                  fontSize: 15,
                 ),
               ),
-            ],
-          ),
-          trailing: Text(
-            DateFormat.yMMMd().format(widget.message.date),
-            style: GoogleFonts.nunitoSans(
-              fontSize: 15,
             ),
+          ],
+        ),
+        trailing: Text(
+          DateFormat.yMMMd().format(widget.message.date),
+          style: GoogleFonts.nunitoSans(
+            fontSize: 15,
           ),
         ),
       ),

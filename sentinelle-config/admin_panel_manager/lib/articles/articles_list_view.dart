@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_network/image_network.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../Class/article_class.dart';
 import '../constants.dart';
@@ -192,10 +193,6 @@ class ArticleInfoLine extends StatelessWidget {
   final Article article;
   final Function() readAction;
 
-  bool isSameDay(DateTime a, DateTime b) {
-    return a.day == b.day && a.month == b.month && a.year == b.year;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -268,13 +265,22 @@ class ArticleInfoLine extends StatelessWidget {
                             size: 30,
                           )),
                       IconButton(
-                          onPressed: readAction,
+                          onPressed: () async {
+                            if (article.linkedinPost.isNotEmpty) {
+                              final Uri url = Uri.parse(article.linkedinPost);
+                              if (await canLaunchUrl(url)) {
+                                await launchUrl(url);
+                              } else {
+                                throw 'Could not launch $url';
+                              }
+                            }
+                          },
                           icon: const Icon(
                             Icons.remove_red_eye_outlined,
                             size: 20,
                           )),
                       IconButton(
-                          onPressed: readAction,
+                          onPressed: () {},
                           icon: const Icon(
                             Icons.delete_outlined,
                             color: Colors.red,

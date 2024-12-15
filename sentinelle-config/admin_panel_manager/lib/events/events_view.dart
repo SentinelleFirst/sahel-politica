@@ -4,6 +4,7 @@ import 'package:admin_panel_manager/widgets/simple_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../Class/event_class.dart';
 import '../widgets/simple_page_title.dart';
 import 'package:image_network/image_network.dart';
@@ -249,14 +250,45 @@ class EventInfoLine extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(
+              width: 100,
+              height: 180,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IconButton(
+                      onPressed: readAction,
+                      icon: const Icon(
+                        Icons.edit_note_rounded,
+                        size: 30,
+                      )),
+                  IconButton(
+                      onPressed: () async {
+                        if (event.linkedinPost.isNotEmpty) {
+                          final Uri url = Uri.parse(event.linkedinPost);
+                          if (await canLaunchUrl(url)) {
+                            await launchUrl(url);
+                          } else {
+                            throw 'Could not launch $url';
+                          }
+                        }
+                      },
+                      icon: const Icon(
+                        Icons.remove_red_eye_outlined,
+                        size: 20,
+                      )),
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.delete_outlined,
+                        color: Colors.red,
+                        size: 20,
+                      )),
+                ],
+              ),
+            )
           ],
         ),
-        trailing: IconButton(
-            onPressed: readAction,
-            icon: const Icon(
-              Icons.more_vert_outlined,
-              size: 30,
-            )),
       ),
     );
   }
