@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:admin_panel_manager/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../main.dart';
+
+import '../Class/profile_class.dart';
+import 'get_user_fonction.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -13,15 +14,24 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final FlutterSecureStorage _storage = const FlutterSecureStorage();
+  /*final*/ TextEditingController _emailController = TextEditingController();
+  /*final*/ TextEditingController _passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance; // Déclarer _auth ici
 
   bool _isLoading = false;
   String? _errorMessage;
 
+  @override
+  void initState() {
+    super.initState();
+    //Pre Connexion
+    _emailController =
+        TextEditingController(text: "sentinelle@sahelpolitica.ch");
+    _passwordController = TextEditingController(text: "Sentinelle226//");
+    _login();
+  }
+
+  // Fonction de login
   Future<void> _login() async {
     setState(() {
       _isLoading = true;
@@ -37,25 +47,19 @@ class _LoginPageState extends State<LoginPage> {
 
       final String userId = userCredential.user?.uid ?? "";
 
-      // Fetch additional user info from Firestore
-      DocumentSnapshot userDoc =
-          await _firestore.collection('AdminUsers').doc(userId).get();
+      // Fetch additional user info from Firestore en utilisant le userId
+      Profile? userProfile = await getUser(userId); // Passer userId ici
 
-      if (userDoc.exists) {
-        Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
-
-        // Save user session with additional info
-        await _storage.write(
-            key: "user_email", value: userCredential.user?.email);
-        await _storage.write(key: "user_name", value: userData['name']);
-        await _storage.write(key: "user_surname", value: userData['surname']);
-        await _storage.write(
-            key: "user_creation_date", value: userData['creation_date']);
+      if (userProfile != null) {
+        // Si le profil a été récupéré avec succès, tu peux l'utiliser ici
+        print('User Profile: ${userProfile.displayName()}');
       }
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const MyApp()),
+        MaterialPageRoute(
+            builder: (context) =>
+                const MyHomePage()), // Replace MyApp with the actual home page widget
       );
     } on FirebaseAuthException catch (e) {
       setState(() {
@@ -70,56 +74,6 @@ class _LoginPageState extends State<LoginPage> {
         _isLoading = false;
       });
     }
-  }
-
-  Future<void> _checkSession() async {
-    String? savedEmail = await _storage.read(key: "user_email");
-    if (savedEmail != null) {
-      try {
-        final String? userId = _auth.currentUser?.uid;
-        if (userId != null) {
-          DocumentSnapshot userDoc =
-              await _firestore.collection('AdminUsers').doc(userId).get();
-          if (userDoc.exists) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const MyApp()),
-            );
-          }
-        }
-      } catch (e) {
-        await _logout();
-      }
-    }
-  }
-
-  Future<Map<String, String>> _getUserInfoFromStorage() async {
-    final String? email = await _storage.read(key: "user_email");
-    final String? name = await _storage.read(key: "user_name");
-    final String? surname = await _storage.read(key: "user_surname");
-    final String? creationDate = await _storage.read(key: "user_creation_date");
-
-    return {
-      "email": email ?? "",
-      "name": name ?? "",
-      "surname": surname ?? "",
-      "creation_date": creationDate ?? "",
-    };
-  }
-
-  Future<void> _logout() async {
-    await _storage.deleteAll();
-    await _auth.signOut();
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const LoginPage()),
-    );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _checkSession();
   }
 
   @override
@@ -181,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                   : MaterialButton(
                       minWidth: 300,
                       height: 70,
-                      color: Color(0xffFACB01),
+                      color: const Color(0xffFACB01),
                       onPressed: _login,
                       shape: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)),
@@ -198,4 +152,8 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+}
+
+class MyApp {
+  const MyApp();
 }
