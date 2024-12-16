@@ -60,13 +60,13 @@ function addError( text) {
 
 // Trigger
 submitter.addEventListener('click', async (e) => {
-  const username = userName.value.trim().toLowerCase();
-  const email = userEmail.value.trim().toLowerCase();
+  const FIRSTNAME = userName.value.trim().toLowerCase();
+  const EMAIL = userEmail.value.trim().toLowerCase();
   validate(username, email);
 
   const data = {
-    email: email,
-    firstname: username,
+    EMAIL: email,
+    FIRSTNAME: username,
   };
 
   try {
