@@ -30,13 +30,15 @@ class _UsersViewState extends State<UsersView> {
         "sentinelle@sahelpolitica.ch", "ITSupport", {}, DateTime.now());
     p1.initITAccess();
 
-    Profile p2 = Profile("23132123", "Saydil", "SIDIBE",
-        "sentinelle@sahelpolitica.ch", "Custom", {}, DateTime.now());
-    p1.initITAccess();
-    p2.initCustomAccess();
-    profiles.add(p1);
-    profiles.add(p2);
     findUser();
+    getAllProfiles();
+  }
+
+  Future<void> getAllProfiles() async {
+    List<Profile> an = await fetchDBProfiles();
+    setState(() {
+      profiles = an;
+    });
   }
 
   Future<void> findUser() async {

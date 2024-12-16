@@ -29,22 +29,16 @@ class _NewslettersViewState extends State<NewslettersView> {
   @override
   void initState() {
     super.initState();
-    newsletters = List<Newsletter>.generate(
-      5,
-      (int index) => Newsletter(
-          "$index",
-          "New publications",
-          "See our new publication on hour website",
-          "https://www.linkedin.com/pulse/la-cheffe-de-diplomatie-burkinab%C3%A8-%C3%A0-doha-pour-obtenir-des/?trackingId=%2Bb%2BcAnFXhvQdyXnyVEb9qw%3D%3D",
-          "See more LinkedIn",
-          "https://firebasestorage.googleapis.com/v0/b/websitesapo-79e6f.firebasestorage.app/o/articles%2F1688121958343.jpeg?alt=media&token=c091bbdf-0c4a-4ff2-b1a6-d4db3c700d85",
-          "La cheffe de la diplomatie burkinabè à Doha pour obtenir des appuis humanitaires et sécuritaires du Qatar contre les groupes djihadistes.",
-          ["sidibesaydil@gmail.com"],
-          "Sidibe Saydil",
-          DateTime.now()),
-      growable: true,
-    );
-    isLoading = false;
+
+    getAllNewsletters();
+  }
+
+  Future<void> getAllNewsletters() async {
+    List<Newsletter> an = await fetchDBNewsletters();
+    setState(() {
+      newsletters = an;
+      isLoading = false;
+    });
   }
 
   List<Newsletter> fetchNewsletters() {

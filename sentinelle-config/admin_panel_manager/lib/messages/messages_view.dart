@@ -22,22 +22,14 @@ class _MessagesViewState extends State<MessagesView> {
   void initState() {
     super.initState();
     //Récupération des messages
-    messages = List<Message>.generate(
-      5,
-      (int index) => Message(
-          "$index",
-          "masterpiecebf@gmail.com",
-          "Saydil",
-          "SIDIBE $index",
-          "Sentinelle",
-          "+22657762837",
-          "Need more info about your training sessions",
-          "Hi, ISSAKA I would like to set up a meeting to  get more informations about your trainings",
-          "",
-          DateTime.now(),
-          false),
-      growable: true,
-    );
+    getAllMessages();
+  }
+
+  Future<void> getAllMessages() async {
+    List<Message> an = await fetchDBMessages();
+    setState(() {
+      messages = an;
+    });
   }
 
   List<Message> fetchMessages() {

@@ -21,28 +21,19 @@ class _EventsViewState extends State<EventsView> {
   String search = "";
   bool isLoading = true;
   List<Event> events = [];
-  final List<Event> rawEvents = List<Event>.generate(
-    5,
-    (int index) => Event(
-      "id $index",
-      "Issaka Ouedraogo Speaks at WAMS Conference in Accra",
-      "Issaka Ouedraogo s'exprime lors de la conférence de la WAMS à Accra",
-      "WAMS Conference in Accra",
-      "Conférence de la WAMS à Accra",
-      "Ghana, Accra",
-      "https://www.linkedin.com/posts/sahelpolitica_wams2023-miningsecurity-sahelpolitica-activity-7117773342169800704-ohaR",
-      "reports/img/29-09-2023.jpg", // Chemin dans Firebase Storage
-      "Conference",
-      DateTime(2023, 09, 20),
-      DateTime(2023, 09, 21),
-    ),
-    growable: true,
-  );
-
+  List<Event> rawEvents = [];
   @override
   void initState() {
     super.initState();
+    getAllEvents();
     _loadEventImages();
+  }
+
+  Future<void> getAllEvents() async {
+    List<Event> an = await fetchDBEvents();
+    setState(() {
+      rawEvents = an;
+    });
   }
 
   Future<void> _loadEventImages() async {

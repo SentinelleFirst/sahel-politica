@@ -1,3 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../login-manager/collection_manager.dart';
+
 class Analysis {
   String id;
   String title;
@@ -74,4 +78,28 @@ class Analysis {
         e.published,
         e.date);
   }
+  factory Analysis.fromJson(Map<String, dynamic> json) {
+    return Analysis(
+      json['id'] ?? "",
+      json['title'] ?? "",
+      json['titleFR'] ?? "",
+      json['subtitle'] ?? "",
+      json['subtitleFR'] ?? "",
+      json['resume'] ?? "",
+      json['resumeFR'] ?? "",
+      List<Map<String, String>>.from(json['preview'] ?? []),
+      List<Map<String, String>>.from(json['previewFR'] ?? []),
+      json['linkPDFEN'] ?? "",
+      json['linkPDFFR'] ?? "",
+      json['imageUrl'] ?? "",
+      json['category'] ?? "",
+      json['author'] ?? "",
+      json['published'] ?? false,
+      (json['date'] as Timestamp).toDate(),
+    );
+  }
+}
+
+Future<List<Analysis>> fetchDBAnalysis() async {
+  return await fetchCollection("Reports", (data) => Analysis.fromJson(data));
 }

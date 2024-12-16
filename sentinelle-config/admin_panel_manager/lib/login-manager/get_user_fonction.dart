@@ -17,13 +17,30 @@ Future<Profile?> getUser(String id) async {
     // Mappez les données Firestore vers un objet Profile
     final data = userDoc.data() as Map<String, dynamic>;
 
+    // Conversion sécurisée de 'access' en Map<String, Map<String, bool>>
+    final accessData = data['access'] as Map<String, dynamic>? ?? {};
+    final access = accessData.map<String, Map<String, bool>>((key, value) {
+      // Vérifiez si 'value' est un Map<String, dynamic>
+      final nestedMap = value as Map<String, dynamic>? ?? {};
+      return MapEntry(
+        key,
+        nestedMap.map<String, bool>((nestedKey, nestedValue) {
+          return MapEntry(
+            nestedKey,
+            nestedValue as bool? ??
+                false, // Assurez-vous que les valeurs sont booléennes
+          );
+        }),
+      );
+    });
+
     return Profile(
       id,
       data['firstname'] ?? '',
       data['lastname'] ?? '',
       data['email'] ?? '',
       data['post'] ?? '',
-      Map<String, Map<String, bool>>.from(data['access'] ?? {}),
+      access,
       (data['dateOfCreation'] != null)
           ? (data['dateOfCreation'] as Timestamp).toDate()
           : DateTime.now(),
@@ -54,6 +71,23 @@ Future<Profile?> getConnectedUser() async {
       // Récupérer les données de l'utilisateur depuis Firestore
       Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
 
+      // Conversion sécurisée de 'access' en Map<String, Map<String, bool>>
+      final accessData = userData['access'] as Map<String, dynamic>? ?? {};
+      final access = accessData.map<String, Map<String, bool>>((key, value) {
+        // Vérifiez si 'value' est un Map<String, dynamic>
+        final nestedMap = value as Map<String, dynamic>? ?? {};
+        return MapEntry(
+          key,
+          nestedMap.map<String, bool>((nestedKey, nestedValue) {
+            return MapEntry(
+              nestedKey,
+              nestedValue as bool? ??
+                  false, // Assurez-vous que les valeurs sont booléennes
+            );
+          }),
+        );
+      });
+
       // Créer et retourner un objet Profile
       Profile profile = Profile(
         currentUser.uid,
@@ -61,12 +95,11 @@ Future<Profile?> getConnectedUser() async {
         userData['lastname'] ?? '',
         userData['email'] ?? '',
         userData['post'] ?? '',
-        Map<String, Map<String, bool>>.from(userData['access'] ?? {}),
+        access,
         (userData['dateOfCreation'] != null)
             ? (userData['dateOfCreation'] as Timestamp).toDate()
             : DateTime.now(),
       );
-      ;
 
       return profile;
     }
