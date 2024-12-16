@@ -79,7 +79,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-<<<<<<< HEAD
     // Chargement des fichiers de langue json et traductions
     const translations = {};
 
@@ -118,8 +117,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }
       
-=======
->>>>>>> parent of 62987d1 (	modified:   js/script-language.js)
     // Récupérer la valeur de la langue depuis localStorage si elle existe et l'appliquer
     var savedLang = getLanguage('lang');
 
@@ -166,4 +163,3 @@ document.addEventListener('DOMContentLoaded', () => {
 */
 // Charger la langue par défaut
 loadTranslations('en');
-console.log("JavaScript file is linked!");
