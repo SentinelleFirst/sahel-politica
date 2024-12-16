@@ -67,8 +67,8 @@ submitter.addEventListener('click', async (e) => {
   //validate(FIRSTNAME, EMAIL);
 
   const data = {
-    EMAIL: email,
-    FIRSTNAME: username,
+    EMAIL: EMAIL,
+    FIRSTNAME: FIRSTNAME,
   };
 
   try {
