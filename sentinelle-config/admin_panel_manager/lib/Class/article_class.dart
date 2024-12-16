@@ -1,3 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../login-manager/collection_manager.dart';
+
 class Article {
   String id;
   String title;
@@ -63,4 +67,25 @@ class Article {
       e.date,
     );
   }
+  factory Article.fromJson(Map<String, dynamic> json) {
+    return Article(
+      json['id'] ?? "",
+      json['title'] ?? "",
+      json['titleFR'] ?? "",
+      json['smallTitle'] ?? "",
+      json['smallTitleFR'] ?? "",
+      json['content'] ?? "",
+      json['contentFR'] ?? "",
+      json['linkedinPost'] ?? "",
+      json['imageUrl'] ?? "",
+      json['category'] ?? "",
+      json['author'] ?? "",
+      json['published'] ?? false,
+      (json['date'] as Timestamp).toDate(),
+    );
+  }
+}
+
+Future<List<Article>> fetchDBArticles() async {
+  return await fetchCollection("Articles", (data) => Article.fromJson(data));
 }

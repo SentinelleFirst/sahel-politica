@@ -1,3 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../login-manager/collection_manager.dart';
+
 class Profile {
   String id;
   String firstname;
@@ -308,4 +312,27 @@ class Profile {
   String displayName() {
     return '$firstname $lastname';
   }
+
+  factory Profile.fromJson(Map<String, dynamic> json) {
+    Map<String, Map<String, bool>> parsedAccess = {};
+    if (json['access'] != null) {
+      json['access'].forEach((key, value) {
+        parsedAccess[key] = Map<String, bool>.from(value as Map);
+      });
+    }
+
+    return Profile(
+      json['id'] ?? "",
+      json['firstname'] ?? "",
+      json['lastname'] ?? "",
+      json['email'] ?? "",
+      json['post'] ?? "Custom",
+      parsedAccess,
+      (json['dateOfCreation'] as Timestamp).toDate(),
+    );
+  }
+}
+
+Future<List<Profile>> fetchDBProfiles() async {
+  return await fetchCollection("AdminUsers", (data) => Profile.fromJson(data));
 }

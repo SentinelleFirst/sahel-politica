@@ -1,3 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../login-manager/collection_manager.dart';
+
 class Event {
   late String id;
   late String title;
@@ -55,4 +59,23 @@ class Event {
       e.end,
     );
   }
+  factory Event.fromJson(Map<String, dynamic> json) {
+    return Event(
+      json['id'] ?? "",
+      json['title'] ?? "",
+      json['titleFR'] ?? "",
+      json['smallTitle'] ?? "",
+      json['smallTitleFR'] ?? "",
+      json['location'] ?? "",
+      json['linkedinPost'] ?? "",
+      json['imageUrl'] ?? "",
+      json['category'] ?? "",
+      (json['start'] as Timestamp).toDate(),
+      (json['end'] as Timestamp).toDate(),
+    );
+  }
+}
+
+Future<List<Event>> fetchDBEvents() async {
+  return await fetchCollection("Events", (data) => Event.fromJson(data));
 }

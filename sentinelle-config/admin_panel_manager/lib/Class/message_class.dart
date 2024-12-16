@@ -1,3 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../login-manager/collection_manager.dart';
+
 class Message {
   String id;
   String email;
@@ -35,4 +39,25 @@ class Message {
   String displayName() {
     return '$fistname $lastname';
   }
+
+  factory Message.fromJson(Map<String, dynamic> json) {
+    return Message(
+      json['id'] ?? "",
+      json['email'] ?? "",
+      json['fistname'] ?? "",
+      json['lastname'] ?? "",
+      json['company'] ?? "",
+      json['phone'] ?? "",
+      json['object'] ?? "",
+      json['message'] ?? "",
+      json['answer'] ?? "",
+      (json['date'] as Timestamp).toDate(),
+      json['readStatus'] ?? false,
+    );
+  }
+}
+
+Future<List<Message>> fetchDBMessages() async {
+  return await fetchCollection(
+      "ContactFormMessage", (data) => Message.fromJson(data));
 }
