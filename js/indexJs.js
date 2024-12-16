@@ -1,4 +1,4 @@
-require('dotenv').config();
+//require('dotenv').config();
 
 //Langue manager
 
@@ -24,7 +24,7 @@ document.querySelectorAll('#languageMenu li').forEach(item => {
 });
 */
 
-const brevoApiKey = process.env.BREVO_API_KEY;
+//const brevoApiKey = process.env.BREVO_API_KEY;
 // Newsletter form
 // Elements selection
 const userName = document.querySelector('#newsletterFirstname');
@@ -62,7 +62,9 @@ function addError( text) {
 submitter.addEventListener('click', async (e) => {
   const FIRSTNAME = userName.value.trim().toLowerCase();
   const EMAIL = userEmail.value.trim().toLowerCase();
-  validate(username, email);
+
+  //console.log(FIRSTNAME,EMAIL);
+  //validate(FIRSTNAME, EMAIL);
 
   const data = {
     EMAIL: email,
@@ -74,7 +76,7 @@ submitter.addEventListener('click', async (e) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'api-key': brevoApiKey,
+        'api-key': "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",
       },
       body: JSON.stringify(data),
     });
