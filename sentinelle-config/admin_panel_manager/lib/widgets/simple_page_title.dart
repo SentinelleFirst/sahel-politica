@@ -75,30 +75,6 @@ class _ComplexePageTitleState extends State<ComplexePageTitle> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            MaterialButton(
-              onPressed: widget.buttonAction,
-              minWidth: 150,
-              height: 40,
-              shape: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: const BorderSide(color: Colors.black, width: 2)),
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.add_circle_outline_sharp,
-                    size: 20,
-                    color: Colors.black,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    widget.buttonTitle,
-                    style: buttonTitleStyle,
-                  )
-                ],
-              ),
-            ),
             Container(
                 margin: const EdgeInsets.only(top: 20),
                 width: 300,
@@ -129,6 +105,30 @@ class _ComplexePageTitleState extends State<ComplexePageTitle> {
                     ),
                   ),
                 )),
+            MaterialButton(
+              onPressed: widget.buttonAction,
+              minWidth: 150,
+              height: 40,
+              shape: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(color: Colors.black, width: 2)),
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.add_circle_outline_sharp,
+                    size: 20,
+                    color: Colors.black,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    widget.buttonTitle,
+                    style: buttonTitleStyle,
+                  )
+                ],
+              ),
+            ),
           ],
         ))
       ],
