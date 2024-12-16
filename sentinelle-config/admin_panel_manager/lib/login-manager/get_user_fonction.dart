@@ -1,34 +1,35 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import '../Class/profile_class.dart';
 
 // Fonction pour récupérer les informations de l'utilisateur depuis Firestore
-Future<Profile?> getUser(String userId) async {
+Future<Profile?> getUser(String id) async {
   try {
-    // Accéder aux données de l'utilisateur dans Firestore en utilisant userId
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    DocumentSnapshot userDoc =
-        await _firestore.collection('AdminUsers').doc(userId).get();
+    // Récupérez les données utilisateur depuis Firestore en utilisant l'id fourni
+    final DocumentSnapshot userDoc =
+        await FirebaseFirestore.instance.collection('AdminUsers').doc(id).get();
 
-    if (userDoc.exists) {
-      Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
-
-      // Créer l'objet Profile à partir des données récupérées
-      Profile profile = Profile(
-        userId,
-        userData['firstname'] ?? '',
-        userData['lastname'] ?? '',
-        userData['email'] ?? '',
-        userData['post'] ?? '',
-        userData['access'] ?? {},
-        (userData['dateOfCreation'] as Timestamp).toDate(),
-      );
-      return profile;
-    } else {
-      return null; // L'utilisateur n'existe pas dans Firestore
+    if (!userDoc.exists) {
+      return null; // Pas d'entrée pour cet utilisateur
     }
+
+    // Mappez les données Firestore vers un objet Profile
+    final data = userDoc.data() as Map<String, dynamic>;
+
+    return Profile(
+      id,
+      data['firstname'] ?? '',
+      data['lastname'] ?? '',
+      data['email'] ?? '',
+      data['post'] ?? '',
+      Map<String, Map<String, bool>>.from(data['access'] ?? {}),
+      (data['dateOfCreation'] != null)
+          ? (data['dateOfCreation'] as Timestamp).toDate()
+          : DateTime.now(),
+    );
   } catch (e) {
-    print('Error fetching user data: $e');
+    debugPrint('Error fetching user profile: $e');
     return null; // Retourne null en cas d'erreur
   }
 }
@@ -56,18 +57,16 @@ Future<Profile?> getConnectedUser() async {
       // Créer et retourner un objet Profile
       Profile profile = Profile(
         currentUser.uid,
-        userData[
-            'firstname'], // Assurez-vous que le champ 'firstname' existe dans votre base de données
-        userData[
-            'lastname'], // Assurez-vous que le champ 'lastname' existe dans votre base de données
-        currentUser.email ?? '', // L'email de l'utilisateur connecté
-        userData[
-            'post'], // Assurez-vous que le champ 'post' existe dans votre base de données
-        userData[
-            'access'], // Assurez-vous que le champ 'access' existe dans votre base de données
-        DateTime.parse(userData[
-            'dateOfCreation']), // Assurez-vous que le champ 'creation_date' existe
+        userData['firstname'] ?? '',
+        userData['lastname'] ?? '',
+        userData['email'] ?? '',
+        userData['post'] ?? '',
+        Map<String, Map<String, bool>>.from(userData['access'] ?? {}),
+        (userData['dateOfCreation'] != null)
+            ? (userData['dateOfCreation'] as Timestamp).toDate()
+            : DateTime.now(),
       );
+      ;
 
       return profile;
     }

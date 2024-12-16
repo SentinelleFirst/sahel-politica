@@ -1,4 +1,6 @@
 import 'package:admin_panel_manager/login-manager/get_user_fonction.dart';
+import 'package:admin_panel_manager/users/new_user_dialog.dart';
+import 'package:admin_panel_manager/users/user_edit_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,16 +26,16 @@ class _UsersViewState extends State<UsersView> {
   void initState() {
     super.initState();
     //Récupération des messages
-    profiles = List<Profile>.generate(
-      5,
-      (int index) => Profile("$index", "Saydil", "SIDIBE",
-          "sentinelle@sahelpolitica.ch", "ITSupport", {}, DateTime.now()),
-      growable: true,
-    );
-    profiles.add(
-      Profile("ao06HCE5shZf90ViU2vxbtK78yp2", "Saydil", "SIDIBE",
-          "sentinelle@sahelpolitica.ch", "ITSupport", {}, DateTime.now()),
-    );
+    Profile p1 = Profile("ao06HCE5shZf90ViU2vxbtK78yp2", "Saydil", "SIDIBE",
+        "sentinelle@sahelpolitica.ch", "ITSupport", {}, DateTime.now());
+    p1.initITAccess();
+
+    Profile p2 = Profile("23132123", "Saydil", "SIDIBE",
+        "sentinelle@sahelpolitica.ch", "Custom", {}, DateTime.now());
+    p1.initITAccess();
+    p2.initCustomAccess();
+    profiles.add(p1);
+    profiles.add(p2);
     findUser();
   }
 
@@ -65,7 +67,17 @@ class _UsersViewState extends State<UsersView> {
     // Ajoutez une action pour ouvrir l'événement
     showDialog(
       context: context,
-      builder: (context) => const Dialog(),
+      builder: (context) => UserEditDialog(
+        profile: profile,
+      ),
+    );
+  }
+
+  void newProfile() {
+    // Ajoutez une action pour ouvrir l'événement
+    showDialog(
+      context: context,
+      builder: (context) => const NewUserDialog(),
     );
   }
 
@@ -99,7 +111,9 @@ class _UsersViewState extends State<UsersView> {
                         Row(
                           children: [
                             TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  newProfile();
+                                },
                                 child: Row(
                                   children: [
                                     const Icon(
@@ -239,9 +253,7 @@ class _UsersViewState extends State<UsersView> {
                                         maxLines: 1,
                                         style: GoogleFonts.nunitoSans())),
                                     DataCell(Text(
-                                        fetchUsers()[index]
-                                            .access
-                                            .length
+                                        countTrueAccess(fetchUsers()[index])
                                             .toString(),
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
@@ -265,4 +277,21 @@ class _UsersViewState extends State<UsersView> {
       ),
     );
   }
+}
+
+int countTrueAccess(Profile profile) {
+  int count = 0;
+
+  // Parcourir chaque entrée du Map
+  profile.access.forEach((key, value) {
+    // Parcourir chaque entrée du sous-Map
+    value.forEach((subKey, subValue) {
+      // Incrémenter le compteur si la valeur est true
+      if (subValue) {
+        count++;
+      }
+    });
+  });
+
+  return count;
 }
