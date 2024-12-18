@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Reservation {
   String id;
   String firstname;
@@ -11,6 +13,8 @@ class Reservation {
   String message;
   Map answer;
   String statue;
+  DateTime emissionDate;
+  DateTime reservationDate;
 
   Reservation(
       this.id,
@@ -24,7 +28,9 @@ class Reservation {
       this.service,
       this.message,
       this.answer,
-      this.statue);
+      this.statue,
+      this.emissionDate,
+      this.reservationDate);
 
   factory Reservation.empty() {
     return Reservation(
@@ -40,6 +46,8 @@ class Reservation {
       "",
       {},
       "",
+      DateTime.now(),
+      DateTime.now(),
     );
   }
 
@@ -56,6 +64,92 @@ class Reservation {
         r.service,
         r.message,
         r.answer,
-        r.statue);
+        r.statue,
+        r.emissionDate,
+        r.reservationDate);
+  }
+
+  // Conversion d'un document Firestore en une instance de Reservation
+  factory Reservation.fromJson(String id, Map<String, dynamic> data) {
+    return Reservation(
+      id,
+      data['firstname'] ?? "",
+      data['lastname'] ?? "",
+      data['phone'] ?? "",
+      data['company'] ?? "",
+      data['email'] ?? "",
+      data['linkmeet'] ?? "",
+      data['location'] ?? "",
+      data['service'] ?? "",
+      data['message'] ?? "",
+      Map<String, dynamic>.from(data['answers'] ?? {}), // Conversion sûre
+      data['statue'] ?? "",
+      (data['emissionDate'] as Timestamp).toDate(),
+      (data['reservationDate'] as Timestamp).toDate(),
+    );
+  }
+
+  bool isPending() {
+    return statue == 'Pending';
+  }
+
+  void setPending() {
+    statue = 'Pending';
+  }
+
+  bool isConfirmed() {
+    return statue == 'Confirmed';
+  }
+
+  void setConfirmed() {
+    statue = 'Confirmed';
+  }
+
+  bool isCanceled() {
+    return statue == 'Canceled';
+  }
+
+  void setCanceled() {
+    statue = 'Canceled';
+  }
+
+  bool isPassed() {
+    return statue == 'Passed';
+  }
+
+  void setPassed() {
+    statue = 'Passed';
+  }
+
+  String displayName() {
+    return '$firstname $lastname';
+  }
+
+  String displayAnswers() {
+    String a = "";
+    for (var i = 0; i < answer.entries.length; i++) {
+      a += "${i + 1} - ${answer.entries.toList()[i].key}\n";
+      a += "${answer.entries.toList()[i].value}\n";
+      if (i != answer.entries.length - 1) {
+        a += "\n";
+      }
+    }
+    return a;
+  }
+}
+
+Future<List<Reservation>> fetchDBReservations() async {
+  try {
+    // Récupère tous les documents de la collection "Reservations"
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('Reservations').get();
+
+    // Convertit chaque document en une instance de Reservation
+    return querySnapshot.docs.map((doc) {
+      return Reservation.fromJson(doc.id, doc.data() as Map<String, dynamic>);
+    }).toList();
+  } catch (e) {
+    print("Error fetching reservations: $e");
+    return []; // Retourne une liste vide en cas d'erreur
   }
 }
