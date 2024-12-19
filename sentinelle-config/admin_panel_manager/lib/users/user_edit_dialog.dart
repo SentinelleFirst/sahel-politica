@@ -5,9 +5,11 @@ import 'package:google_fonts/google_fonts.dart';
 import '../constants.dart';
 
 class UserEditDialog extends StatefulWidget {
-  const UserEditDialog({super.key, required this.profile});
+  const UserEditDialog(
+      {super.key, required this.profile, required this.refresh});
 
   final Profile profile;
+  final Function() refresh;
 
   @override
   State<UserEditDialog> createState() => _UserEditDialogState();
@@ -20,7 +22,6 @@ class _UserEditDialogState extends State<UserEditDialog>
   Profile profileToModify = Profile.empty();
   late TextEditingController firstname;
   late TextEditingController lastname;
-  late TextEditingController email;
 
   @override
   void initState() {
@@ -43,7 +44,6 @@ class _UserEditDialogState extends State<UserEditDialog>
     profileToModify = Profile.copy(widget.profile);
     firstname = TextEditingController(text: profileToModify.firstname);
     lastname = TextEditingController(text: profileToModify.lastname);
-    email = TextEditingController(text: profileToModify.email);
     if (postes.contains(profileToModify.post)) {
       selectedPost = widget.profile.post;
       //A supprimer plus tard
@@ -60,7 +60,30 @@ class _UserEditDialogState extends State<UserEditDialog>
     super.dispose();
   }
 
-  void saveModification() {}
+  bool isLoading = false;
+
+  void saveModification() async {
+    setState(() {
+      isLoading = true;
+    });
+    if (validateEntries()) {
+      await updateDBProfile(profileToModify, context, () {
+        setState(() {
+          widget.refresh();
+          Navigator.pop(context);
+        });
+      });
+    }
+  }
+
+  bool validateEntries() {
+    if (profileToModify.firstname.isEmpty) {
+      return false;
+    } else if (profileToModify.lastname.isEmpty) {
+      return false;
+    }
+    return true;
+  }
 
   List<String> postes = [
     "Administrator",
@@ -101,22 +124,27 @@ class _UserEditDialogState extends State<UserEditDialog>
                         style: secondTitleStyle,
                       ),
                     ),
-                    MaterialButton(
-                      onPressed: () {
-                        saveModification();
-                      },
-                      shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide.none,
+                    if (isLoading)
+                      const CircularProgressIndicator(
+                        color: Colors.yellow,
                       ),
-                      minWidth: 100,
-                      height: 50,
-                      color: const Color(0xffFACB01),
-                      child: Text(
-                        "Save",
-                        style: buttonTitleStyle,
+                    if (!isLoading)
+                      MaterialButton(
+                        onPressed: () {
+                          saveModification();
+                        },
+                        shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide.none,
+                        ),
+                        minWidth: 100,
+                        height: 50,
+                        color: const Color(0xffFACB01),
+                        child: Text(
+                          "Save",
+                          style: buttonTitleStyle,
+                        ),
                       ),
-                    ),
                     IconButton(
                         onPressed: () {
                           Navigator.pop(context);
@@ -222,55 +250,16 @@ class _UserEditDialogState extends State<UserEditDialog>
                     ),
                     Container(
                         width: 350,
+                        height: 50,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(5)),
-                        child: TextField(
-                          textAlignVertical: TextAlignVertical.center,
-                          textAlign: TextAlign.center,
-                          controller: email,
-                          onChanged: (value) {
-                            setState(() {
-                              profileToModify.email = value;
-                            });
-                          },
-                          decoration: InputDecoration(
-                            filled: true,
-                            hintText: "...",
-                            fillColor: Colors.white,
-                            border: InputBorder.none,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5),
-                              borderSide: BorderSide.none,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5),
-                              borderSide: BorderSide.none,
-                            ),
+                        child: Center(
+                          child: Text(
+                            profileToModify.email,
+                            style: normalTextStyle,
                           ),
                         )),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Password :",
-                      style: normalTextStyle,
-                    ),
-                    MaterialButton(
-                      minWidth: 360,
-                      height: 55,
-                      color: Colors.white,
-                      shape: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(5)),
-                      onPressed: () {},
-                      child: Text("Change password", style: normalTextStyle),
-                    ),
                   ],
                 ),
                 const SizedBox(

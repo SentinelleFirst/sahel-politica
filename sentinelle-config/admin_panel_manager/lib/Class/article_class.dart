@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 import '../login-manager/collection_manager.dart';
 
@@ -67,9 +68,9 @@ class Article {
       e.date,
     );
   }
-  factory Article.fromJson(Map<String, dynamic> json) {
+  factory Article.fromJson(Map<String, dynamic> json, String id) {
     return Article(
-      json['id'] ?? "",
+      id,
       json['title'] ?? "",
       json['titleFR'] ?? "",
       json['smallTitle'] ?? "",
@@ -84,8 +85,86 @@ class Article {
       (json['date'] as Timestamp).toDate(),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "title": title,
+      "titleFR": titleFR,
+      "smallTitle": smallTitle,
+      "smallTitleFR": smallTitleFR,
+      "content": content,
+      "contentFR": contentFR,
+      "linkedinPost": linkedinPost,
+      "imageUrl": imageUrl,
+      "category": category,
+      "author": author,
+      "published": published,
+      "date": Timestamp.fromDate(date),
+    };
+  }
 }
 
 Future<List<Article>> fetchDBArticles() async {
-  return await fetchCollection("Articles", (data) => Article.fromJson(data));
+  return await fetchCollection(
+      "Articles", (data, documentId) => Article.fromJson(data, documentId));
+}
+
+Future<void> updateDBArticle(Article article) async {
+  try {
+    await FirebaseFirestore.instance
+        .collection('Articles')
+        .doc(article.id)
+        .update(article.toJson());
+  } catch (e) {
+    print("Error updating article: $e");
+  }
+}
+
+Future<void> deleteReservation(
+    String documentId, Function loading, BuildContext context) async {
+  try {
+    // Supprime le document avec l'ID spécifié dans la collection donnée
+    await FirebaseFirestore.instance
+        .collection("Articles")
+        .doc(documentId)
+        .delete();
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Article deleted."),
+      ),
+    );
+    loading();
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Error, try later"),
+      ),
+    );
+    loading();
+    print("Error deleting document from Articles: $e");
+  }
+}
+
+Future<void> addArticle(
+    Article article, BuildContext context, Function loading) async {
+  try {
+    // Ajoute un nouveau document dans la collection "AdminUsers"
+    await FirebaseFirestore.instance
+        .collection('Articles')
+        .add(article.toJson());
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Article added successfully"),
+      ),
+    );
+    loading();
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Error, try later"),
+      ),
+    );
+    loading();
+    print("Error adding article: $e");
+  }
 }

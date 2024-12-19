@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 import '../login-manager/collection_manager.dart';
 
 class Message {
   String id;
   String email;
-  String fistname;
+  String firstname;
   String lastname;
   String company;
   String phone;
@@ -18,7 +19,7 @@ class Message {
   Message(
       this.id,
       this.email,
-      this.fistname,
+      this.firstname,
       this.lastname,
       this.company,
       this.phone,
@@ -37,14 +38,14 @@ class Message {
   }
 
   String displayName() {
-    return '$fistname $lastname';
+    return '$firstname $lastname';
   }
 
-  factory Message.fromJson(Map<String, dynamic> json) {
+  factory Message.fromJson(Map<String, dynamic> json, String id) {
     return Message(
-      json['id'] ?? "",
+      id,
       json['email'] ?? "",
-      json['fistname'] ?? "",
+      json['firstname'] ?? "",
       json['lastname'] ?? "",
       json['company'] ?? "",
       json['phone'] ?? "",
@@ -55,9 +56,60 @@ class Message {
       json['readStatus'] ?? false,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "email": email,
+      "firstname": firstname,
+      "lastname": lastname,
+      "company": company,
+      "phone": phone,
+      "object": object,
+      "message": message,
+      "answer": answer,
+      "date": Timestamp.fromDate(date),
+      "readStatus": readStatus,
+    };
+  }
 }
 
 Future<List<Message>> fetchDBMessages() async {
-  return await fetchCollection(
-      "ContactFormMessage", (data) => Message.fromJson(data));
+  return await fetchCollection("ContactFormMessage",
+      (data, documentId) => Message.fromJson(data, documentId));
+}
+
+Future<void> updateDBMessage(Message message) async {
+  try {
+    await FirebaseFirestore.instance
+        .collection('ContactFormMessage')
+        .doc(message.id)
+        .update(message.toJson());
+  } catch (e) {
+    print("Error updating message : $e");
+  }
+}
+
+Future<void> deleteReservation(
+    String documentId, Function loading, BuildContext context) async {
+  try {
+    // Supprime le document avec l'ID spécifié dans la collection donnée
+    await FirebaseFirestore.instance
+        .collection("ContactFormMessage")
+        .doc(documentId)
+        .delete();
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Message deleted."),
+      ),
+    );
+    loading();
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Error, try later"),
+      ),
+    );
+    loading();
+    print("Error deleting document from ContactFormMessage: $e");
+  }
 }

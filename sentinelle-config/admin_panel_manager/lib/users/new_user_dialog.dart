@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../constants.dart';
+import '../login-manager/new_user.dart';
 
 class NewUserDialog extends StatefulWidget {
-  const NewUserDialog({super.key});
+  const NewUserDialog({super.key, required this.refresh});
+
+  final Function() refresh;
 
   @override
   State<NewUserDialog> createState() => _NewUserDialogState();
@@ -55,7 +58,50 @@ class _NewUserDialogState extends State<NewUserDialog>
     super.dispose();
   }
 
-  void saveModification() {}
+  void saveModification() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    if (validateEntries()) {
+      await addUser(profileToModify, passwordController.text, context, () {
+        setState(() {
+          isLoading = false;
+          widget.refresh();
+          Navigator.pop(context);
+        });
+      });
+    }
+  }
+
+  bool validateEntries() {
+    if (profileToModify.firstname.isEmpty) {
+      return false;
+    } else if (profileToModify.lastname.isEmpty) {
+      return false;
+    } else if (profileToModify.email.isEmpty) {
+      return false;
+    } else if (!isEmailValid(profileToModify.email)) {
+      //Verifie si l'email est correct
+      return false;
+    } else if (password.length < 6) {
+      return false;
+    } else if (password != passwordConfirm) {
+      return false;
+    }
+    return true;
+  }
+
+  bool isEmailValid(String email) {
+    // Regex pattern for validating an email
+    final RegExp emailRegex = RegExp(
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+    );
+
+    return emailRegex.hasMatch(email);
+  }
+
+  bool isLoading = false;
 
   List<String> postes = [
     "Administrator",
@@ -96,22 +142,29 @@ class _NewUserDialogState extends State<NewUserDialog>
                         style: secondTitleStyle,
                       ),
                     ),
-                    MaterialButton(
-                      onPressed: () {
-                        saveModification();
-                      },
-                      shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide.none,
+                    if (isLoading)
+                      const CircularProgressIndicator(
+                        color: Colors.yellow,
                       ),
-                      minWidth: 100,
-                      height: 50,
-                      color: const Color(0xffFACB01),
-                      child: Text(
-                        "Create",
-                        style: buttonTitleStyle,
+                    if (!isLoading)
+                      MaterialButton(
+                        onPressed: validateEntries()
+                            ? () {
+                                saveModification();
+                              }
+                            : null,
+                        shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide.none,
+                        ),
+                        minWidth: 100,
+                        height: 50,
+                        color: const Color(0xffFACB01),
+                        child: Text(
+                          "Create",
+                          style: buttonTitleStyle,
+                        ),
                       ),
-                    ),
                     IconButton(
                         onPressed: () {
                           Navigator.pop(context);

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class Reservation {
   String id;
@@ -89,6 +90,26 @@ class Reservation {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      "firstname": firstname,
+      "lastname": lastname,
+      "phone": phone,
+      "company": company,
+      "email": email,
+      "linkmeet": linkmeet,
+      "location": location,
+      "service": service,
+      "message": message,
+      "answer": answer,
+      "statue": statue,
+      "emissionDate":
+          Timestamp.fromDate(emissionDate), // Conversion en Timestamp
+      "reservationDate":
+          Timestamp.fromDate(reservationDate), // Conversion en Timestamp
+    };
+  }
+
   bool isPending() {
     return statue == 'Pending';
   }
@@ -151,5 +172,41 @@ Future<List<Reservation>> fetchDBReservations() async {
   } catch (e) {
     print("Error fetching reservations: $e");
     return []; // Retourne une liste vide en cas d'erreur
+  }
+}
+
+Future<void> updateDBReservation(Reservation reservation) async {
+  try {
+    await FirebaseFirestore.instance
+        .collection('Reservations')
+        .doc(reservation.id)
+        .update(reservation.toJson());
+  } catch (e) {
+    print("Error updating reservation: $e");
+  }
+}
+
+Future<void> deleteReservation(
+    String documentId, Function loading, BuildContext context) async {
+  try {
+    // Supprime le document avec l'ID spécifié dans la collection donnée
+    await FirebaseFirestore.instance
+        .collection("Reservations")
+        .doc(documentId)
+        .delete();
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Reservation deleted."),
+      ),
+    );
+    loading();
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Error, try later"),
+      ),
+    );
+    loading();
+    print("Error deleting document from Reservation: $e");
   }
 }

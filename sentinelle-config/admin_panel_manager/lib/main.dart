@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    menuSelect(8);
+    menuSelect(2);
   }
 
   double menuIconSize = 25;

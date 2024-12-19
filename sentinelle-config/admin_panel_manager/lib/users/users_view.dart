@@ -1,3 +1,4 @@
+import 'package:admin_panel_manager/login-manager/delete_user.dart';
 import 'package:admin_panel_manager/login-manager/get_user_fonction.dart';
 import 'package:admin_panel_manager/users/new_user_dialog.dart';
 import 'package:admin_panel_manager/users/user_edit_dialog.dart';
@@ -8,6 +9,7 @@ import 'package:intl/intl.dart';
 
 import '../Class/profile_class.dart';
 import '../widgets/simple_page_title.dart';
+import 'delete_user_dialog.dart';
 
 class UsersView extends StatefulWidget {
   const UsersView({super.key});
@@ -70,6 +72,7 @@ class _UsersViewState extends State<UsersView> {
     showDialog(
       context: context,
       builder: (context) => UserEditDialog(
+        refresh: getAllProfiles,
         profile: profile,
       ),
     );
@@ -79,7 +82,20 @@ class _UsersViewState extends State<UsersView> {
     // Ajoutez une action pour ouvrir l'événement
     showDialog(
       context: context,
-      builder: (context) => const NewUserDialog(),
+      builder: (context) => NewUserDialog(
+        refresh: getAllProfiles,
+      ),
+    );
+  }
+
+  void deleteProfile() {
+    // Ajoutez une action pour ouvrir l'événement
+    showDialog(
+      context: context,
+      builder: (context) => DeleteUserDialog(
+        usersID: usersIds,
+        refresh: getAllProfiles,
+      ),
     );
   }
 
@@ -139,7 +155,9 @@ class _UsersViewState extends State<UsersView> {
                               width: 30,
                             ),
                             TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  deleteProfile();
+                                },
                                 child: Row(
                                   children: [
                                     const Icon(
@@ -215,22 +233,20 @@ class _UsersViewState extends State<UsersView> {
                               return DataRow(
                                   selected:
                                       usersIds.contains(fetchUsers()[index].id),
-                                  onSelectChanged: profileConnected != null &&
-                                          profileConnected!.id !=
-                                              fetchUsers()[index].id
-                                      ? (value) {
-                                          setState(() {
-                                            if (usersIds.contains(
-                                                fetchUsers()[index].id)) {
-                                              usersIds.remove(
-                                                  fetchUsers()[index].id);
-                                            } else {
-                                              usersIds
-                                                  .add(fetchUsers()[index].id);
-                                            }
-                                          });
+                                  onSelectChanged: (value) {
+                                    setState(() {
+                                      if (!(fetchUsers()[index].id ==
+                                          profileConnected!.id)) {
+                                        if (usersIds
+                                            .contains(fetchUsers()[index].id)) {
+                                          usersIds
+                                              .remove(fetchUsers()[index].id);
+                                        } else {
+                                          usersIds.add(fetchUsers()[index].id);
                                         }
-                                      : null,
+                                      }
+                                    });
+                                  },
                                   cells: [
                                     DataCell(Text(
                                         fetchUsers()[index].displayName(),

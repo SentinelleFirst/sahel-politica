@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 import '../login-manager/collection_manager.dart';
 
@@ -313,7 +314,7 @@ class Profile {
     return '$firstname $lastname';
   }
 
-  factory Profile.fromJson(Map<String, dynamic> json) {
+  factory Profile.fromJson(Map<String, dynamic> json, String id) {
     Map<String, Map<String, bool>> parsedAccess = {};
     if (json['access'] != null) {
       json['access'].forEach((key, value) {
@@ -322,7 +323,7 @@ class Profile {
     }
 
     return Profile(
-      json['id'] ?? "",
+      id,
       json['firstname'] ?? "",
       json['lastname'] ?? "",
       json['email'] ?? "",
@@ -331,8 +332,44 @@ class Profile {
       (json['dateOfCreation'] as Timestamp).toDate(),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "firstname": firstname,
+      "lastname": lastname,
+      "email": email,
+      "post": post,
+      "access": access,
+      "dateOfCreation": Timestamp.fromDate(dateOfCreation),
+    };
+  }
 }
 
 Future<List<Profile>> fetchDBProfiles() async {
-  return await fetchCollection("AdminUsers", (data) => Profile.fromJson(data));
+  return await fetchCollection(
+      "AdminUsers", (data, documentId) => Profile.fromJson(data, documentId));
+}
+
+Future<void> updateDBProfile(
+    Profile profile, BuildContext context, Function loading) async {
+  try {
+    await FirebaseFirestore.instance
+        .collection('AdminUsers')
+        .doc(profile.id)
+        .update(profile.toJson());
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Modification saved."),
+      ),
+    );
+    loading();
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Error, try later"),
+      ),
+    );
+    loading();
+    print("Error updating other class: $e");
+  }
 }
