@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_network/image_network.dart';
 
 import '../constants.dart';
+import '../login-manager/file_picker.dart';
 import '../widgets/simple_page_title.dart';
 
 class NewArticleView extends StatefulWidget {
@@ -37,9 +38,132 @@ class _NewArticleViewState extends State<NewArticleView> {
     category = TextEditingController();
   }
 
-  void saveModification() {}
+  void saveModification() async {
+    if (validateEntries()) {
+      setState(() {
+        saving = true;
+      });
+      await addArticle(articleToModify, context, () {
+        setState(() {
+          saving = false;
+        });
+      });
+    }
+  }
 
-  void publishArticle() {}
+  void publishArticle() {
+    if (validateEntries()) {
+      setState(() {
+        articleToModify.published = true;
+      });
+
+      saveModification();
+    }
+  }
+
+  bool validateEntries() {
+    if (articleToModify.title.isEmpty) {
+      setState(() {
+        showEnglishTitle = true;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Title empty..."),
+        ),
+      );
+      return false;
+    } else if (articleToModify.titleFR.isEmpty) {
+      setState(() {
+        showEnglishTitle = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("French title empty..."),
+        ),
+      );
+      return false;
+    } else if (articleToModify.smallTitle.isEmpty) {
+      setState(() {
+        showEnglishSmallTitle = true;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Small title empty..."),
+        ),
+      );
+      return false;
+    } else if (articleToModify.smallTitleFR.isEmpty) {
+      setState(() {
+        showEnglishSmallTitle = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Small title in french empty..."),
+        ),
+      );
+      return false;
+    } else if (articleToModify.content.isEmpty) {
+      setState(() {
+        showEnglishContent = true;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Content empty..."),
+        ),
+      );
+      return false;
+    } else if (articleToModify.contentFR.isEmpty) {
+      setState(() {
+        showEnglishContent = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Content in french empty..."),
+        ),
+      );
+      return false;
+    } else if (articleToModify.category.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Category empty..."),
+        ),
+      );
+      return false;
+    } else if (articleToModify.linkedinPost.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Article link empty..."),
+        ),
+      );
+      return false;
+    } else if (articleToModify.imageUrl.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Download an image..."),
+        ),
+      );
+      return false;
+    }
+    return true;
+  }
+
+  bool saving = false;
+
+  void downloadImage() async {
+    setState(() {
+      imgLoading = true;
+    });
+    await uploadImageToFirebase("articles", setUrlImg);
+  }
+
+  void setUrlImg(String url) {
+    setState(() {
+      articleToModify.imageUrl = url;
+      imgLoading = false;
+    });
+  }
+
+  bool imgLoading = false;
 
   bool showEnglishTitle = true;
   bool showEnglishSmallTitle = true;
@@ -68,59 +192,66 @@ class _NewArticleViewState extends State<NewArticleView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  MaterialButton(
-                    onPressed: saveModification,
-                    minWidth: 150,
-                    height: 40,
-                    shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide:
-                            const BorderSide(color: Colors.black, width: 2)),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.save,
-                          size: 20,
-                          color: Colors.black,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Save modification",
-                          style: buttonTitleStyle,
-                        )
-                      ],
+                  if (saving)
+                    const CircularProgressIndicator(
+                      color: Colors.yellow,
                     ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  MaterialButton(
-                    onPressed: publishArticle,
-                    minWidth: 150,
-                    height: 40,
-                    shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide:
-                            const BorderSide(color: Colors.black, width: 2)),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.publish_rounded,
-                          size: 20,
-                          color: Colors.black,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Save & Publish",
-                          style: buttonTitleStyle,
-                        )
-                      ],
+                  if (!saving)
+                    MaterialButton(
+                      onPressed: saveModification,
+                      minWidth: 150,
+                      height: 40,
+                      shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide:
+                              const BorderSide(color: Colors.black, width: 2)),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.save,
+                            size: 20,
+                            color: Colors.black,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Save modification",
+                            style: buttonTitleStyle,
+                          )
+                        ],
+                      ),
                     ),
-                  ),
+                  if (!saving)
+                    const SizedBox(
+                      width: 20,
+                    ),
+                  if (!saving)
+                    MaterialButton(
+                      onPressed: publishArticle,
+                      minWidth: 150,
+                      height: 40,
+                      shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide:
+                              const BorderSide(color: Colors.black, width: 2)),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.publish_rounded,
+                            size: 20,
+                            color: Colors.black,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Save & Publish",
+                            style: buttonTitleStyle,
+                          )
+                        ],
+                      ),
+                    ),
                 ],
               )
             ],
@@ -536,6 +667,7 @@ class _NewArticleViewState extends State<NewArticleView> {
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(20),
                                   child: ImageNetwork(
+                                    key: ValueKey(articleToModify.imageUrl),
                                     image: articleToModify.imageUrl,
                                     width: 540,
                                     height: 300,
@@ -553,24 +685,29 @@ class _NewArticleViewState extends State<NewArticleView> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    MaterialButton(
-                                      onPressed: () {
-                                        //Selection de l'image
-                                      },
-                                      color: Colors.white,
-                                      shape: OutlineInputBorder(
-                                          borderSide: BorderSide.none,
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      minWidth: 60,
-                                      height: 60,
-                                      child: const Center(
-                                        child: Icon(
-                                          Icons.image,
-                                          size: 20,
-                                        ),
-                                      ),
-                                    ),
+                                    imgLoading
+                                        ? const CircularProgressIndicator(
+                                            color: Colors.yellow,
+                                          )
+                                        : MaterialButton(
+                                            onPressed: () {
+                                              //Selection de l'image
+                                              downloadImage();
+                                            },
+                                            color: Colors.white,
+                                            shape: OutlineInputBorder(
+                                                borderSide: BorderSide.none,
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            minWidth: 60,
+                                            height: 60,
+                                            child: const Center(
+                                              child: Icon(
+                                                Icons.image,
+                                                size: 20,
+                                              ),
+                                            ),
+                                          ),
                                   ],
                                 )
                               ],

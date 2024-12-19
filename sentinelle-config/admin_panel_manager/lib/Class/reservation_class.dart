@@ -175,18 +175,21 @@ Future<List<Reservation>> fetchDBReservations() async {
   }
 }
 
-Future<void> updateDBReservation(Reservation reservation) async {
+Future<void> updateDBReservation(
+    Reservation reservation, Function loading) async {
   try {
     await FirebaseFirestore.instance
         .collection('Reservations')
         .doc(reservation.id)
         .update(reservation.toJson());
+    loading();
   } catch (e) {
+    loading();
     print("Error updating reservation: $e");
   }
 }
 
-Future<void> deleteReservation(
+Future<void> deleteDBReservation(
     String documentId, Function loading, BuildContext context) async {
   try {
     // Supprime le document avec l'ID spécifié dans la collection donnée

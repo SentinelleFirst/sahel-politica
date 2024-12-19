@@ -97,18 +97,31 @@ Future<List<Event>> fetchDBEvents() async {
       "Events", (data, documentId) => Event.fromJson(data, documentId));
 }
 
-Future<void> updateDBEvent(Event event) async {
+Future<void> updateDBEvent(
+    Event event, BuildContext context, Function loading) async {
   try {
     await FirebaseFirestore.instance
         .collection('Events')
         .doc(event.id)
         .update(event.toJson());
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Event updated."),
+      ),
+    );
+    loading();
   } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Error, try later"),
+      ),
+    );
+    loading();
     print("Error updating Event: $e");
   }
 }
 
-Future<void> deleteReservation(
+Future<void> deleteDBEvent(
     String documentId, Function loading, BuildContext context) async {
   try {
     // Supprime le document avec l'ID spécifié dans la collection donnée
@@ -133,7 +146,7 @@ Future<void> deleteReservation(
   }
 }
 
-Future<void> addArticle(
+Future<void> addDBEvent(
     Event event, BuildContext context, Function loading) async {
   try {
     // Ajoute un nouveau document dans la collection "AdminUsers"

@@ -72,7 +72,7 @@ Future<void> updateDBNewsletter(Newsletter newsletter) async {
   }
 }
 
-Future<void> deleteReservation(
+Future<void> deleteDBNewsletter(
     String documentId, Function loading, BuildContext context) async {
   try {
     // Supprime le document avec l'ID spécifié dans la collection donnée
@@ -97,7 +97,7 @@ Future<void> deleteReservation(
   }
 }
 
-Future<void> addArticle(
+Future<void> addDBNewsletter(
     Newsletter newsletter, BuildContext context, Function loading) async {
   try {
     // Ajoute un nouveau document dans la collection "AdminUsers"

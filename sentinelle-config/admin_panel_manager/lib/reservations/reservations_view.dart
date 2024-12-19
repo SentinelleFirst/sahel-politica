@@ -30,8 +30,14 @@ class _ReservationsViewState extends State<ReservationsView> {
   Future<void> getAllReservations() async {
     List<Reservation> an = await fetchDBReservations();
     setState(() {
+      an.sort(
+        (a, b) => b.emissionDate.compareTo(a.emissionDate),
+      );
       reservations = an;
       commingReservations.addAll(reservations.where((re) => re.isConfirmed()));
+      commingReservations.sort(
+        (a, b) => b.reservationDate.compareTo(a.reservationDate),
+      );
     });
   }
 

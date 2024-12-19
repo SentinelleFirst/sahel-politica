@@ -1,4 +1,5 @@
 import 'package:admin_panel_manager/Class/newsletter_class.dart';
+import 'package:admin_panel_manager/newsletters/delete_newsletter_dialog.dart';
 import 'package:admin_panel_manager/newsletters/new_newsletter_dialog.dart';
 import 'package:admin_panel_manager/newsletters/newsletter_details_dialog.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 import '../constants.dart';
+import '../events/get_all_contacts.dart';
 import '../widgets/simple_divider.dart';
 import '../widgets/simple_page_title.dart';
 
@@ -31,13 +33,24 @@ class _NewslettersViewState extends State<NewslettersView> {
     super.initState();
 
     getAllNewsletters();
+    getAllContacts();
   }
 
   Future<void> getAllNewsletters() async {
     List<Newsletter> an = await fetchDBNewsletters();
     setState(() {
+      an.sort(
+        (a, b) => b.date.compareTo(a.date),
+      );
       newsletters = an;
       isLoading = false;
+    });
+  }
+
+  Future<void> getAllContacts() async {
+    List<String> cs = await getContactEmails();
+    setState(() {
+      contacts = cs;
     });
   }
 
@@ -74,7 +87,7 @@ class _NewslettersViewState extends State<NewslettersView> {
       builder: (context) => NewsletterDetailsDialog(
         newsletter: newsletter,
         contacts: contacts,
-        refresh: () {},
+        refresh: getAllNewsletters,
       ),
     );
   }
@@ -84,7 +97,17 @@ class _NewslettersViewState extends State<NewslettersView> {
       context: context,
       builder: (context) => NewNewsletterDialog(
         contacts: contacts,
-        refresh: () {},
+        refresh: getAllNewsletters,
+      ),
+    );
+  }
+
+  void deleteNewsletter(String id) {
+    showDialog(
+      context: context,
+      builder: (context) => DeleteNewsletterDialog(
+        id: id,
+        refresh: getAllNewsletters,
       ),
     );
   }
@@ -122,6 +145,10 @@ class _NewslettersViewState extends State<NewslettersView> {
                             itemBuilder: (_, int index) {
                               return NewsletterInfoLine(
                                 newsletter: fetchNewsletters()[index],
+                                delete: () {
+                                  deleteNewsletter(
+                                      fetchNewsletters()[index].id);
+                                },
                                 readAction: () {
                                   openNewsletter(fetchNewsletters()[index]);
                                 },
@@ -231,10 +258,12 @@ class NewsletterInfoLine extends StatelessWidget {
     super.key,
     required this.newsletter,
     required this.readAction,
+    required this.delete,
   });
 
   final Newsletter newsletter;
   final Function() readAction;
+  final Function() delete;
 
   @override
   Widget build(BuildContext context) {
@@ -301,7 +330,7 @@ class NewsletterInfoLine extends StatelessWidget {
                         size: 30,
                       )),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: delete,
                       icon: const Icon(
                         Icons.delete_outlined,
                         color: Colors.red,

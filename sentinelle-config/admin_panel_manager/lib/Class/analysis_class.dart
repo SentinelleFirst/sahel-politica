@@ -88,8 +88,12 @@ class Analysis {
       json['subtitleFR'] ?? "",
       json['resume'] ?? "",
       json['resumeFR'] ?? "",
-      List<Map<String, String>>.from(json['preview'] ?? []),
-      List<Map<String, String>>.from(json['previewFR'] ?? []),
+      (json['preview'] as List<dynamic>? ?? [])
+          .map((item) => Map<String, String>.from(item as Map))
+          .toList(),
+      (json['previewFR'] as List<dynamic>? ?? [])
+          .map((item) => Map<String, String>.from(item as Map))
+          .toList(),
       json['linkPDFEN'] ?? "",
       json['linkPDFFR'] ?? "",
       json['imageUrl'] ?? "",
@@ -126,18 +130,30 @@ Future<List<Analysis>> fetchDBAnalysis() async {
       "Reports", (data, documentId) => Analysis.fromJson(data, documentId));
 }
 
-Future<void> updateDBAnalysis(Analysis analysis) async {
+Future<void> updateDBAnalysis(
+    Analysis analysis, BuildContext context, Function loading) async {
   try {
     await FirebaseFirestore.instance
         .collection('Reports')
         .doc(analysis.id)
         .update(analysis.toJson());
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Analysis updated."),
+      ),
+    );
+    loading();
   } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Error, try later"),
+      ),
+    );
     print("Error updating analysis: $e");
   }
 }
 
-Future<void> deleteReservation(
+Future<void> deleteDBAnalysis(
     String documentId, Function loading, BuildContext context) async {
   try {
     // Supprime le document avec l'ID spécifié dans la collection donnée

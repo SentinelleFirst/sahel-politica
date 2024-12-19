@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../constants.dart';
 import '../widgets/simple_page_title.dart';
+import 'delete_analysis_dialog.dart';
 
 class AnalysisListView extends StatefulWidget {
   const AnalysisListView(
@@ -33,6 +34,9 @@ class _AnalysisListViewState extends State<AnalysisListView> {
   Future<void> getAllAnalysis() async {
     List<Analysis> an = await fetchDBAnalysis();
     setState(() {
+      an.sort(
+        (a, b) => b.date.compareTo(a.date),
+      );
       analysisList = an;
     });
   }
@@ -51,6 +55,16 @@ class _AnalysisListViewState extends State<AnalysisListView> {
   void openAnalysisDetail(Analysis analysis) {
     // Ajoutez une action pour ouvrir l'analyse
     widget.editAnalysis(analysis);
+  }
+
+  void deleteAnalysis(String id) {
+    showDialog(
+      context: context,
+      builder: (context) => DeleteAnalysisDialog(
+        id: id,
+        refresh: getAllAnalysis,
+      ),
+    );
   }
 
   @override
@@ -156,6 +170,9 @@ class _AnalysisListViewState extends State<AnalysisListView> {
                       itemBuilder: (_, int index) {
                         return AnalysisInfoLine(
                           analysis: fetchAnalysis()[index],
+                          delete: () {
+                            deleteAnalysis(fetchAnalysis()[index].id);
+                          },
                           readAction: () {
                             openAnalysisDetail(fetchAnalysis()[index]);
                           },
@@ -178,10 +195,12 @@ class AnalysisInfoLine extends StatelessWidget {
     super.key,
     required this.analysis,
     required this.readAction,
+    required this.delete,
   });
 
   final Analysis analysis;
   final Function() readAction;
+  final Function() delete;
 
   @override
   Widget build(BuildContext context) {
@@ -199,6 +218,7 @@ class AnalysisInfoLine extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: ImageNetwork(
+                key: ValueKey(analysis.imageUrl),
                 image: analysis.imageUrl,
                 width: 300,
                 height: 170,
@@ -253,7 +273,7 @@ class AnalysisInfoLine extends StatelessWidget {
                             size: 30,
                           )),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: delete,
                           icon: const Icon(
                             Icons.delete_outlined,
                             color: Colors.red,

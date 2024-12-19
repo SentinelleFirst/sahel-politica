@@ -1,3 +1,4 @@
+import 'package:admin_panel_manager/events/delete_event_dialog.dart';
 import 'package:admin_panel_manager/events/event_details_dialog.dart';
 import 'package:admin_panel_manager/events/new_event_dialog.dart';
 import 'package:admin_panel_manager/widgets/simple_divider.dart';
@@ -26,13 +27,16 @@ class _EventsViewState extends State<EventsView> {
   void initState() {
     super.initState();
     getAllEvents();
-    _loadEventImages();
   }
 
   Future<void> getAllEvents() async {
     List<Event> an = await fetchDBEvents();
     setState(() {
+      an.sort(
+        (a, b) => b.start.compareTo(a.start),
+      );
       rawEvents = an;
+      _loadEventImages();
     });
   }
 
@@ -89,7 +93,17 @@ class _EventsViewState extends State<EventsView> {
     showDialog(
       context: context,
       builder: (context) => NewEventDialog(
-        refresh: () {},
+        refresh: getAllEvents,
+      ),
+    );
+  }
+
+  void deleteEvent(String id) {
+    showDialog(
+      context: context,
+      builder: (context) => DeleteEventDialog(
+        id: id,
+        refresh: getAllEvents,
       ),
     );
   }
@@ -120,6 +134,9 @@ class _EventsViewState extends State<EventsView> {
                       itemBuilder: (_, int index) {
                         return EventInfoLine(
                           event: fetchEvents()[index],
+                          delete: () {
+                            deleteEvent(fetchEvents()[index].id);
+                          },
                           readAction: () {
                             openEvent(fetchEvents()[index]);
                           },
@@ -139,10 +156,12 @@ class EventInfoLine extends StatelessWidget {
     super.key,
     required this.event,
     required this.readAction,
+    required this.delete,
   });
 
   final Event event;
   final Function() readAction;
+  final Function() delete;
 
   bool isSameDay(DateTime a, DateTime b) {
     return a.day == b.day && a.month == b.month && a.year == b.year;
@@ -167,6 +186,7 @@ class EventInfoLine extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: ImageNetwork(
+                      key: ValueKey(event.imageUrl),
                       image: event.imageUrl,
                       width: 300,
                       height: 200,
@@ -269,7 +289,7 @@ class EventInfoLine extends StatelessWidget {
                         size: 20,
                       )),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: delete,
                       icon: const Icon(
                         Icons.delete_outlined,
                         color: Colors.red,

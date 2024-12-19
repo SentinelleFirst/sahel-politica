@@ -47,6 +47,7 @@ class _MessageDetailsDialogState extends State<MessageDetailsDialog>
     answerObject =
         TextEditingController(text: 'Reply to : ${widget.message.object}');
     answerMessage = TextEditingController();
+    saveModification();
   }
 
   @override
@@ -55,9 +56,44 @@ class _MessageDetailsDialogState extends State<MessageDetailsDialog>
     super.dispose();
   }
 
-  void sendEmail() {}
+  void sendEmail() {
+    setState(() {
+      saving = true;
+    });
+    if (validateEntries()) {
+      saveModification();
+      //Envoie email
+    }
+    Navigator.pop(context);
+  }
+
+  void saveModification() async {
+    await updateDBMessage(widget.message, () {
+      widget.refresh();
+    });
+  }
+
+  bool validateEntries() {
+    if (emailObject.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Object empty..."),
+        ),
+      );
+      return false;
+    } else if (emailContent.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Message empty..."),
+        ),
+      );
+      return false;
+    }
+    return true;
+  }
 
   bool answerView = false;
+  bool saving = false;
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +127,11 @@ class _MessageDetailsDialogState extends State<MessageDetailsDialog>
                         style: secondTitleStyle,
                       ),
                     ),
-                    if (answerView)
+                    if (saving)
+                      const CircularProgressIndicator(
+                        color: Colors.yellow,
+                      ),
+                    if (answerView && !saving)
                       IconButton(
                           onPressed: () {
                             setState(() {
@@ -103,31 +143,32 @@ class _MessageDetailsDialogState extends State<MessageDetailsDialog>
                             color: Colors.black,
                             size: 30,
                           )),
-                    MaterialButton(
-                      onPressed: () {
-                        if (answerView) {
-                          setState(() {
-                            //Send email
-                            sendEmail();
-                          });
-                        } else {
-                          setState(() {
-                            answerView = true;
-                          });
-                        }
-                      },
-                      shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide.none,
+                    if (!saving)
+                      MaterialButton(
+                        onPressed: () {
+                          if (answerView) {
+                            setState(() {
+                              //Send email
+                              sendEmail();
+                            });
+                          } else {
+                            setState(() {
+                              answerView = true;
+                            });
+                          }
+                        },
+                        shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide.none,
+                        ),
+                        minWidth: 100,
+                        height: 50,
+                        color: const Color(0xffFACB01),
+                        child: Text(
+                          answerView ? "Send" : "Answer",
+                          style: buttonTitleStyle,
+                        ),
                       ),
-                      minWidth: 100,
-                      height: 50,
-                      color: const Color(0xffFACB01),
-                      child: Text(
-                        answerView ? "Send" : "Answer",
-                        style: buttonTitleStyle,
-                      ),
-                    ),
                     IconButton(
                         onPressed: () {
                           Navigator.pop(context);

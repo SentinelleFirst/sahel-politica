@@ -109,18 +109,31 @@ Future<List<Article>> fetchDBArticles() async {
       "Articles", (data, documentId) => Article.fromJson(data, documentId));
 }
 
-Future<void> updateDBArticle(Article article) async {
+Future<void> updateDBArticle(
+    Article article, BuildContext context, Function loading) async {
   try {
     await FirebaseFirestore.instance
         .collection('Articles')
         .doc(article.id)
         .update(article.toJson());
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Article updated."),
+      ),
+    );
+    loading();
   } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Error, try later"),
+      ),
+    );
+    loading();
     print("Error updating article: $e");
   }
 }
 
-Future<void> deleteReservation(
+Future<void> deleteDBArticle(
     String documentId, Function loading, BuildContext context) async {
   try {
     // Supprime le document avec l'ID spécifié dans la collection donnée

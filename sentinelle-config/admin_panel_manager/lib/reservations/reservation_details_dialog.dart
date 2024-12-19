@@ -25,6 +25,8 @@ class _ReservationDetailsDialogState extends State<ReservationDetailsDialog>
   late TextEditingController linkmeet;
   late TextEditingController message;
 
+  bool showBookView = false;
+
   Reservation reservationToModify = Reservation.empty();
 
   @override
@@ -59,9 +61,48 @@ class _ReservationDetailsDialogState extends State<ReservationDetailsDialog>
     super.dispose();
   }
 
-  void saveAndSendReservationEmail() {}
+  void saveAndSendReservationEmail() {
+    setState(() {
+      saving = true;
+    });
+    if (validateEntries()) {
+      //Envoie email
+      saveModification();
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Reservation envoyé."),
+      ),
+    );
+    Navigator.pop(context);
+  }
 
-  bool showBookView = false;
+  bool validateEntries() {
+    if (reservationToModify.location.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Meeting location empty..."),
+        ),
+      );
+      return false;
+    } else if (reservationToModify.message.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Message empty..."),
+        ),
+      );
+      return false;
+    }
+    return true;
+  }
+
+  bool saving = false;
+
+  void saveModification() async {
+    await updateDBReservation(reservationToModify, () {
+      widget.refresh();
+    });
+  }
 
   List<String> statues = ["Pending", "Confirmed", "Canceled", "Passed"];
 
@@ -139,40 +180,46 @@ class _ReservationDetailsDialogState extends State<ReservationDetailsDialog>
                         style: secondTitleStyle,
                       ),
                     ),
-                    MaterialButton(
-                      onPressed: () {
-                        if (showBookView) {
-                          setState(() {
-                            //Save and Send email
-                            saveAndSendReservationEmail();
-                          });
-                        } else {
-                          setState(() {
-                            showBookView = true;
-                          });
-                        }
-                      },
-                      shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide.none,
+                    if (saving)
+                      const CircularProgressIndicator(
+                        color: Colors.yellow,
                       ),
-                      minWidth: 100,
-                      height: 50,
-                      color: const Color(0xffFACB01),
-                      child: Text(
-                        showBookView ? "Save & Send" : "Book info",
-                        style: buttonTitleStyle,
-                      ),
-                    ),
-                    IconButton(
+                    if (!saving)
+                      MaterialButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                          if (showBookView) {
+                            setState(() {
+                              //Save and Send email
+                              saveAndSendReservationEmail();
+                            });
+                          } else {
+                            setState(() {
+                              showBookView = true;
+                            });
+                          }
                         },
-                        icon: const Icon(
-                          Icons.close,
-                          color: Colors.black,
-                          size: 30,
-                        ))
+                        shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide.none,
+                        ),
+                        minWidth: 100,
+                        height: 50,
+                        color: const Color(0xffFACB01),
+                        child: Text(
+                          showBookView ? "Save & Send" : "Book info",
+                          style: buttonTitleStyle,
+                        ),
+                      ),
+                    if (!saving)
+                      IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(
+                            Icons.close,
+                            color: Colors.black,
+                            size: 30,
+                          ))
                   ],
                 ),
                 const SizedBox(

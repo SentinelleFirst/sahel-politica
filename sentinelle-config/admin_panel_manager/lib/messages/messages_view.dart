@@ -28,6 +28,9 @@ class _MessagesViewState extends State<MessagesView> {
   Future<void> getAllMessages() async {
     List<Message> an = await fetchDBMessages();
     setState(() {
+      an.sort(
+        (a, b) => b.date.compareTo(a.date),
+      );
       messages = an;
     });
   }

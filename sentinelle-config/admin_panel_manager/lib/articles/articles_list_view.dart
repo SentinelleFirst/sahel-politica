@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../Class/article_class.dart';
 import '../constants.dart';
 import '../widgets/simple_page_title.dart';
+import 'delete_Article_dialog.dart';
 
 class ArticlesListView extends StatefulWidget {
   const ArticlesListView(
@@ -33,6 +34,9 @@ class _ArticlesListViewState extends State<ArticlesListView> {
   Future<void> getAllArticles() async {
     List<Article> as = await fetchDBArticles();
     setState(() {
+      as.sort(
+        (a, b) => b.date.compareTo(a.date),
+      );
       article = as;
     });
   }
@@ -51,6 +55,16 @@ class _ArticlesListViewState extends State<ArticlesListView> {
   void openArticleDetail(Article article) {
     // Ajoutez une action pour ouvrir l'événement
     widget.editArticle(article);
+  }
+
+  void deleteArticle(String id) {
+    showDialog(
+      context: context,
+      builder: (context) => DeleteArticleDialog(
+        id: id,
+        refresh: getAllArticles,
+      ),
+    );
   }
 
   @override
@@ -156,6 +170,9 @@ class _ArticlesListViewState extends State<ArticlesListView> {
                       itemBuilder: (_, int index) {
                         return ArticleInfoLine(
                           article: fetchArticles()[index],
+                          delete: () {
+                            deleteArticle(fetchArticles()[index].id);
+                          },
                           readAction: () {
                             openArticleDetail(fetchArticles()[index]);
                           },
@@ -178,10 +195,12 @@ class ArticleInfoLine extends StatelessWidget {
     super.key,
     required this.article,
     required this.readAction,
+    required this.delete,
   });
 
   final Article article;
   final Function() readAction;
+  final Function() delete;
 
   @override
   Widget build(BuildContext context) {
@@ -199,6 +218,7 @@ class ArticleInfoLine extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: ImageNetwork(
+                key: ValueKey(article.imageUrl),
                 image: article.imageUrl,
                 width: 300,
                 height: 170,
@@ -270,7 +290,7 @@ class ArticleInfoLine extends StatelessWidget {
                             size: 20,
                           )),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: delete,
                           icon: const Icon(
                             Icons.delete_outlined,
                             color: Colors.red,

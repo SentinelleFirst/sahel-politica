@@ -5,6 +5,7 @@ import 'package:image_network/image_network.dart';
 import 'package:intl/intl.dart';
 
 import '../constants.dart';
+import '../login-manager/file_picker.dart';
 
 class EventDetailsDialog extends StatefulWidget {
   const EventDetailsDialog(
@@ -71,7 +72,103 @@ class _EventDetailsDialogState extends State<EventDetailsDialog>
     super.dispose();
   }
 
-  void publishEvent() {}
+  void saveModification() async {
+    if (validateEntries()) {
+      setState(() {
+        saving = true;
+      });
+      await updateDBEvent(eventToModify, context, () {
+        setState(() {
+          saving = false;
+          widget.refresh();
+        });
+      });
+    }
+  }
+
+  bool validateEntries() {
+    if (eventToModify.title.isEmpty) {
+      setState(() {
+        showEnglishTitle = true;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Title empty..."),
+        ),
+      );
+      return false;
+    } else if (eventToModify.titleFR.isEmpty) {
+      setState(() {
+        showEnglishTitle = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("French title empty..."),
+        ),
+      );
+      return false;
+    } else if (eventToModify.smallTitle.isEmpty) {
+      setState(() {
+        showEnglishSmallTitle = true;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Small title empty..."),
+        ),
+      );
+      return false;
+    } else if (eventToModify.smallTitleFR.isEmpty) {
+      setState(() {
+        showEnglishSmallTitle = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Small title in french empty..."),
+        ),
+      );
+      return false;
+    } else if (eventToModify.location.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Location empty..."),
+        ),
+      );
+      return false;
+    } else if (eventToModify.category.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Category empty..."),
+        ),
+      );
+      return false;
+    } else if (eventToModify.imageUrl.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Pick an image..."),
+        ),
+      );
+      return false;
+    }
+    return true;
+  }
+
+  bool saving = false;
+
+  void downloadImage() async {
+    setState(() {
+      imgLoading = true;
+    });
+    await uploadImageToFirebase("events", setUrlImg);
+  }
+
+  void setUrlImg(String url) {
+    setState(() {
+      eventToModify.imageUrl = url;
+      imgLoading = false;
+    });
+  }
+
+  bool imgLoading = false;
 
   bool showEnglishTitle = true;
   bool showEnglishSmallTitle = true;
@@ -140,29 +237,34 @@ class _EventDetailsDialogState extends State<EventDetailsDialog>
                   children: [
                     Expanded(
                       child: Text(
-                        "Event",
+                        "New event",
                         style: secondTitleStyle,
                       ),
                     ),
-                    MaterialButton(
-                      onPressed: () {
-                        setState(() {
-                          //Publier l'event
-                          publishEvent();
-                        });
-                      },
-                      shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide.none,
+                    if (saving)
+                      const CircularProgressIndicator(
+                        color: Colors.yellow,
                       ),
-                      minWidth: 100,
-                      height: 50,
-                      color: const Color(0xffFACB01),
-                      child: Text(
-                        "Publish",
-                        style: buttonTitleStyle,
+                    if (!saving)
+                      MaterialButton(
+                        onPressed: () {
+                          setState(() {
+                            //Publier l'event
+                            saveModification();
+                          });
+                        },
+                        shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide.none,
+                        ),
+                        minWidth: 100,
+                        height: 50,
+                        color: const Color(0xffFACB01),
+                        child: Text(
+                          "Save",
+                          style: buttonTitleStyle,
+                        ),
                       ),
-                    ),
                     IconButton(
                         onPressed: () {
                           Navigator.pop(context);
@@ -186,6 +288,7 @@ class _EventDetailsDialogState extends State<EventDetailsDialog>
                       ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: ImageNetwork(
+                          key: ValueKey(eventToModify.imageUrl),
                           image: eventToModify.imageUrl,
                           width: 540,
                           height: 300,
@@ -204,23 +307,28 @@ class _EventDetailsDialogState extends State<EventDetailsDialog>
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          MaterialButton(
-                            onPressed: () {
-                              //Selection de l'image
-                            },
-                            color: Colors.white,
-                            shape: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(20)),
-                            minWidth: 60,
-                            height: 60,
-                            child: const Center(
-                              child: Icon(
-                                Icons.image,
-                                size: 20,
-                              ),
-                            ),
-                          ),
+                          imgLoading
+                              ? const CircularProgressIndicator(
+                                  color: Colors.yellow,
+                                )
+                              : MaterialButton(
+                                  onPressed: () {
+                                    //Selection de l'image
+                                    downloadImage();
+                                  },
+                                  color: Colors.white,
+                                  shape: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(20)),
+                                  minWidth: 60,
+                                  height: 60,
+                                  child: const Center(
+                                    child: Icon(
+                                      Icons.image,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
                         ],
                       )
                     ],
@@ -500,7 +608,7 @@ class _EventDetailsDialogState extends State<EventDetailsDialog>
                     ],
                   ),
                 ),
-                //Category info
+                //Location info
                 Container(
                   margin: const EdgeInsets.only(top: 10),
                   width: MediaQuery.of(context).size.width,

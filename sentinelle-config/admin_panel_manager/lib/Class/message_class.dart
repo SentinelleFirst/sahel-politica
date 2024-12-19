@@ -78,18 +78,20 @@ Future<List<Message>> fetchDBMessages() async {
       (data, documentId) => Message.fromJson(data, documentId));
 }
 
-Future<void> updateDBMessage(Message message) async {
+Future<void> updateDBMessage(Message message, Function loading) async {
   try {
     await FirebaseFirestore.instance
         .collection('ContactFormMessage')
         .doc(message.id)
         .update(message.toJson());
+    loading();
   } catch (e) {
+    loading();
     print("Error updating message : $e");
   }
 }
 
-Future<void> deleteReservation(
+Future<void> deleteDBMessage(
     String documentId, Function loading, BuildContext context) async {
   try {
     // Supprime le document avec l'ID spécifié dans la collection donnée

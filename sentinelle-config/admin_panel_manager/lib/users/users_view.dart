@@ -1,4 +1,3 @@
-import 'package:admin_panel_manager/login-manager/delete_user.dart';
 import 'package:admin_panel_manager/login-manager/get_user_fonction.dart';
 import 'package:admin_panel_manager/users/new_user_dialog.dart';
 import 'package:admin_panel_manager/users/user_edit_dialog.dart';

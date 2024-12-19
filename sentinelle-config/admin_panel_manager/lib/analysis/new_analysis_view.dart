@@ -1,8 +1,10 @@
 import 'package:admin_panel_manager/Class/analysis_class.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_network/image_network.dart';
 
 import '../constants.dart';
+import '../login-manager/file_picker.dart';
 import '../widgets/simple_page_title.dart';
 
 class NewAnalysisView extends StatefulWidget {
@@ -25,6 +27,8 @@ class _NewAnalysisViewState extends State<NewAnalysisView> {
   late TextEditingController linkPDFEN;
   late TextEditingController linkPDFFR;
   late TextEditingController category;
+  late TextEditingController preview;
+  late TextEditingController previewFR;
 
   @override
   void initState() {
@@ -38,16 +42,184 @@ class _NewAnalysisViewState extends State<NewAnalysisView> {
     linkPDFEN = TextEditingController();
     linkPDFFR = TextEditingController();
     category = TextEditingController();
+    preview = TextEditingController();
+    previewFR = TextEditingController();
   }
 
-  void saveModification() {}
+  void saveModification() async {
+    if (validateEntries()) {
+      setState(() {
+        saving = true;
+      });
+      await addAnalysis(analysisToModify, context, () {
+        setState(() {
+          saving = false;
+        });
+      });
+    }
+  }
 
-  void publishAnalysis() {}
+  void publishAnalysis() {
+    if (validateEntries()) {
+      setState(() {
+        analysisToModify.published = true;
+      });
+
+      saveModification();
+    }
+  }
+
+  bool validateEntries() {
+    if (analysisToModify.title.isEmpty) {
+      setState(() {
+        showEnglishTitle = true;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Title empty..."),
+        ),
+      );
+      return false;
+    } else if (analysisToModify.titleFR.isEmpty) {
+      setState(() {
+        showEnglishTitle = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("French title empty..."),
+        ),
+      );
+      return false;
+    } else if (analysisToModify.subtitle.isEmpty) {
+      setState(() {
+        showEnglishSubtitle = true;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Subtitle empty..."),
+        ),
+      );
+      return false;
+    } else if (analysisToModify.subtitleFR.isEmpty) {
+      setState(() {
+        showEnglishSubtitle = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Subtitle in french empty..."),
+        ),
+      );
+      return false;
+    } else if (analysisToModify.resume.isEmpty) {
+      setState(() {
+        showEnglishResume = true;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Resume empty..."),
+        ),
+      );
+      return false;
+    } else if (analysisToModify.resumeFR.isEmpty) {
+      setState(() {
+        showEnglishResume = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Resume in french empty..."),
+        ),
+      );
+      return false;
+    } else if (analysisToModify.preview.isEmpty) {
+      setState(() {
+        showEnglishPreview = true;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Preview empty..."),
+        ),
+      );
+      return false;
+    } else if (analysisToModify.previewFR.isEmpty) {
+      setState(() {
+        showEnglishPreview = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Preview in french empty..."),
+        ),
+      );
+      return false;
+    } else if (analysisToModify.category.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Category empty..."),
+        ),
+      );
+      return false;
+    } else if (analysisToModify.linkPDFEN.isEmpty &&
+        analysisToModify.linkPDFFR.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Article PDF empty..."),
+        ),
+      );
+      return false;
+    } else if (analysisToModify.imageUrl.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Download an image..."),
+        ),
+      );
+      return false;
+    }
+    return true;
+  }
+
+  bool saving = false;
+
+  void downloadImage() async {
+    setState(() {
+      imgLoading = true;
+    });
+    await uploadImageToFirebase("reports/img", setUrlImg);
+  }
+
+  void setUrlImg(String url) {
+    setState(() {
+      analysisToModify.imageUrl = url;
+      imgLoading = false;
+    });
+  }
+
+  bool imgLoading = false;
 
   bool showEnglishTitle = true;
   bool showEnglishSubtitle = true;
   bool showEnglishResume = true;
   bool showEnglishPreview = true;
+
+  void selectPDFEN() async {
+    await pdfPickerAndUpload("reports/pdf", setPDFENUrl);
+  }
+
+  void setPDFENUrl(String url) {
+    setState(() {
+      analysisToModify.linkPDFEN = url;
+    });
+  }
+
+  void selectPDFFR() async {
+    await pdfPickerAndUpload("reports/pdf", setPDFENUrl);
+  }
+
+  void setPDFFRUrl(String url) {
+    setState(() {
+      analysisToModify.linkPDFFR = url;
+    });
+  }
+
+  String selectedPreviewEntrieType = "Title 1";
 
   @override
   Widget build(BuildContext context) {
@@ -72,59 +244,66 @@ class _NewAnalysisViewState extends State<NewAnalysisView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  MaterialButton(
-                    onPressed: saveModification,
-                    minWidth: 150,
-                    height: 40,
-                    shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide:
-                            const BorderSide(color: Colors.black, width: 2)),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.save,
-                          size: 20,
-                          color: Colors.black,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Save modifications",
-                          style: buttonTitleStyle,
-                        )
-                      ],
+                  if (saving)
+                    const CircularProgressIndicator(
+                      color: Colors.yellow,
                     ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  MaterialButton(
-                    onPressed: publishAnalysis,
-                    minWidth: 150,
-                    height: 40,
-                    shape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide:
-                            const BorderSide(color: Colors.black, width: 2)),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.publish_rounded,
-                          size: 20,
-                          color: Colors.black,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Publish",
-                          style: buttonTitleStyle,
-                        )
-                      ],
+                  if (!saving)
+                    MaterialButton(
+                      onPressed: saveModification,
+                      minWidth: 150,
+                      height: 40,
+                      shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide:
+                              const BorderSide(color: Colors.black, width: 2)),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.save,
+                            size: 20,
+                            color: Colors.black,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Save modifications",
+                            style: buttonTitleStyle,
+                          )
+                        ],
+                      ),
                     ),
-                  ),
+                  if (!saving)
+                    const SizedBox(
+                      width: 20,
+                    ),
+                  if (!saving)
+                    MaterialButton(
+                      onPressed: publishAnalysis,
+                      minWidth: 150,
+                      height: 40,
+                      shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide:
+                              const BorderSide(color: Colors.black, width: 2)),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.publish_rounded,
+                            size: 20,
+                            color: Colors.black,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Publish",
+                            style: buttonTitleStyle,
+                          )
+                        ],
+                      ),
+                    ),
                 ],
               )
             ],
@@ -378,11 +557,11 @@ class _NewAnalysisViewState extends State<NewAnalysisView> {
                               ],
                             ),
                           ),
-                          //Content
+                          //Resume
                           Container(
                             margin: const EdgeInsets.only(top: 10),
                             width: MediaQuery.of(context).size.width,
-                            height: 400,
+                            height: 200,
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
                                 color: Colors.white,
@@ -518,6 +697,342 @@ class _NewAnalysisViewState extends State<NewAnalysisView> {
                               ],
                             ),
                           ),
+                          //Preview
+                          Container(
+                            margin: const EdgeInsets.only(top: 10),
+                            width: MediaQuery.of(context).size.width,
+                            padding: const EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Preview in ${showEnglishPreview ? "English" : "French"}",
+                                      style: thirdTitleStyle,
+                                    ),
+                                    Row(
+                                      children: [
+                                        MaterialButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              showEnglishPreview = true;
+                                            });
+                                          },
+                                          color: showEnglishPreview
+                                              ? const Color(0xffFACB01)
+                                              : const Color(0xffECECEC),
+                                          minWidth: 50,
+                                          height: 50,
+                                          child: Text(
+                                            "EN",
+                                            style: buttonTitleStyle,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        MaterialButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              showEnglishPreview = false;
+                                            });
+                                          },
+                                          color: !showEnglishPreview
+                                              ? const Color(0xffFACB01)
+                                              : const Color(0xffECECEC),
+                                          minWidth: 50,
+                                          height: 50,
+                                          child: Text(
+                                            "FR",
+                                            style: buttonTitleStyle,
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                Container(
+                                    margin: const EdgeInsets.only(top: 20),
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                        color: const Color(0xffECECEC),
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          height: 55,
+                                          width: 100,
+                                          child: DropdownButton<String>(
+                                            isExpanded: true,
+                                            alignment:
+                                                AlignmentDirectional.center,
+                                            value: selectedPreviewEntrieType,
+                                            onChanged: (String? newValue) {
+                                              setState(() {
+                                                selectedPreviewEntrieType =
+                                                    newValue!;
+                                              });
+                                            },
+                                            items: [
+                                              "Title 1",
+                                              "Title 2",
+                                              "Paragraphe"
+                                            ].map<DropdownMenuItem<String>>(
+                                                (String value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child:
+                                                    Center(child: Text(value)),
+                                              );
+                                            }).toList(),
+                                            icon: const SizedBox
+                                                .shrink(), // Retirer l'icône
+                                            underline: const SizedBox.shrink(),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Container(
+                                            height: 55,
+                                            decoration: BoxDecoration(
+                                                color: const Color(0xffECECEC),
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            child: showEnglishPreview
+                                                ? TextField(
+                                                    expands: true,
+                                                    minLines: null,
+                                                    maxLines: null,
+                                                    textAlignVertical:
+                                                        TextAlignVertical.top,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        preview.text = value;
+                                                      });
+                                                    },
+                                                    decoration: InputDecoration(
+                                                      filled: true,
+                                                      hintText: "rn...",
+                                                      fillColor: const Color(
+                                                          0xFFECECEC),
+                                                      border: InputBorder.none,
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide:
+                                                            BorderSide.none,
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide:
+                                                            BorderSide.none,
+                                                      ),
+                                                    ),
+                                                  )
+                                                : TextField(
+                                                    expands: true,
+                                                    minLines: null,
+                                                    maxLines: null,
+                                                    textAlignVertical:
+                                                        TextAlignVertical.top,
+                                                    onChanged: (value) {
+                                                      setState(() {
+                                                        previewFR.text = value;
+                                                      });
+                                                    },
+                                                    decoration: InputDecoration(
+                                                      filled: true,
+                                                      hintText: "fr...",
+                                                      fillColor: const Color(
+                                                          0xFFECECEC),
+                                                      border: InputBorder.none,
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide:
+                                                            BorderSide.none,
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        borderSide:
+                                                            BorderSide.none,
+                                                      ),
+                                                    ),
+                                                  ),
+                                          ),
+                                        ),
+                                        IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                if (showEnglishPreview &&
+                                                    preview.text.isNotEmpty) {
+                                                  if (selectedPreviewEntrieType ==
+                                                      "Title 1") {
+                                                    analysisToModify.preview
+                                                        .add({
+                                                      "h3": preview.text
+                                                    });
+                                                  } else if (selectedPreviewEntrieType ==
+                                                      "Title 2") {
+                                                    analysisToModify.preview
+                                                        .add({
+                                                      "h6": preview.text
+                                                    });
+                                                  } else if (selectedPreviewEntrieType ==
+                                                      "Paragraphe") {
+                                                    analysisToModify.preview
+                                                        .add({
+                                                      "p": preview.text
+                                                    });
+                                                  }
+                                                } else if ((!showEnglishPreview) &&
+                                                    previewFR.text.isNotEmpty) {
+                                                  if (selectedPreviewEntrieType ==
+                                                      "Title 1") {
+                                                    analysisToModify.previewFR
+                                                        .add({
+                                                      "h3": previewFR.text
+                                                    });
+                                                  } else if (selectedPreviewEntrieType ==
+                                                      "Title 2") {
+                                                    analysisToModify.previewFR
+                                                        .add({
+                                                      "h6": previewFR.text
+                                                    });
+                                                  } else if (selectedPreviewEntrieType ==
+                                                      "Paragraphe") {
+                                                    analysisToModify.previewFR
+                                                        .add({
+                                                      "p": previewFR.text
+                                                    });
+                                                  }
+                                                }
+                                              });
+                                            },
+                                            icon: const Tooltip(
+                                                message: "Add text",
+                                                child: Icon(
+                                                  Icons.arrow_downward_outlined,
+                                                  size: 30,
+                                                )))
+                                      ],
+                                    )),
+                                if (showEnglishPreview)
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 20),
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Column(
+                                      children: List<Widget>.generate(
+                                        analysisToModify.preview.length,
+                                        (index) {
+                                          String text = analysisToModify
+                                              .preview[index]
+                                              .entries
+                                              .first
+                                              .value;
+                                          String balise = analysisToModify
+                                              .preview[index].entries.first.key;
+                                          return ListTile(
+                                            title: Text(
+                                              text,
+                                              style: balise == "h3"
+                                                  ? GoogleFonts.nunito(
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.bold)
+                                                  : balise == "h6"
+                                                      ? GoogleFonts.nunito(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold)
+                                                      : GoogleFonts.nunito(
+                                                          fontSize: 16),
+                                            ),
+                                            trailing: IconButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    analysisToModify.preview
+                                                        .removeAt(index);
+                                                  });
+                                                },
+                                                icon: const Icon(
+                                                  Icons.close,
+                                                  size: 15,
+                                                )),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                if (!showEnglishPreview)
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 20),
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Column(
+                                      children: List<Widget>.generate(
+                                        analysisToModify.previewFR.length,
+                                        (index) {
+                                          String text = analysisToModify
+                                              .previewFR[index]
+                                              .entries
+                                              .first
+                                              .value;
+                                          String balise = analysisToModify
+                                              .previewFR[index]
+                                              .entries
+                                              .first
+                                              .key;
+                                          return ListTile(
+                                            title: Text(
+                                              text,
+                                              style: balise == "h3"
+                                                  ? GoogleFonts.nunito(
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.bold)
+                                                  : balise == "h6"
+                                                      ? GoogleFonts.nunito(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold)
+                                                      : GoogleFonts.nunito(
+                                                          fontSize: 16),
+                                            ),
+                                            trailing: IconButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    analysisToModify.previewFR
+                                                        .removeAt(index);
+                                                  });
+                                                },
+                                                icon: const Icon(
+                                                  Icons.close,
+                                                  size: 15,
+                                                )),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -539,6 +1054,7 @@ class _NewAnalysisViewState extends State<NewAnalysisView> {
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(20),
                                   child: ImageNetwork(
+                                    key: ValueKey(analysisToModify.imageUrl),
                                     image: analysisToModify.imageUrl,
                                     width: 540,
                                     height: 300,
@@ -557,24 +1073,29 @@ class _NewAnalysisViewState extends State<NewAnalysisView> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    MaterialButton(
-                                      onPressed: () {
-                                        //Selection de l'image
-                                      },
-                                      color: Colors.white,
-                                      shape: OutlineInputBorder(
-                                          borderSide: BorderSide.none,
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      minWidth: 60,
-                                      height: 60,
-                                      child: const Center(
-                                        child: Icon(
-                                          Icons.image,
-                                          size: 20,
-                                        ),
-                                      ),
-                                    ),
+                                    imgLoading
+                                        ? const CircularProgressIndicator(
+                                            color: Colors.yellow,
+                                          )
+                                        : MaterialButton(
+                                            onPressed: () {
+                                              //Selection de l'image
+                                              downloadImage();
+                                            },
+                                            color: Colors.white,
+                                            shape: OutlineInputBorder(
+                                                borderSide: BorderSide.none,
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            minWidth: 60,
+                                            height: 60,
+                                            child: const Center(
+                                              child: Icon(
+                                                Icons.image,
+                                                size: 20,
+                                              ),
+                                            ),
+                                          ),
                                   ],
                                 )
                               ],
@@ -625,6 +1146,99 @@ class _NewAnalysisViewState extends State<NewAnalysisView> {
                                         ),
                                       ),
                                     )),
+                              ],
+                            ),
+                          ),
+                          //PDF picker
+                          Container(
+                            margin: const EdgeInsets.only(top: 10),
+                            width: MediaQuery.of(context).size.width,
+                            padding: const EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "PDF",
+                                  style: thirdTitleStyle,
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                        child: Center(
+                                            child: Text(
+                                      "PDF file in english :",
+                                      style:
+                                          GoogleFonts.nunitoSans(fontSize: 20),
+                                    ))),
+                                    Expanded(
+                                      child: InkWell(
+                                        onTap: () {
+                                          selectPDFEN();
+                                        },
+                                        child: Container(
+                                          height: 50,
+                                          padding: const EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                              color: const Color(0xffECECEC),
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: Center(
+                                            child: Text(
+                                              analysisToModify.linkPDFEN,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: GoogleFonts.nunitoSans(
+                                                  fontSize: 20,
+                                                  color: Colors.black),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                        child: Center(
+                                            child: Text(
+                                      "PDF file in english :",
+                                      style:
+                                          GoogleFonts.nunitoSans(fontSize: 20),
+                                    ))),
+                                    Expanded(
+                                      child: InkWell(
+                                        onTap: () {
+                                          selectPDFFR();
+                                        },
+                                        child: Container(
+                                          height: 50,
+                                          padding: const EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                              color: const Color(0xffECECEC),
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: Center(
+                                            child: Text(
+                                              analysisToModify.linkPDFFR,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: GoogleFonts.nunitoSans(
+                                                  fontSize: 20,
+                                                  color: Colors.black),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
