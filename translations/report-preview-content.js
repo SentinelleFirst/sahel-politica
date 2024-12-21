@@ -1,0 +1,7 @@
+window.translationsEN = {
+    "": "",
+    "": "",
+    "": "",
+};
+
+window.translationsFR = {};

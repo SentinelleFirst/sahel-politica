@@ -76,7 +76,7 @@ submitter.addEventListener('click', async (e) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'api-key': "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",
+        'api-key': "",
       },
       body: JSON.stringify(data),
     });

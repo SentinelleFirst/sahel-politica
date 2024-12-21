@@ -116,13 +116,11 @@
             max-width: 100%;
         }
 
-        h3 {
-            
-        }
-
-        h1 {
+        span{
+            font-size: 40px;
+            font-weight: bold;
+            font-family: 'Poppins', 'Roboto', sans-serif;
             margin-bottom: 30px;
-            
         }
 
         p {

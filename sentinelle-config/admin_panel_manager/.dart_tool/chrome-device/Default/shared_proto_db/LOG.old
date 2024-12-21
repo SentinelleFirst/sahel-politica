@@ -1,8 +1,13 @@
-2024/12/19-11:23:28.489 23f0 Reusing MANIFEST C:\Users\HP\AppData\Local\Temp\flutter_tools.d334494c\flutter_tools_chrome_device.a69ba3a8\Default\shared_proto_db/MANIFEST-000001
-2024/12/19-11:23:28.512 23f0 Recovering log #16
-2024/12/19-11:23:28.516 23f0 Reusing old log C:\Users\HP\AppData\Local\Temp\flutter_tools.d334494c\flutter_tools_chrome_device.a69ba3a8\Default\shared_proto_db/000016.log 
-2024/12/19-11:23:28.518 23f0 Delete type=0 #3
-2024/12/19-11:23:28.518 23f0 Delete type=0 #4
-2024/12/19-11:23:28.519 23f0 Delete type=0 #7
-2024/12/19-11:23:28.519 23f0 Delete type=0 #10
-2024/12/19-11:23:28.519 23f0 Delete type=0 #13
+2024/12/19-23:02:45.957 2d8c Reusing MANIFEST C:\Users\HP\AppData\Local\Temp\flutter_tools.7c53376f\flutter_tools_chrome_device.51e76082\Default\shared_proto_db/MANIFEST-000001
+2024/12/19-23:02:45.968 2d8c Recovering log #19
+2024/12/19-23:02:45.970 2d8c Reusing old log C:\Users\HP\AppData\Local\Temp\flutter_tools.7c53376f\flutter_tools_chrome_device.51e76082\Default\shared_proto_db/000019.log 
+2024/12/19-23:02:45.971 2d8c Delete type=0 #3
+2024/12/19-23:02:45.971 2d8c Delete type=0 #4
+2024/12/19-23:02:45.971 2d8c Delete type=0 #7
+2024/12/19-23:02:45.972 2d8c Delete type=2 #8
+2024/12/19-23:02:45.972 2d8c Delete type=0 #10
+2024/12/19-23:02:45.972 2d8c Delete type=2 #11
+2024/12/19-23:02:45.972 2d8c Delete type=0 #13
+2024/12/19-23:02:45.972 2d8c Delete type=2 #14
+2024/12/19-23:02:45.973 2d8c Delete type=0 #16
+2024/12/19-23:02:45.973 2d8c Delete type=2 #17

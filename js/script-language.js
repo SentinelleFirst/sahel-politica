@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
          * Fait appel à ta fonction applyTranslations(lang) ici pour que le changement se fasse au moment
          * de la selection de la langue
          * */
-        
+        applyTranslations(selectedValue)
 
         // Enregistrer la valeur dans localStorage si ce n'est pas l'initialisation
         if (saveLanguage) {
@@ -56,31 +56,34 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    /**
-     * Tu peux mettre toute ta fonction applyTranslations(lang) ici pour qu'il soit include dans le DOM
-     * et qu'il soit exécuté après avoir sélectionné la langue
-     */
      // Appliquer les traductions aux éléments
-    //Cette fonction doit setrouver dans le document.addEventListener si non il ne sera pas lu
     function applyTranslations(lang) {
         const elements = document.querySelectorAll("[data-translate-key]");
+
         elements.forEach((el) => {
             const key = el.getAttribute("data-translate-key");
-            const keys = key.split('.'); // Exemple : "header.home"
-            let translation = translations[lang];
+           
+        let translation = "";
 
-            // Parcourir les niveaux d'objet dans le JSON
-            keys.forEach((k) => {
-                if (translation[k]) translation = translation[k];
-            });
+        if (lang === 'en') {
+            if (key.slice(0, 6) === "header" || key.slice(0, 6) === "footer") {
+                translation = translateHeaderFooterEN[key];
+            } else {
+                translation = translationsEN[key];
+            } 
+        } else {
+            if (key.slice(0, 6) === "header" || key.slice(0, 6) === "footer") {
+                translation = translateHeaderFooterFR[key];
+            } else {
+                translation = translationsFR[key];
+            } 
+        }
 
-            if (translation) {
-                el.textContent = translation; // Remplacer le texte
-            }
+            el.innerHTML = translation; // Remplacer le texte
         });
     }
     // Chargement des fichiers de langue json et traductions
-    const translations = {};
+    
 
     // Charger les traductions depuis un fichier JSON
     async function loadTranslations(lang) {
@@ -90,33 +93,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         applyTranslations(lang);
     }
-    //loadTranslations('en');
-    //Traduction avec Deepl
-    async function translateWithDeepL(text, targetLang) {
-        const apiKey = "60eacb02-4951-40ca-9758-949c06c021e8:fx";
-        const url = `https://api-free.deepl.com/v2/translate`;
-        const params = new URLSearchParams();
-        params.append("auth_key", apiKey);
-        params.append("text", text);
-        params.append("target_lang", targetLang.toUpperCase());
-      
-        const response = await fetch(url, {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: params,
-        });
-        const data = await response.json();
-        return data.translations[0].text;
-      }
-      
-      async function translateDynamicContent(targetLang) {
-        const elements = document.querySelectorAll("[data-translate='true']");
-        for (const el of elements) {
-          const translatedText = await translateWithDeepL(el.textContent, targetLang);
-          el.textContent = translatedText;
-        }
-      }
-      
     // Récupérer la valeur de la langue depuis localStorage si elle existe et l'appliquer
     var savedLang = getLanguage('lang');
 
@@ -136,30 +112,3 @@ document.addEventListener('DOMContentLoaded', function () {
     updateTitle(false);  // Ne pas enregistrer dans localStorage lors de l'initialisation
     
 });
-
-// Chargement des fichiers de langue json et traductions
-const translations = {};
-
-// Charger les traductions depuis un fichier JSON
-async function loadTranslations(lang) {
-    if (!translations[lang]) {
-        const response = await fetch(`translations/${lang}.json`);
-        translations[lang] = await response.json();
-    }
-    applyTranslations(lang);
-}
-
-// Changer la langue
-//Inutile de mettre ce document.addEventListener puisque y'en a déjà un en haut, celui ne sera pas compilé
-/*
-document.addEventListener('DOMContentLoaded', () => {
-    const langDropdown = document.getElementById('mobilLangDropdown');
-
-    langDropdown.addEventListener('change', () => {
-        const selectedLanguage = langDropdown.value;
-        loadTranslations(selectedLanguage);
-    });
-});
-*/
-// Charger la langue par défaut
-loadTranslations('en');

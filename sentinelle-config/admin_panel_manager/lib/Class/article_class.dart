@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../login-manager/collection_manager.dart';
+import '../login-manager/get_user_fonction.dart';
 
 class Article {
   String id;
@@ -161,6 +162,10 @@ Future<void> deleteDBArticle(
 Future<void> addArticle(
     Article article, BuildContext context, Function loading) async {
   try {
+    final currentAuthor = await getConnectedUser();
+    if (currentAuthor != null) {
+      article.author = currentAuthor.displayName();
+    }
     // Ajoute un nouveau document dans la collection "AdminUsers"
     await FirebaseFirestore.instance
         .collection('Articles')

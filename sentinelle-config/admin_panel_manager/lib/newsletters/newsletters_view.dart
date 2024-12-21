@@ -7,9 +7,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 import '../constants.dart';
-import '../events/get_all_contacts.dart';
+import '../login-manager/get_all_contacts.dart';
 import '../widgets/simple_divider.dart';
 import '../widgets/simple_page_title.dart';
+import 'delete_contact_dialog.dart';
 
 class NewslettersView extends StatefulWidget {
   const NewslettersView({super.key});
@@ -23,10 +24,7 @@ class _NewslettersViewState extends State<NewslettersView> {
   String searchContact = "";
   bool isLoading = true;
   List<Newsletter> newsletters = [];
-  List<String> contacts = [
-    "sidibesaydil@gmail.com",
-    "saydilsidibe352@gmail.com"
-  ];
+  List<String> contacts = [];
 
   @override
   void initState() {
@@ -115,7 +113,10 @@ class _NewslettersViewState extends State<NewslettersView> {
   void deleteContact(String contact) {
     showDialog(
       context: context,
-      builder: (context) => const Dialog(),
+      builder: (context) => DeleteContactDialog(
+        email: contact,
+        refresh: getAllContacts,
+      ),
     );
   }
 

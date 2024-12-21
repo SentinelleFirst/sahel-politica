@@ -1,4 +1,5 @@
 import 'package:admin_panel_manager/Class/message_class.dart';
+import 'package:admin_panel_manager/login-manager/send_email.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -63,8 +64,13 @@ class _MessageDetailsDialogState extends State<MessageDetailsDialog>
     if (validateEntries()) {
       saveModification();
       //Envoie email
+      sendEmailCampaign(
+          subject: answerObject.text,
+          recipientEmails: [
+            {"email": widget.message.company, "name": "Jane Doe"}
+          ],
+          content: answerMessage.text);
     }
-    Navigator.pop(context);
   }
 
   void saveModification() async {

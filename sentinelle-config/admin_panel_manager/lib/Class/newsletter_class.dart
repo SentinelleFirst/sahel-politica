@@ -1,3 +1,4 @@
+import 'package:admin_panel_manager/login-manager/get_user_fonction.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -100,6 +101,10 @@ Future<void> deleteDBNewsletter(
 Future<void> addDBNewsletter(
     Newsletter newsletter, BuildContext context, Function loading) async {
   try {
+    final currentAuthor = await getConnectedUser();
+    if (currentAuthor != null) {
+      newsletter.author = currentAuthor.displayName();
+    }
     // Ajoute un nouveau document dans la collection "AdminUsers"
     await FirebaseFirestore.instance
         .collection('Newsletters')

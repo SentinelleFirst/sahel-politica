@@ -1,0 +1,3 @@
+window.translationsEN = {};
+
+window.translationsFR = {};

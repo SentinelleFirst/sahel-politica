@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../login-manager/collection_manager.dart';
+import '../login-manager/get_user_fonction.dart';
 
 class Analysis {
   String id;
@@ -181,6 +182,10 @@ Future<void> deleteDBAnalysis(
 Future<void> addAnalysis(
     Analysis analysis, BuildContext context, Function loading) async {
   try {
+    final currentAuthor = await getConnectedUser();
+    if (currentAuthor != null) {
+      analysis.author = currentAuthor.displayName();
+    }
     // Ajoute un nouveau document dans la collection "AdminUsers"
     await FirebaseFirestore.instance
         .collection('Reports')
