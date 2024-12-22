@@ -99,10 +99,10 @@
         <section class="hero">
             <img class="hero-img" src="images/home-page-carroussel-2.png" alt="">
             <div class="hero-intro">
-                <h1>PUBLICATIONS</h1>
+                <h1 data-translate-key="publications-hero-title">PUBLICATIONS</h1>
                 <div class="divider"></div>
-                <h3>Get informed, get inspired and stay ahead of the trends with our publications.</h3>
-                <p>At Sahel Politica, we help you navigate the complexities of the Sahel by offering resilience audits,
+                <h3 data-translate-key="publications-hero-subtitle">Get informed, get inspired and stay ahead of the trends with our publications.</h3>
+                <p data-translate-key="publications-hero-text">At Sahel Politica, we help you navigate the complexities of the Sahel by offering resilience audits,
                     prarticleion plans, crisis response and expansion strategies.</p>
             </div>
         </section>
@@ -149,7 +149,7 @@
             </div>
         </section>
         <section class="socials-section">
-            <h3>Find us on social media</h3>
+            <h3 data-translate-key="publications-socials-title">Find us on social media</h3>
             <div class="socials-list">
                 <div class="socials-post linkedin-section">
                     <div class="title">
@@ -249,14 +249,14 @@
             </div>
         </section>
         <section class="media-code">
-            <h3>Making sure our social media channels meet your expectations</h3>
+            <h3 data-translate-key="publications-media-code-title">Making sure our social media channels meet your expectations</h3>
             <div class="code code1">
                 <img src="images/social-code.png" class="codeimg">
                 <div class="caption">
-                    <h3>Social media code of conduct</h3>
-                    <p class="resume">Digital interaction offers significant benefits, but it also involves certain risks and responsibilities. To address this, we have established a code of conduct to ensure that the actions of Sahel Politica employees remain safe, positive, and reflective of the true essence of the Sahel Politica brand.</p>
+                    <h3 data-translate-key="publications-media-code-1-title">Social media code of conduct</h3>
+                    <p data-translate-key="publications-media-code-1-text" class="resume">Digital interaction offers significant benefits, but it also involves certain risks and responsibilities. To address this, we have established a code of conduct to ensure that the actions of Sahel Politica employees remain safe, positive, and reflective of the true essence of the Sahel Politica brand.</p>
                     <div class="more-info">
-                        <a href="policies.html?option=social-media-code" class="report-title">See our social media code of
+                        <a data-translate-key="publications-media-code-1-link" href="policies.html?option=social-media-code" class="report-title">See our social media code of
                             conduct<img src="images/long-right-arrow.png"></a>
                     </div>
                 </div>
@@ -264,10 +264,10 @@
             <div class="code code2">
                 <img src="images/media-rules.png" class="codeimg">
                 <div class="caption">
-                    <h3>Social media house rules</h3>
-                    <p class="resume">The house rules set clear expectations for behavior when engaging with us on social media. They aim to maintain a positive experience across our channels and foster communities that are constructive, supportive, and enjoyable for everyone.</p>
+                    <h3 data-translate-key="publications-media-code-2-title">Social media house rules</h3>
+                    <p data-translate-key="publications-media-code-2-text" class="resume">The house rules set clear expectations for behavior when engaging with us on social media. They aim to maintain a positive experience across our channels and foster communities that are constructive, supportive, and enjoyable for everyone.</p>
                     <div class="more-info">
-                        <a href="policies.html?option=media-house-rules" class="report-title">See our social media code of
+                        <a data-translate-key="publications-media-code-2-link" href="policies.html?option=media-house-rules" class="report-title">See our social media code of
                             conduct<img src="images/long-right-arrow.png"></a>
                     </div>
                 </div>
@@ -565,10 +565,20 @@
                 articleContentDialog.innerHTML = `
                     <img src="${selectedArticle.imageUrl}" alt="${selectedArticle.title}" class="article-dialog-img">
                     <div>
-                        <h3>${selectedArticle.title}</h3>
+                        <h3 class="langue-en">${selectedArticle.title}</h3>
+                        <h3 class="langue-fr">${selectedArticle.titleFR}</h3>
                         <p>${formatter.format(new Date(selectedArticle.date.seconds * 1000))}</p>
-                        <p>${selectedArticle.content}</p>
+                        <p class="langue-en">${selectedArticle.content}</p>
+                        <p class="langue-fr">${selectedArticle.contentFR}</p>
                     </div>
+                        <div class="links-dialog">
+                            <a target="_blank" href="${selectedArticle.linkedinPost}">
+                                <img src="images/report-linkedin-icon.svg" alt="">
+                                <div>
+                                    <h6>Find this publication on Linkedin</h6>
+                                </div>
+                            </a>
+                        </div>
                 `;
 
                 // Afficher le modal
@@ -611,17 +621,19 @@
                     articleContentDialog.innerHTML = `
                         <img src="${selectedArticle.imageUrl}" alt="${selectedArticle.title}" class="article-dialog-img">
                         <div class="dialog-content">
-                            <h3>${selectedArticle.title}</h3>
+                            <h3 class="langue-en">${selectedArticle.title}</h3>
+                            <h3 class="langue-fr">${selectedArticle.titleFR}</h3>
                             <p>${formatter.format(new Date(selectedArticle.date.seconds * 1000))}</p>
-                            <p>${selectedArticle.content}</p>
+                            <p class="langue-en">${selectedArticle.content}</p>
+                            <p class="langue-fr">${selectedArticle.contentFR}</p>
                         </div>
                         <div class="links-dialog">
-                        <a target="_blank" href="${selectedArticle.linkedinPost}">
-                            <img src="images/report-linkedin-icon.svg" alt="">
-                            <div>
-                                <h6>Find this publication on Linkedin</h6>
-                            </div>
-                        </a>
+                            <a target="_blank" href="${selectedArticle.linkedinPost}">
+                                <img src="images/report-linkedin-icon.svg" alt="">
+                                <div>
+                                    <h6>Find this publication on Linkedin</h6>
+                                </div>
+                            </a>
                         </div>
                     `;
                 }

@@ -253,7 +253,23 @@
                             for (let key in previewItem) {
                                 if (previewItem.hasOwnProperty(key)) {
                                     // Utiliser la clé comme balise HTML et la valeur comme contenu de la balise
-                                    formattedPreview += `<${key}>${previewItem[key]}</${key}>`;
+                                    formattedPreview += `<${key} class="langue-en">${previewItem[key]}</${key}>`;
+                                }
+                            }
+                        });
+                    }
+
+                    
+                    let formattedPreviewFR = '';
+
+                    // Parcourir chaque élément du tableau preview
+                    if (Array.isArray(report.previewFR)) {
+                        report.previewFR.forEach(previewItem => {
+                            // Chaque previewItem est un objet avec une seule clé-valeur
+                            for (let key in previewItem) {
+                                if (previewItem.hasOwnProperty(key)) {
+                                    // Utiliser la clé comme balise HTML et la valeur comme contenu de la balise
+                                    formattedPreviewFR += `<${key} class="langue-fr">${previewItem[key]}</${key}>`;
                                 }
                             }
                         });
@@ -318,7 +334,8 @@
                                 </a>
                             </div>
                             <div class="report-preview">
-                                ${formattedPreview} <!-- Affiche le contenu formaté du preview -->
+                                ${formattedPreview}
+                                ${formattedPreviewFR}
                             </div>
                         `;
                 } else {
