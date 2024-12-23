@@ -47,7 +47,9 @@ class _MessageDetailsDialogState extends State<MessageDetailsDialog>
 //On initialise des donnés à afficher
     answerObject =
         TextEditingController(text: 'Reply to : ${widget.message.object}');
-    answerMessage = TextEditingController();
+    emailObject = "Reply to : ${widget.message.object}";
+    answerMessage = TextEditingController(text: widget.message.answer);
+    emailContent = widget.message.answer;
     saveModification();
   }
 
@@ -64,12 +66,17 @@ class _MessageDetailsDialogState extends State<MessageDetailsDialog>
     if (validateEntries()) {
       saveModification();
       //Envoie email
-      sendEmailCampaign(
-          subject: answerObject.text,
-          recipientEmails: [
-            {"email": widget.message.company, "name": "Jane Doe"}
-          ],
-          content: answerMessage.text);
+      sendEmailAPI(
+          name: widget.message.displayName(),
+          email: widget.message.email,
+          subject: emailObject,
+          message: emailContent,
+          context: context,
+          loading: () {
+            setState(() {
+              saving = false;
+            });
+          });
     }
   }
 

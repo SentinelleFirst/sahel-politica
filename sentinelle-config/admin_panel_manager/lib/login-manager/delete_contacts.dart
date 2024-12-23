@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../constants.dart';
+
 Future<void> deleteContact(
     String email, Function() loading, BuildContext context) async {
-  final apiKey = ''; // Remplacez par votre clé API
+  final apiKey = brevoKey; // Remplacez par votre clé API
   final url = Uri.parse('https://api.brevo.com/v3/contacts/$email');
   final headers = {
     'accept': 'application/json',

@@ -1,3 +1,4 @@
+import 'package:admin_panel_manager/Class/contacts_class.dart';
 import 'package:admin_panel_manager/login-manager/get_user_fonction.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -12,20 +13,32 @@ class Newsletter {
   String linkText;
   String imageUrl;
   String elementTitle;
-  List<String> contacts;
+  List<ContactClass> contacts;
   String author;
   DateTime date;
+  bool allContacts;
 
-  Newsletter(this.id, this.object, this.message, this.link, this.linkText,
-      this.imageUrl, this.elementTitle, this.contacts, this.author, this.date);
+  Newsletter(
+      this.id,
+      this.object,
+      this.message,
+      this.link,
+      this.linkText,
+      this.imageUrl,
+      this.elementTitle,
+      this.contacts,
+      this.author,
+      this.date,
+      this.allContacts);
 
   factory Newsletter.empty() {
-    return Newsletter("", "", "", "", "", "", "", [], "", DateTime.now());
+    return Newsletter(
+        "", "", "", "", "", "", "", [], "", DateTime.now(), false);
   }
 
   factory Newsletter.copy(Newsletter n) {
     return Newsletter(n.id, n.object, n.message, n.link, n.linkText, n.imageUrl,
-        n.elementTitle, n.contacts, n.author, n.date);
+        n.elementTitle, n.contacts, n.author, n.date, n.allContacts);
   }
   factory Newsletter.fromJson(Map<String, dynamic> json, String id) {
     return Newsletter(
@@ -36,9 +49,13 @@ class Newsletter {
       json['linkText'] ?? "",
       json['imageUrl'] ?? "",
       json['elementTitle'] ?? "",
-      List<String>.from(json['contacts'] ?? []),
+      (json['contacts'] as List<dynamic>)
+          .map((contactJson) =>
+              ContactClass.fromJson(contactJson as Map<String, dynamic>))
+          .toList(),
       json['author'] ?? "",
       (json['date'] as Timestamp).toDate(),
+      json['allContacts'] ?? false,
     );
   }
 
@@ -50,9 +67,10 @@ class Newsletter {
       "linkText": linkText,
       "imageUrl": imageUrl,
       "elementTitle": elementTitle,
-      "contacts": contacts,
+      "contacts": contacts.map((contact) => contact.toJson()).toList(),
       "author": author,
       "date": Timestamp.fromDate(date),
+      "allContacts": allContacts,
     };
   }
 }
@@ -62,13 +80,27 @@ Future<List<Newsletter>> fetchDBNewsletters() async {
       (data, documentId) => Newsletter.fromJson(data, documentId));
 }
 
-Future<void> updateDBNewsletter(Newsletter newsletter) async {
+Future<void> updateDBNewsletter(
+    Newsletter newsletter, BuildContext context, Function loading) async {
   try {
     await FirebaseFirestore.instance
         .collection('Newsletters')
         .doc(newsletter.id)
         .update(newsletter.toJson());
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Newsletter updated successfully"),
+      ),
+    );
+    loading();
   } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Error, try later"),
+      ),
+    );
+    loading();
     print("Error updating newsletter: $e");
   }
 }

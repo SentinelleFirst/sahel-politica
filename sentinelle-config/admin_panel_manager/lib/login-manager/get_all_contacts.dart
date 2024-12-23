@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-Future<List<String>> getContactEmails() async {
-  final apiKey = ''; // Remplacez par votre clé API
+import '../constants.dart';
+
+Future<List<Map<String, String>>> getContactEmails() async {
+  final apiKey = brevoKey; // Remplacez par votre clé API
   final url = Uri.parse('https://api.brevo.com/v3/contacts');
   final headers = {
     'accept': 'application/json',
@@ -22,10 +24,14 @@ Future<List<String>> getContactEmails() async {
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
       final contacts = responseData['contacts'] as List;
-      return contacts
-          .where((contact) => contact['email'] != null)
-          .map<String>((contact) => contact['email'] as String)
-          .toList();
+      return contacts.map<Map<String, String>>((contact) {
+        final email = contact['email'] ?? '';
+        final name = contact['attributes'] != null &&
+                contact['attributes']['FIRSTNAME'] != null
+            ? contact['attributes']['FIRSTNAME']
+            : 'Unknown';
+        return {'email': email, 'name': name};
+      }).toList();
     } else {
       print('Erreur lors de la récupération des contacts : ${response.body}');
       return [];

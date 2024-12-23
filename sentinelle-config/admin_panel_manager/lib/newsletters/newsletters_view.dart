@@ -1,3 +1,4 @@
+import 'package:admin_panel_manager/Class/contacts_class.dart';
 import 'package:admin_panel_manager/Class/newsletter_class.dart';
 import 'package:admin_panel_manager/newsletters/delete_newsletter_dialog.dart';
 import 'package:admin_panel_manager/newsletters/new_newsletter_dialog.dart';
@@ -24,7 +25,7 @@ class _NewslettersViewState extends State<NewslettersView> {
   String searchContact = "";
   bool isLoading = true;
   List<Newsletter> newsletters = [];
-  List<String> contacts = [];
+  List<ContactClass> contacts = [];
 
   @override
   void initState() {
@@ -46,9 +47,11 @@ class _NewslettersViewState extends State<NewslettersView> {
   }
 
   Future<void> getAllContacts() async {
-    List<String> cs = await getContactEmails();
+    List<Map<String, String>> cs = await getContactEmails();
     setState(() {
-      contacts = cs;
+      contacts = cs.where((test) => test['email']!.isNotEmpty).map((e) {
+        return ContactClass.fromJson(e);
+      }).toList();
     });
   }
 
@@ -62,12 +65,12 @@ class _NewslettersViewState extends State<NewslettersView> {
     }
   }
 
-  List<String> fetchContacts() {
+  List<ContactClass> fetchContacts() {
     if (searchContact.isEmpty) {
       return contacts;
     } else {
       return contacts.where((ev) {
-        return ev.contains(search.toLowerCase());
+        return ev.email.contains(search.toLowerCase());
       }).toList();
     }
   }
@@ -110,11 +113,11 @@ class _NewslettersViewState extends State<NewslettersView> {
     );
   }
 
-  void deleteContact(String contact) {
+  void deleteContact(String contactEmail) {
     showDialog(
       context: context,
       builder: (context) => DeleteContactDialog(
-        email: contact,
+        email: contactEmail,
         refresh: getAllContacts,
       ),
     );
@@ -226,12 +229,12 @@ class _NewslettersViewState extends State<NewslettersView> {
                           itemBuilder: (context, index) {
                             return ListTile(
                               title: Text(
-                                contacts[index],
+                                contacts[index].email,
                                 style: normalTextStyle,
                               ),
                               trailing: IconButton(
                                   onPressed: () {
-                                    deleteContact(contacts[index]);
+                                    deleteContact(contacts[index].email);
                                   },
                                   icon: const Icon(
                                     Icons.delete,
@@ -296,7 +299,9 @@ class NewsletterInfoLine extends StatelessWidget {
                             color: Colors.grey,
                             borderRadius: 2),
                         Text(
-                          "Target dispatch : ${newsletter.contacts.length} contacts",
+                          newsletter.allContacts
+                              ? "All the contacts"
+                              : "Target dispatch : ${newsletter.contacts.length} contacts",
                           style: GoogleFonts.poppins(
                               fontSize: 18, color: Colors.grey),
                         ),

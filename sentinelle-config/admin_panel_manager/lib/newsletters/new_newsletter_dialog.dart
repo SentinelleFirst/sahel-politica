@@ -3,13 +3,14 @@ import 'package:admin_panel_manager/Class/article_class.dart';
 import 'package:admin_panel_manager/Class/event_class.dart';
 import 'package:admin_panel_manager/Class/newsletter_class.dart';
 import 'package:flutter/material.dart';
+import '../Class/contacts_class.dart';
 import '../constants.dart';
 
 class NewNewsletterDialog extends StatefulWidget {
   const NewNewsletterDialog(
       {super.key, required this.refresh, required this.contacts});
 
-  final List<String> contacts;
+  final List<ContactClass> contacts;
   final Function() refresh;
 
   @override
@@ -28,7 +29,7 @@ class _NewNewsletterDialogState extends State<NewNewsletterDialog>
   List<Article> articles = [];
   List<Analysis> analysis = [];
   late Newsletter newsletterToModify;
-  static String _displayStringForOption(String option) => option;
+  static String _displayStringForOption(ContactClass option) => option.email;
   static String _displayStringForEvent(Event option) => option.title;
   static String _displayStringForArticle(Article option) => option.title;
   static String _displayStringForAnalysis(Analysis option) => option.title;
@@ -93,25 +94,15 @@ class _NewNewsletterDialogState extends State<NewNewsletterDialog>
     super.dispose();
   }
 
-  void publishNewsletter() {
-    if (validateEntries()) {
-      //Send emails
-
-      saveModification();
-    }
-  }
-
   void saveModification() async {
+    setState(() {
+      saving = true;
+    });
     if (validateEntries()) {
-      setState(() {
-        saving = true;
-      });
       await addDBNewsletter(newsletterToModify, context, () {
-        setState(() {
-          saving = false;
-        });
+        widget.refresh();
+        Navigator.pop(context);
       });
-      widget.refresh();
     }
   }
 
@@ -126,40 +117,53 @@ class _NewNewsletterDialogState extends State<NewNewsletterDialog>
     } else if (newsletterToModify.contacts.isEmpty && !choseAllContact) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("No contact selected..."),
+          content: Text("Select contact..."),
+        ),
+      );
+      return false;
+    } else if (newsletterToModify.elementTitle.isEmpty && type != 4) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Select the item to be announced..."),
         ),
       );
       return false;
     } else if (newsletterToModify.message.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Text empty..."),
+          content: Text("Put a text to be announce..."),
         ),
       );
       return false;
-    } else if (newsletterToModify.link.isEmpty) {
+    } else if (newsletterToModify.link.isNotEmpty &&
+        newsletterToModify.linkText.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("No text for the link..."),
+        ),
+      );
+      return false;
+    } else if (newsletterToModify.link.isEmpty &&
+        newsletterToModify.linkText.isNotEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("No link ..."),
         ),
       );
       return false;
-    } else if (newsletterToModify.linkText.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("No text for the link ..."),
-        ),
-      );
-      return false;
     }
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Filed OK"),
+      ),
+    );
     return true;
   }
 
-  bool saving = false;
-
   bool choseAllContact = true;
+  bool saving = false;
   int type = 1;
-
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -199,7 +203,7 @@ class _NewNewsletterDialogState extends State<NewNewsletterDialog>
                         onPressed: () {
                           setState(() {
                             //Publier l'event
-                            publishNewsletter();
+                            saveModification();
                           });
                         },
                         shape: OutlineInputBorder(
@@ -210,7 +214,7 @@ class _NewNewsletterDialogState extends State<NewNewsletterDialog>
                         height: 50,
                         color: const Color(0xffFACB01),
                         child: Text(
-                          "Send",
+                          "Save",
                           style: buttonTitleStyle,
                         ),
                       ),
@@ -343,7 +347,7 @@ class _NewNewsletterDialogState extends State<NewNewsletterDialog>
                             newsletterToModify.contacts.length,
                             (index) => ListTile(
                               title: Text(
-                                newsletterToModify.contacts[index],
+                                newsletterToModify.contacts[index].email,
                                 style: normalTextStyle,
                               ),
                               trailing: IconButton(
@@ -391,12 +395,13 @@ class _NewNewsletterDialogState extends State<NewNewsletterDialog>
                                     borderRadius: BorderRadius.circular(5)),
                                 width: 300,
                                 height: 55,
-                                child: Autocomplete<String>(
+                                child: Autocomplete<ContactClass>(
                                   displayStringForOption:
                                       _displayStringForOption,
                                   optionsViewBuilder: (BuildContext context,
-                                      AutocompleteOnSelected<String> onSelected,
-                                      Iterable<String> options) {
+                                      AutocompleteOnSelected<ContactClass>
+                                          onSelected,
+                                      Iterable<ContactClass> options) {
                                     return Align(
                                       alignment: Alignment.topLeft,
                                       child: Material(
@@ -410,14 +415,14 @@ class _NewNewsletterDialogState extends State<NewNewsletterDialog>
                                             itemCount: options.length,
                                             itemBuilder: (BuildContext context,
                                                 int index) {
-                                              final String option =
+                                              final ContactClass option =
                                                   options.elementAt(index);
                                               return GestureDetector(
                                                 onTap: () {
                                                   onSelected(option);
                                                 },
                                                 child: ListTile(
-                                                    title: Text(option)),
+                                                    title: Text(option.email)),
                                               );
                                             },
                                           ),
@@ -428,15 +433,18 @@ class _NewNewsletterDialogState extends State<NewNewsletterDialog>
                                   optionsBuilder:
                                       (TextEditingValue textEditingValue) {
                                     if (textEditingValue.text == '') {
-                                      return const Iterable<String>.empty();
+                                      return const Iterable<
+                                          ContactClass>.empty();
                                     }
                                     return widget.contacts
-                                        .where((String option) {
-                                      return option.toLowerCase().contains(
-                                          textEditingValue.text.toLowerCase());
+                                        .where((ContactClass option) {
+                                      return option.email
+                                          .toLowerCase()
+                                          .contains(textEditingValue.text
+                                              .toLowerCase());
                                     });
                                   },
-                                  onSelected: (String selection) {
+                                  onSelected: (ContactClass selection) {
                                     setState(() {
                                       if (!newsletterToModify.contacts
                                           .contains(selection)) {
