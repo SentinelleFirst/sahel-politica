@@ -72,7 +72,7 @@
                         <a data-translate-key="header-contact-us" href="contact.html"><img
                                 src="images/footer-icon-phone.svg" alt="">Contact us</a>
                         <div class="lang-btn">
-                            <img src="images/glob-icon.svg" alt="">
+                            
                             <select id="mobilLangDropdown" title="Choose a language">
                                 <option class="option" value="en">Global - EN</option>
                                 <option class="option" value="fr">Global - FR</option>
@@ -424,7 +424,23 @@
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js" // pour le formatage et la validation
         });
     </script>
-    <script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+        import { getFirestore, collection, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+        // Configuration de votre application Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyC0CxRpNrWfbog-gXHIj-PQlNoUgZPyuFU",
+            authDomain: "websitesapo-79e6f.firebaseapp.com",
+            projectId: "websitesapo-79e6f",
+            storageBucket: "websitesapo-79e6f.firebasestorage.app",
+            messagingSenderId: "437960963379",
+            appId: "1:437960963379:web:56b1405d1ddaac30207a46",
+            measurementId: "G-6BPX26NN2Q"
+        };
+    
+        // Initialiser Firebase et Firestore
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
         document.addEventListener("DOMContentLoaded", function () {
             const questionSections = document.querySelectorAll(".general-questions");
             questionSections.forEach(section => {
@@ -478,18 +494,119 @@
                 // Handle submit button (only in the last question)
                 submitButtons.forEach(button => {
                     button.addEventListener("click", () => {
-                        document.getElementById("confirmation-message").classList.add("validate");
-                        // Masque toutes les sections de type .general-questions
-                        const questionSections = document.querySelectorAll('.question-bocs-item');
-                        questionSections.forEach(section => {
-                            section.classList.add("hide");
-                        });
+                        submitReservation();
                     });
                 });
+
+                
 
                 // Initial display update
                 updateDisplay();
             });
+
+            async function submitReservation() {
+                // Récupérer les valeurs des champs
+                const firstname = document.getElementById('nameReservation').value.trim();
+                const lastname = document.getElementById('lastNameReservation').value.trim();
+                const phoneIndicatif = phoneInput.getSelectedCountryData().dialCode;
+                const phone = phoneInput.getNumber();
+                const company = document.getElementById('companyNameReservation').value.trim();
+                const email = document.getElementById('emailReservation').value.trim();
+                const service = document.getElementById('selectedService').value;
+            
+                // Vérification des champs requis
+                if (!firstname || !lastname || !phone || !company || !email) {
+                    alert("Veuillez remplir tous les champs obligatoires.");
+                    return; // Sortir de la fonction si des champs sont vides
+                }
+            
+                // Créer un objet Reservation
+                const reservation = {
+                    firstname: firstname,
+                    lastname: lastname,
+                    phone: phone,
+                    company: company,
+                    email: email,
+                    linkmeet: "", // Champ vide
+                    location: "", // Champ vide
+                    service: service,
+                    message: "", // Champ vide
+                    answers: {}, // À remplir avec les réponses des blocs Consulting/Training/Keynote
+                    statue: "Pending",
+                    emissionDate: new Date(), // Date actuelle
+                    reservationDate: new Date() // Date actuelle
+                };
+
+                let isValid = true;
+                let errorMessage = "";
+
+                if (service === "consulting") {
+                    const companyActivity = document.getElementById('companyActivityReservation').value.trim();
+                    const companyInfo = document.getElementById('companyInfoReservation').value.trim();
+
+                    if (!companyActivity || !companyInfo) {
+                        isValid = false;
+                        errorMessage += "Veuillez renseigner tous les champs pour le service Consulting.\n";
+                    }
+                    
+                    reservation.answers = {
+                        "What is your company domain of activity ?": document.getElementById('companyActivityReservation').value.trim(),
+                        "Tell us more about your company": document.getElementById('companyInfoReservation').value.trim()
+                    };
+                } else if (service === "training") {
+                    const trainingStart = document.getElementById('trainingDateStart').value.trim();
+                    const trainingEnd = document.getElementById('trainingDateEnd').value.trim();
+                    const trainingDetails = document.getElementById('trainingDetailsReservation').value.trim();
+
+                    if (!trainingStart || !trainingEnd || !trainingDetails) {
+                        isValid = false;
+                        errorMessage += "Veuillez renseigner tous les champs pour le service Training & Workshop.\n";
+                    }
+                    reservation.answers = {
+                        "What is the projected timeline ?": `${document.getElementById('trainingDateStart').value.trim()} to ${document.getElementById('trainingDateEnd').value.trim()}`,
+                        "Provide more details about your training": document.getElementById('trainingDetailsReservation').value.trim()
+                    };
+                } else if (service === "keynote") {
+                    const selectedPackage = document.getElementById('selectedKeynoteOffer').value;
+                    const companyType = document.getElementById('companyKeynoteReservation').value.trim();
+                    const keynoteTopics = document.getElementById('keynoteTopicsReservation').value.trim();
+                    const keynoteDate = document.getElementById('keynoteDate').value.trim();
+                    const keynoteHour = document.getElementById('keynoteHour').value.trim();
+
+                    if (!selectedPackage || !companyType || !keynoteTopics || !keynoteDate || !keynoteHour) {
+                        isValid = false;
+                        errorMessage += "Veuillez renseigner tous les champs pour le service Keynote.\n";
+                    }
+                    reservation.answers = {
+                        "Select your package": document.getElementById('selectedKeynoteOffer').value,
+                        "What type of company are you requesting the presentation for ?": document.getElementById('companyKeynoteReservation').value.trim(),
+                        "Provide more details about your event and the topics": document.getElementById('keynoteTopicsReservation').value.trim(),
+                        "What is the horizon of the event ?": `${document.getElementById('keynoteDate').value.trim()} at ${document.getElementById('keynoteHour').value.trim()}`
+                    };
+                }
+
+                if (!isValid) {
+                    alert(errorMessage);
+                    return false; // Empêche la soumission si des champs sont vides
+                }
+            
+                // Enregistrer dans Firebase
+                try {
+                    // Ajouter les données à Firestore
+                    const collectionRef = collection(db, "Reservations");
+                    await addDoc(collectionRef, reservation);
+
+                    document.getElementById("confirmation-message").classList.add("validate");
+                    // Masque toutes les sections de type .general-questions
+                    const questionSections = document.querySelectorAll('.question-bocs-item');
+                    questionSections.forEach(section => {
+                        section.classList.add("hide");
+                    });
+                } catch (error) {
+                    console.error("Erreur lors de l'enregistrement de la réservation : ", error);
+                    alert("Une erreur s'est produite lors de la soumission de votre réservation. Veuillez réessayer.");
+                }
+            }
         });
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -624,10 +741,6 @@
             dateFormat: "Y-m-d", // Format de date
             locale: "en",        // Forcer l'affichage en anglais
         });
-    </script>
-    <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
-    <script>
-        AOS.init();
     </script>
     <script src="translations/constant_translate.js"></script>
     <script src="translations/reservation-content.js"></script>

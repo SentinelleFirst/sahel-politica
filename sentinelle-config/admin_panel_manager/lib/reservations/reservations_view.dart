@@ -34,6 +34,7 @@ class _ReservationsViewState extends State<ReservationsView> {
         (a, b) => b.emissionDate.compareTo(a.emissionDate),
       );
       reservations = an;
+      commingReservations = [];
       commingReservations.addAll(reservations.where((re) => re.isConfirmed()));
       commingReservations.sort(
         (a, b) => b.reservationDate.compareTo(a.reservationDate),
@@ -65,7 +66,7 @@ class _ReservationsViewState extends State<ReservationsView> {
       context: context,
       builder: (context) => ReservationDetailsDialog(
         reservation: reservation,
-        refresh: () {},
+        refresh: getAllReservations,
       ),
     );
   }
@@ -386,16 +387,20 @@ class ReservationInfoLine extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 20),
-            Text(
-              reservation.statue,
-              style: GoogleFonts.nunitoSans(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: reservation.isPending()
-                      ? const Color(0xffFAA701)
-                      : reservation.isConfirmed()
-                          ? Colors.green
-                          : Colors.grey),
+            SizedBox(
+              width: 120,
+              child: Text(
+                reservation.statue,
+                textAlign: TextAlign.end,
+                style: GoogleFonts.nunitoSans(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: reservation.isPending()
+                        ? const Color(0xffFAA701)
+                        : reservation.isConfirmed()
+                            ? Colors.green
+                            : Colors.grey),
+              ),
             ),
           ],
         ),

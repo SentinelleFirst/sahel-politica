@@ -1,4 +1,5 @@
 import 'package:admin_panel_manager/Class/reservation_class.dart';
+import 'package:admin_panel_manager/login-manager/send_email.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -67,14 +68,25 @@ class _ReservationDetailsDialogState extends State<ReservationDetailsDialog>
     });
     if (validateEntries()) {
       //Envoie email
-      saveModification();
+      if (reservationToModify.isConfirmed()) {
+        sendReservationConfirmationEmail(
+            reservations: reservationToModify,
+            context: context,
+            loading: () {
+              saveModification();
+            });
+      } else if (reservationToModify.isCanceled()) {
+        sendReservationCancelEmail(
+            reservations: reservationToModify,
+            context: context,
+            loading: () {
+              saveModification();
+            });
+      }
     }
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text("Reservation envoyé."),
-      ),
-    );
-    Navigator.pop(context);
+    setState(() {
+      saving = false;
+    });
   }
 
   bool validateEntries() {
@@ -101,7 +113,7 @@ class _ReservationDetailsDialogState extends State<ReservationDetailsDialog>
   void saveModification() async {
     await updateDBReservation(reservationToModify, () {
       widget.refresh();
-    });
+    }, context);
   }
 
   List<String> statues = ["Pending", "Confirmed", "Canceled", "Passed"];
@@ -184,19 +196,10 @@ class _ReservationDetailsDialogState extends State<ReservationDetailsDialog>
                       const CircularProgressIndicator(
                         color: Colors.yellow,
                       ),
-                    if (!saving)
+                    if (!saving && showBookView)
                       MaterialButton(
                         onPressed: () {
-                          if (showBookView) {
-                            setState(() {
-                              //Save and Send email
-                              saveAndSendReservationEmail();
-                            });
-                          } else {
-                            setState(() {
-                              showBookView = true;
-                            });
-                          }
+                          saveModification();
                         },
                         shape: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
@@ -206,7 +209,53 @@ class _ReservationDetailsDialogState extends State<ReservationDetailsDialog>
                         height: 50,
                         color: const Color(0xffFACB01),
                         child: Text(
-                          showBookView ? "Save & Send" : "Book info",
+                          "Save",
+                          style: buttonTitleStyle,
+                        ),
+                      ),
+                    if (!saving && showBookView)
+                      const SizedBox(
+                        width: 10,
+                      ),
+                    if (!saving && showBookView)
+                      MaterialButton(
+                        onPressed: (reservationToModify.isCanceled() ||
+                                reservationToModify.isConfirmed())
+                            ? () {
+                                setState(() {
+                                  //Save and Send email
+                                  saveAndSendReservationEmail();
+                                });
+                              }
+                            : null,
+                        shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide.none,
+                        ),
+                        minWidth: 100,
+                        height: 50,
+                        color: Colors.green,
+                        child: Text(
+                          "Save & Send",
+                          style: buttonTitleStyle,
+                        ),
+                      ),
+                    if (!saving && !showBookView)
+                      MaterialButton(
+                        onPressed: () {
+                          setState(() {
+                            showBookView = true;
+                          });
+                        },
+                        shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide.none,
+                        ),
+                        minWidth: 100,
+                        height: 50,
+                        color: const Color(0xffFACB01),
+                        child: Text(
+                          "Book info",
                           style: buttonTitleStyle,
                         ),
                       ),

@@ -1,5 +1,4 @@
 import 'package:admin_panel_manager/Class/analysis_class.dart';
-import 'package:admin_panel_manager/Class/article_class.dart';
 import 'package:admin_panel_manager/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

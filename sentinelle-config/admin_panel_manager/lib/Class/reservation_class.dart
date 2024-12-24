@@ -101,7 +101,7 @@ class Reservation {
       "location": location,
       "service": service,
       "message": message,
-      "answer": answer,
+      "answers": answer,
       "statue": statue,
       "emissionDate":
           Timestamp.fromDate(emissionDate), // Conversion en Timestamp
@@ -176,14 +176,24 @@ Future<List<Reservation>> fetchDBReservations() async {
 }
 
 Future<void> updateDBReservation(
-    Reservation reservation, Function loading) async {
+    Reservation reservation, Function loading, BuildContext context) async {
   try {
     await FirebaseFirestore.instance
         .collection('Reservations')
         .doc(reservation.id)
         .update(reservation.toJson());
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Reservation updated."),
+      ),
+    );
     loading();
   } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Error, try later"),
+      ),
+    );
     loading();
     print("Error updating reservation: $e");
   }
