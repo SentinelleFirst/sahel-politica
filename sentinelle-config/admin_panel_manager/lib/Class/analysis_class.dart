@@ -1,12 +1,11 @@
+import 'package:admin_panel_manager/Class/publications_class.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../login-manager/collection_manager.dart';
 import '../login-manager/get_user_fonction.dart';
 
-class Analysis {
-  String id;
-  String title;
+class Analysis extends Publications {
   String titleFR;
   String subtitle;
   String subtitleFR;
@@ -16,55 +15,40 @@ class Analysis {
   List<Map<String, String>> previewFR;
   String linkPDFEN;
   String linkPDFFR;
-  String imageUrl;
-  String category;
-  String author;
   bool published;
-  DateTime date;
 
   Analysis(
-      this.id,
-      this.title,
-      this.titleFR,
-      this.subtitle,
-      this.subtitleFR,
-      this.resume,
-      this.resumeFR,
-      this.preview,
-      this.previewFR,
-      this.linkPDFEN,
-      this.linkPDFFR,
-      this.imageUrl,
-      this.category,
-      this.author,
-      this.published,
-      this.date);
+    super.id,
+    super.title,
+    super.author,
+    super.category,
+    super.imageUrl,
+    super.date,
+    this.titleFR,
+    this.subtitle,
+    this.subtitleFR,
+    this.resume,
+    this.resumeFR,
+    this.preview,
+    this.previewFR,
+    this.linkPDFEN,
+    this.linkPDFFR,
+    this.published,
+  );
 
   factory Analysis.empty() {
-    return Analysis(
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      [],
-      [],
-      "",
-      "",
-      "",
-      "",
-      "",
-      false,
-      DateTime.now(),
-    );
+    return Analysis("", "", "", "", "", DateTime.now(), "", "", "", "", "", [],
+        [], "", "", false);
   }
 
   factory Analysis.copy(Analysis e) {
     return Analysis(
         e.id,
         e.title,
+        e.author,
+        e.category,
+        e.imageUrl,
+        e.date,
         e.titleFR,
         e.subtitle,
         e.subtitleFR,
@@ -74,16 +58,16 @@ class Analysis {
         e.previewFR,
         e.linkPDFEN,
         e.linkPDFFR,
-        e.imageUrl,
-        e.category,
-        e.author,
-        e.published,
-        e.date);
+        e.published);
   }
   factory Analysis.fromJson(Map<String, dynamic> json, String id) {
     return Analysis(
       id,
       json['title'] ?? "",
+      json['author'] ?? "",
+      json['category'] ?? "",
+      json['imageUrl'] ?? "",
+      (json['date'] as Timestamp).toDate(),
       json['titleFR'] ?? "",
       json['subtitle'] ?? "",
       json['subtitleFR'] ?? "",
@@ -97,14 +81,11 @@ class Analysis {
           .toList(),
       json['linkPDFEN'] ?? "",
       json['linkPDFFR'] ?? "",
-      json['imageUrl'] ?? "",
-      json['category'] ?? "",
-      json['author'] ?? "",
       json['published'] ?? false,
-      (json['date'] as Timestamp).toDate(),
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       "title": title,

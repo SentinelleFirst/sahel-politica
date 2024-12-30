@@ -15,5 +15,4 @@ TextStyle thirdTitleStyle =
 
 TextStyle normalTextStyle = GoogleFonts.nunitoSans(fontSize: 16);
 
-const String brevoKey =
-    '';
+const String brevoKey = '';

@@ -1068,7 +1068,7 @@ class _NewsletterSendingDialogState extends State<NewsletterSendingDialog> {
       end = false;
     });
     for (var contact in widget.contacts) {
-      sendNewsletterEmail(
+      sendSimpleNewsletterEmail(
           name: contact.name,
           email: contact.email,
           subject: widget.newsletter.object,

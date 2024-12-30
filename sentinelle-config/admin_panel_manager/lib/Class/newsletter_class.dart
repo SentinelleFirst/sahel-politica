@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../login-manager/collection_manager.dart';
+import 'publications_class.dart';
 
 class Newsletter {
   String id;
@@ -17,11 +18,12 @@ class Newsletter {
   Event? event;
   Article? article;
   Analysis? analysis;
+  List<Publications> publications;
   List<ContactClass> contacts;
   String author;
   DateTime date;
   bool allContacts;
-  int type; //Type d'annonce => 1 pour un event / 2 pour un article / 3 pour un analysis / 4 pour une simple annonce
+  int type; //Type d'annonce => 1 pour un event / 2 pour un article / 3 pour un analysis / 4 pour plusieurs annonces / 5 pour une simple annonce
 
   Newsletter(
       this.id,
@@ -32,6 +34,7 @@ class Newsletter {
       this.event,
       this.article,
       this.analysis,
+      this.publications,
       this.contacts,
       this.author,
       this.date,
@@ -40,7 +43,7 @@ class Newsletter {
 
   factory Newsletter.empty() {
     return Newsletter("", "", "", "", "", Event.empty(), Article.empty(),
-        Analysis.empty(), [], "", DateTime.now(), false, 4);
+        Analysis.empty(), [], [], "", DateTime.now(), false, 5);
   }
 
   factory Newsletter.copy(Newsletter n) {
@@ -53,6 +56,7 @@ class Newsletter {
         n.event,
         n.article,
         n.analysis,
+        n.publications,
         n.contacts,
         n.author,
         n.date,
@@ -69,6 +73,10 @@ class Newsletter {
         Event.fromJson(json['event'], ""),
         Article.fromJson(json['article'], ""),
         Analysis.fromJson(json['analysis'], ""),
+        (json['publications'] as List<dynamic>)
+            .map((contactJson) =>
+                Publications.fromJson(contactJson as Map<String, dynamic>))
+            .toList(),
         (json['contacts'] as List<dynamic>)
             .map((contactJson) =>
                 ContactClass.fromJson(contactJson as Map<String, dynamic>))
@@ -88,6 +96,8 @@ class Newsletter {
       "event": event != null ? event!.toJson() : {},
       "article": article != null ? article!.toJson() : {},
       "analysis": analysis != null ? analysis!.toJson() : {},
+      "publications":
+          publications.map((publication) => publication.toJson()).toList(),
       "contacts": contacts.map((contact) => contact.toJson()).toList(),
       "author": author,
       "date": Timestamp.fromDate(date),
@@ -108,33 +118,48 @@ class Newsletter {
     return type == 3;
   }
 
-  bool isSimpleNewsletter() {
+  bool isMultiplePublicationNewsletter() {
     return type == 4;
+  }
+
+  bool isSimpleNewsletter() {
+    return type == 5;
   }
 
   void changeTypeInEventNewsletter() {
     article = null;
     analysis = null;
+    publications = [];
     type = 1;
   }
 
   void changeTypeInArticleNewsletter() {
     event = null;
     analysis = null;
+    publications = [];
     type = 2;
   }
 
   void changeTypeInAnalysisNewsletter() {
     event = null;
     article = null;
+    publications = [];
     type = 3;
+  }
+
+  void changeTypeInMultiplePublicationNewsletter() {
+    event = null;
+    article = null;
+    analysis = null;
+    type = 4;
   }
 
   void changeTypeInSimpleNewsletter() {
     event = null;
     article = null;
     analysis = null;
-    type = 4;
+    publications = [];
+    type = 5;
   }
 }
 

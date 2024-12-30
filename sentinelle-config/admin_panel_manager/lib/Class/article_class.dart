@@ -3,90 +3,73 @@ import 'package:flutter/material.dart';
 
 import '../login-manager/collection_manager.dart';
 import '../login-manager/get_user_fonction.dart';
+import 'publications_class.dart';
 
-class Article {
-  String id;
-  String title;
+class Article extends Publications {
   String titleFR;
   String smallTitle;
   String smallTitleFR;
   String content;
   String contentFR;
   String linkedinPost;
-  String imageUrl;
-  String category;
-  String author;
   bool published; //Que 2 status possible: soit publié, soit brouillons
-  DateTime date;
 
   Article(
-      this.id,
-      this.title,
-      this.titleFR,
-      this.smallTitle,
-      this.smallTitleFR,
-      this.content,
-      this.contentFR,
-      this.linkedinPost,
-      this.imageUrl,
-      this.category,
-      this.author,
-      this.published,
-      this.date);
+    super.id,
+    super.title,
+    super.author,
+    super.category,
+    super.imageUrl,
+    super.date,
+    this.titleFR,
+    this.smallTitle,
+    this.smallTitleFR,
+    this.content,
+    this.contentFR,
+    this.linkedinPost,
+    this.published,
+  );
 
   factory Article.empty() {
     return Article(
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      false,
-      DateTime.now(),
-    );
+        "", "", "", "", "", DateTime.now(), "", "", "", "", "", "", false);
   }
 
   factory Article.copy(Article e) {
     return Article(
-      e.id,
-      e.title,
-      e.titleFR,
-      e.smallTitle,
-      e.smallTitleFR,
-      e.content,
-      e.contentFR,
-      e.linkedinPost,
-      e.imageUrl,
-      e.category,
-      e.author,
-      e.published,
-      e.date,
-    );
+        e.id,
+        e.title,
+        e.author,
+        e.category,
+        e.imageUrl,
+        e.date,
+        e.titleFR,
+        e.smallTitle,
+        e.smallTitleFR,
+        e.content,
+        e.contentFR,
+        e.linkedinPost,
+        e.published);
   }
   factory Article.fromJson(Map<String, dynamic> json, String id) {
     return Article(
       id,
       json['title'] ?? "",
+      json['author'] ?? "",
+      json['category'] ?? "",
+      json['imageUrl'] ?? "",
+      (json['date'] as Timestamp).toDate(),
       json['titleFR'] ?? "",
       json['smallTitle'] ?? "",
       json['smallTitleFR'] ?? "",
       json['content'] ?? "",
       json['contentFR'] ?? "",
       json['linkedinPost'] ?? "",
-      json['imageUrl'] ?? "",
-      json['category'] ?? "",
-      json['author'] ?? "",
       json['published'] ?? false,
-      (json['date'] as Timestamp).toDate(),
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       "title": title,
