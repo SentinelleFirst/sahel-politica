@@ -1,4 +1,5 @@
 import 'package:admin_panel_manager/Class/analysis_class.dart';
+import 'package:admin_panel_manager/Class/profile_class.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_network/image_network.dart';
@@ -8,9 +9,14 @@ import '../login-manager/file_picker.dart';
 import '../widgets/simple_page_title.dart';
 
 class NewAnalysisView extends StatefulWidget {
-  const NewAnalysisView({super.key, required this.goBack});
+  const NewAnalysisView({
+    super.key,
+    required this.goBack,
+    required this.currentProfile,
+  });
 
   final Function() goBack;
+  final Profile currentProfile;
 
   @override
   State<NewAnalysisView> createState() => _NewAnalysisViewState();
@@ -280,7 +286,10 @@ class _NewAnalysisViewState extends State<NewAnalysisView> {
                     ),
                   if (!saving)
                     MaterialButton(
-                      onPressed: publishAnalysis,
+                      onPressed:
+                          gotAccesToAnalysisPublish(widget.currentProfile)
+                              ? publishAnalysis
+                              : null,
                       minWidth: 150,
                       height: 40,
                       shape: OutlineInputBorder(

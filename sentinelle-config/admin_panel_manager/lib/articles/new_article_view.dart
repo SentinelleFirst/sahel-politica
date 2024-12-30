@@ -2,13 +2,16 @@ import 'package:admin_panel_manager/Class/article_class.dart';
 import 'package:flutter/material.dart';
 import 'package:image_network/image_network.dart';
 
+import '../Class/profile_class.dart';
 import '../constants.dart';
 import '../login-manager/file_picker.dart';
 import '../widgets/simple_page_title.dart';
 
 class NewArticleView extends StatefulWidget {
-  const NewArticleView({super.key, required this.goBack});
+  const NewArticleView(
+      {super.key, required this.goBack, required this.currentProfile});
   final Function() goBack;
+  final Profile currentProfile;
 
   @override
   State<NewArticleView> createState() => _NewArticleViewState();
@@ -228,7 +231,9 @@ class _NewArticleViewState extends State<NewArticleView> {
                     ),
                   if (!saving)
                     MaterialButton(
-                      onPressed: publishArticle,
+                      onPressed: gotAccesToArticlePublish(widget.currentProfile)
+                          ? publishArticle
+                          : null,
                       minWidth: 150,
                       height: 40,
                       shape: OutlineInputBorder(

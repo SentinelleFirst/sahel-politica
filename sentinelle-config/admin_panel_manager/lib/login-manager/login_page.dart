@@ -1,7 +1,10 @@
-import 'package:admin_panel_manager/main.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:admin_panel_manager/main.dart';
 
 import '../Class/profile_class.dart';
 import 'get_user_fonction.dart';
@@ -14,9 +17,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  /*final*/ TextEditingController _emailController = TextEditingController();
-  /*final*/ TextEditingController _passwordController = TextEditingController();
-  final FirebaseAuth _auth = FirebaseAuth.instance; // Déclarer _auth ici
+  final TextEditingController _emailController =
+      TextEditingController(text: "sentinelle@sahelpolitica.ch");
+  final TextEditingController _passwordController =
+      TextEditingController(text: "Sentinelle226//");
 
   bool _isLoading = false;
   String? _errorMessage;
@@ -24,14 +28,16 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    //Pre Connexion
-    _emailController =
-        TextEditingController(text: "sentinelle@sahelpolitica.ch");
-    _passwordController = TextEditingController(text: "Sentinelle226//");
     _login();
   }
 
-  // Fonction de login
+  // Fonction pour crypter le mot de passe
+  String _hashPassword(String password) {
+    return sha256.convert(utf8.encode(password)).toString();
+  }
+
+  final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
+
   Future<void> _login() async {
     setState(() {
       _isLoading = true;
@@ -39,32 +45,41 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     try {
-      final UserCredential userCredential =
-          await _auth.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
+      // Récupérer les utilisateurs correspondant à l'email
+      final QuerySnapshot snapshot = await FirebaseFirestore.instance
+          .collection('AdminUsers')
+          .where('email', isEqualTo: _emailController.text.trim())
+          .get();
 
-      final String userId = userCredential.user?.uid ?? "";
-
-      // Fetch additional user info from Firestore en utilisant le userId
-      Profile? userProfile = await getUser(userId); // Passer userId ici
-
-      if (userProfile != null) {
-        // Si le profil a été récupéré avec succès, tu peux l'utiliser ici
-        print('User Profile: ${userProfile.displayName()}');
+      if (snapshot.docs.isEmpty) {
+        setState(() {
+          _errorMessage = "User not found.";
+        });
+        return;
       }
 
+      final userDoc = snapshot.docs.first;
+      final userData = userDoc.data() as Map<String, dynamic>;
+      final hashedPassword = _hashPassword(_passwordController.text.trim());
+
+      if (userData['password'] != hashedPassword) {
+        setState(() {
+          _errorMessage = "Incorrect password.";
+        });
+        return;
+      }
+
+      // Connexion réussie, enregistrer l'ID dans les cookies
+      await _secureStorage.write(key: 'userId', value: userDoc.id);
+      Profile? a = await getConnectedUser();
+      // Naviguer vers la page d'accueil
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                const MyHomePage()), // Replace MyApp with the actual home page widget
+            builder: (context) => MyHomePage(
+                  currentProfile: a!,
+                )),
       );
-    } on FirebaseAuthException catch (e) {
-      setState(() {
-        _errorMessage = e.message;
-      });
     } catch (e) {
       setState(() {
         _errorMessage = "An unexpected error occurred. Please try again.";
@@ -131,7 +146,9 @@ class _LoginPageState extends State<LoginPage> {
               ],
               const SizedBox(height: 20),
               _isLoading
-                  ? const CircularProgressIndicator()
+                  ? CircularProgressIndicator(
+                      color: Colors.yellow[800],
+                    )
                   : MaterialButton(
                       minWidth: 300,
                       height: 70,
@@ -152,8 +169,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-}
-
-class MyApp {
-  const MyApp();
 }

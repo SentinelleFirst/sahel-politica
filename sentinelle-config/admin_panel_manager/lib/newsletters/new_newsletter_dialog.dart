@@ -121,7 +121,10 @@ class _NewNewsletterDialogState extends State<NewNewsletterDialog>
         ),
       );
       return false;
-    } else if (newsletterToModify.elementTitle.isEmpty && type != 4) {
+    } else if ((newsletterToModify.event == null ||
+            newsletterToModify.article == null ||
+            newsletterToModify.analysis == null) &&
+        !newsletterToModify.isSimpleNewsletter()) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Select the item to be announced..."),
@@ -594,10 +597,24 @@ class _NewNewsletterDialogState extends State<NewNewsletterDialog>
                           "Title of the element select:",
                           style: normalTextStyle,
                         ),
-                        Text(
-                          newsletterToModify.elementTitle,
-                          style: normalTextStyle,
-                        ),
+                        if (newsletterToModify.isEventNewsletter() &&
+                            newsletterToModify.event != null)
+                          Text(
+                            newsletterToModify.event!.title,
+                            style: normalTextStyle,
+                          ),
+                        if (newsletterToModify.isArticleNewsletter() &&
+                            newsletterToModify.article != null)
+                          Text(
+                            newsletterToModify.article!.title,
+                            style: normalTextStyle,
+                          ),
+                        if (newsletterToModify.isAnalysisNewsletter() &&
+                            newsletterToModify.analysis != null)
+                          Text(
+                            newsletterToModify.analysis!.title,
+                            style: normalTextStyle,
+                          ),
                         Container(
                           margin: const EdgeInsets.only(top: 20),
                           width: MediaQuery.of(context).size.width,
@@ -661,10 +678,7 @@ class _NewNewsletterDialogState extends State<NewNewsletterDialog>
                                     },
                                     onSelected: (Event selection) {
                                       setState(() {
-                                        newsletterToModify.imageUrl =
-                                            selection.imageUrl;
-                                        newsletterToModify.elementTitle =
-                                            selection.title;
+                                        newsletterToModify.event = selection;
                                       });
                                     },
                                     fieldViewBuilder: (BuildContext context,
@@ -745,10 +759,8 @@ class _NewNewsletterDialogState extends State<NewNewsletterDialog>
                                         },
                                         onSelected: (Article selection) {
                                           setState(() {
-                                            newsletterToModify.imageUrl =
-                                                selection.imageUrl;
-                                            newsletterToModify.elementTitle =
-                                                selection.title;
+                                            newsletterToModify.article =
+                                                selection;
                                           });
                                         },
                                         fieldViewBuilder: (BuildContext context,
@@ -828,10 +840,8 @@ class _NewNewsletterDialogState extends State<NewNewsletterDialog>
                                         },
                                         onSelected: (Analysis selection) {
                                           setState(() {
-                                            newsletterToModify.imageUrl =
-                                                selection.imageUrl;
-                                            newsletterToModify.elementTitle =
-                                                selection.title;
+                                            newsletterToModify.analysis =
+                                                selection;
                                           });
                                         },
                                         fieldViewBuilder: (BuildContext context,

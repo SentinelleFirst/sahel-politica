@@ -5,14 +5,19 @@ import 'package:image_network/image_network.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../Class/profile_class.dart';
 import '../constants.dart';
 import '../widgets/simple_page_title.dart';
 import 'delete_analysis_dialog.dart';
 
 class AnalysisListView extends StatefulWidget {
   const AnalysisListView(
-      {super.key, required this.editAnalysis, required this.newAnalysis});
+      {super.key,
+      required this.editAnalysis,
+      required this.newAnalysis,
+      required this.connectedProfil});
 
+  final Profile connectedProfil;
   final Function(Analysis) editAnalysis;
   final Function() newAnalysis;
 
@@ -78,7 +83,9 @@ class _AnalysisListViewState extends State<AnalysisListView> {
             children: [
               const SimplePageTitle(title: "In-dept analysis"),
               MaterialButton(
-                onPressed: widget.newAnalysis,
+                onPressed: gotAccesToAnalysisCreate(widget.connectedProfil)
+                    ? widget.newAnalysis
+                    : null,
                 minWidth: 150,
                 height: 40,
                 shape: OutlineInputBorder(
@@ -169,6 +176,8 @@ class _AnalysisListViewState extends State<AnalysisListView> {
                       itemCount: fetchAnalysis().length,
                       itemBuilder: (_, int index) {
                         return AnalysisInfoLine(
+                          canDelete:
+                              gotAccesToAnalysisDelete(widget.connectedProfil),
                           analysis: fetchAnalysis()[index],
                           delete: () {
                             deleteAnalysis(fetchAnalysis()[index].id);
@@ -196,11 +205,13 @@ class AnalysisInfoLine extends StatelessWidget {
     required this.analysis,
     required this.readAction,
     required this.delete,
+    required this.canDelete,
   });
 
   final Analysis analysis;
   final Function() readAction;
   final Function() delete;
+  final bool canDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -273,7 +284,7 @@ class AnalysisInfoLine extends StatelessWidget {
                             size: 30,
                           )),
                       IconButton(
-                          onPressed: delete,
+                          onPressed: canDelete ? delete : null,
                           icon: const Icon(
                             Icons.delete_outlined,
                             color: Colors.red,

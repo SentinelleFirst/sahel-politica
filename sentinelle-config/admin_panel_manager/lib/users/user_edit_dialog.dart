@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../constants.dart';
+import 'password_change_dialog.dart';
 
 class UserEditDialog extends StatefulWidget {
   const UserEditDialog(
@@ -46,8 +47,6 @@ class _UserEditDialogState extends State<UserEditDialog>
     lastname = TextEditingController(text: profileToModify.lastname);
     if (postes.contains(profileToModify.post)) {
       selectedPost = widget.profile.post;
-      //A supprimer plus tard
-      profileToModify.initITAccess();
     } else {
       //Problême avec le post du profil
       Navigator.pop(context);
@@ -269,6 +268,42 @@ class _UserEditDialogState extends State<UserEditDialog>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
+                      "Password :",
+                      style: normalTextStyle,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) => PasswordChangeDialog(
+                                  id: profileToModify.id,
+                                ));
+                      },
+                      child: Container(
+                          width: 350,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(5)),
+                          child: Center(
+                            child: Text(
+                              "Change password",
+                              style: GoogleFonts.nunitoSans(
+                                  fontSize: 16,
+                                  decoration: TextDecoration.underline,
+                                  color: Colors.blue),
+                            ),
+                          )),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
                       "Poste :",
                       style: normalTextStyle,
                     ),
@@ -313,6 +348,16 @@ class _UserEditDialogState extends State<UserEditDialog>
                     ),
                   ],
                 ),
+                if (profileToModify.isAdmin())
+                  const SizedBox(
+                    height: 20,
+                  ),
+                if (profileToModify.isAdmin())
+                  Text(
+                    "As an Administrator or an ITSupport, the user has direct access to all the functions of the \"Your team\" page.",
+                    style: GoogleFonts.nunito(
+                        color: Colors.red, fontStyle: FontStyle.italic),
+                  ),
                 Container(
                   width: MediaQuery.of(context).size.width,
                   margin: const EdgeInsets.only(top: 50),

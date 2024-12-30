@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../Class/profile_class.dart';
 import '../widgets/simple_page_title.dart';
 
 class DashboardView extends StatefulWidget {
-  const DashboardView({super.key});
+  const DashboardView({super.key, required this.connectedProfil});
+
+  final Profile connectedProfil;
 
   @override
   State<DashboardView> createState() => _DashboardViewState();

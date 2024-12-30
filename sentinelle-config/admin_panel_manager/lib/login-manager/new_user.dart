@@ -1,30 +1,27 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import '../Class/profile_class.dart';
 
 Future<bool> addUser(Profile profile, String password, BuildContext context,
     Function loading) async {
   try {
-    // Étape 1: Créer un utilisateur dans Firebase Authentication
-    UserCredential userCredential =
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: profile.email,
-      password: password,
-    );
+    // Cryptage du mot de passe
+    var bytes = utf8.encode(password); // Convertir le mot de passe en bytes
+    var hashedPassword =
+        sha256.convert(bytes).toString(); // Hasher le mot de passe avec SHA-256
 
-    // Récupérer l'UID généré par Firebase Authentication
-    String userId = userCredential.user!.uid;
+    // Préparer les données utilisateur
+    Map<String, dynamic> userData =
+        profile.toJson(); // Convertir le profil en JSON
+    userData['password'] = hashedPassword; // Ajouter le mot de passe crypté
 
-    // Étape 2: Ajouter les informations de l'utilisateur dans Firestore
-    await FirebaseFirestore.instance.collection('AdminUsers').doc(userId).set({
-      'firstname': profile.firstname,
-      'lastname': profile.lastname,
-      'email': profile.email,
-      'post': profile.post,
-      'access': profile.access,
-      'dateOfCreation': profile.dateOfCreation,
-    });
+    // Ajouter l'utilisateur dans Firestore sans spécifier d'ID (ID généré automatiquement)
+    await FirebaseFirestore.instance.collection('AdminUsers').add(userData);
+
+    print("User added successfully: ${profile.displayName()}");
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(

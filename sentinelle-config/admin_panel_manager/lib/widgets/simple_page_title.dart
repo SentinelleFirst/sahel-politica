@@ -41,7 +41,7 @@ class ComplexePageTitle extends StatefulWidget {
 
   final String title;
   final Function(String) searchFieldChange;
-  final Function() buttonAction;
+  final Function()? buttonAction;
   final String buttonTitle;
 
   @override

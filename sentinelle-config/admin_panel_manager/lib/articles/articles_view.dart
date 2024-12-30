@@ -3,10 +3,13 @@ import 'package:admin_panel_manager/articles/article_edit_view.dart';
 import 'package:admin_panel_manager/articles/articles_list_view.dart';
 import 'package:flutter/material.dart';
 
+import '../Class/profile_class.dart';
 import 'new_article_view.dart';
 
 class ArticlesView extends StatefulWidget {
-  const ArticlesView({super.key});
+  const ArticlesView({super.key, required this.connectedProfil});
+
+  final Profile connectedProfil;
 
   @override
   State<ArticlesView> createState() => _ArticlesViewState();
@@ -27,6 +30,7 @@ class _ArticlesViewState extends State<ArticlesView> {
   void showNewArticleView() {
     setState(() {
       frameView = NewArticleView(
+        currentProfile: widget.connectedProfil,
         goBack: showArticleViewList,
       );
     });
@@ -35,6 +39,7 @@ class _ArticlesViewState extends State<ArticlesView> {
   void showEditArticleView(Article article) {
     setState(() {
       frameView = ArticleEditView(
+        currentProfile: widget.connectedProfil,
         article: article,
         goBack: showArticleViewList,
       );
@@ -44,6 +49,7 @@ class _ArticlesViewState extends State<ArticlesView> {
   void showArticleViewList() {
     setState(() {
       frameView = ArticlesListView(
+        currentProfile: widget.connectedProfil,
         editArticle: showEditArticleView,
         newArticle: showNewArticleView,
       );
@@ -51,6 +57,7 @@ class _ArticlesViewState extends State<ArticlesView> {
   }
 
   Widget frameView = ArticlesListView(
+    currentProfile: Profile.empty(),
     editArticle: (Article a) {},
     newArticle: () {},
   );

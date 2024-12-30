@@ -1,7 +1,6 @@
 import 'package:admin_panel_manager/login-manager/get_user_fonction.dart';
 import 'package:admin_panel_manager/users/new_user_dialog.dart';
 import 'package:admin_panel_manager/users/user_edit_dialog.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -21,7 +20,6 @@ class _UsersViewState extends State<UsersView> {
   String search = "";
   List<Profile> profiles = [];
   Profile? profileConnected;
-  User? currentUser = FirebaseAuth.instance.currentUser;
 
   @override
   void initState() {
@@ -43,7 +41,7 @@ class _UsersViewState extends State<UsersView> {
   }
 
   Future<void> findUser() async {
-    Profile? pro = await getUser(currentUser!.uid);
+    Profile? pro = await getConnectedUser();
     setState(() {
       profileConnected = pro;
     });
@@ -99,6 +97,9 @@ class _UsersViewState extends State<UsersView> {
   }
 
   List<String> usersIds = [];
+  bool isProfilConnected(String id) {
+    return profileConnected != null && (profileConnected!.id == id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -215,77 +216,115 @@ class _UsersViewState extends State<UsersView> {
                     ),
                   ),
                   Expanded(
-                      child: SingleChildScrollView(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: DataTable(
-                          columns: const [
-                            DataColumn(label: Text("Name")),
-                            DataColumn(label: Text("Email")),
-                            DataColumn(label: Text("Post")),
-                            DataColumn(label: Text("Authorisations")),
-                            DataColumn(label: Text("Date of creation")),
-                          ],
-                          rows: List<DataRow>.generate(
-                            fetchUsers().length,
-                            (index) {
-                              return DataRow(
-                                  selected:
-                                      usersIds.contains(fetchUsers()[index].id),
-                                  onSelectChanged: (value) {
-                                    setState(() {
-                                      if (!(fetchUsers()[index].id ==
-                                          profileConnected!.id)) {
-                                        if (usersIds
-                                            .contains(fetchUsers()[index].id)) {
-                                          usersIds
-                                              .remove(fetchUsers()[index].id);
-                                        } else {
-                                          usersIds.add(fetchUsers()[index].id);
-                                        }
-                                      }
-                                    });
-                                  },
-                                  cells: [
-                                    DataCell(Text(
-                                        fetchUsers()[index].displayName(),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                        style: GoogleFonts.nunitoSans())),
-                                    DataCell(onTap: () {
-                                      seeProfile(fetchUsers()[index]);
-                                    },
-                                        Text(
-                                          fetchUsers()[index].email,
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 1,
-                                          style: GoogleFonts.nunitoSans(
-                                            color: Colors.blue,
-                                            decoration:
-                                                TextDecoration.underline,
-                                          ),
-                                        )),
-                                    DataCell(Text(fetchUsers()[index].post,
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                        style: GoogleFonts.nunitoSans())),
-                                    DataCell(Text(
-                                        countTrueAccess(fetchUsers()[index])
-                                            .toString(),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                        style: GoogleFonts.nunitoSans())),
-                                    DataCell(Text(
-                                        DateFormat.yMd().format(
-                                            fetchUsers()[index].dateOfCreation),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                        style: GoogleFonts.nunitoSans())),
-                                  ]);
-                            },
-                          )),
-                    ),
-                  )),
+                      child: fetchUsers().isEmpty
+                          ? Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.yellow[800],
+                              ),
+                            )
+                          : SingleChildScrollView(
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: DataTable(
+                                    columns: const [
+                                      DataColumn(label: Text("Name")),
+                                      DataColumn(label: Text("Email")),
+                                      DataColumn(label: Text("Post")),
+                                      DataColumn(label: Text("Authorisations")),
+                                      DataColumn(
+                                          label: Text("Date of creation")),
+                                      DataColumn(label: Text("")),
+                                    ],
+                                    rows: List<DataRow>.generate(
+                                      fetchUsers().length,
+                                      (index) {
+                                        return DataRow(
+                                            selected: usersIds.contains(
+                                                fetchUsers()[index].id),
+                                            onSelectChanged: (value) {
+                                              setState(() {
+                                                if (!isProfilConnected(
+                                                    fetchUsers()[index].id)) {
+                                                  if (usersIds.contains(
+                                                      fetchUsers()[index].id)) {
+                                                    usersIds.remove(
+                                                        fetchUsers()[index].id);
+                                                  } else {
+                                                    usersIds.add(
+                                                        fetchUsers()[index].id);
+                                                  }
+                                                }
+                                              });
+                                            },
+                                            cells: [
+                                              DataCell(Text(
+                                                  fetchUsers()[index]
+                                                      .displayName(),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  style: GoogleFonts
+                                                      .nunitoSans())),
+                                              DataCell(Text(
+                                                fetchUsers()[index].email,
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 1,
+                                                style: GoogleFonts.nunitoSans(
+                                                  color: Colors.blue,
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                ),
+                                              )),
+                                              DataCell(Text(
+                                                  fetchUsers()[index].post,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  style: GoogleFonts
+                                                      .nunitoSans())),
+                                              DataCell(Text(
+                                                  countTrueAccess(
+                                                          fetchUsers()[index])
+                                                      .toString(),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  style: GoogleFonts
+                                                      .nunitoSans())),
+                                              DataCell(Text(
+                                                  DateFormat.yMd().format(
+                                                      fetchUsers()[index]
+                                                          .dateOfCreation),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  style: GoogleFonts
+                                                      .nunitoSans())),
+                                              DataCell(IconButton(
+                                                onPressed: !isProfilConnected(
+                                                        fetchUsers()[index].id)
+                                                    ? () {
+                                                        seeProfile(fetchUsers()[
+                                                            index]);
+                                                      }
+                                                    : null,
+                                                icon: Tooltip(
+                                                  message: isProfilConnected(
+                                                          fetchUsers()[index]
+                                                              .id)
+                                                      ? "Go to your profil page"
+                                                      : "Manage this user",
+                                                  child: const Icon(
+                                                    Icons.info,
+                                                    size: 17,
+                                                  ),
+                                                ),
+                                              ))
+                                            ]);
+                                      },
+                                    )),
+                              ),
+                            )),
                 ],
               ),
             ),

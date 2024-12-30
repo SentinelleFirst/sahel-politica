@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../Class/analysis_class.dart';
+import '../Class/profile_class.dart';
 import 'analysis_edit_view.dart';
 import 'analysis_list_view.dart';
 import 'new_analysis_view.dart';
 
 class AnalysisView extends StatefulWidget {
-  const AnalysisView({super.key});
+  const AnalysisView({super.key, required this.connectedProfil});
+
+  final Profile connectedProfil;
 
   @override
   State<AnalysisView> createState() => _AnalysisViewState();
@@ -41,6 +44,7 @@ class _AnalysisViewState extends State<AnalysisView> {
   void showNewAnalysisView() {
     setState(() {
       frameView = NewAnalysisView(
+        currentProfile: widget.connectedProfil,
         goBack: showAnalysisViewList,
       );
     });
@@ -49,6 +53,7 @@ class _AnalysisViewState extends State<AnalysisView> {
   void showEditAnalysisView(Analysis analysis) {
     setState(() {
       frameView = AnalysisEditView(
+        connectedProfil: widget.connectedProfil,
         analysis: analysis,
         goBack: showAnalysisViewList,
       );
@@ -58,6 +63,7 @@ class _AnalysisViewState extends State<AnalysisView> {
   void showAnalysisViewList() {
     setState(() {
       frameView = AnalysisListView(
+        connectedProfil: widget.connectedProfil,
         editAnalysis: showEditAnalysisView,
         newAnalysis: showNewAnalysisView,
       );
@@ -65,6 +71,7 @@ class _AnalysisViewState extends State<AnalysisView> {
   }
 
   Widget frameView = AnalysisListView(
+    connectedProfil: Profile.empty(),
     editAnalysis: (Analysis a) {},
     newAnalysis: () {},
   );

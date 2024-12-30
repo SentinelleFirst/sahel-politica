@@ -4,11 +4,14 @@ import 'package:admin_panel_manager/widgets/simple_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../Class/message_class.dart';
+import '../Class/profile_class.dart';
 import '../widgets/simple_page_title.dart';
 import 'package:intl/intl.dart';
 
 class MessagesView extends StatefulWidget {
-  const MessagesView({super.key});
+  const MessagesView({super.key, required this.connectedProfil});
+
+  final Profile connectedProfil;
 
   @override
   State<MessagesView> createState() => _MessagesViewState();
@@ -60,8 +63,10 @@ class _MessagesViewState extends State<MessagesView> {
     });
     showDialog(
       context: context,
-      builder: (context) =>
-          MessageDetailsDialog(message: message, refresh: () {}),
+      builder: (context) => MessageDetailsDialog(
+          connectedProfil: widget.connectedProfil,
+          message: message,
+          refresh: getAllMessages),
     );
   }
 

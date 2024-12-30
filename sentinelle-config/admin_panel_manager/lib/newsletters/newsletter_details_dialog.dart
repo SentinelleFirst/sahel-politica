@@ -7,6 +7,7 @@ import 'package:admin_panel_manager/login-manager/send_email.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../Class/profile_class.dart';
 import '../constants.dart';
 
 class NewsletterDetailsDialog extends StatefulWidget {
@@ -14,8 +15,10 @@ class NewsletterDetailsDialog extends StatefulWidget {
       {super.key,
       required this.newsletter,
       required this.refresh,
-      required this.contacts});
+      required this.contacts,
+      required this.connectedProfil});
 
+  final Profile connectedProfil;
   final Newsletter newsletter;
   final List<ContactClass> contacts;
   final Function() refresh;
@@ -150,7 +153,10 @@ class _NewsletterDetailsDialogState extends State<NewsletterDetailsDialog>
         ),
       );
       return false;
-    } else if (newsletterToModify.elementTitle.isEmpty && type != 4) {
+    } else if ((newsletterToModify.event == null ||
+            newsletterToModify.article == null ||
+            newsletterToModify.analysis == null) &&
+        !newsletterToModify.isSimpleNewsletter()) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Select the item to be announced..."),
@@ -184,8 +190,6 @@ class _NewsletterDetailsDialogState extends State<NewsletterDetailsDialog>
     return true;
   }
 
-  int type = 1;
-
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -217,12 +221,15 @@ class _NewsletterDetailsDialogState extends State<NewsletterDetailsDialog>
                       ),
                     ),
                     MaterialButton(
-                      onPressed: () {
-                        setState(() {
-                          //Save newsletter
-                          simplySaveModification();
-                        });
-                      },
+                      onPressed:
+                          gotAccesToNewsletterEdit(widget.connectedProfil)
+                              ? () {
+                                  setState(() {
+                                    //Save newsletter
+                                    simplySaveModification();
+                                  });
+                                }
+                              : null,
                       shape: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5),
                         borderSide: BorderSide.none,
@@ -236,12 +243,15 @@ class _NewsletterDetailsDialogState extends State<NewsletterDetailsDialog>
                       ),
                     ),
                     MaterialButton(
-                      onPressed: () {
-                        setState(() {
-                          //Publier l'event
-                          publishNewsletter();
-                        });
-                      },
+                      onPressed:
+                          gotAccesToNewsletterPublish(widget.connectedProfil)
+                              ? () {
+                                  setState(() {
+                                    //Publier l'event
+                                    publishNewsletter();
+                                  });
+                                }
+                              : null,
                       shape: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5),
                         borderSide: BorderSide.none,
@@ -533,10 +543,11 @@ class _NewsletterDetailsDialogState extends State<NewsletterDetailsDialog>
                               MaterialButton(
                                 onPressed: () {
                                   setState(() {
-                                    type = 1;
+                                    newsletterToModify
+                                        .changeTypeInEventNewsletter();
                                   });
                                 },
-                                color: type == 1
+                                color: newsletterToModify.isEventNewsletter()
                                     ? const Color(0xffFACB01)
                                     : const Color(0xffECECEC),
                                 minWidth: 50,
@@ -549,10 +560,11 @@ class _NewsletterDetailsDialogState extends State<NewsletterDetailsDialog>
                               MaterialButton(
                                 onPressed: () {
                                   setState(() {
-                                    type = 2;
+                                    newsletterToModify
+                                        .changeTypeInArticleNewsletter();
                                   });
                                 },
-                                color: type == 2
+                                color: newsletterToModify.isArticleNewsletter()
                                     ? const Color(0xffFACB01)
                                     : const Color(0xffECECEC),
                                 minWidth: 50,
@@ -565,10 +577,11 @@ class _NewsletterDetailsDialogState extends State<NewsletterDetailsDialog>
                               MaterialButton(
                                 onPressed: () {
                                   setState(() {
-                                    type = 3;
+                                    newsletterToModify
+                                        .changeTypeInAnalysisNewsletter();
                                   });
                                 },
-                                color: type == 3
+                                color: newsletterToModify.isAnalysisNewsletter()
                                     ? const Color(0xffFACB01)
                                     : const Color(0xffECECEC),
                                 minWidth: 50,
@@ -581,10 +594,11 @@ class _NewsletterDetailsDialogState extends State<NewsletterDetailsDialog>
                               MaterialButton(
                                 onPressed: () {
                                   setState(() {
-                                    type = 4;
+                                    newsletterToModify
+                                        .changeTypeInSimpleNewsletter();
                                   });
                                 },
-                                color: type == 4
+                                color: newsletterToModify.isSimpleNewsletter()
                                     ? const Color(0xffFACB01)
                                     : const Color(0xffECECEC),
                                 minWidth: 50,
@@ -600,7 +614,7 @@ class _NewsletterDetailsDialogState extends State<NewsletterDetailsDialog>
                   ),
                 ),
                 //Select element
-                if (type != 4)
+                if (!newsletterToModify.isSimpleNewsletter())
                   Container(
                     margin: const EdgeInsets.only(top: 10),
                     width: MediaQuery.of(context).size.width,
@@ -611,17 +625,17 @@ class _NewsletterDetailsDialogState extends State<NewsletterDetailsDialog>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (type == 1)
+                        if (newsletterToModify.isEventNewsletter())
                           Text(
                             "Select event",
                             style: thirdTitleStyle,
                           ),
-                        if (type == 2)
+                        if (newsletterToModify.isArticleNewsletter())
                           Text(
                             "Select article",
                             style: thirdTitleStyle,
                           ),
-                        if (type == 3)
+                        if (newsletterToModify.isAnalysisNewsletter())
                           Text(
                             "Select analysis",
                             style: thirdTitleStyle,
@@ -630,17 +644,31 @@ class _NewsletterDetailsDialogState extends State<NewsletterDetailsDialog>
                           "Title of the element select:",
                           style: normalTextStyle,
                         ),
-                        Text(
-                          newsletterToModify.elementTitle,
-                          style: normalTextStyle,
-                        ),
+                        if (newsletterToModify.isEventNewsletter() &&
+                            newsletterToModify.event != null)
+                          Text(
+                            newsletterToModify.event!.title,
+                            style: normalTextStyle,
+                          ),
+                        if (newsletterToModify.isArticleNewsletter() &&
+                            newsletterToModify.article != null)
+                          Text(
+                            newsletterToModify.article!.title,
+                            style: normalTextStyle,
+                          ),
+                        if (newsletterToModify.isAnalysisNewsletter() &&
+                            newsletterToModify.analysis != null)
+                          Text(
+                            newsletterToModify.analysis!.title,
+                            style: normalTextStyle,
+                          ),
                         Container(
                           margin: const EdgeInsets.only(top: 20),
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                               color: const Color(0xffECECEC),
                               borderRadius: BorderRadius.circular(5)),
-                          child: type == 1
+                          child: newsletterToModify.isEventNewsletter()
                               ? Container(
                                   decoration: BoxDecoration(
                                       color: Colors.white,
@@ -697,10 +725,7 @@ class _NewsletterDetailsDialogState extends State<NewsletterDetailsDialog>
                                     },
                                     onSelected: (Event selection) {
                                       setState(() {
-                                        newsletterToModify.imageUrl =
-                                            selection.imageUrl;
-                                        newsletterToModify.elementTitle =
-                                            selection.title;
+                                        newsletterToModify.event = selection;
                                       });
                                     },
                                     fieldViewBuilder: (BuildContext context,
@@ -719,7 +744,7 @@ class _NewsletterDetailsDialogState extends State<NewsletterDetailsDialog>
                                     },
                                   ),
                                 )
-                              : type == 2
+                              : newsletterToModify.isArticleNewsletter()
                                   ? Container(
                                       decoration: BoxDecoration(
                                           color: Colors.white,
@@ -781,10 +806,8 @@ class _NewsletterDetailsDialogState extends State<NewsletterDetailsDialog>
                                         },
                                         onSelected: (Article selection) {
                                           setState(() {
-                                            newsletterToModify.imageUrl =
-                                                selection.imageUrl;
-                                            newsletterToModify.elementTitle =
-                                                selection.title;
+                                            newsletterToModify.article =
+                                                selection;
                                           });
                                         },
                                         fieldViewBuilder: (BuildContext context,
@@ -864,10 +887,8 @@ class _NewsletterDetailsDialogState extends State<NewsletterDetailsDialog>
                                         },
                                         onSelected: (Analysis selection) {
                                           setState(() {
-                                            newsletterToModify.imageUrl =
-                                                selection.imageUrl;
-                                            newsletterToModify.elementTitle =
-                                                selection.title;
+                                            newsletterToModify.analysis =
+                                                selection;
                                           });
                                         },
                                         fieldViewBuilder: (BuildContext context,

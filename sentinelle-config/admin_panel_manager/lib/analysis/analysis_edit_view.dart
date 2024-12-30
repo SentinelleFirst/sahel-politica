@@ -3,14 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_network/image_network.dart';
 
+import '../Class/profile_class.dart';
 import '../constants.dart';
 import '../login-manager/file_picker.dart';
 import '../widgets/simple_page_title.dart';
 
 class AnalysisEditView extends StatefulWidget {
   const AnalysisEditView(
-      {super.key, required this.analysis, required this.goBack});
+      {super.key,
+      required this.analysis,
+      required this.goBack,
+      required this.connectedProfil});
 
+  final Profile connectedProfil;
   final Analysis analysis;
   final Function() goBack;
 
@@ -241,7 +246,7 @@ class _AnalysisEditViewState extends State<AnalysisEditView> {
                   const SizedBox(
                     width: 20,
                   ),
-                  const SimplePageTitle(title: "New analysis"),
+                  const SimplePageTitle(title: "Edit analysis"),
                 ],
               ),
               Row(
@@ -253,7 +258,9 @@ class _AnalysisEditViewState extends State<AnalysisEditView> {
                     ),
                   if (!saving)
                     MaterialButton(
-                      onPressed: saveModification,
+                      onPressed: gotAccesToAnalysisEdit(widget.connectedProfil)
+                          ? saveModification
+                          : null,
                       minWidth: 150,
                       height: 40,
                       shape: OutlineInputBorder(
@@ -283,7 +290,10 @@ class _AnalysisEditViewState extends State<AnalysisEditView> {
                     ),
                   if (!saving)
                     MaterialButton(
-                      onPressed: publishAnalysis,
+                      onPressed:
+                          gotAccesToAnalysisPublish(widget.connectedProfil)
+                              ? publishAnalysis
+                              : null,
                       minWidth: 150,
                       height: 40,
                       shape: OutlineInputBorder(

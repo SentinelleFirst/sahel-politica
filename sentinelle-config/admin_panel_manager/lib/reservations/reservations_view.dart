@@ -5,11 +5,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
+import '../Class/profile_class.dart';
 import '../constants.dart';
 import '../widgets/simple_page_title.dart';
 
 class ReservationsView extends StatefulWidget {
-  const ReservationsView({super.key});
+  const ReservationsView({super.key, required this.connectedProfil});
+
+  final Profile connectedProfil;
 
   @override
   State<ReservationsView> createState() => _ReservationsViewState();
@@ -65,6 +68,7 @@ class _ReservationsViewState extends State<ReservationsView> {
     showDialog(
       context: context,
       builder: (context) => ReservationDetailsDialog(
+        connectedProfil: widget.connectedProfil,
         reservation: reservation,
         refresh: getAllReservations,
       ),

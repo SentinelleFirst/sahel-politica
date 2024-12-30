@@ -1,4 +1,6 @@
+import 'package:admin_panel_manager/Class/profile_class.dart';
 import 'package:admin_panel_manager/articles/articles_view.dart';
+import 'package:admin_panel_manager/login-manager/get_user_fonction.dart';
 import 'package:admin_panel_manager/messages/messages_view.dart';
 import 'package:admin_panel_manager/newsletters/newsletters_view.dart';
 import 'package:admin_panel_manager/reservations/reservations_view.dart';
@@ -24,14 +26,20 @@ Future<void> main() async {
 
   final FlutterSecureStorage storage = const FlutterSecureStorage();
   String? savedEmail = await storage.read(key: "user_email");
+  Profile? current = await getConnectedUser();
 
-  runApp(MyAppWrapper(savedEmail: savedEmail));
+  runApp(MyAppWrapper(
+    savedEmail: savedEmail,
+    current: current,
+  ));
 }
 
 class MyAppWrapper extends StatelessWidget {
   final String? savedEmail;
+  final Profile? current;
 
-  const MyAppWrapper({Key? key, this.savedEmail}) : super(key: key);
+  const MyAppWrapper({Key? key, this.savedEmail, this.current})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +51,8 @@ class MyAppWrapper extends StatelessWidget {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Profile? current;
+  const MyApp({super.key, this.current});
 
   @override
   Widget build(BuildContext context) {
@@ -54,13 +63,17 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const MyHomePage(),
+      home: MyHomePage(
+        currentProfile: current,
+      ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  const MyHomePage({super.key, required this.currentProfile});
+
+  final Profile? currentProfile;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -70,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    menuSelect(8);
+    menuSelect(selectedMenuIndex);
   }
 
   double menuIconSize = 25;
@@ -81,39 +94,64 @@ class _MyHomePageState extends State<MyHomePage> {
   void menuSelect(int i) {
     setState(() {
       selectedMenuIndex = i;
-      switch (selectedMenuIndex) {
-        case 1:
-          frameView = const DashboardView();
-          break;
-        case 2:
-          frameView = const UsersView();
-          break;
-        case 3:
-          frameView = const AnalyticsView();
-          break;
-        case 4:
-          frameView = const ArticlesView();
-          break;
-        case 5:
-          frameView = const AnalysisView();
-          break;
-        case 6:
-          frameView = const EventsView();
-          break;
-        case 7:
-          frameView = const MessagesView();
-          break;
-        case 8:
-          frameView = const ReservationsView();
-          break;
-        case 9:
-          frameView = const NewslettersView();
-          break;
-        // Ajoutez d'autres cas selon vos besoins
-        default:
-          frameView = Container(); // Vue par défaut
+      if (widget.currentProfile != null) {
+        switch (selectedMenuIndex) {
+          case 1:
+            frameView = DashboardView(
+              connectedProfil: widget.currentProfile!,
+            );
+            break;
+          case 2:
+            frameView = const UsersView();
+            break;
+          case 3:
+            frameView = AnalyticsView(
+              connectedProfil: widget.currentProfile!,
+            );
+            break;
+          case 4:
+            frameView = ArticlesView(
+              connectedProfil: widget.currentProfile!,
+            );
+            break;
+          case 5:
+            frameView = AnalysisView(
+              connectedProfil: widget.currentProfile!,
+            );
+            break;
+          case 6:
+            frameView = EventsView(
+              connectedProfil: widget.currentProfile!,
+            );
+            break;
+          case 7:
+            frameView = MessagesView(
+              connectedProfil: widget.currentProfile!,
+            );
+            break;
+          case 8:
+            frameView = ReservationsView(
+              connectedProfil: widget.currentProfile!,
+            );
+            break;
+          case 9:
+            frameView = NewslettersView(
+              connectedProfil: widget.currentProfile!,
+            );
+            break;
+          // Ajoutez d'autres cas selon vos besoins
+          default:
+            frameView = Container(); // Vue par défaut
+        }
       }
     });
+  }
+
+  bool isAdmin() {
+    if (widget.currentProfile == null) {
+      return false;
+    }
+    return widget.currentProfile!.isAdmin();
   }
 
   @override
@@ -172,94 +210,102 @@ class _MyHomePageState extends State<MyHomePage> {
                           width: menuIconSize,
                         ),
                       ),
-                      MenuItems(
-                        selected: selectedMenuIndex == 2,
-                        menuSelect: () {
-                          menuSelect(2);
-                        },
-                        title: "Users",
-                        icon: SvgPicture.asset(
-                          "admin-page-users-icon.svg",
-                          width: menuIconSize,
+                      if (isAdmin())
+                        MenuItems(
+                          selected: selectedMenuIndex == 2,
+                          menuSelect: () {
+                            menuSelect(2);
+                          },
+                          title: "Users",
+                          icon: SvgPicture.asset(
+                            "admin-page-users-icon.svg",
+                            width: menuIconSize,
+                          ),
                         ),
-                      ),
-                      MenuItems(
-                        selected: selectedMenuIndex == 3,
-                        menuSelect: () {
-                          menuSelect(3);
-                        },
-                        title: "Analytics",
-                        icon: SvgPicture.asset(
-                          "admin-page-analytics-icon.svg",
-                          width: menuIconSize,
+                      if (gotAccesToAnalyticView(widget.currentProfile))
+                        MenuItems(
+                          selected: selectedMenuIndex == 3,
+                          menuSelect: () {
+                            menuSelect(3);
+                          },
+                          title: "Analytics",
+                          icon: SvgPicture.asset(
+                            "admin-page-analytics-icon.svg",
+                            width: menuIconSize,
+                          ),
                         ),
-                      ),
-                      MenuItems(
-                        selected: selectedMenuIndex == 4,
-                        menuSelect: () {
-                          menuSelect(4);
-                        },
-                        title: "Articles",
-                        icon: SvgPicture.asset(
-                          "admin-page-articles-icon.svg",
-                          width: menuIconSize,
+                      if (gotAccesToArticleView(widget.currentProfile))
+                        MenuItems(
+                          selected: selectedMenuIndex == 4,
+                          menuSelect: () {
+                            menuSelect(4);
+                          },
+                          title: "Articles",
+                          icon: SvgPicture.asset(
+                            "admin-page-articles-icon.svg",
+                            width: menuIconSize,
+                          ),
                         ),
-                      ),
-                      MenuItems(
-                        selected: selectedMenuIndex == 5,
-                        menuSelect: () {
-                          menuSelect(5);
-                        },
-                        title: "In-dept analysis",
-                        icon: SvgPicture.asset(
-                          "admin-page-report-icon.svg",
-                          width: menuIconSize,
+                      if (gotAccesToAnalysisView(widget.currentProfile))
+                        MenuItems(
+                          selected: selectedMenuIndex == 5,
+                          menuSelect: () {
+                            menuSelect(5);
+                          },
+                          title: "In-dept analysis",
+                          icon: SvgPicture.asset(
+                            "admin-page-report-icon.svg",
+                            width: menuIconSize,
+                          ),
                         ),
-                      ),
-                      MenuItems(
-                        selected: selectedMenuIndex == 6,
-                        menuSelect: () {
-                          menuSelect(6);
-                        },
-                        title: "Events",
-                        icon: SvgPicture.asset(
-                          "admin-page-events-icon.svg",
-                          width: menuIconSize,
+                      if (gotAccesToEventView(widget.currentProfile))
+                        MenuItems(
+                          selected: selectedMenuIndex == 6,
+                          menuSelect: () {
+                            menuSelect(6);
+                          },
+                          title: "Events",
+                          icon: SvgPicture.asset(
+                            "admin-page-events-icon.svg",
+                            width: menuIconSize,
+                          ),
                         ),
-                      ),
-                      MenuItems(
-                        selected: selectedMenuIndex == 7,
-                        menuSelect: () {
-                          menuSelect(7);
-                        },
-                        title: "Messages",
-                        icon: SvgPicture.asset(
-                          "admin-page-message-icon.svg",
-                          width: menuIconSize,
+                      if (gotAccesToMessageView(widget.currentProfile))
+                        MenuItems(
+                          selected: selectedMenuIndex == 7,
+                          menuSelect: () {
+                            menuSelect(7);
+                          },
+                          title: "Messages",
+                          icon: SvgPicture.asset(
+                            "admin-page-message-icon.svg",
+                            width: menuIconSize,
+                          ),
                         ),
-                      ),
-                      MenuItems(
-                        selected: selectedMenuIndex == 8,
-                        menuSelect: () {
-                          menuSelect(8);
-                        },
-                        title: "Reservations",
-                        icon: SvgPicture.asset(
-                          "admin-page-reservation-icon.svg",
-                          width: menuIconSize,
+                      if (gotAccesToReservationView(widget.currentProfile))
+                        MenuItems(
+                          selected: selectedMenuIndex == 8,
+                          menuSelect: () {
+                            menuSelect(8);
+                          },
+                          title: "Reservations",
+                          icon: SvgPicture.asset(
+                            "admin-page-reservation-icon.svg",
+                            width: menuIconSize,
+                          ),
                         ),
-                      ),
-                      MenuItems(
-                        selected: selectedMenuIndex == 9,
-                        menuSelect: () {
-                          menuSelect(9);
-                        },
-                        title: "Newsletters",
-                        icon: SvgPicture.asset(
-                          "admin-page-newsletter-icon.svg",
-                          width: menuIconSize,
+                      if (gotAccesToNewsletterView(widget.currentProfile))
+                        MenuItems(
+                          selected: selectedMenuIndex == 9,
+                          menuSelect: () {
+                            menuSelect(9);
+                          },
+                          title: "Newsletters",
+                          icon: SvgPicture.asset(
+                            "admin-page-newsletter-icon.svg",
+                            width: menuIconSize,
+                          ),
                         ),
-                      ),
                     ],
                   ),
                 ),
@@ -271,7 +317,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       width: 50,
                     ),
                     title: Text(
-                      "Issaka OUDRAOGO-ISELI",
+                      widget.currentProfile == null
+                          ? ""
+                          : widget.currentProfile!.displayName(),
                       style: GoogleFonts.poppins(fontSize: 14),
                     ),
                   ),

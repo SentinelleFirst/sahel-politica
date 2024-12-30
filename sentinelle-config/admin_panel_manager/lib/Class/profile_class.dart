@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 
 import '../login-manager/collection_manager.dart';
@@ -24,6 +27,10 @@ class Profile {
   factory Profile.copy(Profile p) {
     return Profile(p.id, p.firstname, p.lastname, p.email, p.post, p.access,
         p.dateOfCreation);
+  }
+
+  bool isAdmin() {
+    return post == "Administrator" || post == "ITSupport";
   }
 
   void initAdminAccess() {
@@ -372,4 +379,223 @@ Future<void> updateDBProfile(
     loading();
     print("Error updating other class: $e");
   }
+}
+
+Future<void> changePassword(String userId, String newPassword,
+    BuildContext context, Function loading) async {
+  try {
+    // Cryptage du nouveau mot de passe
+    var bytes = utf8.encode(newPassword);
+    var hashedPassword = sha256.convert(bytes).toString();
+
+    // Mise à jour du mot de passe dans Firestore
+    await FirebaseFirestore.instance
+        .collection('AdminUsers')
+        .doc(userId)
+        .update({'password': hashedPassword});
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("New password saved."),
+      ),
+    );
+    loading();
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Error, try later"),
+      ),
+    );
+    loading();
+    print("Error updating password: $e");
+  }
+}
+
+bool gotAccesToArticleView(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Articles", "view");
+}
+
+bool gotAccesToArticlePublish(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Articles", "publish");
+}
+
+bool gotAccesToArticleEdit(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Articles", "edit");
+}
+
+bool gotAccesToArticleCreate(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Articles", "create");
+}
+
+bool gotAccesToArticleDelete(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Articles", "delete");
+}
+
+bool gotAccesToAnalysisView(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("In-dept analysis", "view");
+}
+
+bool gotAccesToAnalysisPublish(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("In-dept analysis", "publish");
+}
+
+bool gotAccesToAnalysisEdit(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("In-dept analysis", "edit");
+}
+
+bool gotAccesToAnalysisCreate(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("In-dept analysis", "create");
+}
+
+bool gotAccesToAnalysisDelete(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("In-dept analysis", "delete");
+}
+
+bool gotAccesToEventView(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Events", "view");
+}
+
+bool gotAccesToEventPublish(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Events", "publish");
+}
+
+bool gotAccesToEventEdit(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Events", "edit");
+}
+
+bool gotAccesToEventDelete(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Events", "delete");
+}
+
+bool gotAccesToNewsletterView(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Newsletters", "view");
+}
+
+bool gotAccesToNewsletterPublish(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Newsletters", "publish");
+}
+
+bool gotAccesToNewsletterEdit(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Newsletters", "edit");
+}
+
+bool gotAccesToNewsletterCreate(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Newsletters", "create");
+}
+
+bool gotAccesToNewsletterDelete(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Newsletters", "delete");
+}
+
+bool gotAccesToReservationView(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Reservations", "view");
+}
+
+bool gotAccesToReservationPublish(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Reservations", "publish");
+}
+
+bool gotAccesToReservationEdit(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Reservations", "edit");
+}
+
+bool gotAccesToReservationDelete(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Reservations", "delete");
+}
+
+bool gotAccesToMessageView(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Messages", "view");
+}
+
+bool gotAccesToMessagePublish(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Messages", "publish");
+}
+
+bool gotAccesToMessageDelete(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Messages", "delete");
+}
+
+bool gotAccesToAnalyticView(Profile? profile) {
+  if (profile == null) {
+    return false;
+  }
+  return profile.getAcces("Analytics", "view");
 }

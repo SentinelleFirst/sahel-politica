@@ -1,3 +1,4 @@
+import 'package:admin_panel_manager/Class/profile_class.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_network/image_network.dart';
@@ -11,10 +12,14 @@ import 'delete_Article_dialog.dart';
 
 class ArticlesListView extends StatefulWidget {
   const ArticlesListView(
-      {super.key, required this.editArticle, required this.newArticle});
+      {super.key,
+      required this.editArticle,
+      required this.newArticle,
+      required this.currentProfile});
 
   final Function(Article) editArticle;
   final Function() newArticle;
+  final Profile currentProfile;
 
   @override
   State<ArticlesListView> createState() => _ArticlesListViewState();
@@ -78,7 +83,9 @@ class _ArticlesListViewState extends State<ArticlesListView> {
             children: [
               const SimplePageTitle(title: "Articles"),
               MaterialButton(
-                onPressed: widget.newArticle,
+                onPressed: gotAccesToArticleCreate(widget.currentProfile)
+                    ? widget.newArticle
+                    : null,
                 minWidth: 150,
                 height: 40,
                 shape: OutlineInputBorder(
@@ -169,6 +176,8 @@ class _ArticlesListViewState extends State<ArticlesListView> {
                       itemCount: fetchArticles().length,
                       itemBuilder: (_, int index) {
                         return ArticleInfoLine(
+                          canDelete:
+                              gotAccesToArticleDelete(widget.currentProfile),
                           article: fetchArticles()[index],
                           delete: () {
                             deleteArticle(fetchArticles()[index].id);
@@ -196,11 +205,13 @@ class ArticleInfoLine extends StatelessWidget {
     required this.article,
     required this.readAction,
     required this.delete,
+    required this.canDelete,
   });
 
   final Article article;
   final Function() readAction;
   final Function() delete;
+  final bool canDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -290,7 +301,7 @@ class ArticleInfoLine extends StatelessWidget {
                             size: 20,
                           )),
                       IconButton(
-                          onPressed: delete,
+                          onPressed: canDelete ? delete : null,
                           icon: const Icon(
                             Icons.delete_outlined,
                             color: Colors.red,

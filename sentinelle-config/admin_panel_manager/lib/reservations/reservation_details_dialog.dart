@@ -4,12 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
+import '../Class/profile_class.dart';
 import '../constants.dart';
 
 class ReservationDetailsDialog extends StatefulWidget {
   const ReservationDetailsDialog(
-      {super.key, required this.reservation, required this.refresh});
+      {super.key,
+      required this.reservation,
+      required this.refresh,
+      required this.connectedProfil});
 
+  final Profile connectedProfil;
   final Reservation reservation;
   final Function() refresh;
 
@@ -70,7 +75,7 @@ class _ReservationDetailsDialogState extends State<ReservationDetailsDialog>
       //Envoie email
       if (reservationToModify.isConfirmed()) {
         sendReservationConfirmationEmail(
-            reservations: reservationToModify,
+            reservation: reservationToModify,
             context: context,
             loading: () {
               saveModification();
@@ -198,9 +203,12 @@ class _ReservationDetailsDialogState extends State<ReservationDetailsDialog>
                       ),
                     if (!saving && showBookView)
                       MaterialButton(
-                        onPressed: () {
-                          saveModification();
-                        },
+                        onPressed:
+                            gotAccesToReservationEdit(widget.connectedProfil)
+                                ? () {
+                                    saveModification();
+                                  }
+                                : null,
                         shape: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide: BorderSide.none,
@@ -219,8 +227,10 @@ class _ReservationDetailsDialogState extends State<ReservationDetailsDialog>
                       ),
                     if (!saving && showBookView)
                       MaterialButton(
-                        onPressed: (reservationToModify.isCanceled() ||
-                                reservationToModify.isConfirmed())
+                        onPressed: (gotAccesToReservationPublish(
+                                    widget.connectedProfil) &&
+                                (reservationToModify.isCanceled() ||
+                                    reservationToModify.isConfirmed()))
                             ? () {
                                 setState(() {
                                   //Save and Send email
@@ -255,7 +265,7 @@ class _ReservationDetailsDialogState extends State<ReservationDetailsDialog>
                         height: 50,
                         color: const Color(0xffFACB01),
                         child: Text(
-                          "Book info",
+                          "Appointment info",
                           style: buttonTitleStyle,
                         ),
                       ),

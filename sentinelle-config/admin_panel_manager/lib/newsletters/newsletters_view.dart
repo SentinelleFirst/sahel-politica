@@ -1,5 +1,6 @@
 import 'package:admin_panel_manager/Class/contacts_class.dart';
 import 'package:admin_panel_manager/Class/newsletter_class.dart';
+import 'package:admin_panel_manager/Class/profile_class.dart';
 import 'package:admin_panel_manager/newsletters/delete_newsletter_dialog.dart';
 import 'package:admin_panel_manager/newsletters/new_newsletter_dialog.dart';
 import 'package:admin_panel_manager/newsletters/newsletter_details_dialog.dart';
@@ -14,7 +15,9 @@ import '../widgets/simple_page_title.dart';
 import 'delete_contact_dialog.dart';
 
 class NewslettersView extends StatefulWidget {
-  const NewslettersView({super.key});
+  const NewslettersView({super.key, required this.connectedProfil});
+
+  final Profile connectedProfil;
 
   @override
   State<NewslettersView> createState() => _NewslettersViewState();
@@ -86,6 +89,7 @@ class _NewslettersViewState extends State<NewslettersView> {
     showDialog(
       context: context,
       builder: (context) => NewsletterDetailsDialog(
+        connectedProfil: widget.connectedProfil,
         newsletter: newsletter,
         contacts: contacts,
         refresh: getAllNewsletters,
@@ -132,7 +136,9 @@ class _NewslettersViewState extends State<NewslettersView> {
           ComplexePageTitle(
             title: "Newsletter",
             buttonTitle: "New campaign",
-            buttonAction: newNewsletter,
+            buttonAction: gotAccesToNewsletterCreate(widget.connectedProfil)
+                ? newNewsletter
+                : null,
             searchFieldChange: setSearchValue,
           ),
           const SizedBox(height: 30),
@@ -148,6 +154,8 @@ class _NewslettersViewState extends State<NewslettersView> {
                             itemCount: fetchNewsletters().length,
                             itemBuilder: (_, int index) {
                               return NewsletterInfoLine(
+                                canDelete: gotAccesToNewsletterDelete(
+                                    widget.connectedProfil),
                                 newsletter: fetchNewsletters()[index],
                                 delete: () {
                                   deleteNewsletter(
@@ -233,9 +241,12 @@ class _NewslettersViewState extends State<NewslettersView> {
                                 style: normalTextStyle,
                               ),
                               trailing: IconButton(
-                                  onPressed: () {
-                                    deleteContact(contacts[index].email);
-                                  },
+                                  onPressed: gotAccesToNewsletterDelete(
+                                          widget.connectedProfil)
+                                      ? () {
+                                          deleteContact(contacts[index].email);
+                                        }
+                                      : null,
                                   icon: const Icon(
                                     Icons.delete,
                                     color: Colors.red,
@@ -263,11 +274,13 @@ class NewsletterInfoLine extends StatelessWidget {
     required this.newsletter,
     required this.readAction,
     required this.delete,
+    required this.canDelete,
   });
 
   final Newsletter newsletter;
   final Function() readAction;
   final Function() delete;
+  final bool canDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -336,7 +349,7 @@ class NewsletterInfoLine extends StatelessWidget {
                         size: 30,
                       )),
                   IconButton(
-                      onPressed: delete,
+                      onPressed: canDelete ? delete : null,
                       icon: const Icon(
                         Icons.delete_outlined,
                         color: Colors.red,

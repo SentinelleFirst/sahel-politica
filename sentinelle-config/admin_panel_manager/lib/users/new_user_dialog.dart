@@ -432,6 +432,16 @@ class _NewUserDialogState extends State<NewUserDialog>
                     ),
                   ],
                 ),
+                if (profileToModify.isAdmin())
+                  const SizedBox(
+                    height: 20,
+                  ),
+                if (profileToModify.isAdmin())
+                  Text(
+                    "As an Administrator or an ITSupport, the user has direct access to all the functions of the \"Your team\" page.",
+                    style: GoogleFonts.nunito(
+                        color: Colors.red, fontStyle: FontStyle.italic),
+                  ),
                 Container(
                   width: MediaQuery.of(context).size.width,
                   margin: const EdgeInsets.only(top: 50),

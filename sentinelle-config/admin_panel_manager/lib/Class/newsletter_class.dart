@@ -1,4 +1,7 @@
+import 'package:admin_panel_manager/Class/analysis_class.dart';
+import 'package:admin_panel_manager/Class/article_class.dart';
 import 'package:admin_panel_manager/Class/contacts_class.dart';
+import 'package:admin_panel_manager/Class/event_class.dart';
 import 'package:admin_panel_manager/login-manager/get_user_fonction.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -11,12 +14,14 @@ class Newsletter {
   String message;
   String link;
   String linkText;
-  String imageUrl;
-  String elementTitle;
+  Event? event;
+  Article? article;
+  Analysis? analysis;
   List<ContactClass> contacts;
   String author;
   DateTime date;
   bool allContacts;
+  int type; //Type d'annonce => 1 pour un event / 2 pour un article / 3 pour un analysis / 4 pour une simple annonce
 
   Newsletter(
       this.id,
@@ -24,39 +29,54 @@ class Newsletter {
       this.message,
       this.link,
       this.linkText,
-      this.imageUrl,
-      this.elementTitle,
+      this.event,
+      this.article,
+      this.analysis,
       this.contacts,
       this.author,
       this.date,
-      this.allContacts);
+      this.allContacts,
+      this.type);
 
   factory Newsletter.empty() {
-    return Newsletter(
-        "", "", "", "", "", "", "", [], "", DateTime.now(), false);
+    return Newsletter("", "", "", "", "", Event.empty(), Article.empty(),
+        Analysis.empty(), [], "", DateTime.now(), false, 4);
   }
 
   factory Newsletter.copy(Newsletter n) {
-    return Newsletter(n.id, n.object, n.message, n.link, n.linkText, n.imageUrl,
-        n.elementTitle, n.contacts, n.author, n.date, n.allContacts);
+    return Newsletter(
+        n.id,
+        n.object,
+        n.message,
+        n.link,
+        n.linkText,
+        n.event,
+        n.article,
+        n.analysis,
+        n.contacts,
+        n.author,
+        n.date,
+        n.allContacts,
+        n.type);
   }
   factory Newsletter.fromJson(Map<String, dynamic> json, String id) {
     return Newsletter(
-      id,
-      json['object'] ?? "",
-      json['message'] ?? "",
-      json['link'] ?? "",
-      json['linkText'] ?? "",
-      json['imageUrl'] ?? "",
-      json['elementTitle'] ?? "",
-      (json['contacts'] as List<dynamic>)
-          .map((contactJson) =>
-              ContactClass.fromJson(contactJson as Map<String, dynamic>))
-          .toList(),
-      json['author'] ?? "",
-      (json['date'] as Timestamp).toDate(),
-      json['allContacts'] ?? false,
-    );
+        id,
+        json['object'] ?? "",
+        json['message'] ?? "",
+        json['link'] ?? "",
+        json['linkText'] ?? "",
+        Event.fromJson(json['event'], ""),
+        Article.fromJson(json['article'], ""),
+        Analysis.fromJson(json['analysis'], ""),
+        (json['contacts'] as List<dynamic>)
+            .map((contactJson) =>
+                ContactClass.fromJson(contactJson as Map<String, dynamic>))
+            .toList(),
+        json['author'] ?? "",
+        (json['date'] as Timestamp).toDate(),
+        json['allContacts'] ?? false,
+        json['type']);
   }
 
   Map<String, dynamic> toJson() {
@@ -65,13 +85,56 @@ class Newsletter {
       "message": message,
       "link": link,
       "linkText": linkText,
-      "imageUrl": imageUrl,
-      "elementTitle": elementTitle,
+      "event": event != null ? event!.toJson() : {},
+      "article": article != null ? article!.toJson() : {},
+      "analysis": analysis != null ? analysis!.toJson() : {},
       "contacts": contacts.map((contact) => contact.toJson()).toList(),
       "author": author,
       "date": Timestamp.fromDate(date),
       "allContacts": allContacts,
+      "type": type,
     };
+  }
+
+  bool isEventNewsletter() {
+    return type == 1;
+  }
+
+  bool isArticleNewsletter() {
+    return type == 2;
+  }
+
+  bool isAnalysisNewsletter() {
+    return type == 3;
+  }
+
+  bool isSimpleNewsletter() {
+    return type == 4;
+  }
+
+  void changeTypeInEventNewsletter() {
+    article = null;
+    analysis = null;
+    type = 1;
+  }
+
+  void changeTypeInArticleNewsletter() {
+    event = null;
+    analysis = null;
+    type = 2;
+  }
+
+  void changeTypeInAnalysisNewsletter() {
+    event = null;
+    article = null;
+    type = 3;
+  }
+
+  void changeTypeInSimpleNewsletter() {
+    event = null;
+    article = null;
+    analysis = null;
+    type = 4;
   }
 }
 

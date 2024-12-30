@@ -7,12 +7,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Class/event_class.dart';
+import '../Class/profile_class.dart';
 import '../widgets/simple_page_title.dart';
 import 'package:image_network/image_network.dart';
 import 'package:intl/intl.dart';
 
 class EventsView extends StatefulWidget {
-  const EventsView({super.key});
+  const EventsView({super.key, required this.connectedProfil});
+
+  final Profile connectedProfil;
 
   @override
   State<EventsView> createState() => _EventsViewState();
@@ -83,6 +86,7 @@ class _EventsViewState extends State<EventsView> {
     showDialog(
       context: context,
       builder: (context) => EventDetailsDialog(
+        connectedProfil: widget.connectedProfil,
         event: event,
         refresh: () {},
       ),
@@ -117,7 +121,9 @@ class _EventsViewState extends State<EventsView> {
           ComplexePageTitle(
             title: "Events",
             buttonTitle: "New event",
-            buttonAction: newEvent,
+            buttonAction: gotAccesToEventPublish(widget.connectedProfil)
+                ? newEvent
+                : null,
             searchFieldChange: setSearchValue,
           ),
           const SizedBox(height: 30),
@@ -133,6 +139,8 @@ class _EventsViewState extends State<EventsView> {
                       itemCount: fetchEvents().length,
                       itemBuilder: (_, int index) {
                         return EventInfoLine(
+                          canDelete:
+                              gotAccesToEventDelete(widget.connectedProfil),
                           event: fetchEvents()[index],
                           delete: () {
                             deleteEvent(fetchEvents()[index].id);
@@ -157,11 +165,13 @@ class EventInfoLine extends StatelessWidget {
     required this.event,
     required this.readAction,
     required this.delete,
+    required this.canDelete,
   });
 
   final Event event;
   final Function() readAction;
   final Function() delete;
+  final bool canDelete;
 
   bool isSameDay(DateTime a, DateTime b) {
     return a.day == b.day && a.month == b.month && a.year == b.year;
@@ -289,7 +299,7 @@ class EventInfoLine extends StatelessWidget {
                         size: 20,
                       )),
                   IconButton(
-                      onPressed: delete,
+                      onPressed: canDelete ? delete : null,
                       icon: const Icon(
                         Icons.delete_outlined,
                         color: Colors.red,

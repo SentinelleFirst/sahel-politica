@@ -2,16 +2,21 @@ import 'package:admin_panel_manager/Class/article_class.dart';
 import 'package:flutter/material.dart';
 import 'package:image_network/image_network.dart';
 
+import '../Class/profile_class.dart';
 import '../constants.dart';
 import '../login-manager/file_picker.dart';
 import '../widgets/simple_page_title.dart';
 
 class ArticleEditView extends StatefulWidget {
   const ArticleEditView(
-      {super.key, required this.article, required this.goBack});
+      {super.key,
+      required this.article,
+      required this.goBack,
+      required this.currentProfile});
 
   final Article article;
   final Function() goBack;
+  final Profile currentProfile;
 
   @override
   State<ArticleEditView> createState() => _ArticleEditViewState();
@@ -202,7 +207,9 @@ class _ArticleEditViewState extends State<ArticleEditView> {
                     ),
                   if (!saving)
                     MaterialButton(
-                      onPressed: saveModification,
+                      onPressed: gotAccesToArticleEdit(widget.currentProfile)
+                          ? saveModification
+                          : null,
                       minWidth: 150,
                       height: 40,
                       shape: OutlineInputBorder(
@@ -232,7 +239,9 @@ class _ArticleEditViewState extends State<ArticleEditView> {
                     ),
                   if (!articleToModify.published && !saving)
                     MaterialButton(
-                      onPressed: publishArticle,
+                      onPressed: gotAccesToArticlePublish(widget.currentProfile)
+                          ? publishArticle
+                          : null,
                       minWidth: 150,
                       height: 40,
                       shape: OutlineInputBorder(

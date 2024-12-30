@@ -4,13 +4,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_network/image_network.dart';
 import 'package:intl/intl.dart';
 
+import '../Class/profile_class.dart';
 import '../constants.dart';
 import '../login-manager/file_picker.dart';
 
 class EventDetailsDialog extends StatefulWidget {
   const EventDetailsDialog(
-      {super.key, required this.event, required this.refresh});
+      {super.key,
+      required this.event,
+      required this.refresh,
+      required this.connectedProfil});
 
+  final Profile connectedProfil;
   final Event event;
   final Function() refresh;
 
@@ -247,12 +252,14 @@ class _EventDetailsDialogState extends State<EventDetailsDialog>
                       ),
                     if (!saving)
                       MaterialButton(
-                        onPressed: () {
-                          setState(() {
-                            //Publier l'event
-                            saveModification();
-                          });
-                        },
+                        onPressed: gotAccesToEventEdit(widget.connectedProfil)
+                            ? () {
+                                setState(() {
+                                  //Publier l'event
+                                  saveModification();
+                                });
+                              }
+                            : null,
                         shape: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide: BorderSide.none,

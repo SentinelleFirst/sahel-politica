@@ -1,4 +1,5 @@
 import 'package:admin_panel_manager/Class/message_class.dart';
+import 'package:admin_panel_manager/Class/profile_class.dart';
 import 'package:admin_panel_manager/login-manager/send_email.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -7,8 +8,12 @@ import '../constants.dart';
 
 class MessageDetailsDialog extends StatefulWidget {
   const MessageDetailsDialog(
-      {super.key, required this.message, required this.refresh});
+      {super.key,
+      required this.message,
+      required this.refresh,
+      required this.connectedProfil});
 
+  final Profile connectedProfil;
   final Message message;
   final Function() refresh;
 
@@ -158,18 +163,21 @@ class _MessageDetailsDialogState extends State<MessageDetailsDialog>
                           )),
                     if (!saving)
                       MaterialButton(
-                        onPressed: () {
-                          if (answerView) {
-                            setState(() {
-                              //Send email
-                              sendEmail();
-                            });
-                          } else {
-                            setState(() {
-                              answerView = true;
-                            });
-                          }
-                        },
+                        onPressed:
+                            gotAccesToMessagePublish(widget.connectedProfil)
+                                ? () {
+                                    if (answerView) {
+                                      setState(() {
+                                        //Send email
+                                        sendEmail();
+                                      });
+                                    } else {
+                                      setState(() {
+                                        answerView = true;
+                                      });
+                                    }
+                                  }
+                                : null,
                         shape: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                           borderSide: BorderSide.none,
